@@ -4,7 +4,7 @@
 
 let individualProto = {
     calculateWorkload() {
-        this.projects.forEach(project => {
+        this.assignedProjects.forEach(assignedProject => {
 
         })
     }
@@ -18,11 +18,18 @@ function createIndividual(state) {
     //pass employee name, employee type, and employee status as properties of state
     //name, type, status
     
-    state.projects = []
+    state.assignedProjects = []
     return Object.assign(
         Object.create(individualProto),
         state
     )
+}
+
+function addProject(individual, project, projectSlot) {
+    if(projectSlot.employee != null) throw Error('Employee slot already occupied.')
+    else {
+        individual.assignedProjects.push(projectSlot)
+    }
 }
 
 let george = createIndividual({
@@ -30,7 +37,6 @@ let george = createIndividual({
     type: 'qs',
     status: 'active'
 })
-console.log(george)
 
 let building = createProject({
     name: 'Sky Tower',
@@ -88,7 +94,6 @@ function createProject(state, employeeState) {
 }
 
 function openPopup() {
-    console.log('test')
 
     let createProjectDialogue = document.createElement('div')
     createProjectDialogue.className = 'createProjectDialogue'
