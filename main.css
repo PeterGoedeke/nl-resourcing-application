@@ -64,7 +64,6 @@ CSS starts here---------------------------------------------------------------
     border: solid black 1px;
 }
 .slot {
-    height: 50px;
     width: 20px;
     margin: 0 auto;
     background-color: blue;
@@ -83,6 +82,17 @@ CSS starts here---------------------------------------------------------------
 .dialogue:after {
     clear: both;
 }
+.assignEmployeeWorkloadRadio {
+    display: block;
+    margin: 0 auto;
+}
+.assignEmployeeWorkload:first-child {
+    padding-top: 10px;
+}
+.assignEmployeeWorkload:last-child {
+    padding-bottom: 10px;
+}
+
 .test {
     height: 50px;
 }

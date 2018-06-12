@@ -1,4 +1,22 @@
-let employeeTypes = ['qs', 'pm', 'sm']
+let stateHandler = (function() {
+    let employeeTypes = ['qs', 'pm', 'sm']
+    let employees = []
+    let projects = []
+    return {
+        get employeeTypes() {
+            return employeeTypes
+        },
+        get employees() {
+            return employees
+        },
+        addEmployee(employee) {
+            employees.push(employee)
+        },
+        addProject(project) {
+            projects.push(project)
+        }
+    }
+})()
 
 let employeeProto = {
     calculateWorkload() {
@@ -34,39 +52,63 @@ function createEmployee(state = {
 
 let createProjectFrame = () => {
     state = {}
-    employeeTypes.forEach(type => state[type] = [])
+    stateHandler.employeeTypes.forEach(type => state[type] = [])
     return state
 }
-//let createProjectFrame = () => employeeTypes.reduce((type) => state[type] = [], {})
+//let createProjectFrame = () => stateHandler.employeeTypes.reduce((type) => state[type] = [], {})
 
 function openProjectCreationDialogue() {
     let projectToCreate = {}
     projectToCreate.employeeData = createProjectFrame()
     let projectCreationDialogue = document.createElement('div')
     projectCreationDialogue.className = 'projectCreation dialogue'
-    employeeTypes.forEach(type => {
+    stateHandler.employeeTypes.forEach(type => {
+        //Add employee of category
         let element = document.createElement('div')
         element.className = `${type} create`
-        
         element.addEventListener('mouseup', (event) => {
             if(event.which == 1) {
                 projectToCreate.employeeData[type].push({employee: createEmployee(type), workload: 0})
-                let child = document.createElement('div')
-                child.className = `${type} slot`
+                let employeeToAssignDialogue = document.createElement('div')
+                employeeToAssignDialogue.className = `${type} slot`
+                
                 let employeeIndex = projectToCreate.employeeData[type].length - 1
                 
-                child.addEventListener('mouseup', (event) => {
+                let selectEmployeeDisplay = docuemnt.createElement('div')
+                selectEmployeeDisplay.className = 'selectEmployeeDisplay'
+                let selectEmployeeSearchBar = document.createElement('input')
+                selectEmployeeSearchBar.type = 'search'
+                selectEmployeeSearchBar.placeholder = 'Select Employee...'
+                stateHandler.employees.forEach(employee => {
+                    
+                })
+
+                
+                //Create workload radios
+                let radioDisplay = document.createElement('div')
+                radioDisplay.className = 'assignEmployeeWorkload'
+                for(let i = 1; i <= 5; i ++) {
+                    let radio = document.createElement('input')
+                    radio.type = 'radio'
+                    radio.name = `${type}${employeeIndex}`
+                    radio.className = 'assignEmployeeWorkloadRadio'
+                    radioDisplay.appendChild(document.createTextNode(i))
+                    radioDisplay.appendChild(radio)
+                }
+                employeeToAssignDialogue.appendChild(radioDisplay)
+                //Edit employee information
+                employeeToAssignDialogue.addEventListener('mouseup', (event) => {
                     event.stopPropagation()
                     if(event.which == 1) {
                         projectToCreate.employeeData[type][employeeIndex].workload ++
                     }
                     else if(event.which == 3) {
-                        child.remove()
+                        employeeToAssignDialogue.remove()
                         projectToCreate.employeeData[type].splice(employeeIndex, 1)
                     }
                 })
 
-                element.appendChild(child)
+                element.appendChild(employeeToAssignDialogue)
             }
             else if(event.which == 3) {
                 while(element.firstChild) element.removeChild(element.firstChild)
@@ -93,10 +135,10 @@ function openProjectCreationDialogue() {
 function openEmployeeCreationDialogue() {
     let employeeCreationDialogue = document.createElement('div')
     employeeCreationDialogue.className = 'employeeCreation dialogue'
-    employeeTypes.forEach((type) => {
+    stateHandler.employeeTypes.forEach((type) => {
         let typeRadio = document.createElement('input')
         typeRadio.type = 'radio'
-        typeRadio.name = 'employeeTypeSelect'
+        typeRadio.name = 'stateHandler.employeeTypeSelect'
         employeeCreationDialogue.appendChild(typeRadio)
         employeeCreationDialogue.appendChild(document.createTextNode(type))
     })
