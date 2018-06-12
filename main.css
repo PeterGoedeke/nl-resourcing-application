@@ -49,10 +49,18 @@ CSS starts here---------------------------------------------------------------
 ------------------------------------------------------------------------------
 */
 
-.test {
+.create {
     display: inline-block;
     height: 25px;
-    width: 25px;
+    width: 50px;
     background-color: red;
+    border: solid black 1px;
+}
+
+.slot {
+    height: 50px;
+    width: 20px;
+    margin: 0 auto;
+    background-color: blue;
     border: solid black 1px;
 }
