@@ -50,9 +50,9 @@ CSS starts here---------------------------------------------------------------
 */
 
 .create {
-    display: inline-block;
-    height: 25px;
+    min-height: 25px;
     width: 50px;
+    float: left;
     background-color: red;
     border: solid black 1px;
 }
@@ -68,5 +68,10 @@ CSS starts here---------------------------------------------------------------
     width: 20px;
     margin: 0 auto;
     background-color: blue;
+    border: solid black 1px;
+}
+.dialogue {
+    width: 300px;
+    background-color: green;
     border: solid black 1px;
 }

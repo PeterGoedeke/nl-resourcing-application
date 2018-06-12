@@ -42,7 +42,7 @@ function openProjectCreationDialogue() {
     let projectToCreate = {}
     projectToCreate.employeeData = createProjectFrame()
     let projectCreationDialogue = document.createElement('div')
-    projectCreationDialogue.className = 'projectCreationDialogue'
+    projectCreationDialogue.className = 'projectCreation dialogue'
     employeeTypes.forEach(type => {
         let element = document.createElement('div')
         element.className = `${type} create`
@@ -86,4 +86,20 @@ function openProjectCreationDialogue() {
     projectCreationDialogue.appendChild(projectCreationButton)
     document.querySelector('.here').appendChild(projectCreationDialogue)
 }
+
+function openEmployeeCreationDialogue() {
+    let employeeCreationDialogue = document.createElement('div')
+    employeeCreationDialogue.className = 'employeeCreation dialogue'
+    employeeTypes.forEach((type) => {
+        let typeRadio = document.createElement('input')
+        typeRadio.type = 'radio'
+        typeRadio.name = 'employeeTypeSelect'
+        employeeCreationDialogue.appendChild(typeRadio)
+        employeeCreationDialogue.appendChild(document.createTextNode(type))
+    })
+    document.querySelector('.here').appendChild(employeeCreationDialogue)
+}
+
 openProjectCreationDialogue()
+document.querySelector('.here').appendChild(document.createElement('br'))
+openEmployeeCreationDialogue()
