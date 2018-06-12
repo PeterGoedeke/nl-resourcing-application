@@ -56,7 +56,13 @@ CSS starts here---------------------------------------------------------------
     background-color: red;
     border: solid black 1px;
 }
-
+.button {
+    display: inline-block;
+    height: 25px;
+    width: 50px;
+    background-color: yellow;
+    border: solid black 1px;
+}
 .slot {
     height: 50px;
     width: 20px;
