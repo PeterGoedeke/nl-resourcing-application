@@ -1,10 +1,12 @@
 let employeeTypes = ['qs', 'pm', 'sm']
 
 let employeeProto = {
+    calculateWorkload() {
+
+    }
 
 }
 let projectProto = {
-
 }
 function createProject(employeeState, state = {
     name: 'Default',
@@ -19,14 +21,13 @@ function createProject(employeeState, state = {
     )
 }
 
-function createEmployee(employeeState, state = {
+function createEmployee(state = {
     name: 'Empty',
     type: null,
     status: null
 }) {
     return Object.assign(
         Object.create(employeeProto),
-        employeeState,
         state
     )
 }
@@ -80,6 +81,8 @@ function openProjectCreationDialogue() {
     projectCreationButton.addEventListener('mouseup', (event) => {
         //validate project addition
         let newProject = createProject(projectToCreate)
+        newProject.employeeData.qs[0].employee == 'dave'
+        workloadHandler.registerProject(newProject)
         console.log(newProject)
     })
 
@@ -103,3 +106,44 @@ function openEmployeeCreationDialogue() {
 openProjectCreationDialogue()
 document.querySelector('.here').appendChild(document.createElement('br'))
 openEmployeeCreationDialogue()
+
+let dave = createEmployee({
+    name: 'dave',
+    type: 'qs',
+    status: 'active'
+})
+
+let harry = createEmployee({
+    name: 'harry',
+    type: 'qs',
+    status: 'active'
+})
+
+let workloadHandler = (function() {
+    let projectList = []
+    function calculateSpecific(employee) {
+        /*
+        let test = projectList.reduce((total, currentValue) => {
+            if(currentValue.employeeData[employee.type].find(slot => slot.employee == employee.name))
+                total + currentValue.employeeData[employee.type].find(slot => slot.workload)
+        }, 0)
+        let test = projectList.forEach(project => {
+            project.employeeData[employee.type].find(slot => slot.employee == employee)
+        })
+
+        let test = projectList.forEach(project => project.employeeData[employee.type].find(slot => slot.employee == employee))
+        */
+        //console.log(test)
+    }
+    return {
+        calculateSpecific, projectList,
+        registerProject(project) {
+            projectList.push(project)
+        }
+    }
+})()
+
+document.querySelector('.test').addEventListener('mouseup', (event) => {
+    console.log(workloadHandler.projectList)
+    workloadHandler.calculateSpecific(dave)
+})

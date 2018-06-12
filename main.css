@@ -74,4 +74,15 @@ CSS starts here---------------------------------------------------------------
     width: 300px;
     background-color: green;
     border: solid black 1px;
+    *zoom: 1;
+}
+.dialogue:before, .dialogue:after {
+    content: " ";
+    display: table;
+}
+.dialogue:after {
+    clear: both;
+}
+.test {
+    height: 50px;
 }
