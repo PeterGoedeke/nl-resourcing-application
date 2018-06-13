@@ -44,10 +44,12 @@ function createEmployee(state = {
     type: null,
     status: null
 }) {
-    return Object.assign(
+    let employee = Object.assign(
         Object.create(employeeProto),
         state
     )
+    stateHandler.addEmployee(employee)
+    return employee
 }
 
 let createProjectFrame = () => {
@@ -61,7 +63,7 @@ function openProjectCreationDialogue() {
     let projectToCreate = {}
     projectToCreate.employeeData = createProjectFrame()
     let projectCreationDialogue = document.createElement('div')
-    projectCreationDialogue.className = 'projectCreation dialogue'
+    projectCreationDialogue.className = 'projectCreation dialogue clearfix'
     stateHandler.employeeTypes.forEach(type => {
         //Add employee of category
         let element = document.createElement('div')
@@ -70,19 +72,51 @@ function openProjectCreationDialogue() {
             if(event.which == 1) {
                 projectToCreate.employeeData[type].push({employee: createEmployee(type), workload: 0})
                 let employeeToAssignDialogue = document.createElement('div')
-                employeeToAssignDialogue.className = `${type} slot`
+                employeeToAssignDialogue.className = `${type} slot clearfix`
                 
                 let employeeIndex = projectToCreate.employeeData[type].length - 1
                 
-                let selectEmployeeDisplay = docuemnt.createElement('div')
+                //Create employee search selection box
+                let selectEmployeeDisplay = document.createElement('div')
                 selectEmployeeDisplay.className = 'selectEmployeeDisplay'
                 let selectEmployeeSearchBar = document.createElement('input')
                 selectEmployeeSearchBar.type = 'search'
                 selectEmployeeSearchBar.placeholder = 'Select Employee...'
-                stateHandler.employees.forEach(employee => {
-                    
+                selectEmployeeSearchBar.className = 'selectEmployeeSearchBar'
+                selectEmployeeSearchBar.addEventListener('keyup', () => {
+                    let filteredEmployees = stateHandler.employees.filter(employee => employee.type == type)
+                    .filter(employee => new RegExp(selectEmployeeSearchBar.value.toLowerCase(), 'g').exec(employee.name.toLowerCase()))
+                    if(filteredEmployees.length > 0) {
+                        selectEmployeeDisplay.innerHTML = ''
+                        filteredEmployees.forEach(employee => {
+                            let selectElement = document.createElement('div')
+                            selectElement.className = 'selectEmployeeForAssignment'
+                            selectElement.textContent = employee.name
+                            selectElement.addEventListener('mouseup', () => {
+                                Array.from(document.querySelectorAll('.selectEmployeeForAssignment')).forEach(element => element.style.backgroundColor = 'blue')
+                                selectElement.style.backgroundColor = 'red'
+                                projectToCreate.employeeData[type][employeeIndex].employee = employee.name
+                                //Select the employee
+                                //Set the name property of the slot to the employee
+                            })
+                            selectEmployeeDisplay.appendChild(selectElement)
+                        })
+                    }
                 })
-
+                employeeToAssignDialogue.appendChild(selectEmployeeSearchBar)
+                stateHandler.employees.filter(employee => employee.type == type).forEach(employee => {
+                    let selectElement = document.createElement('div')
+                    selectElement.className = 'selectEmployeeForAssignment'
+                    selectElement.textContent = employee.name
+                    selectElement.addEventListener('mouseup', () => {
+                        Array.from(document.querySelectorAll('.selectEmployeeForAssignment')).forEach(element => element.style.backgroundColor = 'blue')
+                        selectElement.style.backgroundColor = 'red'
+                        projectToCreate.employeeData[type][employeeIndex].employee = employee.name
+                        //WEGFJERKGLRLGKHRGKJREGKLHWLERKJRWKLGJREHKLHRELGHERKGLERHKLGHEKLGHREKLG          
+                    })
+                    selectEmployeeDisplay.appendChild(selectElement)
+                })
+                employeeToAssignDialogue.appendChild(selectEmployeeDisplay)
                 
                 //Create workload radios
                 let radioDisplay = document.createElement('div')
@@ -145,12 +179,14 @@ function openEmployeeCreationDialogue() {
     document.querySelector('.here').appendChild(employeeCreationDialogue)
 }
 
-openProjectCreationDialogue()
-document.querySelector('.here').appendChild(document.createElement('br'))
-openEmployeeCreationDialogue()
-
 let dave = createEmployee({
     name: 'dave',
+    type: 'qs',
+    status: 'active'
+})
+
+let david = createEmployee({
+    name: 'david',
     type: 'qs',
     status: 'active'
 })
@@ -160,6 +196,20 @@ let harry = createEmployee({
     type: 'qs',
     status: 'active'
 })
+
+for(let i = 0; i < 200; i++) temp()
+
+function temp() {
+    createEmployee({
+        name: random.name(),
+        type: stateHandler.employeeTypes[(Math.floor(Math.random() * 3))],
+        status: 'active'
+    })
+}
+
+openProjectCreationDialogue()
+document.querySelector('.here').appendChild(document.createElement('br'))
+openEmployeeCreationDialogue()
 
 let workloadHandler = (function() {
     let projectList = []
