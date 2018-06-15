@@ -148,20 +148,28 @@ employees =
         }
 }
 
-employees = 
+employeeSlots = 
 {
     qs = [
         {employee, workload},
         {employee, workload}
     ]
-    sm =
-        {
+    pm = [
+        {employee, workload},
+        {employee, workload}
+    ]
+    sm = [
+        {employee, workload},
+        {employee, workload}
+    ]
+}
 
-        }
-    pm =
-        {
-
-        }
+employee =
+{
+    assignedSlots = [
+        {employee, workload},
+        {employee, workload}
+    ]
 }
 
 */

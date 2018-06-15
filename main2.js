@@ -3,6 +3,10 @@ let stateHandler = (function() {
     let employees = []
     let projects = []
     return {
+        retrieveEmployeeWorkload(employee) {
+            return projects.filter(project => project.employeeSlots[employee.type].some(employee.name))
+            .map(project => project.employeeSlots[employee.type].find(slot => slot.employee = employee.name))
+        },
         get employeeTypes() {
             return employeeTypes
         },
