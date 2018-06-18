@@ -254,6 +254,18 @@ function createLittleBois() {
     littleBoi.className = 'papa'
     testMeDaddy.appendChild(littleBoi)
 }
+let testX = 500
+let isResizing = false
+testMeDaddy.style.left = testX + 'px'
+testMeDaddy.addEventListener('drag', (event) => {
+    let change = event.pageX - parseInt(testMeDaddy.style.left) + bigDaddy.scrollLeft
+    testMeDaddy.style.left = parseInt(testMeDaddy.style.left) + change + 'px'
+    testMeDaddy.style.width += (change + "px")
+    console.log(change)
+    // console.log(event.pageX - parseInt(testMeDaddy.style.left) + bigDaddy.scrollLeft)
+    // console.log(testMeDaddy.style.left)
+})
+
 bigDaddy.appendChild(testMeDaddy)
 bigDaddy.scrollLeft = 250
 document.querySelector('.here').appendChild(bigDaddy)

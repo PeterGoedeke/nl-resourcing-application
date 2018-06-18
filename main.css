@@ -140,7 +140,6 @@ input[type="search"]::-webkit-search-results-decoration {
 .daddy {
     display: inline-block;
     position: relative;
-    left: 500px;
 }
 .papa {
     height: 20px;
