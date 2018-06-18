@@ -134,3 +134,26 @@ input[type="search"]::-webkit-search-results-decoration {
 .clearfix:after {
     clear: both;
 }
+
+
+
+.daddy {
+    display: inline-block;
+    position: relative;
+    left: 500px;
+}
+.papa {
+    height: 20px;
+    width: 20px;
+    background-color: yellow;
+    border: solid black 1px;
+    display: inline-block;
+}
+.bigDaddy {
+    width: 90vw;
+    height: 20vh;
+    background-color: beige;
+    overflow-x: scroll;
+    white-space: nowrap;
+    margin-bottom: 50px;
+}

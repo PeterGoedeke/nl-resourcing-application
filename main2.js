@@ -24,9 +24,7 @@ let stateHandler = (function() {
 
 let employeeProto = {
     calculateWorkload() {
-
     }
-
 }
 let projectProto = {
 }
@@ -243,3 +241,21 @@ document.querySelector('.test').addEventListener('mouseup', (event) => {
     console.log(workloadHandler.projectList)
     workloadHandler.calculateSpecific(dave)
 })
+
+let bigDaddy = document.createElement('div')
+bigDaddy.className = 'bigDaddy'
+
+let testMeDaddy = document.createElement('div')
+testMeDaddy.className = 'daddy'
+for(let i = 0; i < 10; i++) createLittleBois()
+
+function createLittleBois() {
+    let littleBoi = document.createElement('div')
+    littleBoi.className = 'papa'
+    testMeDaddy.appendChild(littleBoi)
+}
+bigDaddy.appendChild(testMeDaddy)
+bigDaddy.scrollLeft = 250
+document.querySelector('.here').appendChild(bigDaddy)
+//setTimeout(() => bigDaddy.scrollLeft = 250, 1000)
+addEventListener('load', () => bigDaddy.scrollLeft = 250)
