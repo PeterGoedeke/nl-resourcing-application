@@ -1,6 +1,3 @@
-let scale
-let earliestVisible, latestVisible
-
 function createProject(name, group, security) {
     let project = {name, group, security}
 
