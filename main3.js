@@ -1,11 +1,25 @@
-function createEmployeeSlot(workload) {
+let scale
+let earliestVisible, latestVisible
+
+function createProject(name, group, security) {
+    let project = {name, group, security}
+
+    //calculate where the project should be positioned
+    return project
+}
+function createEmployeeSlot(hostProject, employeeType) {
     let workloadInformation = Symbol('workload information')
-    let employeeSlot = {
-        employee: {},
+    let workload = Object.create(null)
+    for(let i = hostProject.startDate; i < hostProject.endDate; i++) workload[i] = 5
+
+    let assignedEmployee = 'Empty'
+
+    return {
+        hostProject, employeeType, startDate: hostProject.startDate, endDate: hostProject.endDate, assignedEmployee,
         [workloadInformation]: workload,
-        addEmployee(employee) {
-            this.employee = employee
-            this.employee.workload[workloadInformation] = this[workloadInformation]
+        assignEmployee(employee) {
+            this.assignedEmployee = employee
+            this.assignedEmployee.workload[workloadInformation] = this[workloadInformation]
         },
         removeEmployee() {
             if(this.employee.name) {
@@ -18,58 +32,8 @@ function createEmployeeSlot(workload) {
             this[workloadInformation].push(...newWorkload)
         }
     }
-    return employeeSlot
 }
 
-let testSlot = createEmployeeSlot(['test', 'workload'])
-let testSlot2 = createEmployeeSlot(['test', 'workload', '2'])
-let employee = {
-    name: 'dave',
-    workload: {}
-}
-
-// console.log('-----------------')
-
-// testSlot.removeEmployee()
-// testSlot.addEmployee(employee)
-// testSlot.reallocateWorkload(['testtehgkhg'])
-
-// console.log(testSlot)
-// console.log(employee)
-// console.log('-----------------')
-
-/*
-
-employee =
-{
-    workloadInformation = 
-    [
-        {},
-        {},
-        {}
-    ]
-}
-
-employeeSlot = {
-    key: 
+function createEmployee() {
 
 }
-
-employeeSlot.setEmployee(dave)
-employeeSlot.changeWorkload({test: test})
-employeeSlot.setEmployee(steve)
-employeeSlot.emptyEmployee()
-
-setEmployee = function(employee) {
-    this.employee = employee
-    employee.workloadInformation.push(this.workloadInformation)
-}
-changeWorkload = function(newWorkload) {
-    this.workload = newWorkload
-    employee.workloadInformation
-}
-
-employeeslot.employee = dave
-
-
-*/
