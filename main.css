@@ -68,9 +68,15 @@ div {
     bottom: 0px;
 }
 .topAxisContainer {
-    position: relative;
-    left: 175px;
+    height: 30px;
     background-color: yellow;
+    position: relative;
+    top: -35px;
+    z-index: 10;
+}
+.timeBlock {
+    display: inline-block;
+    width: 50px;
 }
 .mainWindow {
     top: 35px;
@@ -117,6 +123,7 @@ div {
 .sidebar {
     height: 100%;
     width: 175px;
+    float: left;
 }
 .leftSidebar,rightSidebar {
     height: 100%;
@@ -131,6 +138,14 @@ div {
     min-height: 50px;
     text-align: center;
     padding: 30% 0;
+}
+
+.contentPane {
+    position: relative;
+    height: 100%;
+    background-color: lightgreen;
+    white-space: nowrap;
+    overflow-x: scroll;
 }
 
 
