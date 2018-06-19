@@ -49,79 +49,90 @@ CSS starts here---------------------------------------------------------------
 ------------------------------------------------------------------------------
 */
 
-.create {
-    min-height: 25px;
-    min-width: 50px;
-    float: left;
-    background-color: red;
-    border: solid black 1px;
-}
-.button {
-    display: inline-block;
-    height: 25px;
-    width: 50px;
-    background-color: yellow;
-    border: solid black 1px;
-}
-.slot {
-    width: 100px;
-    margin: 0 auto;
-    background-color: blue;
-    border: solid black 1px;
-}
-.dialogue {
-    width: 300px;
-    background-color: green;
-    border: solid black 1px;
-}
-.assignEmployeeWorkloadRadio {
-    display: block;
-    margin: 0 auto;
-}
-.assignEmployeeWorkload:first-child {
-    padding-top: 10px;
-}
-.assignEmployeeWorkload:last-child {
-    padding-bottom: 10px;
-}
-.selectEmployeeDisplay {
-    box-sizing: border-box;
-    text-align: center;
-    padding-left: 5%;
-    width: 80%;
-    max-height: 150px;
-    overflow: auto;
-    overflow-x: hidden;
-    float: left;
-}
-.selectEmployeeForAssignment {
-    border: solid black 1px;
-    width: 100%;
-    word-break: break-all;
-    
-}
-.assignEmployeeWorkload {
-    box-sizing: border-box;
-    float: left;
-    padding: 0 5%;
-    width: 20%;
-    text-align: center;
-}
-.selectEmployeeSearchBar {
-    display: block;
-    margin: 5px auto;
-    width: 90%;
-}
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration {
-  display: none;
+body {
+    overflow: hidden;
 }
 
-.test {
-    height: 50px;
+div {
+    border: solid black 1px;
+    background-color: lightgrey;
+    box-sizing: border-box;
+    user-select: none;
 }
+
+.margin {
+    height: 30px;
+    width: 100vw;
+}
+.bottomMargin {
+    bottom: 0px;
+}
+.topAxisContainer {
+    position: relative;
+    left: 175px;
+    background-color: yellow;
+}
+.mainWindow {
+    top: 35px;
+    bottom: 35px;
+}
+.row {
+    position: absolute;
+}
+.separator {
+    width: 100vw;
+    height: 5px;
+    background-color: red;
+}
+.top {
+    top: 30px;
+}
+.bottom {
+    bottom: 30px;
+}
+
+.marginElement {
+    height: 100%;
+}
+.button {
+    text-align: center;
+    font-weight: bolder;
+    line-height: 30px;
+    cursor: pointer;
+}
+.addType {
+    float: left;
+    width: 50px;
+}
+.zoomContainer, .openNewWindow {
+    float: right;
+}
+.zoomContainer {
+    width: 100px;
+}
+.openNewWindow {
+    width: 50px;
+}
+
+.sidebar {
+    height: 100%;
+    width: 175px;
+}
+.leftSidebar,rightSidebar {
+    height: 100%;
+    width: 50%;
+    float: left;
+}
+.createProject, .createLeaveSlot, .createEmployee {
+    height: 20px;
+    line-height: 20px;
+}
+.leaveLabel, .typeLabel {
+    min-height: 50px;
+    text-align: center;
+    padding: 30% 0;
+}
+
 
 
 .clearfix {
@@ -133,26 +144,4 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 .clearfix:after {
     clear: both;
-}
-
-
-
-.daddy {
-    display: inline-block;
-    position: relative;
-}
-.papa {
-    height: 20px;
-    width: 20px;
-    background-color: yellow;
-    border: solid black 1px;
-    display: inline-block;
-}
-.bigDaddy {
-    width: 90vw;
-    height: 20vh;
-    background-color: beige;
-    overflow-x: scroll;
-    white-space: nowrap;
-    margin-bottom: 50px;
 }
