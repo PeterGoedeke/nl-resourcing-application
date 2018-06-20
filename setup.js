@@ -2,16 +2,34 @@ let scale = 100
 let earliestDate = 29
 let latestDate = 35
 
+let screenQuery = (function() {
+    function getTimeBlockWidth() {
+        return document.querySelector('.timeBlock').offsetWidth
+    }
+    function getContentPaneWidth() {
+        return document.querySelector('.contentPane').offsetWidth
+    }
+    return {
+        getTimeBlockWidth, getContentPaneWidth,
+        getVisibleTimeBlockRange() {
+            let contentPane = document.querySelector('.contentPane')
+            //potential latent bug with earliestDate
+            let firstTimeBlockOnScreen = Math.floor(contentPane.scrollLeft / getTimeBlockWidth()) + earliestDate
+            let timeBlocksOnScreen = Math.floor(contentPane.offsetWidth / getTimeBlockWidth())
+            let lastTimeBlockOnScreen = firstTimeBlockOnScreen + timeBlocksOnScreen
+            return [firstTimeBlockOnScreen, lastTimeBlockOnScreen]
+        }
+    }
+})()
+
 function initTimeframe() {
     for(let i = earliestDate; i <= latestDate; i++) appendTimeBlock(i)
     appendUntilFit()
 }
 function appendUntilFit() {
-    let timeBlockWidth = document.querySelector('.timeBlock').offsetWidth
     let timeBlocks = document.querySelector('.topAxisContainer').childNodes.length
     let contentWidth = document.querySelector('.contentPane').offsetWidth
-    console.log(timeBlockWidth, timeBlocks, contentWidth)
-    while((timeBlockWidth * timeBlocks) < contentWidth) {
+    while((screenQuery.getTimeBlockWidth() * timeBlocks) < contentWidth) {
         appendTimeBlock(Number(document.querySelector('.topAxisContainer').lastChild.textContent) + 1)
         timeBlocks ++
     }
@@ -19,6 +37,10 @@ function appendUntilFit() {
 addEventListener('load', initTimeframe)
 addEventListener('resize', appendUntilFit)
 
+document.querySelector('.createProject').addEventListener('mouseup', () => {
+    createProject('Default', null, 'Secure')
+    console.log('hell yeah')
+})
 
 // read the JSON and stuff
 
@@ -30,7 +52,7 @@ function convertIDToDate(id) {
     return (timeOfMonth == 0 ? 'Early ' : 'Late ') + month + "/" + year
 }
 
-console.log(convertIDToDate(50))
+setInterval(getScreenTimeBlocks, 100)
 
 function appendTimeBlock(dateID) {
     let timeBlock = document.createElement('div')
@@ -38,11 +60,3 @@ function appendTimeBlock(dateID) {
     timeBlock.textContent = dateID
     document.querySelector('.topAxisContainer').appendChild(timeBlock)
 }
-
-let earliestAssignedDate = 10;
-
-setInterval(() => {
-    let width = document.querySelector('.topAxisContainer').offsetWidth
-    
-    
-}, 100)

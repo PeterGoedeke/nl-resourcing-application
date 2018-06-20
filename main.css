@@ -132,6 +132,7 @@ div {
     height: 100%;
     width: 50%;
     float: left;
+    padding-top: 30px;
 }
 .createProject, .createLeaveSlot, .createEmployee {
     height: 20px;

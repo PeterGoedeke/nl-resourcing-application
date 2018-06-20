@@ -1,6 +1,5 @@
 function createProject(name, group, security) {
     let project = {name, group, security}
-
     //calculate where the project should be positioned
     return project
 }
