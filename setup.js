@@ -1,4 +1,4 @@
-let scale = 100
+let scale = 50
 let earliestDate = 29
 let latestDate = 35
 
@@ -39,7 +39,6 @@ addEventListener('resize', appendUntilFit)
 
 document.querySelector('.createProject').addEventListener('mouseup', () => {
     createProject('Default', null, 'Secure')
-    console.log('hell yeah')
 })
 
 // read the JSON and stuff
@@ -51,8 +50,10 @@ function convertIDToDate(id) {
     let timeOfMonth = id % 2 == 0 ? 0 : 1 //0 = early, 1 = late
     return (timeOfMonth == 0 ? 'Early ' : 'Late ') + month + "/" + year
 }
-
-setInterval(getScreenTimeBlocks, 100)
+function getXLocationFromID(id) {
+    //latent bug with earliestDate
+    return (id - earliestDate) * scale 
+}
 
 function appendTimeBlock(dateID) {
     let timeBlock = document.createElement('div')
