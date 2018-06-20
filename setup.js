@@ -11,12 +11,21 @@ let screenQuery = (function() {
     }
     return {
         getTimeBlockWidth, getContentPaneWidth,
-        getVisibleTimeBlockRange() {
+        getVisibleTimeBlockRange(border = false) {
             let contentPane = document.querySelector('.contentPane')
             //potential latent bug with earliestDate
             let firstTimeBlockOnScreen = Math.floor(contentPane.scrollLeft / getTimeBlockWidth()) + earliestDate
             let timeBlocksOnScreen = Math.floor(contentPane.offsetWidth / getTimeBlockWidth())
             let lastTimeBlockOnScreen = firstTimeBlockOnScreen + timeBlocksOnScreen
+            
+            if(border) {
+                firstTimeBlockOnScreen ++
+                lastTimeBlockOnScreen --
+            }
+            while(firstTimeBlockOnScreen >= lastTimeBlockOnScreen) {
+                firstTimeBlockOnScreen --
+                lastTimeBlockOnScreen ++
+            }
             return [firstTimeBlockOnScreen, lastTimeBlockOnScreen]
         }
     }
