@@ -49,9 +49,17 @@ addEventListener('resize', appendUntilFit)
 
 document.querySelector('.createProject').addEventListener('mouseup', () => {
     createProject('Default', null, 'Secure')
+    fixContentPaneHeight()
 })
 
+contentPane.addEventListener('scroll', () => document.querySelector('.sidebar').scrollTop = contentPane.scrollTop)
 // read the JSON and stuff
+
+const positioner = document.querySelector('.positioner')
+const createEmployeeButton = document.querySelector('.createEmployee')
+function fixContentPaneHeight() {
+    positioner.style.top = createEmployeeButton.getBoundingClientRect().top + contentPane.scrollTop + 'px'
+}
 
 function convertIDToDate(id) {
     let year = 2000

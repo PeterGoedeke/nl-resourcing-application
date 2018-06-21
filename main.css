@@ -130,6 +130,7 @@ div {
     height: 100%;
     width: 175px;
     float: left;
+    overflow: hidden;
 }
 .leftSidebar,rightSidebar {
     height: 100%;
@@ -163,6 +164,11 @@ div {
 }
 
 
+
+.positioner {
+    position: absolute;
+    visibility: hidden;
+}
 
 .clearfix {
     *zoom: 1;
