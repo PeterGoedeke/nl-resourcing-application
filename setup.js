@@ -2,17 +2,18 @@ let scale = 50
 let earliestDate = 29
 let latestDate = 35
 
+let contentPane = document.querySelector('.contentPane')
+
 let screenQuery = (function() {
     function getTimeBlockWidth() {
         return document.querySelector('.timeBlock').offsetWidth
     }
     function getContentPaneWidth() {
-        return document.querySelector('.contentPane').offsetWidth
+        return contentPane.offsetWidth
     }
     return {
         getTimeBlockWidth, getContentPaneWidth,
         getVisibleTimeBlockRange(border = false) {
-            let contentPane = document.querySelector('.contentPane')
             //potential latent bug with earliestDate
             let firstTimeBlockOnScreen = Math.floor(contentPane.scrollLeft / getTimeBlockWidth()) + earliestDate
             let timeBlocksOnScreen = Math.floor(contentPane.offsetWidth / getTimeBlockWidth())
@@ -37,7 +38,7 @@ function initTimeframe() {
 }
 function appendUntilFit() {
     let timeBlocks = document.querySelector('.topAxisContainer').childNodes.length
-    let contentWidth = document.querySelector('.contentPane').offsetWidth
+    let contentWidth = contentPane.offsetWidth
     while((screenQuery.getTimeBlockWidth() * timeBlocks) < contentWidth) {
         appendTimeBlock(Number(document.querySelector('.topAxisContainer').lastChild.textContent) + 1)
         timeBlocks ++
@@ -64,7 +65,7 @@ function getXLocationFromID(id) {
     return (id - earliestDate) * scale 
 }
 function getCursorXLocation(absoluteCursorPosition) {
-    return absoluteCursorPosition + document.querySelector('.contentPane').scrollLeft - document.querySelector('.contentPane').getBoundingClientRect().left
+    return absoluteCursorPosition + contentPane.scrollLeft - contentPane.getBoundingClientRect().left
 }
 function getNearestTimeBlock(xPosition) {
     return Math.round(xPosition / screenQuery.getTimeBlockWidth()) + earliestDate

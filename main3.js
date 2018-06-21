@@ -38,7 +38,26 @@ let projectProto = {
                 draggingInterface.registerDragging(this, 'right')
             }
         })
-        document.querySelector('.contentPane').appendChild(this.projectDisplay)
+
+        this.projectDisplay.addEventListener('mousemove', (event) => {
+            let cursorPastLeftSide = getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left)
+            let cursorCloseToLeftSide = getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + 10
+            
+            let cursorBeforeRightSide = getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width)
+            let cursorCloseToRightSide = getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width) - 10
+
+            if(cursorPastLeftSide && cursorCloseToLeftSide) {
+                this.projectDisplay.style.cursor = 'pointer'
+            }
+            else if(cursorBeforeRightSide && cursorCloseToRightSide) {
+                this.projectDisplay.style.cursor = 'pointer'
+            }
+            else {
+                this.projectDisplay.style.cursor = 'auto'
+            }
+        })
+
+        contentPane.appendChild(this.projectDisplay)
         document.querySelector('.leftSidebar').insertBefore(this.projectLabel, document.querySelector('.createProject'))
         this.updateDisplay()
     },
@@ -51,6 +70,7 @@ let projectProto = {
         this.projectLabel.textContent = this.name
     },
     drag(event, side) {
+        contentPane.style.cursor = 'pointer'
         if(side == 'left') {
             this.projectDisplay.style.left = getCursorXLocation(event.pageX) + 'px'
             this.projectDisplay.style.width = getXLocationFromID(this.endDate) - getCursorXLocation(event.pageX) + 'px'
@@ -60,6 +80,7 @@ let projectProto = {
         }
     },
     stopDrag() {
+        contentPane.style.cursor = 'auto'
         this.startDate = getNearestTimeBlock(parseInt(this.projectDisplay.style.left))
         this.endDate = getNearestTimeBlock(parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width))
         this.updateDisplay()
