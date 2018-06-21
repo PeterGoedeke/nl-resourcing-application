@@ -4,7 +4,7 @@ let draggingInterface = (function() {
     addEventListener('mouseup', (event) => {
         if(currentlyDragging) {
             currentlyDragging.dragging = false
-            currentlyDragging.stopDrag()
+            currentlyDragging.stopDrag(direction)
             currentlyDragging = null
         }
     })
@@ -21,6 +21,10 @@ let draggingInterface = (function() {
         }
     }
 })()
+
+function calculateCursors() {
+    
+}
 
 let projectProto = {
     initDisplay() {
@@ -79,10 +83,12 @@ let projectProto = {
             this.projectDisplay.style.width = getCursorXLocation(event.pageX) - parseInt(this.projectDisplay.style.left) + 'px'
         }
     },
-    stopDrag() {
+    stopDrag(direction) {
         contentPane.style.cursor = 'auto'
         this.startDate = getNearestTimeBlock(parseInt(this.projectDisplay.style.left))
         this.endDate = getNearestTimeBlock(parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width))
+        if(direction == 'left' && this.startDate == this.endDate) this.startDate --
+        else if(direction == 'right' && this.startDate == this.endDate) this.endDate ++
         this.updateDisplay()
         console.log(this.startDate, this.endDate)
     }
