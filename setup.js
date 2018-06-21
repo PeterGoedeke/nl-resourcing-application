@@ -59,6 +59,7 @@ const timeAxis = document.querySelector('.topAxisContainer')
 contentPane.addEventListener('scroll', () => {
     sidebar.scrollTop = contentPane.scrollTop
     timeAxis.scrollLeft = contentPane.scrollLeft
+    timeAxis.style.width = contentPane.offsetWidth + 'px'
     console.log(timeAxis.offsetWidth, contentPane.offsetWidth)
 })
 // read the JSON and stuff
