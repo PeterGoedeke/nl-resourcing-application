@@ -71,7 +71,7 @@ div {
 .topAxisContainer {
     height: 30px;
     background-color: yellow;
-    position: relative;
+    position: fixed;
     z-index: 1;
 }
 .timeBlock {
@@ -158,6 +158,7 @@ div {
 .project {
     height: 30px;
     position: relative;
+    top: 30px;
 }
 .projectLabel {
     height: 30px;
