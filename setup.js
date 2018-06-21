@@ -16,7 +16,7 @@ let screenQuery = (function() {
         getVisibleTimeBlockRange(border = false) {
             //potential latent bug with earliestDate
             let firstTimeBlockOnScreen = Math.floor(contentPane.scrollLeft / getTimeBlockWidth()) + earliestDate
-            let timeBlocksOnScreen = Math.floor(contentPane.offsetWidth / getTimeBlockWidth())
+            let timeBlocksOnScreen = Math.floor((document.querySelector('.mainWindow').offsetWidth - 175) / getTimeBlockWidth())
             let lastTimeBlockOnScreen = firstTimeBlockOnScreen + timeBlocksOnScreen
             
             if(border) {
@@ -45,14 +45,22 @@ function appendUntilFit() {
     }
 }
 addEventListener('load', initTimeframe)
-addEventListener('resize', appendUntilFit)
+addEventListener('resize', () => {
+    appendUntilFit()
+})
 
 document.querySelector('.createProject').addEventListener('mouseup', () => {
     createProject('Default', null, 'Secure')
     fixContentPaneHeight()
 })
 
-contentPane.addEventListener('scroll', () => document.querySelector('.sidebar').scrollTop = contentPane.scrollTop)
+const sidebar = document.querySelector('.sidebar')
+const timeAxis = document.querySelector('.topAxisContainer')
+contentPane.addEventListener('scroll', () => {
+    sidebar.scrollTop = contentPane.scrollTop
+    timeAxis.scrollLeft = contentPane.scrollLeft
+    console.log(timeAxis.offsetWidth, contentPane.offsetWidth)
+})
 // read the JSON and stuff
 
 const positioner = document.querySelector('.positioner')

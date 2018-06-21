@@ -11,6 +11,7 @@ let draggingInterface = (function() {
     addEventListener('mousemove', (event) => {
         if(currentlyDragging) {
             currentlyDragging.drag(event, direction)
+            positioner.style.width = currentlyDragging.offsetWidth - 175 + screenQuery.getTimeBlockWidth() + 'px'
         }
     })
     return {
@@ -86,6 +87,16 @@ let projectProto = {
         }
         else if(side == 'right') {
             this.projectDisplay.style.width = getCursorXLocation(event.pageX) - parseInt(this.projectDisplay.style.left) + 'px'
+        }
+        if(event.pageX < contentPane.getBoundingClientRect().left + 30 && side == 'left') {
+
+        }
+        if(event.pageX > contentPane.getBoundingClientRect().right - 30 && side == 'right') {
+            contentPane.scrollLeft += 10
+            if(screenQuery.getVisibleTimeBlockRange()[1] == timeAxis.lastChild.textContent) {
+                appendTimeBlock(parseInt(timeAxis.lastChild.textContent) + 1)
+            }
+            appendUntilFit()
         }
     },
     stopDrag(direction) {

@@ -71,8 +71,11 @@ div {
 .topAxisContainer {
     height: 30px;
     background-color: yellow;
-    position: fixed;
+    position: relative;
     z-index: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    left: 175px;
 }
 .timeBlock {
     display: inline-block;
