@@ -93,7 +93,7 @@ let projectProto = {
         }
         if(event.pageX > contentPane.getBoundingClientRect().right - 30 && side == 'right') {
             contentPane.scrollLeft += 10
-            if(screenQuery.getVisibleTimeBlockRange()[1] == timeAxis.lastChild.textContent) {
+            if(screenQuery.getVisibleTimeBlockRange()[1] > timeAxis.lastChild.textContent - 5) {
                 appendTimeBlock(parseInt(timeAxis.lastChild.textContent) + 1)
             }
             appendUntilFit()
