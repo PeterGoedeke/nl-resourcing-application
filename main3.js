@@ -23,18 +23,23 @@ let draggingInterface = (function() {
 })()
 
 function calculateCursors() {
+    let cursorPastLeftSide = getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left)
+    let cursorCloseToLeftSide = getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + 10
     
+    let cursorBeforeRightSide = getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width)
+    let cursorCloseToRightSide = getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width) - 10
+    return {cursorPastLeftSide, cursorCloseToLeftSide, cursorBeforeRightSide, cursorCloseToRightSide}
 }
 
 let projectProto = {
     initDisplay() {
         this.projectDisplay.addEventListener('mousedown', (event) => {
-            let cursorPastLeftSide = getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left)
-            let cursorCloseToLeftSide = getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + 10
-            
-            let cursorBeforeRightSide = getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width)
-            let cursorCloseToRightSide = getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width) - 10
-
+            const {
+                cursorPastLeftSide,
+                cursorCloseToLeftSide,
+                cursorBeforeRightSide,
+                cursorCloseToRightSide
+            } = calculateCursors.call(this)
             if(cursorPastLeftSide && cursorCloseToLeftSide) {
                 draggingInterface.registerDragging(this, 'left')
             }
@@ -44,12 +49,12 @@ let projectProto = {
         })
 
         this.projectDisplay.addEventListener('mousemove', (event) => {
-            let cursorPastLeftSide = getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left)
-            let cursorCloseToLeftSide = getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + 10
-            
-            let cursorBeforeRightSide = getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width)
-            let cursorCloseToRightSide = getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width) - 10
-
+            const {
+                cursorPastLeftSide,
+                cursorCloseToLeftSide,
+                cursorBeforeRightSide,
+                cursorCloseToRightSide
+            } = calculateCursors.call(this)
             if(cursorPastLeftSide && cursorCloseToLeftSide) {
                 this.projectDisplay.style.cursor = 'pointer'
             }
