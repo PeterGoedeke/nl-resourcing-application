@@ -67,7 +67,7 @@ function getCursorXLocation(absoluteCursorPosition) {
     return absoluteCursorPosition + document.querySelector('.contentPane').scrollLeft - document.querySelector('.contentPane').getBoundingClientRect().left
 }
 function getNearestTimeBlock(xPosition) {
-    return Math.floor(xPosition / screenQuery.getTimeBlockWidth()) + earliestDate
+    return Math.round(xPosition / screenQuery.getTimeBlockWidth()) + earliestDate
 }
 
 function appendTimeBlock(dateID) {
