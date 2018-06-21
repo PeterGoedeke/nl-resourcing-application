@@ -63,6 +63,12 @@ function getXLocationFromID(id) {
     //latent bug with earliestDate
     return (id - earliestDate) * scale 
 }
+function getCursorXLocation(absoluteCursorPosition) {
+    return absoluteCursorPosition + document.querySelector('.contentPane').scrollLeft - document.querySelector('.contentPane').getBoundingClientRect().left
+}
+function getNearestTimeBlock(xPosition) {
+    return Math.floor(xPosition / screenQuery.getTimeBlockWidth()) + earliestDate
+}
 
 function appendTimeBlock(dateID) {
     let timeBlock = document.createElement('div')
