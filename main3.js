@@ -14,12 +14,18 @@ let draggingInterface = (function() {
             currentlyDragging.drag(event, direction)
             positioner.style.width = currentlyDragging.offsetWidth - 175 + screenQuery.getTimeBlockWidth() + 'px'
             if(event.pageX < contentPane.getBoundingClientRect().left + 30 && direction == 'left') {
-
+                timer = timer || setInterval(() => {
+                    contentPane.scrollLeft -= 6
+                    if(screenQuery.getVisibleTimeBlockRange()[0] < timeAxis.firstChild.textContent + 5) {
+                        appendTimeBlock(parseInt(timeAxis.firstChild.textContent) - 1, true)
+                        positioner.style.width = screenQuery.getTimeBlockWidth() * timeAxis.childNodes.length + 'px'
+                        projects.forEach(project => project.updateDisplay())
+                    }
+                    appendUntilFit()
+                }, 10)
             }
             else if(event.pageX > contentPane.getBoundingClientRect().right - 30 && direction == 'right') {
-                console.log(timer)
                 timer = timer || setInterval(() => {
-                    //console.log('hello')
                     contentPane.scrollLeft += 6
                     if(screenQuery.getVisibleTimeBlockRange()[1] > timeAxis.lastChild.textContent - 5) {
                         appendTimeBlock(parseInt(timeAxis.lastChild.textContent) + 1)
@@ -27,6 +33,10 @@ let draggingInterface = (function() {
                     }
                     appendUntilFit()
                 }, 10)
+            }
+            else {
+                clearInterval(timer)
+                timer = undefined    
             }
         }
         else {
@@ -44,11 +54,11 @@ let draggingInterface = (function() {
 })()
 
 function calculateCursors() {
-    let cursorPastLeftSide = getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left)
-    let cursorCloseToLeftSide = getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + 10
+    let cursorPastLeftSide = sq.getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left)
+    let cursorCloseToLeftSide = sq.getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + 10
     
-    let cursorBeforeRightSide = getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width)
-    let cursorCloseToRightSide = getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width) - 10
+    let cursorBeforeRightSide = sq.getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width)
+    let cursorCloseToRightSide = sq.getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width) - 10
     return {cursorPastLeftSide, cursorCloseToLeftSide, cursorBeforeRightSide, cursorCloseToRightSide}
 }
 
@@ -87,13 +97,13 @@ let projectProto = {
             }
         })
 
-        contentPane.appendChild(this.projectDisplay)
-        document.querySelector('.leftSidebar').insertBefore(this.projectLabel, document.querySelector('.createProject'))
+        sq.contentPane.appendChild(this.projectDisplay)
+        document.querySelector('.leftSidebar').insertBefore(this.projectLabel, sq.createProjectButton)
         this.updateDisplay()
     },
     updateDisplay() {
-        this.projectDisplay.style.left = getXLocationFromID(this.startDate) + 'px'
-        this.projectDisplay.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
+        this.projectDisplay.style.left = logic.getXLocationFromID(this.startDate) + 'px'
+        this.projectDisplay.style.width = logic.getXLocationFromID(this.endDate) - logic.getXLocationFromID(this.startDate) + 'px'
     },
     rename(newName) {
         this.name = newName
@@ -102,11 +112,11 @@ let projectProto = {
     drag(event, side) {
         contentPane.style.cursor = 'pointer'
         if(side == 'left') {
-            this.projectDisplay.style.left = getCursorXLocation(event.pageX) + 'px'
-            this.projectDisplay.style.width = getXLocationFromID(this.endDate) - getCursorXLocation(event.pageX) + 'px'
+            this.projectDisplay.style.left = sq.getCursorXLocation(event.pageX) + 'px'
+            this.projectDisplay.style.width = logic.getXLocationFromID(this.endDate) - sq.getCursorXLocation(event.pageX) + 'px'
         }
         else if(side == 'right') {
-            this.projectDisplay.style.width = getCursorXLocation(event.pageX) - parseInt(this.projectDisplay.style.left) + 'px'
+            this.projectDisplay.style.width = sq.getCursorXLocation(event.pageX) - parseInt(this.projectDisplay.style.left) + 'px'
         }
     },
     stopDrag(direction) {
@@ -121,7 +131,7 @@ let projectProto = {
 }
 
 function createProject(name, group, security) {
-    let [startDate, endDate] = screenQuery.getVisibleTimeBlockRange(true)
+    let [startDate, endDate] = sq.getVisibleTimeBlockRange('inset')
     let projectDisplay = document.createElement('div')
     projectDisplay.className = 'project'
     let projectLabel = document.createElement('div')
