@@ -1,5 +1,3 @@
-"use strict"
-
 let earliestDate = 29
 let latestDate = 35
 
@@ -11,6 +9,7 @@ const sq = (function() {
     const positioner = document.querySelector('.positioner')
     const createEmployeeButton = document.querySelector('.createEmployee')
     const createProjectButton = document.querySelector('.createProject')
+    const leftSidebar = document.querySelector('.leftSidebar')
 
     function getTimeBlockWidth() {
         return document.querySelector('.timeBlock').offsetWidth
@@ -42,7 +41,7 @@ const sq = (function() {
         getNearestTimeBlock(xPosition) {
             return Math.round(xPosition / screenQuery.getTimeBlockWidth()) + earliestDate
         },
-        contentPane, numberOfTimeBlocks, sidebar, topAxisContainer, positioner, createEmployeeButton, createProjectButton
+        contentPane, numberOfTimeBlocks, sidebar, topAxisContainer, positioner, createEmployeeButton, createProjectButton, leftSidebar
     }
 })();
 
