@@ -17,7 +17,7 @@ const sq = (function() {
         getTimeBlockWidth() {
             //exists becuase timeBlocks are subject to change
             return document.querySelector('.timeBlock').offsetWidth
-        },
+        },  
         getVisibleTimeBlockRange(border = false) {
             //potential latent bug with earliestDate
             let firstTimeBlockOnScreen = Math.floor(contentPane.scrollLeft / this.getTimeBlockWidth()) + earliestDate
@@ -41,28 +41,38 @@ const sq = (function() {
             return Math.round(xPosition / this.getTimeBlockWidth()) + earliestDate
         }
     }
-})()
+})();
 
-function initTimeframe() {
-    for(let i = earliestDate; i <= latestDate; i++) appendTimeBlock(i)
-    appendUntilFit()
-}
-function appendUntilFit() {
-    let timeBlocks = document.querySelector('.topAxisContainer').childNodes.length
-    let contentWidth = sq.contentPane.offsetWidth
-    while((sq.getTimeBlockWidth() * timeBlocks) < contentWidth) {
-        appendTimeBlock(Number(document.querySelector('.topAxisContainer').lastChild.textContent) + 1)
-        timeBlocks ++
+const sm = {
+    initTimeFrame() {
+        for(let i = earliestDate; i <= latestDate; i++) sm.appendTimeBlock(i)
+        sm.appendUntilFit()
+    },
+    appendUntilFit() {
+        let timeBlocks = sq.topAxisContainer.childNodes.length
+        const contentWidth = sq.contentPane.offsetWidth
+        while((sq.getTimeBlockWidth() * timeBlocks) < contentWidth) {
+            sm.appendTimeBlock(Number(sq.topAxisContainer.lastChild.textContent) + 1)
+            timeBlocks ++
+        }
+    },
+    fixContentPaneHeight() {
+        sq.positioner.style.top = sq.createEmployeeButton.getBoundingClientRect().top + sq.contentPane.scrollTop + 'px'
+    },
+    appendTimeBlock(dateID) {
+        let timeBlock = document.createElement('div')
+        timeBlock.className = 'timeBlock marginElement'
+        timeBlock.textContent = dateID
+        sq.topAxisContainer.appendChild(timeBlock)
     }
 }
-addEventListener('load', initTimeframe)
-addEventListener('resize', () => {
-    appendUntilFit()
-})
+
+addEventListener('load', sm.initTimeFrame)
+addEventListener('resize', sm.appendUntilFit)
 
 sq.createProjectButton.addEventListener('mouseup', () => {
     createProject('Default', null, 'Secure')
-    fixContentPaneHeight()
+    sm.fixContentPaneHeight()
 })
 
 sq.contentPane.addEventListener('scroll', (event) => {
@@ -74,9 +84,7 @@ sq.contentPane.addEventListener('scroll', (event) => {
 // read the JSON and stuff
 
 
-function fixContentPaneHeight() {
-    sq.positioner.style.top = sq.createEmployeeButton.getBoundingClientRect().top + sq.contentPane.scrollTop + 'px'
-}
+
 
 function convertIDToDate(id) {
     let year = 2000
@@ -88,11 +96,4 @@ function convertIDToDate(id) {
 function getXLocationFromID(id) {
     //latent bug with earliestDate
     return (id - earliestDate) * scale 
-}
-
-function appendTimeBlock(dateID) {
-    let timeBlock = document.createElement('div')
-    timeBlock.className = 'timeBlock marginElement'
-    timeBlock.textContent = dateID
-    document.querySelector('.topAxisContainer').appendChild(timeBlock)
 }

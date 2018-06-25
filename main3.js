@@ -17,11 +17,11 @@ let draggingInterface = (function() {
                 timer = timer || setInterval(() => {
                     sq.contentPane.scrollLeft -= 6
                     if(sq.getVisibleTimeBlockRange()[0] < sq.topAxisContainer.firstChild.textContent + 5) {
-                        appendTimeBlock(parseInt(sq.topAxisContainer.firstChild.textContent) - 1, true)
+                        sm.appendTimeBlock(parseInt(sq.topAxisContainer.firstChild.textContent) - 1, true)
                         sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
                         projects.forEach(project => project.updateDisplay())
                     }
-                    appendUntilFit()
+                    sm.appendUntilFit()
                 }, 10)
             }
             else if(event.pageX > sq.contentPane.getBoundingClientRect().right - 30 && direction == 'right') {
@@ -30,10 +30,10 @@ let draggingInterface = (function() {
                     //console.log('hello')
                     sq.contentPane.scrollLeft += 6
                     if(sq.getVisibleTimeBlockRange()[1] > sq.topAxisContainer.lastChild.textContent - 5) {
-                        appendTimeBlock(parseInt(sq.topAxisContainer.lastChild.textContent) + 1)
+                        sm.appendTimeBlock(parseInt(sq.topAxisContainer.lastChild.textContent) + 1)
                         sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
                     }
-                    appendUntilFit()
+                    sm.appendUntilFit()
                 }, 10)
             }
             else {
