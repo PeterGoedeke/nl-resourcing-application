@@ -2,21 +2,26 @@ let scale = 50
 let earliestDate = 29
 let latestDate = 35
 
-let contentPane = document.querySelector('.contentPane')
+const sq = (function() {
+    const contentPane = document.querySelector('.contentPane')
+    const mainWindow = document.querySelector('.mainWindow')
 
-let screenQuery = (function() {
-    function getTimeBlockWidth() {
-        return document.querySelector('.timeBlock').offsetWidth
-    }
-    function getContentPaneWidth() {
-        return contentPane.offsetWidth
-    }
+    const sidebar = document.querySelector('.sidebar')
+    const topAxisContainer = document.querySelector('.topAxisContainer')
+    const positioner = document.querySelector('.positioner')
+    const createEmployeeButton = document.querySelector('.createEmployee')
+    const createProjectButton = document.querySelector('.createProject')
     return {
-        getTimeBlockWidth, getContentPaneWidth,
+        contentPane,
+        sidebar, topAxisContainer, positioner, createEmployeeButton, createProjectButton,
+        getTimeBlockWidth() {
+            //exists becuase timeBlocks are subject to change
+            return document.querySelector('.timeBlock').offsetWidth
+        },
         getVisibleTimeBlockRange(border = false) {
             //potential latent bug with earliestDate
-            let firstTimeBlockOnScreen = Math.floor(contentPane.scrollLeft / getTimeBlockWidth()) + earliestDate
-            let timeBlocksOnScreen = Math.floor((document.querySelector('.mainWindow').offsetWidth - 175) / getTimeBlockWidth())
+            let firstTimeBlockOnScreen = Math.floor(contentPane.scrollLeft / this.getTimeBlockWidth()) + earliestDate
+            let timeBlocksOnScreen = Math.floor((mainWindow.offsetWidth - 175) / this.getTimeBlockWidth())
             let lastTimeBlockOnScreen = firstTimeBlockOnScreen + timeBlocksOnScreen
             
             if(border) {
@@ -28,6 +33,12 @@ let screenQuery = (function() {
                 lastTimeBlockOnScreen ++
             }
             return [firstTimeBlockOnScreen, lastTimeBlockOnScreen]
+        },
+        getCursorXLocation(absoluteCursorPosition) {
+            return absoluteCursorPosition + contentPane.scrollLeft - contentPane.getBoundingClientRect().left
+        },
+        getNearestTimeBlock(xPosition) {
+            return Math.round(xPosition / this.getTimeBlockWidth()) + earliestDate
         }
     }
 })()
@@ -38,8 +49,8 @@ function initTimeframe() {
 }
 function appendUntilFit() {
     let timeBlocks = document.querySelector('.topAxisContainer').childNodes.length
-    let contentWidth = contentPane.offsetWidth
-    while((screenQuery.getTimeBlockWidth() * timeBlocks) < contentWidth) {
+    let contentWidth = sq.contentPane.offsetWidth
+    while((sq.getTimeBlockWidth() * timeBlocks) < contentWidth) {
         appendTimeBlock(Number(document.querySelector('.topAxisContainer').lastChild.textContent) + 1)
         timeBlocks ++
     }
@@ -49,25 +60,22 @@ addEventListener('resize', () => {
     appendUntilFit()
 })
 
-document.querySelector('.createProject').addEventListener('mouseup', () => {
+sq.createProjectButton.addEventListener('mouseup', () => {
     createProject('Default', null, 'Secure')
     fixContentPaneHeight()
 })
 
-const sidebar = document.querySelector('.sidebar')
-const timeAxis = document.querySelector('.topAxisContainer')
-contentPane.addEventListener('scroll', (event) => {
-    sidebar.scrollTop = contentPane.scrollTop
-    timeAxis.scrollLeft = contentPane.scrollLeft
-    timeAxis.style.width = contentPane.offsetWidth + 'px'
-    console.log(timeAxis.offsetWidth, contentPane.offsetWidth)
+sq.contentPane.addEventListener('scroll', (event) => {
+    sq.sidebar.scrollTop = sq.contentPane.scrollTop
+    sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
+    sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
+    console.log(sq.topAxisContainer.offsetWidth, sq.contentPane.offsetWidth)
 })
 // read the JSON and stuff
 
-const positioner = document.querySelector('.positioner')
-const createEmployeeButton = document.querySelector('.createEmployee')
+
 function fixContentPaneHeight() {
-    positioner.style.top = createEmployeeButton.getBoundingClientRect().top + contentPane.scrollTop + 'px'
+    sq.positioner.style.top = sq.createEmployeeButton.getBoundingClientRect().top + sq.contentPane.scrollTop + 'px'
 }
 
 function convertIDToDate(id) {
@@ -80,12 +88,6 @@ function convertIDToDate(id) {
 function getXLocationFromID(id) {
     //latent bug with earliestDate
     return (id - earliestDate) * scale 
-}
-function getCursorXLocation(absoluteCursorPosition) {
-    return absoluteCursorPosition + contentPane.scrollLeft - contentPane.getBoundingClientRect().left
-}
-function getNearestTimeBlock(xPosition) {
-    return Math.round(xPosition / screenQuery.getTimeBlockWidth()) + earliestDate
 }
 
 function appendTimeBlock(dateID) {

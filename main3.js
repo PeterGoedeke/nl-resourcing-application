@@ -12,26 +12,26 @@ let draggingInterface = (function() {
     addEventListener('mousemove', (event) => {
         if(currentlyDragging) {
             currentlyDragging.drag(event, direction)
-            positioner.style.width = currentlyDragging.offsetWidth - 175 + screenQuery.getTimeBlockWidth() + 'px'
-            if(event.pageX < contentPane.getBoundingClientRect().left + 30 && direction == 'left') {
+            sq.positioner.style.width = currentlyDragging.offsetWidth - 175 + sq.getTimeBlockWidth() + 'px'
+            if(event.pageX < sq.contentPane.getBoundingClientRect().left + 30 && direction == 'left') {
                 timer = timer || setInterval(() => {
-                    contentPane.scrollLeft -= 6
-                    if(screenQuery.getVisibleTimeBlockRange()[0] < timeAxis.firstChild.textContent + 5) {
-                        appendTimeBlock(parseInt(timeAxis.firstChild.textContent) - 1, true)
-                        positioner.style.width = screenQuery.getTimeBlockWidth() * timeAxis.childNodes.length + 'px'
+                    sq.contentPane.scrollLeft -= 6
+                    if(sq.getVisibleTimeBlockRange()[0] < sq.topAxisContainer.firstChild.textContent + 5) {
+                        appendTimeBlock(parseInt(sq.topAxisContainer.firstChild.textContent) - 1, true)
+                        sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
                         projects.forEach(project => project.updateDisplay())
                     }
                     appendUntilFit()
                 }, 10)
             }
-            else if(event.pageX > contentPane.getBoundingClientRect().right - 30 && direction == 'right') {
+            else if(event.pageX > sq.contentPane.getBoundingClientRect().right - 30 && direction == 'right') {
                 console.log(timer)
                 timer = timer || setInterval(() => {
                     //console.log('hello')
-                    contentPane.scrollLeft += 6
-                    if(screenQuery.getVisibleTimeBlockRange()[1] > timeAxis.lastChild.textContent - 5) {
-                        appendTimeBlock(parseInt(timeAxis.lastChild.textContent) + 1)
-                        positioner.style.width = screenQuery.getTimeBlockWidth() * timeAxis.childNodes.length + 'px'
+                    sq.contentPane.scrollLeft += 6
+                    if(sq.getVisibleTimeBlockRange()[1] > sq.topAxisContainer.lastChild.textContent - 5) {
+                        appendTimeBlock(parseInt(sq.topAxisContainer.lastChild.textContent) + 1)
+                        sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
                     }
                     appendUntilFit()
                 }, 10)
@@ -56,11 +56,11 @@ let draggingInterface = (function() {
 })()
 
 function calculateCursors() {
-    let cursorPastLeftSide = getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left)
-    let cursorCloseToLeftSide = getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + 10
+    let cursorPastLeftSide = sq.getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left)
+    let cursorCloseToLeftSide = sq.getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + 10
     
-    let cursorBeforeRightSide = getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width)
-    let cursorCloseToRightSide = getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width) - 10
+    let cursorBeforeRightSide = sq.getCursorXLocation(event.pageX) < parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width)
+    let cursorCloseToRightSide = sq.getCursorXLocation(event.pageX) > parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width) - 10
     return {cursorPastLeftSide, cursorCloseToLeftSide, cursorBeforeRightSide, cursorCloseToRightSide}
 }
 
@@ -99,8 +99,8 @@ let projectProto = {
             }
         })
 
-        contentPane.appendChild(this.projectDisplay)
-        document.querySelector('.leftSidebar').insertBefore(this.projectLabel, document.querySelector('.createProject'))
+        sq.contentPane.appendChild(this.projectDisplay)
+        document.querySelector('.leftSidebar').insertBefore(this.projectLabel, sq.createProjectButton)
         this.updateDisplay()
     },
     updateDisplay() {
@@ -112,19 +112,19 @@ let projectProto = {
         this.projectLabel.textContent = this.name
     },
     drag(event, side) {
-        contentPane.style.cursor = 'pointer'
+        sq.contentPane.style.cursor = 'pointer'
         if(side == 'left') {
-            this.projectDisplay.style.left = getCursorXLocation(event.pageX) + 'px'
-            this.projectDisplay.style.width = getXLocationFromID(this.endDate) - getCursorXLocation(event.pageX) + 'px'
+            this.projectDisplay.style.left = sq.getCursorXLocation(event.pageX) + 'px'
+            this.projectDisplay.style.width = getXLocationFromID(this.endDate) - sq.getCursorXLocation(event.pageX) + 'px'
         }
         else if(side == 'right') {
-            this.projectDisplay.style.width = getCursorXLocation(event.pageX) - parseInt(this.projectDisplay.style.left) + 'px'
+            this.projectDisplay.style.width = sq.getCursorXLocation(event.pageX) - parseInt(this.projectDisplay.style.left) + 'px'
         }
     },
     stopDrag(direction) {
-        contentPane.style.cursor = 'auto'
-        this.startDate = getNearestTimeBlock(parseInt(this.projectDisplay.style.left))
-        this.endDate = getNearestTimeBlock(parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width))
+        sq.contentPane.style.cursor = 'auto'
+        this.startDate = sq.getNearestTimeBlock(parseInt(this.projectDisplay.style.left))
+        this.endDate = sq.getNearestTimeBlock(parseInt(this.projectDisplay.style.left) + parseInt(this.projectDisplay.style.width))
         if(direction == 'left' && this.startDate == this.endDate) this.startDate --
         else if(direction == 'right' && this.startDate == this.endDate) this.endDate ++
         this.updateDisplay()
@@ -133,7 +133,7 @@ let projectProto = {
 }
 
 function createProject(name, group, security) {
-    let [startDate, endDate] = screenQuery.getVisibleTimeBlockRange(true)
+    let [startDate, endDate] = sq.getVisibleTimeBlockRange(true)
     let projectDisplay = document.createElement('div')
     projectDisplay.className = 'project'
     let projectLabel = document.createElement('div')
