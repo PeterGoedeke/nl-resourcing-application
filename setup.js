@@ -1,7 +1,3 @@
-let scale = 50
-let earliestDate = 29
-let latestDate = 35
-
 const sq = (function() {
     const contentPane = document.querySelector('.contentPane')
     const mainWindow = document.querySelector('.mainWindow')
@@ -20,7 +16,7 @@ const sq = (function() {
         },  
         getVisibleTimeBlockRange(border = false) {
             //potential latent bug with earliestDate
-            let firstTimeBlockOnScreen = Math.floor(contentPane.scrollLeft / this.getTimeBlockWidth()) + earliestDate
+            let firstTimeBlockOnScreen = Math.floor(contentPane.scrollLeft / this.getTimeBlockWidth()) + state.earliestDate
             let timeBlocksOnScreen = Math.floor((mainWindow.offsetWidth - 175) / this.getTimeBlockWidth())
             let lastTimeBlockOnScreen = firstTimeBlockOnScreen + timeBlocksOnScreen
             
@@ -38,14 +34,14 @@ const sq = (function() {
             return absoluteCursorPosition + contentPane.scrollLeft - contentPane.getBoundingClientRect().left
         },
         getNearestTimeBlock(xPosition) {
-            return Math.round(xPosition / this.getTimeBlockWidth()) + earliestDate
+            return Math.round(xPosition / this.getTimeBlockWidth()) + state.earliestDate
         }
     }
 })();
 
 const sm = {
     initTimeFrame() {
-        for(let i = earliestDate; i <= latestDate; i++) sm.appendTimeBlock(i)
+        for(let i = state.earliestDate; i <= state.latestDate; i++) sm.appendTimeBlock(i)
         sm.appendUntilFit()
     },
     appendUntilFit() {
@@ -67,24 +63,37 @@ const sm = {
     }
 }
 
-addEventListener('load', sm.initTimeFrame)
-addEventListener('resize', sm.appendUntilFit)
+const state = (function() {
+    let scale = 50
+    let earliestDate = 29
+    let latestDate = 35
+    let projects = []
+    return {
+        scale, earliestDate, latestDate,
+        registerProject(project) {
+            projects.push(project)
+        },
+        get projects() {
+            return projects
+        }
+    }
+})();
 
-sq.createProjectButton.addEventListener('mouseup', () => {
-    createProject('Default', null, 'Secure')
-    sm.fixContentPaneHeight()
-})
-
-sq.contentPane.addEventListener('scroll', (event) => {
-    sq.sidebar.scrollTop = sq.contentPane.scrollTop
-    sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
-    sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
-    console.log(sq.topAxisContainer.offsetWidth, sq.contentPane.offsetWidth)
-})
-// read the JSON and stuff
-
-
-
+(function() {
+    addEventListener('load', sm.initTimeFrame)
+    addEventListener('resize', sm.appendUntilFit)
+    
+    sq.createProjectButton.addEventListener('mouseup', () => {
+        createProject('Default', null, 'Secure')
+        sm.fixContentPaneHeight()
+    })
+    sq.contentPane.addEventListener('scroll', (event) => {
+        sq.sidebar.scrollTop = sq.contentPane.scrollTop
+        sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
+        sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
+        console.log(sq.topAxisContainer.offsetWidth, sq.contentPane.offsetWidth)
+    })
+})()
 
 function convertIDToDate(id) {
     let year = 2000
@@ -95,5 +104,5 @@ function convertIDToDate(id) {
 }
 function getXLocationFromID(id) {
     //latent bug with earliestDate
-    return (id - earliestDate) * scale 
+    return (id - state.earliestDate) * state.scale 
 }

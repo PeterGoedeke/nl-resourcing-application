@@ -19,7 +19,7 @@ let draggingInterface = (function() {
                     if(sq.getVisibleTimeBlockRange()[0] < sq.topAxisContainer.firstChild.textContent + 5) {
                         sm.appendTimeBlock(parseInt(sq.topAxisContainer.firstChild.textContent) - 1, true)
                         sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
-                        projects.forEach(project => project.updateDisplay())
+                        state.projects.forEach(project => project.updateDisplay())
                     }
                     sm.appendUntilFit()
                 }, 10)
@@ -147,6 +147,7 @@ function createProject(name, group, security) {
         {name, group, security, startDate, endDate}
     )
     project.initDisplay()
+    state.registerProject(project)
     return project
 }
 function createEmployeeSlot(hostProject, employeeType) {
