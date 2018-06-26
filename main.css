@@ -158,6 +158,13 @@ div {
     white-space: nowrap;
     overflow-x: scroll;
 }
+.contentPane::-webkit-scrollbar {
+    width: 0 !important
+}
+.contentPane::-webkit-scrollbar-thumb {
+    background: lightgrey;
+    border: solid black 1px;
+}
 .project {
     height: 30px;
     position: relative;
