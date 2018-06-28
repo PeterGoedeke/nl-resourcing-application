@@ -15,8 +15,7 @@ const sq = (function() {
             return document.querySelector('.timeBlock').offsetWidth
         },  
         getVisibleTimeBlockRange(border = false) {
-            //potential latent bug with earliestDate
-            let firstTimeBlockOnScreen = Math.floor(contentPane.scrollLeft / this.getTimeBlockWidth()) + state.earliestDate
+            let firstTimeBlockOnScreen = Math.floor(contentPane.scrollLeft / this.getTimeBlockWidth()) + state.baseDate
             let timeBlocksOnScreen = Math.floor((mainWindow.offsetWidth - 175) / this.getTimeBlockWidth())
             let lastTimeBlockOnScreen = firstTimeBlockOnScreen + timeBlocksOnScreen
             
@@ -34,14 +33,14 @@ const sq = (function() {
             return absoluteCursorPosition + contentPane.scrollLeft - contentPane.getBoundingClientRect().left
         },
         getNearestTimeBlock(xPosition) {
-            return Math.round(xPosition / this.getTimeBlockWidth()) + state.earliestDate
+            return Math.round(xPosition / this.getTimeBlockWidth()) + state.baseDate
         }
     }
 })();
 
 const sm = {
     initTimeFrame() {
-        for(let i = state.earliestDate; i <= state.latestDate; i++) sm.appendTimeBlock(i)
+        for(let i = state.baseDate; i <= state.latestDate; i++) sm.appendTimeBlock(i)
         sm.appendUntilFit()
     },
     appendUntilFit() {
@@ -55,21 +54,23 @@ const sm = {
     fixContentPaneHeight() {
         sq.positioner.style.top = sq.createEmployeeButton.getBoundingClientRect().top + sq.contentPane.scrollTop + 'px'
     },
-    appendTimeBlock(dateID) {
+    appendTimeBlock(dateID, firstChild = false) {
         let timeBlock = document.createElement('div')
         timeBlock.className = 'timeBlock marginElement'
         timeBlock.textContent = dateID
-        sq.topAxisContainer.appendChild(timeBlock)
+        if(firstChild) sq.topAxisContainer.insertBefore(timeBlock, sq.topAxisContainer.firstChild)
+        else sq.topAxisContainer.appendChild(timeBlock)
     }
 }
 
 const state = (function() {
     let scale = 50
+    let baseDate = 29
     let earliestDate = 29
     let latestDate = 35
     let projects = []
     return {
-        scale, earliestDate, latestDate,
+        scale, baseDate, earliestDate, latestDate,
         registerProject(project) {
             projects.push(project)
         },
@@ -103,6 +104,5 @@ function convertIDToDate(id) {
     return (timeOfMonth == 0 ? 'Early ' : 'Late ') + month + "/" + year
 }
 function getXLocationFromID(id) {
-    //latent bug with earliestDate
-    return (id - state.earliestDate) * state.scale 
+    return (id - state.baseDate) * state.scale 
 }

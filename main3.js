@@ -13,28 +13,37 @@ let draggingInterface = (function() {
         if(currentlyDragging) {
             currentlyDragging.drag(event, direction)
             sq.positioner.style.width = currentlyDragging.offsetWidth - 175 + sq.getTimeBlockWidth() + 'px'
-            if(event.pageX < sq.contentPane.getBoundingClientRect().left + 30 && direction == 'left') {
-                timer = timer || setInterval(() => {
+            if(event.pageX < sq.contentPane.getBoundingClientRect().left + 30) {
+                if(direction == 'left') {
+                    timer = timer || setInterval(() => {
+                        sq.contentPane.scrollLeft -= 6
+                        console.log(sq.getVisibleTimeBlockRange()[0], parseInt(sq.topAxisContainer.firstChild.textContent))
+                        if(sq.getVisibleTimeBlockRange()[0] < parseInt(sq.topAxisContainer.firstChild.textContent) + 5) {
+                            sm.appendTimeBlock(parseInt(sq.topAxisContainer.firstChild.textContent) - 1, true)
+                            sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
+                            state.baseDate --
+                            state.projects.forEach(project => project.updateDisplay())
+                        }
+                        sm.appendUntilFit()
+                    })
+                } else if(direction == 'right') {
                     sq.contentPane.scrollLeft -= 6
-                    if(sq.getVisibleTimeBlockRange()[0] < sq.topAxisContainer.firstChild.textContent + 5) {
-                        sm.appendTimeBlock(parseInt(sq.topAxisContainer.firstChild.textContent) - 1, true)
-                        sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
-                        state.projects.forEach(project => project.updateDisplay())
-                    }
-                    sm.appendUntilFit()
-                }, 10)
+                }
+
             }
-            else if(event.pageX > sq.contentPane.getBoundingClientRect().right - 30 && direction == 'right') {
-                console.log(timer)
-                timer = timer || setInterval(() => {
-                    //console.log('hello')
+            else if(event.pageX > sq.contentPane.getBoundingClientRect().right - 30) {
+                if(direction == 'right') {
+                    timer = timer || setInterval(() => {
+                        sq.contentPane.scrollLeft += 6
+                        if(sq.getVisibleTimeBlockRange()[1] > parseInt(sq.topAxisContainer.lastChild.textContent) - 5) {
+                            sm.appendTimeBlock(parseInt(sq.topAxisContainer.lastChild.textContent) + 1)
+                            sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
+                        }
+                        sm.appendUntilFit()
+                    }, 10)
+                } else if(direction == 'left') {
                     sq.contentPane.scrollLeft += 6
-                    if(sq.getVisibleTimeBlockRange()[1] > sq.topAxisContainer.lastChild.textContent - 5) {
-                        sm.appendTimeBlock(parseInt(sq.topAxisContainer.lastChild.textContent) + 1)
-                        sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
-                    }
-                    sm.appendUntilFit()
-                }, 10)
+                }
             }
             else {
                 clearInterval(timer)

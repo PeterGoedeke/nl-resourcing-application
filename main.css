@@ -135,7 +135,7 @@ div {
     float: left;
     overflow: hidden;
 }
-.leftSidebar,rightSidebar {
+.leftSidebar, .rightSidebar {
     height: 100%;
     width: 50%;
     float: left;
