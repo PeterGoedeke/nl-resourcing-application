@@ -29,6 +29,7 @@ let draggingInterface = (function() {
             */
             if(event.pageX < sq.contentPane.getBoundingClientRect().left + 30) {
                 timer = timer || setInterval(() => {
+                    currentlyDragging.drag(event, direction)
                     if(direction == 'left') {
                         sq.contentPane.scrollLeft -= 6
                         if(sq.getVisibleTimeBlockRange()[0] < parseInt(sq.topAxisContainer.firstChild.textContent) + 5) {
@@ -45,19 +46,20 @@ let draggingInterface = (function() {
                 }, 10)
             }
             else if(event.pageX > sq.contentPane.getBoundingClientRect().right - 30) {
-                    timer = timer || setInterval(() => {
-                        if(direction == 'right') {
-                            sq.contentPane.scrollLeft += 6
-                            if(sq.getVisibleTimeBlockRange()[1] > parseInt(sq.topAxisContainer.lastChild.textContent) - 5) {
-                                sm.appendTimeBlock(parseInt(sq.topAxisContainer.lastChild.textContent) + 1)
-                                sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
-                            }
-                            sm.appendUntilFit()
+                timer = timer || setInterval(() => {
+                    currentlyDragging.drag(event, direction)
+                    if(direction == 'right') {
+                        sq.contentPane.scrollLeft += 6
+                        if(sq.getVisibleTimeBlockRange()[1] > parseInt(sq.topAxisContainer.lastChild.textContent) - 5) {
+                            sm.appendTimeBlock(parseInt(sq.topAxisContainer.lastChild.textContent) + 1)
+                            sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
                         }
-                        else if(direction == 'left') {
-                            sq.contentPane.scrollLeft += 6
-                        }
-                    }, 10)
+                        sm.appendUntilFit()
+                    }
+                    else if(direction == 'left') {
+                        sq.contentPane.scrollLeft += 6
+                    }
+                }, 10)
             }
             else {
                 clearInterval(timer)
