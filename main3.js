@@ -9,15 +9,28 @@ let draggingInterface = (function() {
             currentlyDragging = null
         }
     })
+
     addEventListener('mousemove', (event) => {
         if(currentlyDragging) {
             currentlyDragging.drag(event, direction)
             sq.positioner.style.width = currentlyDragging.offsetWidth - 175 + sq.getTimeBlockWidth() + 'px'
+            /*
+            timer = timer || setInterval(() => {
+                if(currentlyDragging) {
+                    //console.log(event.pageX)
+                    if(event.pageX < sq.contentPane.getBoundingClientRect().left + 30) {
+                        console.log('hello')
+                    }
+                    else if(event.pageX > sq.contentPane.getBoundingClientRect().right - 30) {
+                        console.log('hi')
+                    }
+                }
+            }, 10)
+            */
             if(event.pageX < sq.contentPane.getBoundingClientRect().left + 30) {
-                if(direction == 'left') {
-                    timer = timer || setInterval(() => {
+                timer = timer || setInterval(() => {
+                    if(direction == 'left') {
                         sq.contentPane.scrollLeft -= 6
-                        console.log(sq.getVisibleTimeBlockRange()[0], parseInt(sq.topAxisContainer.firstChild.textContent))
                         if(sq.getVisibleTimeBlockRange()[0] < parseInt(sq.topAxisContainer.firstChild.textContent) + 5) {
                             sm.appendTimeBlock(parseInt(sq.topAxisContainer.firstChild.textContent) - 1, true)
                             sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
@@ -25,25 +38,26 @@ let draggingInterface = (function() {
                             state.projects.forEach(project => project.updateDisplay())
                         }
                         sm.appendUntilFit()
-                    })
-                } else if(direction == 'right') {
-                    sq.contentPane.scrollLeft -= 6
-                }
-
+                    }
+                    else if(direction == 'right') {
+                        sq.contentPane.scrollLeft -= 6
+                    }
+                }, 10)
             }
             else if(event.pageX > sq.contentPane.getBoundingClientRect().right - 30) {
-                if(direction == 'right') {
                     timer = timer || setInterval(() => {
-                        sq.contentPane.scrollLeft += 6
-                        if(sq.getVisibleTimeBlockRange()[1] > parseInt(sq.topAxisContainer.lastChild.textContent) - 5) {
-                            sm.appendTimeBlock(parseInt(sq.topAxisContainer.lastChild.textContent) + 1)
-                            sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
+                        if(direction == 'right') {
+                            sq.contentPane.scrollLeft += 6
+                            if(sq.getVisibleTimeBlockRange()[1] > parseInt(sq.topAxisContainer.lastChild.textContent) - 5) {
+                                sm.appendTimeBlock(parseInt(sq.topAxisContainer.lastChild.textContent) + 1)
+                                sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
+                            }
+                            sm.appendUntilFit()
                         }
-                        sm.appendUntilFit()
+                        else if(direction == 'left') {
+                            sq.contentPane.scrollLeft += 6
+                        }
                     }, 10)
-                } else if(direction == 'left') {
-                    sq.contentPane.scrollLeft += 6
-                }
             }
             else {
                 clearInterval(timer)
