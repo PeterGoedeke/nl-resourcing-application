@@ -167,14 +167,12 @@ div {
 }
 .projectDisplay {
     height: 30px;
+    top: 30px;
     position: relative;
     visibility: visible;
 }
 .projectContainer {
-    position: relative;
     top: 30px;
-    display: flex;
-    align-items: center;
     visibility: hidden;
 }
 .projectLabel {
@@ -191,8 +189,11 @@ div {
 }
 
 .employeeSlot {
-    position: relative;
+    top: 30px;
+    position: absolute;
     margin-left: 10px;
+    visibility: visible;
+    z-index: 1;
 }
 .employeeSlotWorkloadBlock {
     width: 50px;

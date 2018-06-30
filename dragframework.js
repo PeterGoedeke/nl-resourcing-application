@@ -37,7 +37,10 @@ let draggingInterface = (function() {
                                 sm.appendTimeBlock(parseInt(sq.topAxisContainer.firstChild.textContent) - 1, true)
                                 sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
                                 state.baseDate --
-                                state.projects.forEach(project => project.updateDisplay())
+                                state.projects.forEach(project => {
+                                    project.updateDisplay()
+                                    project.employeeSlots[state.visibleType].forEach(employeeSlot => employeeSlot.updateDisplay())
+                                })
                                 sq.contentPane.scrollLeft = sq.getTimeBlockWidth() * 2
                             }
                             sm.appendUntilFit()

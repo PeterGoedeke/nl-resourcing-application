@@ -41,6 +41,7 @@ let projectProto = {
         sq.contentPane.appendChild(this.container)
         document.querySelector('.leftSidebar').insertBefore(this.projectLabel, sq.createProjectButton)
         this.updateDisplay()
+        this.employeeSlots[state.visibleType].forEach(employeeSlot => employeeSlot.updateDisplay())
     },
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) + 'px'

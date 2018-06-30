@@ -11,7 +11,7 @@ let employeeSlotProto = {
     initDisplay(workload) {
         this.refreshWorkload(workload)
         this.display.style.display = 'none'
-        this.hostProject.display.appendChild(this.display)
+        this.hostProject.container.appendChild(this.display)
     },
     assignEmployee(employee) {
         this.assignedEmployee = employee
@@ -39,6 +39,11 @@ let employeeSlotProto = {
             workloadBlock.value = workload[i]
             this.display.appendChild(workloadBlock)
         }
+    },
+    updateDisplay() {
+        this.display.style.left = getXLocationFromID(this.startDate) + 'px'
+        this.display.style.top = this.hostProject.display.getBoundingClientRect().top + 'px'
+        this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
     }
 }
 
