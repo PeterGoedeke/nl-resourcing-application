@@ -165,12 +165,17 @@ div {
     background: lightgrey;
     border: solid black 1px;
 }
-.project {
+.projectDisplay {
     height: 30px;
+    position: relative;
+    visibility: visible;
+}
+.projectContainer {
     position: relative;
     top: 30px;
     display: flex;
     align-items: center;
+    visibility: hidden;
 }
 .projectLabel {
     height: 30px;
@@ -179,6 +184,7 @@ div {
     position: fixed;
     left: 98.5vw;
     margin: auto 0;
+    visibility: visible;
 }
 .createEmployeeSlot:hover {
     cursor: pointer;

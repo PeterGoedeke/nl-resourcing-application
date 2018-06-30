@@ -13,12 +13,6 @@ let draggingInterface = (function() {
     addEventListener('mousemove', (event) => {
         if(currentlyDragging) {
             currentlyDragging.drag(event, direction)
-            if(projectProto.isPrototypeOf(currentlyDragging)) {
-                currentlyDragging.employeeSlots[state.visibleType].forEach(employeeSlot => employeeSlot.display.style.left = getXLocationFromID(employeeSlot.startDate) - sq.getCursorXLocation(event.pageX) + 'px')
-                //console.log()
-                //Array.from(currentlyDragging.display.childNodes).slice(0, currentlyDragging.display.childNodes.length - 1)
-                //.forEach(child => child.style.left = getXLocationFromID(child.startDate) - sq.getCursorXLocation(event.pageX) + 'px')
-            }
             sq.positioner.style.width = currentlyDragging.offsetWidth - 175 + sq.getTimeBlockWidth() + 'px'
             /*
             timer = timer || setInterval(() => {

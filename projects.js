@@ -36,9 +36,9 @@ let projectProto = {
         this.createEmployeeSlotButton.addEventListener('mouseup', (event) => {
 
         })
-
-        this.display.appendChild(this.createEmployeeSlotButton)
-        sq.contentPane.appendChild(this.display)
+        this.container.appendChild(this.createEmployeeSlotButton)
+        this.container.appendChild(this.display)
+        sq.contentPane.appendChild(this.container)
         document.querySelector('.leftSidebar').insertBefore(this.projectLabel, sq.createProjectButton)
         this.updateDisplay()
     },
@@ -59,8 +59,11 @@ let projectProto = {
 
 function createProject(name, group, security) {
     let [startDate, endDate] = sq.getVisibleTimeBlockRange(true)
+    let container = document.createElement('div')
+    container.className = 'projectContainer'
+    
     let display = document.createElement('div')
-    display.className = 'project'
+    display.className = 'projectDisplay'
     
     let projectLabel = document.createElement('div')
     projectLabel.className = 'projectLabel'
@@ -74,7 +77,7 @@ function createProject(name, group, security) {
     let project = Object.assign(
         Object.create(projectProto),
         draggable,
-        {display, projectLabel, createEmployeeSlotButton, dragging,
+        {container, display, projectLabel, createEmployeeSlotButton, dragging,
             name, group, security, startDate, endDate}
     )
     
