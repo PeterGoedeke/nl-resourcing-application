@@ -32,16 +32,11 @@ let employeeSlotProto = {
     },
     refreshWorkload(workload) {
         while(this.display.firstChild) this.display.removeChild(this.display.firstChild)
-        for(let i = this.startDate; i < this.endDate; i++) {
-            let workloadBlock = document.createElement('div')
+        for(let i = this.startDate; i < this.endDate; i++) {            
+            let workloadBlock = document.createElement('input')
             workloadBlock.className = 'employeeSlotWorkloadBlock'
-            
-            let workloadBlockInput = document.createElement('input')
-            workloadBlockInput.className = 'employeeSlotWorkloadBlockInput'
-            workloadBlockInput.type = 'text'
-            workloadBlockInput.value = workload[i]
-            
-            workloadBlock.appendChild(workloadBlockInput)
+            workloadBlock.type = 'text'
+            workloadBlock.value = workload[i]
             this.display.appendChild(workloadBlock)
         }
     }

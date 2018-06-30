@@ -184,6 +184,19 @@ div {
     cursor: pointer;
 }
 
+.employeeSlotWorkloadBlock {
+    width: 46px;
+    display: inline-block;
+}
+.employeeSlotWorkloadBlock:first-child {
+    width: 36px;
+    margin-left: 10px;
+    background-color: yellow;
+}
+.employeeSlotWorkloadBlock:last-child {
+    width: 36px;
+    margin-right: 10px;
+}
 
 .positioner {
     position: absolute;
