@@ -69,8 +69,10 @@ const state = (function() {
     let earliestDate = 29
     let latestDate = 35
     let projects = []
+    let employeeTypes = ['qs', 'pm', 'sm']
+    let visibleType = 'qs'
     return {
-        scale, baseDate, earliestDate, latestDate,
+        scale, baseDate, earliestDate, latestDate, employeeTypes, visibleType,
         registerProject(project) {
             projects.push(project)
         },
