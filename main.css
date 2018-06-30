@@ -184,17 +184,22 @@ div {
     cursor: pointer;
 }
 
+.employeeSlot {
+    position: relative;
+    margin-left: 10px;
+}
 .employeeSlotWorkloadBlock {
-    width: 46px;
+    width: 50px;
     display: inline-block;
+    box-sizing: border-box;
 }
 .employeeSlotWorkloadBlock:first-child {
-    width: 36px;
+    width: 30px;
     margin-left: 10px;
     background-color: yellow;
 }
 .employeeSlotWorkloadBlock:last-child {
-    width: 36px;
+    width: 30px;
     margin-right: 10px;
 }
 
