@@ -169,11 +169,20 @@ div {
     height: 30px;
     position: relative;
     top: 30px;
+    display: flex;
+    align-items: center;
 }
 .projectLabel {
     height: 30px;
 }
-
+.createEmployeeSlot {
+    position: fixed;
+    left: 98.5vw;
+    margin: auto 0;
+}
+.createEmployeeSlot:hover {
+    cursor: pointer;
+}
 
 
 .positioner {
