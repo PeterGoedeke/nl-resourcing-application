@@ -14,6 +14,8 @@ let employeeSlotProto = {
         this.hostProject.container.appendChild(this.display)
         this.initDraggable()
     },
+    requestWorkload() {
+        return Object.getOwnPropertySymbols(this)[0]
     },
     assignEmployee(employee) {
         this.assignedEmployee = employee
@@ -32,20 +34,22 @@ let employeeSlotProto = {
     changeWorkloadAtIndex(index, newWorkload) {
         this[workloadInformation][index] = newWorkload
     },
-    refreshWorkload(workload) {
+    refreshWorkload() {
+        let workload = this.requestWorkload()
         while(this.display.firstChild) this.display.removeChild(this.display.firstChild)
         for(let i = this.startDate; i < this.endDate; i++) {            
             let workloadBlock = document.createElement('input')
             workloadBlock.className = 'employeeSlotWorkloadBlock'
             workloadBlock.type = 'text'
-            workloadBlock.value = workload[i]
+            workloadBlock.value = this[workload][i]
             this.display.appendChild(workloadBlock)
         }
     },
     updateDisplay() {
-        this.display.style.left = getXLocationFromID(this.startDate) + 'px'
+        this.display.style.left = getXLocationFromID(this.startDate) + 10 + 'px'
         this.display.style.top = this.hostProject.display.getBoundingClientRect().top + 'px'
-        this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
+        this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) - 20 + 'px'
+        this.refreshWorkload()
     }
 }
 
@@ -68,7 +72,7 @@ function createEmployeeSlot(hostProject, employeeType) {
         [workloadInformation]: workload,
         display, employeeSlotLabel}
     )
-    employeeSlot.initDisplay(employeeSlot[workloadInformation])
+    employeeSlot.initDisplay()
     return employeeSlot
 }
 

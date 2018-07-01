@@ -170,6 +170,7 @@ div {
     top: 30px;
     position: relative;
     visibility: visible;
+    overflow: hidden;
 }
 .projectContainer {
     top: 30px;
@@ -191,9 +192,9 @@ div {
 .employeeSlot {
     top: 30px;
     position: absolute;
-    margin-left: 10px;
     visibility: visible;
     z-index: 1;
+    overflow: hidden;
 }
 .employeeSlotWorkloadBlock {
     width: 50px;
