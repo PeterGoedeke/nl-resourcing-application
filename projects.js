@@ -1,38 +1,6 @@
 let projectProto = {
     initDisplay() {
-        this.display.addEventListener('mousedown', (event) => {
-            const {
-                cursorPastLeftSide,
-                cursorCloseToLeftSide,
-                cursorBeforeRightSide,
-                cursorCloseToRightSide
-            } = calculateCursors.call(this)
-            if(cursorPastLeftSide && cursorCloseToLeftSide) {
-                draggingInterface.registerDragging(this, 'left')
-            }
-            else if(cursorBeforeRightSide && cursorCloseToRightSide) {
-                draggingInterface.registerDragging(this, 'right')
-            }
-        })
-
-        this.display.addEventListener('mousemove', (event) => {
-            const {
-                cursorPastLeftSide,
-                cursorCloseToLeftSide,
-                cursorBeforeRightSide,
-                cursorCloseToRightSide
-            } = calculateCursors.call(this)
-            if(cursorPastLeftSide && cursorCloseToLeftSide) {
-                this.display.style.cursor = 'pointer'
-            }
-            else if(cursorBeforeRightSide && cursorCloseToRightSide) {
-                this.display.style.cursor = 'pointer'
-            }
-            else {
-                this.display.style.cursor = 'auto'
-            }
-        })
-
+        this.initDraggable()
         this.createEmployeeSlotButton.addEventListener('mouseup', (event) => {
 
         })

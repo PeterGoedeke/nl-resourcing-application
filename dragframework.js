@@ -89,6 +89,41 @@ let draggingInterface = (function() {
 })()
 
 let draggable = {
+    initDraggable() {
+        console.log(this.display)
+        this.display.addEventListener('mousedown', (event) => {
+            const {
+                cursorPastLeftSide,
+                cursorCloseToLeftSide,
+                cursorBeforeRightSide,
+                cursorCloseToRightSide
+            } = calculateCursors.call(this)
+            if(cursorPastLeftSide && cursorCloseToLeftSide) {
+                draggingInterface.registerDragging(this, 'left')
+            }
+            else if(cursorBeforeRightSide && cursorCloseToRightSide) {
+                draggingInterface.registerDragging(this, 'right')
+            }
+        })
+
+        this.display.addEventListener('mousemove', (event) => {
+            const {
+                cursorPastLeftSide,
+                cursorCloseToLeftSide,
+                cursorBeforeRightSide,
+                cursorCloseToRightSide
+            } = calculateCursors.call(this)
+            if(cursorPastLeftSide && cursorCloseToLeftSide) {
+                this.display.style.cursor = 'pointer'
+            }
+            else if(cursorBeforeRightSide && cursorCloseToRightSide) {
+                this.display.style.cursor = 'pointer'
+            }
+            else {
+                this.display.style.cursor = 'auto'
+            }
+        })
+    },
     drag(event, side) {
         sq.contentPane.style.cursor = 'pointer'
         if(side == 'left') {
@@ -106,6 +141,5 @@ let draggable = {
         if(direction == 'left' && this.startDate == this.endDate) this.startDate --
         else if(direction == 'right' && this.startDate == this.endDate) this.endDate ++
         this.updateDisplay()
-        console.log(this.startDate, this.endDate)
     }
 }

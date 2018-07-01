@@ -8,10 +8,12 @@ function calculateCursors() {
 }
 
 let employeeSlotProto = {
-    initDisplay(workload) {
-        this.refreshWorkload(workload)
+    initDisplay() {
+        this.refreshWorkload()
         this.display.style.display = 'none'
         this.hostProject.container.appendChild(this.display)
+        this.initDraggable()
+    },
     },
     assignEmployee(employee) {
         this.assignedEmployee = employee
