@@ -63,7 +63,7 @@ div, form {
 .margin {
     height: 30px;
     width: 100vw;
-    z-index: 1;
+    z-index: 2;
 }
 .bottomMargin {
     bottom: 0px;
@@ -72,7 +72,6 @@ div, form {
     height: 30px;
     background-color: yellow;
     position: relative;
-    z-index: 1;
     white-space: nowrap;
     overflow: hidden;
     left: 175px;
@@ -180,10 +179,12 @@ div, form {
     height: 30px;
 }
 .createEmployeeSlot {
-    position: fixed;
+    position: absolute;
     left: 98.5vw;
     margin: auto 0;
     visibility: visible;
+    height: 20px;
+    z-index: 1;
 }
 .createEmployeeSlot:hover {
     cursor: pointer;

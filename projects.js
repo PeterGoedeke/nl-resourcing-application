@@ -2,7 +2,9 @@ let projectProto = {
     initDisplay() {
         this.initDraggable()
         this.createEmployeeSlotButton.addEventListener('mouseup', (event) => {
-
+            this.employeeSlots[state.visibleType].push(createEmployeeSlot(this, state.visibleType))
+            this.employeeSlots[state.visibleType][this.employeeSlots[state.visibleType].length - 1].updateDisplay()
+            this.updateDisplay()
         })
         this.container.appendChild(this.createEmployeeSlotButton)
         this.container.appendChild(this.display)
@@ -11,10 +13,18 @@ let projectProto = {
         this.updateDisplay()
         this.employeeSlots[state.visibleType].forEach(employeeSlot => employeeSlot.updateDisplay())
     },
+    updateVerticalDisplay() {
+        this.createEmployeeSlotButton.style.top = this.display.getBoundingClientRect().bottom - 25 + 'px'
+        this.employeeSlots[state.visibleType].forEach((employeeSlot, i) => employeeSlot.display.style.top = this.display.getBoundingClientRect().top + i * 30 + 'px')
+        this.projectLabel.style.height = this.display.style.height
+    },
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
+        this.createEmployeeSlotButton.style.left = parseInt(this.display.style.left) + parseInt(this.display.style.width) + 10 + 'px'
+        this.display.style.height = this.employeeSlots[state.visibleType].length * 30 + 'px'
         this.showVisibleTypes()
+        state.projects.forEach(project => project.updateVerticalDisplay())
     },
     rename(newName) {
         this.name = newName
@@ -55,7 +65,7 @@ function createProject(name, group, security) {
     for(let type in employeeSlots) employeeSlots[type].push(createEmployeeSlot(project, type))
     project.employeeSlots = employeeSlots
     
-    project.initDisplay()
     state.registerProject(project)
+    project.initDisplay()
     return project
 }
