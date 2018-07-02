@@ -43,8 +43,8 @@ let employeeSlotProto = {
         for(let i = this.startDate; i < this.endDate; i++) if(!workload[i]) {
             workload[i] = 5
         }
-        console.log('--------')
-        for(key in workload) console.log(key, workload[key])
+        //console.log('--------')
+        //for(key in workload) console.log(key, workload[key])
     },
     refreshWorkloadDisplay() {
         let workload = this.requestWorkload()

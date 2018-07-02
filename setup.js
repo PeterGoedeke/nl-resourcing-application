@@ -97,7 +97,11 @@ const state = (function() {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop
         sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
         sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
-        //if(sq.getVisibleTimeBlockRange()[1].textContent + 1 < )
+        // if(sq.getVisibleTimeBlockRange()[0] - 1 > state.earliestDate) {
+        //     console.log('ello')
+        //     sq.positioner.style.left = sq.contentPane.scrollLeft + 'px'
+        //     sq.positioner.style.width = getXLocationFromID(state.latestDate) - sq.contentPane.scrollLeft + 'px'
+        // }
     })
 })()
 

@@ -149,7 +149,5 @@ let draggable = {
             if(project.startDate < state.earliestDate) state.earliestDate = project.startDate
             if(project.endDate > state.latestDate) state.latestDate = project.endDate
         })
-
-
     }
 }
