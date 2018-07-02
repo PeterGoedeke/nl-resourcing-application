@@ -34,6 +34,12 @@ const sq = (function() {
         },
         getNearestTimeBlock(xPosition) {
             return Math.round(xPosition / this.getTimeBlockWidth()) + state.baseDate
+        },
+        getElementTop(element) {
+            return element.getBoundingClientRect().top + contentPane.scrollTop
+        },
+        getElementBottom(element) {
+            return element.getBoundingClientRect().bottom + contentPane.scrollTop
         }
     }
 })();
@@ -52,7 +58,7 @@ const sm = {
         }
     },
     fixContentPaneHeight() {
-        sq.positioner.style.top = sq.createEmployeeButton.getBoundingClientRect().top + sq.contentPane.scrollTop + 'px'
+        sq.positioner.style.top = sq.getElementTop(sq.createEmployeeButton) + 'px'
     },
     appendTimeBlock(dateID, firstChild = false) {
         let timeBlock = document.createElement('div')

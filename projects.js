@@ -14,8 +14,8 @@ let projectProto = {
         this.employeeSlots[state.visibleType].forEach(employeeSlot => employeeSlot.updateDisplay())
     },
     updateVerticalDisplay() {
-        this.createEmployeeSlotButton.style.top = this.display.getBoundingClientRect().bottom - 25 + 'px'
-        this.employeeSlots[state.visibleType].forEach((employeeSlot, i) => employeeSlot.display.style.top = this.display.getBoundingClientRect().top + i * 30 + 'px')
+        this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 25 + 'px'
+        this.employeeSlots[state.visibleType].forEach((employeeSlot, i) => employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 30 + 'px')
         this.projectLabel.style.height = this.display.style.height
     },
     updateDisplay() {
