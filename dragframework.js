@@ -144,8 +144,12 @@ let draggable = {
         state.projects.forEach(project => {
             for(let employeeSlot in project.employeeSlots[state.visibleType]) {
                 if(project.employeeSlots[state.visibleType][employeeSlot].startDate < state.earliestDate) state.earliestDate = project.employeeSlots[state.visibleType][employeeSlot].startDate
+                if(project.employeeSlots[state.visibleType][employeeSlot].endDate > state.latestDate) state.latestDate = project.employeeSlots[state.visibleType][employeeSlot].endDate
             }
             if(project.startDate < state.earliestDate) state.earliestDate = project.startDate
+            if(project.endDate > state.latestDate) state.latestDate = project.endDate
         })
+
+
     }
 }
