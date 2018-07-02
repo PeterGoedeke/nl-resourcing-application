@@ -78,12 +78,9 @@ const state = (function() {
     let employeeTypes = ['qs', 'pm', 'sm']
     let visibleType = 'qs'
     return {
-        scale, baseDate, earliestDate, latestDate, employeeTypes, visibleType,
+        projects, scale, baseDate, earliestDate, latestDate, employeeTypes, visibleType,
         registerProject(project) {
             projects.push(project)
-        },
-        get projects() {
-            return projects
         }
     }
 })();
@@ -100,7 +97,7 @@ const state = (function() {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop
         sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
         sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
-        console.log(sq.topAxisContainer.offsetWidth, sq.contentPane.offsetWidth)
+        //if(sq.getVisibleTimeBlockRange()[1].textContent + 1 < )
     })
 })()
 

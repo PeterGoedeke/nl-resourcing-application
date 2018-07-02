@@ -140,5 +140,12 @@ let draggable = {
         if(direction == 'left' && this.startDate == this.endDate) this.startDate --
         else if(direction == 'right' && this.startDate == this.endDate) this.endDate ++
         this.updateDisplay()
+
+        state.projects.forEach(project => {
+            for(let employeeSlot in project.employeeSlots[state.visibleType]) {
+                if(project.employeeSlots[state.visibleType][employeeSlot].startDate < state.earliestDate) state.earliestDate = project.employeeSlots[state.visibleType][employeeSlot].startDate
+            }
+            if(project.startDate < state.earliestDate) state.earliestDate = project.startDate
+        })
     }
 }
