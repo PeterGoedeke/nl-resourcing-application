@@ -9,20 +9,20 @@ let projectProto = {
         this.container.appendChild(this.createEmployeeSlotButton)
         this.container.appendChild(this.display)
         sq.contentPane.appendChild(this.container)
-        document.querySelector('.leftSidebar').insertBefore(this.projectLabel, sq.createProjectButton)
+        sq.leftSidebar.insertBefore(this.projectLabel, sq.createProjectButton)
         this.updateDisplay()
         this.employeeSlots[state.visibleType].forEach(employeeSlot => employeeSlot.updateDisplay())
     },
     updateVerticalDisplay() {
         this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 25 + 'px'
-        this.employeeSlots[state.visibleType].forEach((employeeSlot, i) => employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 30 + 'px')
+        this.employeeSlots[state.visibleType].forEach((employeeSlot, i) => employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 25 + 'px')
         this.projectLabel.style.height = this.display.style.height
     },
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
         this.createEmployeeSlotButton.style.left = parseInt(this.display.style.left) + parseInt(this.display.style.width) + 10 + 'px'
-        this.display.style.height = this.employeeSlots[state.visibleType].length * 30 + 'px'
+        this.display.style.height = this.employeeSlots[state.visibleType].length * 25 + 5 + 'px'
         this.showVisibleTypes()
         state.projects.forEach(project => project.updateVerticalDisplay())
     },

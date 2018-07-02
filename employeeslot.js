@@ -12,6 +12,7 @@ let employeeSlotProto = {
         this.refreshWorkloadDisplay()
         this.display.style.display = 'none'
         this.hostProject.container.appendChild(this.display)
+        sq.rightSidebar.appendChild(this.employeeSlotLabel)
         this.initDraggable()
     },
     requestWorkload() {

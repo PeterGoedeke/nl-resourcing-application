@@ -3,13 +3,15 @@ const sq = (function() {
     const mainWindow = document.querySelector('.mainWindow')
 
     const sidebar = document.querySelector('.sidebar')
+    const leftSidebar = document.querySelector('.leftSidebar')
+    const rightSidebar = document.querySelector('.rightSidebar')
     const topAxisContainer = document.querySelector('.topAxisContainer')
     const positioner = document.querySelector('.positioner')
     const createEmployeeButton = document.querySelector('.createEmployee')
     const createProjectButton = document.querySelector('.createProject')
     return {
         contentPane,
-        sidebar, topAxisContainer, positioner, createEmployeeButton, createProjectButton,
+        sidebar, leftSidebar, rightSidebar, topAxisContainer, positioner, createEmployeeButton, createProjectButton,
         getTimeBlockWidth() {
             //exists becuase timeBlocks are subject to change
             return document.querySelector('.timeBlock').offsetWidth

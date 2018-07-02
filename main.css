@@ -56,8 +56,10 @@ body {
 div, form {
     border: solid black 1px;
     background-color: lightgrey;
-    box-sizing: border-box;
     user-select: none;
+}
+form {
+    box-sizing: border-box;
 }
 
 .margin {
@@ -138,7 +140,8 @@ div, form {
     height: 100%;
     width: 50%;
     float: left;
-    padding-top: 30px;
+    padding-top: 35px;
+    box-sizing: border-box;
 }
 .createProject, .createLeaveSlot, .createEmployee {
     height: 20px;
@@ -166,7 +169,7 @@ div, form {
 }
 .projectDisplay {
     height: 30px;
-    top: 30px;
+    top: 35px;
     position: relative;
     visibility: visible;
     overflow: hidden;
@@ -192,16 +195,19 @@ div, form {
 }
 
 .employeeSlot {
-    top: 30px;
+    top: 35px;
+    height: 25px;
     position: absolute;
     visibility: visible;
     z-index: 1;
     overflow: hidden;
 }
+.employeeSlotLabel {
+
+}
 .employeeSlotWorkloadBlock {
     width: 50px;
     display: inline-block;
-    box-sizing: border-box;
 }
 .employeeSlotWorkloadBlock:first-child {
     width: 30px;
