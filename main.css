@@ -53,7 +53,7 @@ body {
     overflow: hidden;
 }
 
-div {
+div, form {
     border: solid black 1px;
     background-color: lightgrey;
     box-sizing: border-box;
@@ -204,7 +204,6 @@ div {
 .employeeSlotWorkloadBlock:first-child {
     width: 30px;
     margin-left: 10px;
-    background-color: yellow;
 }
 .employeeSlotWorkloadBlock:last-child {
     width: 30px;

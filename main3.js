@@ -9,13 +9,13 @@ function calculateCursors() {
 
 let employeeSlotProto = {
     initDisplay() {
-        this.refreshWorkload()
+        this.refreshWorkloadDisplay()
         this.display.style.display = 'none'
         this.hostProject.container.appendChild(this.display)
         this.initDraggable()
     },
     requestWorkload() {
-        return Object.getOwnPropertySymbols(this)[0]
+        return this[Object.getOwnPropertySymbols(this)[0]]
     },
     assignEmployee(employee) {
         this.assignedEmployee = employee
@@ -34,14 +34,32 @@ let employeeSlotProto = {
     changeWorkloadAtIndex(index, newWorkload) {
         this[workloadInformation][index] = newWorkload
     },
-    refreshWorkload() {
+    enterWorkloadInformation(id, value) {
+        this.requestWorkload()[id] = value
+    },
+    refreshWorkloadInformation() {
+        let workload = this.requestWorkload()
+        for(key in workload) if(key >= this.endDate || key < this.startDate) delete workload[key]
+        for(let i = this.startDate; i < this.endDate; i++) if(!workload[i]) {
+            workload[i] = 5
+        }
+        console.log('--------')
+        for(key in workload) console.log(key, workload[key])
+    },
+    refreshWorkloadDisplay() {
         let workload = this.requestWorkload()
         while(this.display.firstChild) this.display.removeChild(this.display.firstChild)
         for(let i = this.startDate; i < this.endDate; i++) {            
             let workloadBlock = document.createElement('input')
             workloadBlock.className = 'employeeSlotWorkloadBlock'
             workloadBlock.type = 'text'
-            workloadBlock.value = this[workload][i]
+            workloadBlock.value = workload[i]
+
+            workloadBlock.addEventListener('change', () => {
+                this.enterWorkloadInformation.call(this, i, workloadBlock.value)
+                console.log(workloadBlock.value)
+            })
+
             this.display.appendChild(workloadBlock)
         }
     },
@@ -49,7 +67,8 @@ let employeeSlotProto = {
         this.display.style.left = getXLocationFromID(this.startDate) + 10 + 'px'
         this.display.style.top = this.hostProject.display.getBoundingClientRect().top + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) - 20 + 'px'
-        this.refreshWorkload()
+        this.refreshWorkloadInformation()
+        this.refreshWorkloadDisplay()
     }
 }
 
@@ -59,7 +78,7 @@ function createEmployeeSlot(hostProject, employeeType) {
     for(let i = hostProject.startDate; i < hostProject.endDate; i++) workload[i] = 5
     let assignedEmployee = 'Empty'
 
-    let display = document.createElement('div')
+    let display = document.createElement('form')
     display.className = 'employeeSlot'
 
     let employeeSlotLabel = document.createElement('div')

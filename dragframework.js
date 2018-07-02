@@ -90,7 +90,6 @@ let draggingInterface = (function() {
 
 let draggable = {
     initDraggable() {
-        console.log(this.display)
         this.display.addEventListener('mousedown', (event) => {
             const {
                 cursorPastLeftSide,
