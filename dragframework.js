@@ -113,10 +113,10 @@ let draggable = {
                 cursorCloseToRightSide
             } = calculateCursors.call(this)
             if(cursorPastLeftSide && cursorCloseToLeftSide) {
-                this.display.style.cursor = 'pointer'
+                this.display.style.cursor = 'e-resize'
             }
             else if(cursorBeforeRightSide && cursorCloseToRightSide) {
-                this.display.style.cursor = 'pointer'
+                this.display.style.cursor = 'e-resize'
             }
             else {
                 this.display.style.cursor = 'auto'
@@ -124,7 +124,7 @@ let draggable = {
         })
     },
     drag(event, side) {
-        sq.contentPane.style.cursor = 'pointer'
+        sq.contentPane.style.cursor = 'e-resize'
         if(side == 'left') {
             this.display.style.left = sq.getCursorXLocation(event.pageX) + 'px'
             this.display.style.width = getXLocationFromID(this.endDate) - sq.getCursorXLocation(event.pageX) + 'px'
