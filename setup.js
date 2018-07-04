@@ -99,6 +99,7 @@ const state = (function() {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop
         sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
         sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
+        state.projects.forEach(project => project.updateVerticalDisplay())
         // if(sq.getVisibleTimeBlockRange()[0] - 1 > state.earliestDate) {
         //     console.log('ello')
         //     sq.positioner.style.left = sq.contentPane.scrollLeft + 'px'

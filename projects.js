@@ -15,7 +15,10 @@ let projectProto = {
     },
     updateVerticalDisplay() {
         this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 25 + 'px'
-        this.employeeSlots[state.visibleType].forEach((employeeSlot, i) => employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 25 + 'px')
+        this.employeeSlots[state.visibleType].forEach((employeeSlot, i) => {
+            employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 25 + 'px'
+            employeeSlot.employeeSlotLabel.style.top = parseInt(employeeSlot.display.style.top) - sq.contentPane.scrollTop + 'px'
+        })
         this.projectLabel.style.height = this.display.style.height
     },
     updateDisplay() {
@@ -31,8 +34,14 @@ let projectProto = {
         this.projectLabel.textContent = this.name
     },
     showVisibleTypes() {
-        for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.display.style.display = 'none')
-        this.employeeSlots[state.visibleType].forEach(employeeSlot => employeeSlot.display.style.display = 'block')
+        for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {
+            employeeSlot.display.style.display = 'none'
+            employeeSlot.employeeSlotLabel.style.display = 'none'
+        })
+        this.employeeSlots[state.visibleType].forEach(employeeSlot => {
+            employeeSlot.display.style.display = 'block'
+            employeeSlot.employeeSlotLabel.style.display = 'block'
+        })
     }
 }
 

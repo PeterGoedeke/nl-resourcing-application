@@ -1,2 +1,4 @@
 - Create employee slot buttons can overlap employee slots
 - Positioner can get too long, meaning that you can scroll too far in either direction
+- If you let go of the drag while your mouse is over the sidebar it isn't so great
+- Right sidebar labels don't scroll when you scroll-y

@@ -58,7 +58,6 @@ let employeeSlotProto = {
 
             workloadBlock.addEventListener('change', () => {
                 this.enterWorkloadInformation.call(this, i, workloadBlock.value)
-                console.log(workloadBlock.value)
             })
 
             this.display.appendChild(workloadBlock)
@@ -81,7 +80,8 @@ function createEmployeeSlot(hostProject, employeeType) {
     let display = document.createElement('form')
     display.className = 'employeeSlot'
 
-    let employeeSlotLabel = document.createElement('div')
+    let employeeSlotLabel = document.createElement('input')
+    employeeSlotLabel.type = 'text'
     employeeSlotLabel.className = 'employeeSlotLabel'
 
     let employeeSlot = Object.assign(
