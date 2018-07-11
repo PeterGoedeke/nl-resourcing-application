@@ -1,19 +1,27 @@
 let dialogueProto = {
-
+    initDisplay(event) {
+        this.display = document.createElement('div')
+        if(event.pageY > sq.mainWindow.getBoundingClientRect().bottom - 120) {
+            this.display.style.top = event.pageY - 150 + 'px'
+        } else {
+            this.display.style.top = event.pageY + 'px'
+        }
+        this.display.style.left = event.pageX - 40 + 'px'
+    }
 }
 
 function openProjectDialogue(hostProject, event) {
     let dialogue = Object.create(dialogueProto)
-    dialogue.display = document.createElement('div')
+    dialogue.initDisplay(event)
     dialogue.display.className = 'projectDialogue dialogue'
 
-
-    if(event.pageY > sq.mainWindow.getBoundingClientRect().bottom - 120) {
-        dialogue.display.style.top = event.pageY - 150 + 'px'
-    } else {
-        dialogue.display.style.top = event.pageY + 'px'
-    }
-    dialogue.display.style.left = event.pageX - 40 + 'px'
+    let deleteHostProjectButton = document.createElement('div')
+    deleteHostProjectButton.className = 'deleteHostProjectButton'
+    deleteHostProjectButton.addEventListener('mouseup', event => {
+        state.deleteProject(hostProject)
+        dialogueInterface.closeDialogue()
+    })
+    dialogue.display.appendChild(deleteHostProjectButton)
     dialogueInterface.registerDialogue(dialogue)
 }
 

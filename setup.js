@@ -83,6 +83,12 @@ const state = (function() {
         projects, scale, baseDate, earliestDate, latestDate, employeeTypes, visibleType,
         registerProject(project) {
             projects.push(project)
+        },
+        deleteProject(project) {
+            if(projects.includes(project)) {
+                project.deleteProject()
+                projects.forEach(project => project.updateVerticalDisplay())
+            }
         }
     }
 })();

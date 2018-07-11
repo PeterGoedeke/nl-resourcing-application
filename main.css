@@ -232,6 +232,11 @@ input {
     position: absolute;
     z-index: 5;
 }
+.deleteHostProjectButton {
+    margin: 0 auto;
+    width: 30px;
+    height: 30px;
+}
 
 .positioner {
     position: absolute;
