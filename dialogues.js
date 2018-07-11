@@ -15,46 +15,31 @@ function openProjectDialogue(hostProject, event) {
     dialogue.initDisplay(event)
     dialogue.display.className = 'projectDialogue dialogue'
 
-    let deleteHostProjectButton = document.createElement('div')
-    deleteHostProjectButton.className = 'deleteHostProjectButton'
-    deleteHostProjectButton.addEventListener('mouseup', event => {
+    let deleteHostButton = document.createElement('div')
+    deleteHostButton.className = 'deleteHostButton'
+    deleteHostButton.addEventListener('mouseup', event => {
         state.deleteProject(hostProject)
         dialogueInterface.closeDialogue()
     })
-    dialogue.display.appendChild(deleteHostProjectButton)
+    dialogue.display.appendChild(deleteHostButton)
     dialogueInterface.registerDialogue(dialogue)
 }
 
-function createProject(name, group, security) {
-    let [startDate, endDate] = sq.getVisibleTimeBlockRange(true)
-    let container = document.createElement('div')
-    container.className = 'projectContainer'
-    
-    let display = document.createElement('div')
-    display.className = 'projectDisplay'
-    
-    let projectLabel = document.createElement('div')
-    projectLabel.className = 'projectLabel'
-    projectLabel.textContent = name
+function openEmployeeSlotDialogue(hostEmployeeSlot, event) {
+    let dialogue = Object.create(dialogueProto)
+    dialogue.initDisplay(event)
+    dialogue.display.className = 'employeeSlotDialogue dialogue'
 
-    let createEmployeeSlotButton = document.createElement('div')
-    createEmployeeSlotButton.className = 'createEmployeeSlot'
-    createEmployeeSlotButton.textContent = '+'
+    let deleteHostButton = document.createElement('div')
+    deleteHostButton.className = 'deleteHostButton'
+    deleteHostButton.addEventListener('mouseup', event => {
+        if(hostEmployeeSlot.hostProject.employeeSlots[hostEmployeeSlot.employeeType].length > 1) {
+            hostEmployeeSlot.deleteEmployeeSlot()
+            state.projects.forEach(project => project.updateVerticalDisplay())
+        }
+        dialogueInterface.closeDialogue()
+    })
 
-    let dragging = false
-    let project = Object.assign(
-        Object.create(projectProto),
-        draggable,
-        {container, display, projectLabel, createEmployeeSlotButton, dragging,
-            name, group, security, startDate, endDate}
-    )
-    
-    let employeeSlots = {}
-    state.employeeTypes.forEach(type => employeeSlots[type] = [])
-    for(let type in employeeSlots) employeeSlots[type].push(createEmployeeSlot(project, type))
-    project.employeeSlots = employeeSlots
-    
-    state.registerProject(project)
-    project.initDisplay()
-    return project
+    dialogue.display.appendChild(deleteHostButton)
+    dialogueInterface.registerDialogue(dialogue)
 }

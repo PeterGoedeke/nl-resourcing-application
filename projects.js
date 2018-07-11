@@ -9,7 +9,7 @@ let projectProto = {
             this.employeeSlots[state.visibleType][this.employeeSlots[state.visibleType].length - 1].updateDisplay()
             this.updateDisplay()
         })
-        this.container.addEventListener('mouseup', event => {
+        this.display.addEventListener('mouseup', event => {
             if(event.which == 3) {
                 openProjectDialogue(this, event)
             }
@@ -22,18 +22,18 @@ let projectProto = {
         this.employeeSlots[state.visibleType].forEach(employeeSlot => employeeSlot.updateDisplay())
     },
     updateVerticalDisplay() {
-        this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 25 + 'px'
         this.employeeSlots[state.visibleType].forEach((employeeSlot, i) => {
             employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 25 + 'px'
             employeeSlot.employeeSlotLabel.style.top = parseInt(employeeSlot.display.style.top) - sq.contentPane.scrollTop + 'px'
         })
+        this.display.style.height = this.employeeSlots[state.visibleType].length * 25 + 5 + 'px'
         this.projectLabel.style.height = this.display.style.height
+        this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 25 + 'px'
     },
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
         this.createEmployeeSlotButton.style.left = parseInt(this.display.style.left) + parseInt(this.display.style.width) + 10 + 'px'
-        this.display.style.height = this.employeeSlots[state.visibleType].length * 25 + 5 + 'px'
         this.showVisibleTypes()
         state.projects.forEach(project => project.updateVerticalDisplay())
     },
@@ -56,6 +56,9 @@ let projectProto = {
         sq.leftSidebar.removeChild(this.projectLabel)
         for(type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => sq.rightSidebar.removeChild(employeeSlot.employeeSlotLabel))
         state.projects.splice(state.projects.indexOf(this), 1)
+    },
+    deleteEmployeeSlot(slot) {
+
     }
 }
 

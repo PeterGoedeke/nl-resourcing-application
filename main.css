@@ -226,13 +226,13 @@ input {
     margin-right: 10px;
 }
 
-.projectDialogue {
+.dialogue {
     height: 150px;
     width: 80px;
     position: absolute;
     z-index: 5;
 }
-.deleteHostProjectButton {
+.deleteHostButton {
     margin: 0 auto;
     width: 30px;
     height: 30px;

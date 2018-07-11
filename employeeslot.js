@@ -14,6 +14,12 @@ let employeeSlotProto = {
         this.hostProject.container.appendChild(this.display)
         sq.rightSidebar.appendChild(this.employeeSlotLabel)
         this.initDraggable()
+
+        this.display.addEventListener('mouseup', event => {
+            if(event.which == 3) {
+                openEmployeeSlotDialogue(this, event)
+            }
+        })
     },
     requestWorkload() {
         return this[Object.getOwnPropertySymbols(this)[0]]
@@ -68,6 +74,11 @@ let employeeSlotProto = {
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) - 20 + 'px'
         this.refreshWorkloadInformation()
         this.refreshWorkloadDisplay()
+    },
+    deleteEmployeeSlot() {
+        this.hostProject.container.removeChild(this.display)
+        sq.rightSidebar.removeChild(this.employeeSlotLabel)
+        this.hostProject.employeeSlots[this.employeeType].splice(this.hostProject.employeeSlots[this.employeeType].indexOf(this), 1)
     }
 }
 
