@@ -5,13 +5,14 @@ const sq = (function() {
     const sidebar = document.querySelector('.sidebar')
     const leftSidebar = document.querySelector('.leftSidebar')
     const rightSidebar = document.querySelector('.rightSidebar')
+    const typeLabel = document.querySelector('.typeLabel')
     const topAxisContainer = document.querySelector('.topAxisContainer')
     const positioner = document.querySelector('.positioner')
     const createEmployeeButton = document.querySelector('.createEmployee')
     const createProjectButton = document.querySelector('.createProject')
     return {
         contentPane, mainWindow,
-        sidebar, leftSidebar, rightSidebar, topAxisContainer, positioner, createEmployeeButton, createProjectButton,
+        sidebar, leftSidebar, rightSidebar, typeLabel, topAxisContainer, positioner, createEmployeeButton, createProjectButton,
         getTimeBlockWidth() {
             //exists becuase timeBlocks are subject to change
             return document.querySelector('.timeBlock').offsetWidth
@@ -101,9 +102,12 @@ const state = (function() {
         
     })
 
-    sq.createProjectButton.addEventListener('mouseup', () => {
+    sq.createProjectButton.addEventListener('mouseup', event => {
         createProject('Default', null, 'Secure')
         sm.fixContentPaneHeight()
+    })
+    sq.createEmployeeButton.addEventListener('mouseup', event => {
+        createEmployee(state.visibleType)
     })
     sq.contentPane.addEventListener('scroll', (event) => {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop

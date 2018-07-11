@@ -17,6 +17,9 @@ let projectProto = {
         this.label.addEventListener('change', event => {
             this.name = this.label.value
         })
+        this.verticalDragger.addEventListener('drag', event => {
+            console.log('sup bitches')
+        })
         this.container.appendChild(this.createEmployeeSlotButton)
         this.container.appendChild(this.display)
         sq.contentPane.appendChild(this.container)
@@ -86,7 +89,7 @@ function createProject(name, group, security) {
     let dragging = false
     let project = Object.assign(
         Object.create(projectProto),
-        draggable,
+        horizontalDraggable,
         {container, display, label, labelContainer, verticalDragger, createEmployeeSlotButton, dragging,
             name, group, security, startDate, endDate}
     )

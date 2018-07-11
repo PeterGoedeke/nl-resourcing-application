@@ -88,7 +88,15 @@ let draggingInterface = (function() {
     }
 })()
 
-let draggable = {
+let verticalDraggable = {
+    draggableType: 'vertical',
+    initDraggable() {
+        
+    }
+}
+
+let horizontalDraggable = {
+    draggableType: 'horizontal',
     initDraggable() {
         this.display.addEventListener('mousedown', (event) => {
             const {

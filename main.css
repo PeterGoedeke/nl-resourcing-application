@@ -235,6 +235,21 @@ input {
     margin-right: 10px;
 }
 
+.employee {
+    height: 30px;
+    top: 35px;
+    position: relative;
+    overflow: hidden;
+}
+.employeeLabel {
+
+}
+.employeeWorkloadBlock {
+    width: 50px;
+    display: inline-block;
+    height: 100%;
+}
+
 .dialogue {
     height: 150px;
     width: 80px;

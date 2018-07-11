@@ -97,7 +97,7 @@ function createEmployeeSlot(hostProject, employeeType) {
 
     let employeeSlot = Object.assign(
         Object.create(employeeSlotProto),
-        draggable,
+        horizontalDraggable,
         {hostProject, employeeType, startDate: hostProject.startDate, endDate: hostProject.endDate, assignedEmployee,
         [workloadInformation]: workload,
         display, label}
