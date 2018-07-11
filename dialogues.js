@@ -3,14 +3,17 @@ let dialogueProto = {
 }
 
 function openProjectDialogue(hostProject, event) {
-    let dialogue = document.createElement('div')
-    dialogue.className = 'projectDialogue dialogue'
+    let dialogue = Object.create(dialogueProto)
+    dialogue.display = document.createElement('div')
+    dialogue.display.className = 'projectDialogue dialogue'
+
+
     if(event.pageY > sq.mainWindow.getBoundingClientRect().bottom - 120) {
-        dialogue.style.top = event.pageY - 150 + 'px'
+        dialogue.display.style.top = event.pageY - 150 + 'px'
     } else {
-        dialogue.style.top = event.pageY + 'px'
+        dialogue.display.style.top = event.pageY + 'px'
     }
-    dialogue.style.left = event.pageX - 40 + 'px'
+    dialogue.display.style.left = event.pageX - 40 + 'px'
     dialogueInterface.registerDialogue(dialogue)
 }
 
