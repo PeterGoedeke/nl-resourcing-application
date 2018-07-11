@@ -10,7 +10,7 @@ const sq = (function() {
     const createEmployeeButton = document.querySelector('.createEmployee')
     const createProjectButton = document.querySelector('.createProject')
     return {
-        contentPane,
+        contentPane, mainWindow,
         sidebar, leftSidebar, rightSidebar, topAxisContainer, positioner, createEmployeeButton, createProjectButton,
         getTimeBlockWidth() {
             //exists becuase timeBlocks are subject to change
@@ -91,6 +91,10 @@ const state = (function() {
     addEventListener('load', sm.initTimeFrame)
     addEventListener('resize', sm.appendUntilFit)
     
+    addEventListener('mouseup', event => {
+        
+    })
+
     sq.createProjectButton.addEventListener('mouseup', () => {
         createProject('Default', null, 'Secure')
         sm.fixContentPaneHeight()

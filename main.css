@@ -226,6 +226,13 @@ input {
     margin-right: 10px;
 }
 
+.projectDialogue {
+    height: 150px;
+    width: 80px;
+    position: absolute;
+    z-index: 5;
+}
+
 .positioner {
     position: absolute;
     visibility: hidden;
