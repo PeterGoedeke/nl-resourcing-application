@@ -184,6 +184,15 @@ input {
     border: 0;
 }
 .projectLabel {
+    float: left;
+    width: 90%;
+    height: 100%;
+}
+.projectVerticalDragger {
+    float: left;
+    width: 10%;
+}
+.projectLabelContainer {
     height: 30px;
 }
 .createEmployeeSlot {

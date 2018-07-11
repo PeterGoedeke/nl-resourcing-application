@@ -20,7 +20,9 @@ let projectProto = {
         this.container.appendChild(this.createEmployeeSlotButton)
         this.container.appendChild(this.display)
         sq.contentPane.appendChild(this.container)
-        sq.leftSidebar.insertBefore(this.label, sq.createProjectButton)
+        this.labelContainer.appendChild(this.verticalDragger)
+        this.labelContainer.appendChild(this.label)
+        sq.leftSidebar.insertBefore(this.labelContainer, sq.createProjectButton)
         this.updateDisplay()
         this.employeeSlots[state.visibleType].forEach(employeeSlot => employeeSlot.updateDisplay())
     },
@@ -30,7 +32,7 @@ let projectProto = {
             employeeSlot.label.style.top = parseInt(employeeSlot.display.style.top) - sq.contentPane.scrollTop + 'px'
         })
         this.display.style.height = this.employeeSlots[state.visibleType].length * 25 + 5 + 'px'
-        this.label.style.height = this.display.style.height
+        this.labelContainer.style.height = this.display.style.height
         this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 25 + 'px'
     },
     updateDisplay() {
@@ -39,10 +41,6 @@ let projectProto = {
         this.createEmployeeSlotButton.style.left = parseInt(this.display.style.left) + parseInt(this.display.style.width) + 10 + 'px'
         this.showVisibleTypes()
         state.projects.forEach(project => project.updateVerticalDisplay())
-    },
-    rename(newName) {
-        this.name = newName
-        this.label.textContent = this.name
     },
     showVisibleTypes() {
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {
@@ -56,7 +54,7 @@ let projectProto = {
     },
     deleteProject() {
         sq.contentPane.removeChild(this.container)
-        sq.leftSidebar.removeChild(this.label)
+        sq.leftSidebar.removeChild(this.labelContainer)
         for(type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => sq.rightSidebar.removeChild(employeeSlot.label))
         state.projects.splice(state.projects.indexOf(this), 1)
     }
@@ -69,6 +67,12 @@ function createProject(name, group, security) {
     
     let display = document.createElement('div')
     display.className = 'projectDisplay'
+
+    let labelContainer = document.createElement('div')
+    labelContainer.className = 'projectLabelContainer'
+
+    let verticalDragger = document.createElement('div')
+    verticalDragger.className = 'projectVerticalDragger'
 
     let label = document.createElement('input')
     label.type = 'text'
@@ -83,7 +87,7 @@ function createProject(name, group, security) {
     let project = Object.assign(
         Object.create(projectProto),
         draggable,
-        {container, display, label, createEmployeeSlotButton, dragging,
+        {container, display, label, labelContainer, verticalDragger, createEmployeeSlotButton, dragging,
             name, group, security, startDate, endDate}
     )
     
