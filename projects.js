@@ -14,6 +14,9 @@ let projectProto = {
                 openProjectDialogue(this, event)
             }
         })
+        this.projectLabel.addEventListener('change', event => {
+            this.name = this.projectLabel.value
+        })
         this.container.appendChild(this.createEmployeeSlotButton)
         this.container.appendChild(this.display)
         sq.contentPane.appendChild(this.container)
@@ -70,9 +73,10 @@ function createProject(name, group, security) {
     let display = document.createElement('div')
     display.className = 'projectDisplay'
     
-    let projectLabel = document.createElement('div')
+    let projectLabel = document.createElement('input')
+    projectLabel.type = 'text'
     projectLabel.className = 'projectLabel'
-    projectLabel.textContent = name
+    projectLabel.value = name
 
     let createEmployeeSlotButton = document.createElement('div')
     createEmployeeSlotButton.className = 'createEmployeeSlot'

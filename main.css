@@ -56,7 +56,7 @@ body {
 * {
     background-color: lightgrey;
     user-select: none;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 div, form, input {
     border: solid black 1px;
