@@ -12,7 +12,7 @@ let employeeSlotProto = {
         this.refreshWorkloadDisplay()
         this.display.style.display = 'none'
         this.hostProject.container.appendChild(this.display)
-        sq.rightSidebar.appendChild(this.employeeSlotLabel)
+        sq.rightSidebar.appendChild(this.label)
         this.initDraggable()
 
         this.display.addEventListener('mouseup', event => {
@@ -77,7 +77,7 @@ let employeeSlotProto = {
     },
     deleteEmployeeSlot() {
         this.hostProject.container.removeChild(this.display)
-        sq.rightSidebar.removeChild(this.employeeSlotLabel)
+        sq.rightSidebar.removeChild(this.label)
         this.hostProject.employeeSlots[this.employeeType].splice(this.hostProject.employeeSlots[this.employeeType].indexOf(this), 1)
     }
 }
@@ -91,16 +91,16 @@ function createEmployeeSlot(hostProject, employeeType) {
     let display = document.createElement('form')
     display.className = 'employeeSlot'
 
-    let employeeSlotLabel = document.createElement('input')
-    employeeSlotLabel.type = 'text'
-    employeeSlotLabel.className = 'employeeSlotLabel'
+    let label = document.createElement('input')
+    label.type = 'text'
+    label.className = 'employeeSlotLabel'
 
     let employeeSlot = Object.assign(
         Object.create(employeeSlotProto),
         draggable,
         {hostProject, employeeType, startDate: hostProject.startDate, endDate: hostProject.endDate, assignedEmployee,
         [workloadInformation]: workload,
-        display, employeeSlotLabel}
+        display, label}
     )
     employeeSlot.initDisplay()
     return employeeSlot

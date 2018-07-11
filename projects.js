@@ -14,23 +14,23 @@ let projectProto = {
                 openProjectDialogue(this, event)
             }
         })
-        this.projectLabel.addEventListener('change', event => {
-            this.name = this.projectLabel.value
+        this.label.addEventListener('change', event => {
+            this.name = this.label.value
         })
         this.container.appendChild(this.createEmployeeSlotButton)
         this.container.appendChild(this.display)
         sq.contentPane.appendChild(this.container)
-        sq.leftSidebar.insertBefore(this.projectLabel, sq.createProjectButton)
+        sq.leftSidebar.insertBefore(this.label, sq.createProjectButton)
         this.updateDisplay()
         this.employeeSlots[state.visibleType].forEach(employeeSlot => employeeSlot.updateDisplay())
     },
     updateVerticalDisplay() {
         this.employeeSlots[state.visibleType].forEach((employeeSlot, i) => {
             employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 25 + 'px'
-            employeeSlot.employeeSlotLabel.style.top = parseInt(employeeSlot.display.style.top) - sq.contentPane.scrollTop + 'px'
+            employeeSlot.label.style.top = parseInt(employeeSlot.display.style.top) - sq.contentPane.scrollTop + 'px'
         })
         this.display.style.height = this.employeeSlots[state.visibleType].length * 25 + 5 + 'px'
-        this.projectLabel.style.height = this.display.style.height
+        this.label.style.height = this.display.style.height
         this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 25 + 'px'
     },
     updateDisplay() {
@@ -42,26 +42,23 @@ let projectProto = {
     },
     rename(newName) {
         this.name = newName
-        this.projectLabel.textContent = this.name
+        this.label.textContent = this.name
     },
     showVisibleTypes() {
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {
             employeeSlot.display.style.display = 'none'
-            employeeSlot.employeeSlotLabel.style.display = 'none'
+            employeeSlot.label.style.display = 'none'
         })
         this.employeeSlots[state.visibleType].forEach(employeeSlot => {
             employeeSlot.display.style.display = 'block'
-            employeeSlot.employeeSlotLabel.style.display = 'block'
+            employeeSlot.label.style.display = 'block'
         })
     },
     deleteProject() {
         sq.contentPane.removeChild(this.container)
-        sq.leftSidebar.removeChild(this.projectLabel)
-        for(type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => sq.rightSidebar.removeChild(employeeSlot.employeeSlotLabel))
+        sq.leftSidebar.removeChild(this.label)
+        for(type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => sq.rightSidebar.removeChild(employeeSlot.label))
         state.projects.splice(state.projects.indexOf(this), 1)
-    },
-    deleteEmployeeSlot(slot) {
-
     }
 }
 
@@ -72,11 +69,11 @@ function createProject(name, group, security) {
     
     let display = document.createElement('div')
     display.className = 'projectDisplay'
-    
-    let projectLabel = document.createElement('input')
-    projectLabel.type = 'text'
-    projectLabel.className = 'projectLabel'
-    projectLabel.value = name
+
+    let label = document.createElement('input')
+    label.type = 'text'
+    label.className = 'projectLabel'
+    label.value = name
 
     let createEmployeeSlotButton = document.createElement('div')
     createEmployeeSlotButton.className = 'createEmployeeSlot'
@@ -86,7 +83,7 @@ function createProject(name, group, security) {
     let project = Object.assign(
         Object.create(projectProto),
         draggable,
-        {container, display, projectLabel, createEmployeeSlotButton, dragging,
+        {container, display, label, createEmployeeSlotButton, dragging,
             name, group, security, startDate, endDate}
     )
     
