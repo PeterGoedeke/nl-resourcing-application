@@ -115,7 +115,10 @@ const state = (function() {
                 if(project.startDate < earliestDate) earliestDate = project.startDate
                 if(project.endDate > latestDate) latestDate = project.endDate
             })
-        }
+            console.log(earliestDate, latestDate)
+        },
+        get earliestDate() { return earliestDate },
+        get latestDate() { return latestDate }
     }
 })();
 
@@ -130,12 +133,14 @@ const state = (function() {
     sq.createProjectButton.addEventListener('mouseup', event => {
         createProject('Default', null, 'Secure')
         sm.fixContentPaneHeight()
+        state.calculateDateRange()
     })
     sq.createEmployeeButton.addEventListener('mouseup', event => {
         createEmployee(state.visibleType)
         sm.updateVerticalDisplay()
+        state.calculateDateRange()
     })
-    sq.contentPane.addEventListener('scroll', (event) => {
+    sq.contentPane.addEventListener('scroll', event => {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop
         sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
         sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'

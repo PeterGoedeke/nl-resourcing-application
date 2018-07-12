@@ -23,6 +23,7 @@ function createEmployee(employeeType) {
     let display = document.createElement('div')
     display.className = 'employee'
 
+    console.log(state.earliestDate, state.latestDate)
     for(let i = state.earliestDate; i < state.latestDate; i++) {
         let workloadBlock = document.createElement('div')
         workloadBlock.className = 'employeeWorkloadBlock'
