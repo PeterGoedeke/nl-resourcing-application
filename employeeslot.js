@@ -30,8 +30,12 @@ let employeeSlotProto = {
             }
         })
         this.label.addEventListener('blur', event => {
+            if(this.label.value === '') {
+                this.removeEmployee()
+                this.label.value = 'Empty'
+            }
             if(!state.employeeExists(this.label.value)) {
-                this.label.value = this.employee && this.employee.name || null
+                this.label.value = this.employee && this.employee.name || 'Empty'
             }
         })
     },
@@ -119,6 +123,7 @@ function createEmployeeSlot(hostProject, employeeType) {
 
     let label = document.createElement('input')
     label.type = 'text'
+    label.value = 'Empty'
     label.className = 'employeeSlotLabel'
 
     let employeeSlot = Object.assign(
