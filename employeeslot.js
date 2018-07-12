@@ -24,20 +24,29 @@ let employeeSlotProto = {
     requestWorkload() {
         return this[Object.getOwnPropertySymbols(this)[0]]
     },
+    requestWorkloadKey() {
+        return Object.getOwnPropertySymbols(this)[0]
+    },
     assignEmployee(employee) {
         this.assignedEmployee = employee
-        this.assignedEmployee.workload[workloadInformation] = this[workloadInformation]
+        this.setEmployeeWorkload()
     },
     removeEmployee() {
         if(this.employee.name) {
-            delete this.employee.workload[workloadInformation]
+            delete this.employee.workload[this.requestWorkloadKey()]
             this.employee = null
         }
     },
+    setEmployeeWorkload() {
+        if(this.employee.name) {
+            this.employee.workload[this.requestWorkloadKey()] = this.requestWorkload()
+        }
+    },
+    /*
     temp(newWorkload) {
         this[workloadInformation].length = 0
         this[workloadInformation].push(...newWorkload)
-    },
+    }*/
     changeWorkloadAtIndex(index, newWorkload) {
         this[workloadInformation][index] = newWorkload
     },
