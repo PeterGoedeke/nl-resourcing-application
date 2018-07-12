@@ -103,7 +103,7 @@ const state = (function() {
             employees.push(employee)
         },
         validateEmployeeName(name) {
-            if(employees.filter(employee => employee.name !== null).map(employee => employee.name.toLowerCase()).includes(name.toLowerCase())) console.log('exists')
+            return !employees.filter(employee => employee.name !== null).map(employee => employee.name.toLowerCase()).includes(name.toLowerCase())
         },
         calculateDateRange() {
             let temporary = earliestDate
