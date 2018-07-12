@@ -28,7 +28,7 @@ let employeeSlotProto = {
         return Object.getOwnPropertySymbols(this)[0]
     },
     assignEmployee(employee) {
-        this.assignedEmployee = employee
+        this.employee = employee
         this.setEmployeeWorkload()
     },
     removeEmployee() {
@@ -95,7 +95,7 @@ function createEmployeeSlot(hostProject, employeeType) {
     let workloadInformation = Symbol('workload information')
     let workload = Object.create(null)
     for(let i = hostProject.startDate; i < hostProject.endDate; i++) workload[i] = 5
-    let assignedEmployee = 'Empty'
+    let employee = 'Empty'
 
     let display = document.createElement('form')
     display.className = 'employeeSlot'
@@ -107,7 +107,7 @@ function createEmployeeSlot(hostProject, employeeType) {
     let employeeSlot = Object.assign(
         Object.create(employeeSlotProto),
         horizontalDraggable,
-        {hostProject, employeeType, startDate: hostProject.startDate, endDate: hostProject.endDate, assignedEmployee,
+        {hostProject, employeeType, startDate: hostProject.startDate, endDate: hostProject.endDate, employee,
         [workloadInformation]: workload,
         display, label}
     )

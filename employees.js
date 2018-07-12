@@ -7,6 +7,18 @@ let employeeProto = {
     updateVerticalDisplay(index) {
         this.display.style.top = sq.getElementTop(sq.typeLabel) + index * 25 + 'px'
         this.label.style.top = parseInt(this.display.style.top) - sq.contentPane.scrollTop + 'px'
+    },
+    flattenWorkload() {
+        let flattenedWorkload = {}
+        Object.getOwnPropertySymbols(this.workload).forEach((symbol) => {
+            for(key in this.workload[symbol]) {
+                flattenedWorkload[key] = (flattenedWorkload[key] + this.workload[symbol][key]) || this.workload[symbol][key]
+            }
+        })
+        console.log(flattenedWorkload)
+    },
+    refreshDisplay() {
+
     }
 }
 
@@ -26,10 +38,11 @@ function createEmployee(employeeType) {
     label.className = 'employeeLabel'
 
     let workload = {}
+    let name = 'Unnamed'
     let employee = Object.assign(
         Object.create(employeeProto),
         {display, label,
-        employeeType}
+        employeeType, name, workload}
     )
     state.registerEmployee(employee)
     employee.initDisplay()
