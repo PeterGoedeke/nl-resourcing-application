@@ -69,11 +69,9 @@ let employeeSlotProto = {
         this[workloadInformation].length = 0
         this[workloadInformation].push(...newWorkload)
     }*/
-    changeWorkloadAtIndex(index, newWorkload) {
-        this[workloadInformation][index] = newWorkload
-    },
     enterWorkloadInformation(id, value) {
         this.requestWorkload()[id] = value
+        this.employee.updateDisplay()
     },
     refreshWorkloadInformation() {
         let workload = this.requestWorkload()
