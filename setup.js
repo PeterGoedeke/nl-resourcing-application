@@ -106,7 +106,7 @@ const state = (function() {
             return employees.filter(employee => employee.name !== null).map(employee => employee.name.toLowerCase()).includes(name.toLowerCase())
         },
         getEmployeeFromName(name) {
-            return employees.find(employee => employee.name == name)
+            return employees.find(employee => employee.name.toLowerCase() == name.toLowerCase())
         },
         calculateDateRange() {
             let temporary = earliestDate
