@@ -3,6 +3,7 @@
 - If you let go of the drag while your mouse is over the sidebar it isn't so great
 - All little text boys need to highlight on select
 - sq doesn't need to use the module pattern
-- Earliest and latest date need to be able to shrink inwards
+- Earliest and latest dates need to change at more times
+- Employee slots can be entirely out of their projects
 
 - Projects security status

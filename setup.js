@@ -103,7 +103,9 @@ const state = (function() {
             employees.push(employee)
         },
         calculateDateRange() {
-
+            let temporary = earliestDate
+            earliestDate = latestDate
+            latestDate = temporary
             
             projects.forEach(project => {
                 for(let employeeSlot in project.employeeSlots[visibleType]) {
