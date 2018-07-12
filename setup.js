@@ -101,6 +101,18 @@ const state = (function() {
         },
         registerEmployee(employee) {
             employees.push(employee)
+        },
+        calculateDateRange() {
+
+            
+            projects.forEach(project => {
+                for(let employeeSlot in project.employeeSlots[visibleType]) {
+                    if(project.employeeSlots[visibleType][employeeSlot].startDate < earliestDate) earliestDate = project.employeeSlots[visibleType][employeeSlot].startDate
+                    if(project.employeeSlots[visibleType][employeeSlot].endDate > latestDate) latestDate = project.employeeSlots[visibleType][employeeSlot].endDate
+                }
+                if(project.startDate < earliestDate) earliestDate = project.startDate
+                if(project.endDate > latestDate) latestDate = project.endDate
+            })
         }
     }
 })();

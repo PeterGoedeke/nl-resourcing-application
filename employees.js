@@ -16,9 +16,6 @@ let employeeProto = {
             }
         })
         console.log(flattenedWorkload)
-    },
-    refreshDisplay() {
-
     }
 }
 
