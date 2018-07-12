@@ -73,6 +73,8 @@ const sm = {
     updateVerticalDisplay() {
         state.projects.forEach(project => project.updateVerticalDisplay())
         state.employees.forEach((employee, i) => employee.updateVerticalDisplay(i))
+        sq.typeLabel.style.height = state.employees.length * 25 + 'px'
+        this.fixContentPaneHeight()
     }
 }
 
@@ -117,6 +119,7 @@ const state = (function() {
     })
     sq.createEmployeeButton.addEventListener('mouseup', event => {
         createEmployee(state.visibleType)
+        sm.updateVerticalDisplay()
     })
     sq.contentPane.addEventListener('scroll', (event) => {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop

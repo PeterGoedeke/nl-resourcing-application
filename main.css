@@ -236,13 +236,15 @@ input {
 }
 
 .employee {
-    height: 30px;
+    height: 25px;
     top: 35px;
     position: absolute;
     overflow: hidden;
 }
 .employeeLabel {
-
+    height: 25px;
+    width: 86px;
+    position: absolute;
 }
 .employeeWorkloadBlock {
     width: 50px;

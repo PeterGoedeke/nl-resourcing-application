@@ -5,7 +5,8 @@ let employeeProto = {
         this.updateVerticalDisplay()
     },
     updateVerticalDisplay(index) {
-        this.display.style.top = sq.typeLabel.getBoundingClientRect().top + index * 30 + 'px'
+        this.display.style.top = sq.getElementTop(sq.typeLabel) + index * 25 + 'px'
+        this.label.style.top = parseInt(this.display.style.top) - sq.contentPane.scrollTop + 'px'
     }
 }
 
