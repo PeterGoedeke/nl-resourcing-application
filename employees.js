@@ -46,7 +46,7 @@ function createEmployee(employeeType) {
     label.className = 'employeeLabel'
 
     let workload = {}
-    let name = 'Unnamed'
+    let name = null
     let employee = Object.assign(
         Object.create(employeeProto),
         {display, label,

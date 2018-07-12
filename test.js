@@ -1,7 +1,3 @@
-let dog = {
-    a: 'a',
-    b: 'b',
-    c: 'c'
-}
+let test = ['a', 'b', null, 'c']
 
-console.log(Object.getOwnPropertyNames(dog).length)
+console.log(test.filter(element => element !== null))
