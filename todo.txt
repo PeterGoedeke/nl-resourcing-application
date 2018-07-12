@@ -7,5 +7,6 @@
 - Employee slots can be entirely out of their projects
 - Tab order of the right sidebar is bad
 - There was a bug where getting the employee from name was running when it wasn't meant to (even when the employee didn't exist)
+- EmployeeSlot input needs to be checked properly to see whether it is a number
 
 - Projects security status

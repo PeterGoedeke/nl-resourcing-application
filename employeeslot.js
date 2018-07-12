@@ -91,7 +91,9 @@ let employeeSlotProto = {
             workloadBlock.value = workload[i]
 
             workloadBlock.addEventListener('change', () => {
-                this.enterWorkloadInformation.call(this, i, workloadBlock.value)
+                let value = parseInt(workloadBlock.value)
+                workloadBlock.value = value
+                this.enterWorkloadInformation.call(this, i, value)
             })
 
             this.display.appendChild(workloadBlock)
