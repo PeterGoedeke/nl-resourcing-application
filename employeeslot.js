@@ -32,7 +32,6 @@ let employeeSlotProto = {
         this.label.addEventListener('blur', event => {
             if(this.label.value === '') {
                 this.removeEmployee()
-                this.label.value = 'Empty'
             }
             if(!state.employeeExists(this.label.value)) {
                 this.label.value = this.employee && this.employee.name || 'Empty'
@@ -56,6 +55,7 @@ let employeeSlotProto = {
             delete this.employee.workload[this.requestWorkloadKey()]
             this.employee.updateDisplay()
             this.employee = null
+            this.label.value = 'Empty'
         }
     },
     setEmployeeWorkload() {
@@ -108,6 +108,7 @@ let employeeSlotProto = {
     deleteEmployeeSlot() {
         this.hostProject.container.removeChild(this.display)
         sq.rightSidebar.removeChild(this.label)
+        this.removeEmployee()
         this.hostProject.employeeSlots[this.employeeType].splice(this.hostProject.employeeSlots[this.employeeType].indexOf(this), 1)
     }
 }
