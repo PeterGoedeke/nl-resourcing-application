@@ -6,7 +6,7 @@ let employeeProto = {
         this.updateDisplay()
 
         this.label.addEventListener('change', event => {
-            if(state.validateEmployeeName(this.label.value)) this.name = this.label.value
+            if(!state.employeeExists(this.label.value)) this.name = this.label.value
         })
         this.label.addEventListener('blur', event => {
             if(this.label.value != this.name) this.label.value = this.name || 'Unnamed'

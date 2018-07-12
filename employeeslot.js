@@ -20,6 +20,19 @@ let employeeSlotProto = {
                 openEmployeeSlotDialogue(this, event)
             }
         })
+        this.label.addEventListener('keyup', event => {
+
+        })
+        this.label.addEventListener('change', event => {
+            if(state.employeeExists(this.label.value)) {
+                this.assignEmployee(state.getEmployeeFromName(this.label.value))
+            }
+        })
+        this.label.addEventListener('blur', event => {
+            if(!state.employeeExists(this.label.value)) {
+                this.label.value = this.employee && this.employee.name || null
+            }
+        })
     },
     requestWorkload() {
         return this[Object.getOwnPropertySymbols(this)[0]]
@@ -28,18 +41,22 @@ let employeeSlotProto = {
         return Object.getOwnPropertySymbols(this)[0]
     },
     assignEmployee(employee) {
+        this.removeEmployee()
         this.employee = employee
         this.setEmployeeWorkload()
+        this.employee.updateDisplay()
     },
     removeEmployee() {
         if(this.employee) {
             delete this.employee.workload[this.requestWorkloadKey()]
+            this.employee.updateDisplay()
             this.employee = null
         }
     },
     setEmployeeWorkload() {
         if(this.employee) {
             this.employee.workload[this.requestWorkloadKey()] = this.requestWorkload()
+            this.employee.updateDisplay()
         }
     },
     /*

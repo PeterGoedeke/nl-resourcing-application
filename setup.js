@@ -102,8 +102,11 @@ const state = (function() {
         registerEmployee(employee) {
             employees.push(employee)
         },
-        validateEmployeeName(name) {
-            return !employees.filter(employee => employee.name !== null).map(employee => employee.name.toLowerCase()).includes(name.toLowerCase())
+        employeeExists(name) {
+            return employees.filter(employee => employee.name !== null).map(employee => employee.name.toLowerCase()).includes(name.toLowerCase())
+        },
+        getEmployeeFromName(name) {
+            return employees.find(employee => employee.name == name)
         },
         calculateDateRange() {
             let temporary = earliestDate
