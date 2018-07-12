@@ -58,7 +58,10 @@ let projectProto = {
     deleteProject() {
         sq.contentPane.removeChild(this.container)
         sq.leftSidebar.removeChild(this.labelContainer)
-        for(type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => sq.rightSidebar.removeChild(employeeSlot.label))
+        for(type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {
+            sq.rightSidebar.removeChild(employeeSlot.label)
+            employeeSlot.removeEmployee()
+        })
         state.projects.splice(state.projects.indexOf(this), 1)
     }
 }
