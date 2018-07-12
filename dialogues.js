@@ -35,7 +35,7 @@ function openEmployeeSlotDialogue(hostEmployeeSlot, event) {
     deleteHostButton.addEventListener('mouseup', event => {
         if(hostEmployeeSlot.hostProject.employeeSlots[hostEmployeeSlot.employeeType].length > 1) {
             hostEmployeeSlot.deleteEmployeeSlot()
-            state.projects.forEach(project => project.updateVerticalDisplay())
+            sm.updateVerticalDisplay()
         }
         dialogueInterface.closeDialogue()
     })

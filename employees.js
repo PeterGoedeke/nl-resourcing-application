@@ -4,8 +4,8 @@ let employeeProto = {
         sq.rightSidebar.appendChild(this.label)
         this.updateVerticalDisplay()
     },
-    updateVerticalDisplay() {
-        this.display.style.top
+    updateVerticalDisplay(index) {
+        this.display.style.top = sq.typeLabel.getBoundingClientRect().top + index * 30 + 'px'
     }
 }
 
@@ -30,6 +30,7 @@ function createEmployee(employeeType) {
         {display, label,
         employeeType}
     )
+    state.registerEmployee(employee)
     employee.initDisplay()
     return employee
 }

@@ -238,7 +238,7 @@ input {
 .employee {
     height: 30px;
     top: 35px;
-    position: relative;
+    position: absolute;
     overflow: hidden;
 }
 .employeeLabel {

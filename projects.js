@@ -43,7 +43,7 @@ let projectProto = {
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
         this.createEmployeeSlotButton.style.left = parseInt(this.display.style.left) + parseInt(this.display.style.width) + 10 + 'px'
         this.showVisibleTypes()
-        state.projects.forEach(project => project.updateVerticalDisplay())
+        sm.updateVerticalDisplay()
     },
     showVisibleTypes() {
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {

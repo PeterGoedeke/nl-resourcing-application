@@ -69,6 +69,10 @@ const sm = {
         timeBlock.textContent = dateID
         if(firstChild) sq.topAxisContainer.insertBefore(timeBlock, sq.topAxisContainer.firstChild)
         else sq.topAxisContainer.appendChild(timeBlock)
+    },
+    updateVerticalDisplay() {
+        state.projects.forEach(project => project.updateVerticalDisplay())
+        state.employees.forEach((employee, i) => employee.updateVerticalDisplay(i))
     }
 }
 
@@ -78,18 +82,23 @@ const state = (function() {
     let earliestDate = 29
     let latestDate = 35
     let projects = []
+    let employees = []
     let employeeTypes = ['qs', 'pm', 'sm']
     let visibleType = 'qs'
     return {
-        projects, scale, baseDate, earliestDate, latestDate, employeeTypes, visibleType,
+        projects, employees, scale, baseDate, earliestDate, latestDate, employeeTypes, visibleType,
         registerProject(project) {
             projects.push(project)
+            sm.updateVerticalDisplay()
         },
         deleteProject(project) {
             if(projects.includes(project)) {
                 project.deleteProject()
-                projects.forEach(project => project.updateVerticalDisplay())
+                sm.updateVerticalDisplay()
             }
+        },
+        registerEmployee(employee) {
+            employees.push(employee)
         }
     }
 })();
@@ -113,7 +122,7 @@ const state = (function() {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop
         sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
         sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
-        state.projects.forEach(project => project.updateVerticalDisplay())
+        sm.updateVerticalDisplay()
         // if(sq.getVisibleTimeBlockRange()[0] - 1 > state.earliestDate) {
         //     console.log('ello')
         //     sq.positioner.style.left = sq.contentPane.scrollLeft + 'px'
