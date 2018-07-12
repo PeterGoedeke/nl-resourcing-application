@@ -4,6 +4,10 @@ let employeeProto = {
         sq.rightSidebar.appendChild(this.label)
         this.updateVerticalDisplay()
         this.updateDisplay()
+
+        this.label.addEventListener('change', event => {
+            this.name = this.label.value
+        })
     },
     updateVerticalDisplay(index) {
         this.display.style.top = sq.getElementTop(sq.typeLabel) + index * 25 + 'px'

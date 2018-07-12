@@ -18,7 +18,7 @@ let projectProto = {
             this.name = this.label.value
         })
         this.verticalDragger.addEventListener('drag', event => {
-            console.log('sup bitches')
+
         })
         this.container.appendChild(this.createEmployeeSlotButton)
         this.container.appendChild(this.display)
