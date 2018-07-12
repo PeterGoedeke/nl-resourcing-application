@@ -115,7 +115,6 @@ const state = (function() {
                 if(project.startDate < earliestDate) earliestDate = project.startDate
                 if(project.endDate > latestDate) latestDate = project.endDate
             })
-            console.log(earliestDate, latestDate)
         },
         get earliestDate() { return earliestDate },
         get latestDate() { return latestDate }

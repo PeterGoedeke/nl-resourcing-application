@@ -32,13 +32,13 @@ let employeeSlotProto = {
         this.setEmployeeWorkload()
     },
     removeEmployee() {
-        if(this.employee.name) {
+        if(this.employee) {
             delete this.employee.workload[this.requestWorkloadKey()]
             this.employee = null
         }
     },
     setEmployeeWorkload() {
-        if(this.employee.name) {
+        if(this.employee) {
             this.employee.workload[this.requestWorkloadKey()] = this.requestWorkload()
         }
     },
@@ -59,8 +59,7 @@ let employeeSlotProto = {
         for(let i = this.startDate; i < this.endDate; i++) if(!workload[i]) {
             workload[i] = 5
         }
-        //console.log('--------')
-        //for(key in workload) console.log(key, workload[key])
+        this.setEmployeeWorkload()
     },
     refreshWorkloadDisplay() {
         let workload = this.requestWorkload()
@@ -95,7 +94,7 @@ function createEmployeeSlot(hostProject, employeeType) {
     let workloadInformation = Symbol('workload information')
     let workload = Object.create(null)
     for(let i = hostProject.startDate; i < hostProject.endDate; i++) workload[i] = 5
-    let employee = 'Empty'
+    let employee = null
 
     let display = document.createElement('form')
     display.className = 'employeeSlot'
