@@ -6,13 +6,15 @@ const sq = (function() {
     const leftSidebar = document.querySelector('.leftSidebar')
     const rightSidebar = document.querySelector('.rightSidebar')
     const typeLabel = document.querySelector('.typeLabel')
+    const createLeaveSlotButton = document.querySelector('.createLeaveSlot')
+    const leaveLabel = document.querySelector('.leaveLabel')
     const topAxisContainer = document.querySelector('.topAxisContainer')
     const positioner = document.querySelector('.positioner')
     const createEmployeeButton = document.querySelector('.createEmployee')
     const createProjectButton = document.querySelector('.createProject')
     return {
         contentPane, mainWindow,
-        sidebar, leftSidebar, rightSidebar, typeLabel, topAxisContainer, positioner, createEmployeeButton, createProjectButton,
+        sidebar, leftSidebar, rightSidebar, typeLabel, createLeaveSlotButton, leaveLabel, topAxisContainer, positioner, createEmployeeButton, createProjectButton,
         getTimeBlockWidth() {
             //exists becuase timeBlocks are subject to change
             return document.querySelector('.timeBlock').offsetWidth
@@ -72,8 +74,10 @@ const sm = {
     },
     updateVerticalDisplay() {
         state.projects.forEach(project => project.updateVerticalDisplay())
-        state.employees.forEach((employee, i) => employee.updateVerticalDisplay(i))
+        leave.updateVerticalDisplay()
         sq.typeLabel.style.height = state.employees.length * 25 + 'px'
+        sq.leaveLabel.style.height = leave.leaveSlots[state.visibleType].length * 25 + 'px'
+        state.employees.forEach((employee, i) => employee.updateVerticalDisplay(i))
         this.fixContentPaneHeight()
     }
 }
@@ -128,15 +132,11 @@ const state = (function() {
 })();
 
 (function() {
-    addEventListener('load', () => {
+    addEventListener('load', event => {
         sm.initTimeFrame()
         sq.typeLabel.textContent = state.visibleType.toUpperCase()
     })
     addEventListener('resize', sm.appendUntilFit)
-    
-    addEventListener('mouseup', event => {
-        
-    })
 
     sq.createProjectButton.addEventListener('mouseup', event => {
         createProject('Default', null, 'Secure')
@@ -147,6 +147,11 @@ const state = (function() {
         createEmployee(state.visibleType)
         sm.updateVerticalDisplay()
         state.calculateDateRange()
+    })
+    sq.createLeaveSlotButton.addEventListener('mouseup', event => {
+        leave.leaveSlots[state.visibleType].push(createLeaveSlot(state.visibleType))
+        sm.updateVerticalDisplay()
+        //leave.leaveSlots[state.visibleType][leave.leaveSlots[state.visibleType].length - 1].
     })
     sq.contentPane.addEventListener('scroll', event => {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop

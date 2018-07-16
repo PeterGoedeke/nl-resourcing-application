@@ -20,23 +20,6 @@ let employeeSlotProto = {
                 openEmployeeSlotDialogue(this, event)
             }
         })
-        this.label.addEventListener('keyup', event => {
-
-        })
-        this.label.addEventListener('change', event => {
-            if(state.employeeExists(this.label.value)) {
-                this.assignEmployee(state.getEmployeeFromName(this.label.value))
-                this.label.value = this.employee.name
-            }
-        })
-        this.label.addEventListener('blur', event => {
-            if(this.label.value === '') {
-                this.removeEmployee()
-            }
-            if(!state.employeeExists(this.label.value)) {
-                this.label.value = this.employee && this.employee.name || 'Empty'
-            }
-        })
     },
     requestWorkload() {
         return this[Object.getOwnPropertySymbols(this)[0]]
@@ -131,15 +114,12 @@ function createEmployeeSlot(hostProject, employeeType) {
 
     let employeeSlot = Object.assign(
         Object.create(employeeSlotProto),
-        horizontalDraggable,
+        horizontalDraggable, slot,
         {hostProject, employeeType, startDate: hostProject.startDate, endDate: hostProject.endDate, employee,
         [workloadInformation]: workload,
         display, label}
     )
     employeeSlot.initDisplay()
+    employeeSlot.initSlot()
     return employeeSlot
-}
-
-function createEmployee() {
-
 }

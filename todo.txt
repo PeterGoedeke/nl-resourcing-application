@@ -10,5 +10,6 @@
 - EmployeeSlot input needs to be checked properly to see whether it is a number
 
 - Projects security status
+- Employee dialogue for leaving and joining and all of that
 
 - Undo?
