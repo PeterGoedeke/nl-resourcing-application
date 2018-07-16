@@ -25,8 +25,8 @@ let leaveSlotProto = {
         this.initDraggable()
     },
     updateDisplay() {
-        this.display.style.left = getXLocationFromID(this.startDate) + 10 + 'px'
-        this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) - 20 + 'px'
+        this.display.style.left = getXLocationFromID(this.startDate) + 'px'
+        this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
     },
     assignEmployee(employee) {
         this.removeEmployee()
@@ -62,7 +62,7 @@ function createLeaveSlot(employeeType) {
     let leaveSlot = Object.assign(
         Object.create(leaveSlotProto),
         horizontalDraggable, slot,
-        {employeeType, startDate: sq.getVisibleTimeBlockRange()[0], endDate: sq.getVisibleTimeBlockRange()[1], employee,
+        {employeeType, startDate: sq.getVisibleTimeBlockRange(true)[0], endDate: sq.getVisibleTimeBlockRange(true)[1], employee,
         display, label}
     )
     leaveSlot.initDisplay()

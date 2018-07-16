@@ -151,7 +151,7 @@ const state = (function() {
     sq.createLeaveSlotButton.addEventListener('mouseup', event => {
         leave.leaveSlots[state.visibleType].push(createLeaveSlot(state.visibleType))
         sm.updateVerticalDisplay()
-        //leave.leaveSlots[state.visibleType][leave.leaveSlots[state.visibleType].length - 1].
+        leave.leaveSlots[state.visibleType][leave.leaveSlots[state.visibleType].length - 1].updateDisplay()
     })
     sq.contentPane.addEventListener('scroll', event => {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop
