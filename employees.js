@@ -27,6 +27,7 @@ let employeeProto = {
             workloadBlock.textContent = workload[key]
             this.display.appendChild(workloadBlock)
         }
+        this.display.style.width = sq.positioner.style.width
     },
     flattenWorkload() {
         let flattenedWorkload = {}
