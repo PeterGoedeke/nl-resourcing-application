@@ -26,7 +26,7 @@ let leaveSlotProto = {
 
         this.display.addEventListener('mouseup', event => {
             if(event.which == 3) {
-                openEmployeeSlotDialogue(this, event)
+                openObjectDialogue(this, event)
             }
         })
     },
@@ -43,7 +43,7 @@ let leaveSlotProto = {
         }
         this.setEmployeeWorkload()
     },
-    deleteLeaveSlot() {
+    delete() {
         leave.container.removeChild(this.display)
         sq.rightSidebar.removeChild(this.label)
         this.removeEmployee()
