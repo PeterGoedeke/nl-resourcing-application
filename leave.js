@@ -27,18 +27,15 @@ let leaveSlotProto = {
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
+        this.refreshWorkloadInformation()
     },
-    assignEmployee(employee) {
-        this.removeEmployee()
-        this.employee = employee
-        this.employee.updateDisplay()
-    },
-    removeEmployee() {
-        if(this.employee) {
-            this.employee.updateDisplay()
-            this.employee = null
-            this.label.value = 'Empty'
+    refreshWorkloadInformation() {
+        let workload = this.requestWorkload()
+        for(key in workload) if(key >= this.endDate || key < this.startDate) delete workload[key]
+        for(let i = this.startDate; i < this.endDate; i++) if(!workload[i]) {
+            workload[i] = 'leave'
         }
+        this.setEmployeeWorkload()
     },
     deleteLeaveSlot() {
         leave.container.removeChild(this.display)
@@ -49,6 +46,10 @@ let leaveSlotProto = {
 }
 
 function createLeaveSlot(employeeType) {
+    let [startDate, endDate] = sq.getVisibleTimeBlockRange(true)
+    let workloadInformation = Symbol('workload information')
+    let workload = Object.create(null)
+    for(let i = startDate; i < endDate; i++) workload[i] = 'leave'
     let employee = null
 
     let display = document.createElement('div')
@@ -62,7 +63,8 @@ function createLeaveSlot(employeeType) {
     let leaveSlot = Object.assign(
         Object.create(leaveSlotProto),
         horizontalDraggable, slot,
-        {employeeType, startDate: sq.getVisibleTimeBlockRange(true)[0], endDate: sq.getVisibleTimeBlockRange(true)[1], employee,
+        {employeeType, startDate, endDate, employee,
+        [workloadInformation]: workload,
         display, label}
     )
     leaveSlot.initDisplay()

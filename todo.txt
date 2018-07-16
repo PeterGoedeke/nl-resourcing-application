@@ -13,3 +13,7 @@
 - Employee dialogue for leaving and joining and all of that
 
 - Undo?
+
+
+- LeaveSlot scrolls along with other things for some reason
+- Leave doesn't update when it's scrolled or anything like that 

@@ -41,6 +41,7 @@ let draggingInterface = (function() {
                                     project.updateDisplay()
                                     project.employeeSlots[state.visibleType].forEach(employeeSlot => employeeSlot.updateDisplay())
                                 })
+                                leave.leaveSlots[state.visibleType].forEach(leaveSlot => leaveSlot.updateDisplay())
                                 sq.contentPane.scrollLeft = sq.getTimeBlockWidth() * 2
                             }
                             sm.appendUntilFit()

@@ -23,8 +23,8 @@ let employeeProto = {
             let workloadBlock = document.createElement('div')
             workloadBlock.className = 'employeeWorkloadBlock'
             workloadBlock.style.left = getXLocationFromID(key) + 'px'
-            workloadBlock.style.backgroundColor = workload[key] == 4 || workload[key] == 5 ? 'green' : (workload[key] < 4 ? 'yellow' : 'red')
-            workloadBlock.textContent = workload[key]
+            workloadBlock.style.backgroundColor = workload[key] == 'leave' ? 'white' : ((workload[key] == 4 || workload[key] == 5) ? 'green' : (workload[key] < 4 ? 'yellow' : 'red'))
+            if(!isNaN(workload[key])) workloadBlock.textContent = workload[key]
             this.display.appendChild(workloadBlock)
         }
         this.display.style.width = sq.positioner.style.width
@@ -33,7 +33,11 @@ let employeeProto = {
         let flattenedWorkload = {}
         Object.getOwnPropertySymbols(this.workload).forEach((symbol) => {
             for(key in this.workload[symbol]) {
-                flattenedWorkload[key] = (parseInt(flattenedWorkload[key]) + parseInt(this.workload[symbol][key])) || this.workload[symbol][key]
+                if(isNaN(this.workload[symbol][key])) {
+                    flattenedWorkload[key] = 'leave'
+                } else if(flattenedWorkload[key] != 'leave') {
+                    flattenedWorkload[key] = (parseInt(flattenedWorkload[key]) + parseInt(this.workload[symbol][key])) || this.workload[symbol][key]
+                }
             }
         })
         console.log(flattenedWorkload)
