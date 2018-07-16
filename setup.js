@@ -128,7 +128,10 @@ const state = (function() {
 })();
 
 (function() {
-    addEventListener('load', sm.initTimeFrame)
+    addEventListener('load', () => {
+        sm.initTimeFrame()
+        sq.typeLabel.textContent = state.visibleType.toUpperCase()
+    })
     addEventListener('resize', sm.appendUntilFit)
     
     addEventListener('mouseup', event => {
