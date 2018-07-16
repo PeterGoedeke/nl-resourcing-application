@@ -97,12 +97,6 @@ const state = (function() {
             projects.push(project)
             sm.updateVerticalDisplay()
         },
-        deleteProject(project) {
-            if(projects.includes(project)) {
-                project.deleteProject()
-                sm.updateVerticalDisplay()
-            }
-        },
         registerEmployee(employee) {
             employees.push(employee)
         },

@@ -10,34 +10,17 @@ let dialogueProto = {
     }
 }
 
-function openProjectDialogue(hostProject, event) {
+function openObjectDialogue(clickedObject, event) {
     let dialogue = Object.create(dialogueProto)
     dialogue.initDisplay(event)
-    dialogue.display.className = 'projectDialogue dialogue'
+    dialogue.display.className = 'dialogue'
 
     let deleteHostButton = document.createElement('div')
     deleteHostButton.className = 'deleteHostButton'
     deleteHostButton.addEventListener('mouseup', event => {
-        state.deleteProject(hostProject)
+        clickedObject.delete()
         dialogueInterface.closeDialogue()
-    })
-    dialogue.display.appendChild(deleteHostButton)
-    dialogueInterface.registerDialogue(dialogue)
-}
-
-function openEmployeeSlotDialogue(hostEmployeeSlot, event) {
-    let dialogue = Object.create(dialogueProto)
-    dialogue.initDisplay(event)
-    dialogue.display.className = 'employeeSlotDialogue dialogue'
-
-    let deleteHostButton = document.createElement('div')
-    deleteHostButton.className = 'deleteHostButton'
-    deleteHostButton.addEventListener('mouseup', event => {
-        if(hostEmployeeSlot.hostProject.employeeSlots[hostEmployeeSlot.employeeType].length > 1) {
-            hostEmployeeSlot.deleteEmployeeSlot()
-            sm.updateVerticalDisplay()
-        }
-        dialogueInterface.closeDialogue()
+        sm.updateVerticalDisplay()
     })
 
     dialogue.display.appendChild(deleteHostButton)

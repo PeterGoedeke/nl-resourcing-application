@@ -1,9 +1,6 @@
 let projectProto = {
     initDisplay() {
         this.initDraggable()
-        this.display.addEventListener('mouseup', event => {
-            if(event.which == 3) openProjectDialogue(this, event)
-        })
         this.createEmployeeSlotButton.addEventListener('mouseup', (event) => {
             this.employeeSlots[state.visibleType].push(createEmployeeSlot(this, state.visibleType))
             this.employeeSlots[state.visibleType][this.employeeSlots[state.visibleType].length - 1].updateDisplay()
@@ -11,7 +8,7 @@ let projectProto = {
         })
         this.display.addEventListener('mouseup', event => {
             if(event.which == 3) {
-                openProjectDialogue(this, event)
+                openObjectDialogue(this, event)
             }
         })
         this.label.addEventListener('change', event => {
@@ -55,7 +52,7 @@ let projectProto = {
             employeeSlot.label.style.display = 'block'
         })
     },
-    deleteProject() {
+    delete() {
         sq.contentPane.removeChild(this.container)
         sq.leftSidebar.removeChild(this.labelContainer)
         for(type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {
@@ -63,6 +60,8 @@ let projectProto = {
             employeeSlot.removeEmployee()
         })
         state.projects.splice(state.projects.indexOf(this), 1)
+
+        sm.updateVerticalDisplay()
     }
 }
 

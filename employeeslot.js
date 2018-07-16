@@ -17,7 +17,7 @@ let employeeSlotProto = {
 
         this.display.addEventListener('mouseup', event => {
             if(event.which == 3) {
-                openEmployeeSlotDialogue(this, event)
+                openObjectDialogue(this, event)
             }
         })
     },
@@ -64,11 +64,13 @@ let employeeSlotProto = {
         this.refreshWorkloadInformation()
         this.refreshWorkloadDisplay()
     },
-    deleteEmployeeSlot() {
-        this.hostProject.container.removeChild(this.display)
-        sq.rightSidebar.removeChild(this.label)
-        this.removeEmployee()
-        this.hostProject.employeeSlots[this.employeeType].splice(this.hostProject.employeeSlots[this.employeeType].indexOf(this), 1)
+    delete() {
+        if(this.hostProject.employeeSlots[this.employeeType].length > 1) {
+            this.hostProject.container.removeChild(this.display)
+            sq.rightSidebar.removeChild(this.label)
+            this.removeEmployee()
+            this.hostProject.employeeSlots[this.employeeType].splice(this.hostProject.employeeSlots[this.employeeType].indexOf(this), 1)
+        }
     }
 }
 
