@@ -71,7 +71,7 @@ let employeeSlotProto = {
     }*/
     enterWorkloadInformation(id, value) {
         this.requestWorkload()[id] = value
-        this.employee.updateDisplay()
+        if(this.employee) this.employee.updateDisplay()
     },
     refreshWorkloadInformation() {
         let workload = this.requestWorkload()
@@ -91,9 +91,11 @@ let employeeSlotProto = {
             workloadBlock.value = workload[i]
 
             workloadBlock.addEventListener('change', () => {
-                let value = parseInt(workloadBlock.value)
-                workloadBlock.value = value
-                this.enterWorkloadInformation.call(this, i, value)
+                if(isNaN(workloadBlock.value)) {
+                    workloadBlock.value = workloadBlock.value = workload[i]
+                } else {
+                    this.enterWorkloadInformation.call(this, i, workloadBlock.value)
+                }
             })
 
             this.display.appendChild(workloadBlock)
