@@ -44,6 +44,15 @@ let employeeProto = {
         console.log(flattenedWorkload)
         return flattenedWorkload
     },
+    showVisibleTypes() {
+        if(this.type == state.visibleType.type) {
+            this.display.style.display = 'absolute'
+            this.label.style.display = 'absolute'
+        } else {
+            this.display.style.display = 'none'
+            this.label.style.display = 'none'
+        }
+    },
     delete() {
         sq.contentPane.removeChild(this.display)
         sq.rightSidebar.removeChild(this.label)

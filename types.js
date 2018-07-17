@@ -7,6 +7,26 @@ const employeeTypeProto = {
                 openObjectDialogue(this, event)
             }
         })
+        this.display.addEventListener('mouseup', event => {
+            state.setVisibleType(this)
+            
+        })
+        this.display.addEventListener('dblclick', event => {
+            let displayInput = document.createElement('input')
+            displayInput.type = 'text'
+            displayInput.className = 'employeeTypeInput'
+            displayInput.value = this.type
+            displayInput.addEventListener('blur', event => {
+                this.type = displayInput.value
+                this.display.removeChild(displayInput)
+                this.display.appendChild(document.createTextNode(this.type.toUpperCase()))
+                state.setVisibleType(state.visibleType)
+            })
+
+            this.display.removeChild(this.display.firstChild)
+            this.display.appendChild(displayInput)
+            displayInput.focus()
+        })
     },
     delete() {
 

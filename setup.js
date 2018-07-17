@@ -91,15 +91,26 @@ const state = {
     employeeTypes: [],
     visibleType: null,
 
+    setVisibleType(type) {
+        if(this.visibleType) this.visibleType.display.classList.remove('selectedType')
+        type.display.classList.add('selectedType')
+        this.visibleType = type
+        state.projects.forEach(project => project.showVisibleTypes())
+        state.employees.forEach(employee => employee.showVisibleTypes())
+        sq.typeLabel.textContent = state.visibleType.type.toUpperCase()
+        sm.updateVerticalDisplay()
+    },
+    addEmployeeType(type) {
+        this.employeeTypes.push(type)
+        this.projects.forEach(project => project.employeeSlots[type.type] = [])
+        leave.leaveSlots[type.type] = []
+    },
     registerProject(project) {
         this.projects.push(project)
         sm.updateVerticalDisplay()
     },
     registerEmployee(employee) {
         this.employees.push(employee)
-    },
-    addEmployeeType(type) {
-        this.employeeTypes.push(type)
     },
     employeeExists(name) {
         return this.employees.filter(employee => employee.name !== null).map(employee => employee.name.toLowerCase()).includes(name.toLowerCase())
@@ -124,13 +135,10 @@ const state = {
 };
 
 (function() {
-    createEmployeeType('qs')
-    state.visibleType = state.employeeTypes[0]
-    console.log(state.visibleType.type)
-
     addEventListener('load', event => {
         sm.initTimeFrame()
-        sq.typeLabel.textContent = state.visibleType.type.toUpperCase()
+        createEmployeeType('qs')
+        state.setVisibleType(state.employeeTypes[0])
     })
     addEventListener('resize', sm.appendUntilFit)
 
@@ -161,7 +169,7 @@ const state = {
         // }
     })
     sq.addTypeButton.addEventListener('mouseup', event => {
-        createEmployeeType()
+        createEmployeeType('NA')
     })
 })()
 
