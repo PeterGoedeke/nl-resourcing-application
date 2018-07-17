@@ -8,11 +8,14 @@
 - Tab order of the right sidebar is bad
 - There was a bug where getting the employee from name was running when it wasn't meant to (even when the employee didn't exist)
 - EmployeeSlot input needs to be checked properly to see whether it is a number
+- TypeLabel starts too large
+- Text isn't vertically centred in the type label and the other things in the left sidebar
 
 - Projects security status
 - Employee dialogue for leaving and joining and all of that
 - Zooming
 - Viewing and adding of different employee types
+- Reading and writing information to files
 
 - Undo?
 

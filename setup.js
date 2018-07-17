@@ -1,53 +1,49 @@
-const sq = (function() {
-    const contentPane = document.querySelector('.contentPane')
-    const mainWindow = document.querySelector('.mainWindow')
+const sq = {
+    contentPane: document.querySelector('.contentPane'),
+    mainWindow: document.querySelector('.mainWindow'),
+    sidebar: document.querySelector('.sidebar'),
+    leftSidebar: document.querySelector('.leftSidebar'),
+    rightSidebar: document.querySelector('.rightSidebar'),
+    typeLabel: document.querySelector('.typeLabel'),
+    createLeaveSlotButton: document.querySelector('.createLeaveSlot'),
+    leaveLabel: document.querySelector('.leaveLabel'),
+    topAxisContainer: document.querySelector('.topAxisContainer'),
+    positioner: document.querySelector('.positioner'),
+    createEmployeeButton: document.querySelector('.createEmployee'),
+    createProjectButton: document.querySelector('.createProject'),
 
-    const sidebar = document.querySelector('.sidebar')
-    const leftSidebar = document.querySelector('.leftSidebar')
-    const rightSidebar = document.querySelector('.rightSidebar')
-    const typeLabel = document.querySelector('.typeLabel')
-    const createLeaveSlotButton = document.querySelector('.createLeaveSlot')
-    const leaveLabel = document.querySelector('.leaveLabel')
-    const topAxisContainer = document.querySelector('.topAxisContainer')
-    const positioner = document.querySelector('.positioner')
-    const createEmployeeButton = document.querySelector('.createEmployee')
-    const createProjectButton = document.querySelector('.createProject')
-    return {
-        contentPane, mainWindow,
-        sidebar, leftSidebar, rightSidebar, typeLabel, createLeaveSlotButton, leaveLabel, topAxisContainer, positioner, createEmployeeButton, createProjectButton,
-        getTimeBlockWidth() {
-            //exists becuase timeBlocks are subject to change
-            return document.querySelector('.timeBlock').offsetWidth
-        },  
-        getVisibleTimeBlockRange(border = false) {
-            let firstTimeBlockOnScreen = Math.floor(contentPane.scrollLeft / this.getTimeBlockWidth()) + state.baseDate
-            let timeBlocksOnScreen = Math.floor((mainWindow.offsetWidth - 175) / this.getTimeBlockWidth())
-            let lastTimeBlockOnScreen = firstTimeBlockOnScreen + timeBlocksOnScreen
-            
-            if(border) {
-                firstTimeBlockOnScreen ++
-                lastTimeBlockOnScreen --
-            }
-            while(firstTimeBlockOnScreen >= lastTimeBlockOnScreen) {
-                firstTimeBlockOnScreen --
-                lastTimeBlockOnScreen ++
-            }
-            return [firstTimeBlockOnScreen, lastTimeBlockOnScreen]
-        },
-        getCursorXLocation(absoluteCursorPosition) {
-            return absoluteCursorPosition + contentPane.scrollLeft - contentPane.getBoundingClientRect().left
-        },
-        getNearestTimeBlock(xPosition) {
-            return Math.round(xPosition / this.getTimeBlockWidth()) + state.baseDate
-        },
-        getElementTop(element) {
-            return element.getBoundingClientRect().top + contentPane.scrollTop
-        },
-        getElementBottom(element) {
-            return element.getBoundingClientRect().bottom + contentPane.scrollTop
+    getTimeBlockWidth() {
+        //exists becuase timeBlocks are subject to change
+        return document.querySelector('.timeBlock').offsetWidth
+    },  
+    getVisibleTimeBlockRange(border = false) {
+        let firstTimeBlockOnScreen = Math.floor(this.contentPane.scrollLeft / this.getTimeBlockWidth()) + state.baseDate
+        let timeBlocksOnScreen = Math.floor((this.mainWindow.offsetWidth - 175) / this.getTimeBlockWidth())
+        let lastTimeBlockOnScreen = firstTimeBlockOnScreen + timeBlocksOnScreen
+        
+        if(border) {
+            firstTimeBlockOnScreen ++
+            lastTimeBlockOnScreen --
         }
+        while(firstTimeBlockOnScreen >= lastTimeBlockOnScreen) {
+            firstTimeBlockOnScreen --
+            lastTimeBlockOnScreen ++
+        }
+        return [firstTimeBlockOnScreen, lastTimeBlockOnScreen]
+    },
+    getCursorXLocation(absoluteCursorPosition) {
+        return absoluteCursorPosition + this.contentPane.scrollLeft - this.contentPane.getBoundingClientRect().left
+    },
+    getNearestTimeBlock(xPosition) {
+        return Math.round(xPosition / this.getTimeBlockWidth()) + state.baseDate
+    },
+    getElementTop(element) {
+        return element.getBoundingClientRect().top + this.contentPane.scrollTop
+    },
+    getElementBottom(element) {
+        return element.getBoundingClientRect().bottom + this.contentPane.scrollTop
     }
-})();
+}
 
 const sm = {
     initTimeFrame() {
@@ -82,48 +78,44 @@ const sm = {
     }
 }
 
-const state = (function() {
-    let scale = 50
-    let baseDate = 29
-    let earliestDate = 29
-    let latestDate = 35
-    let projects = []
-    let employees = []
-    let employeeTypes = ['qs', 'pm', 'sm']
-    let visibleType = 'qs'
-    return {
-        projects, employees, scale, baseDate, earliestDate, latestDate, employeeTypes, visibleType,
-        registerProject(project) {
-            projects.push(project)
-            sm.updateVerticalDisplay()
-        },
-        registerEmployee(employee) {
-            employees.push(employee)
-        },
-        employeeExists(name) {
-            return employees.filter(employee => employee.name !== null).map(employee => employee.name.toLowerCase()).includes(name.toLowerCase())
-        },
-        getEmployeeFromName(name) {
-            return employees.find(employee => employee.name.toLowerCase() == name.toLowerCase())
-        },
-        calculateDateRange() {
-            let temporary = earliestDate
-            earliestDate = latestDate
-            latestDate = temporary
-            
-            projects.forEach(project => {
-                for(let employeeSlot in project.employeeSlots[visibleType]) {
-                    if(project.employeeSlots[visibleType][employeeSlot].startDate < earliestDate) earliestDate = project.employeeSlots[visibleType][employeeSlot].startDate
-                    if(project.employeeSlots[visibleType][employeeSlot].endDate > latestDate) latestDate = project.employeeSlots[visibleType][employeeSlot].endDate
-                }
-                if(project.startDate < earliestDate) earliestDate = project.startDate
-                if(project.endDate > latestDate) latestDate = project.endDate
-            })
-        },
-        get earliestDate() { return earliestDate },
-        get latestDate() { return latestDate }
+const state = {
+    scale: 50,
+    baseDate: 29,
+    earliestDate: 29,
+    latestDate: 35,
+    projects: [],
+    employees: [],
+    employeeTypes: ['qs', 'pm', 'sm'],
+    visibleType: 'qs',
+
+    registerProject(project) {
+        this.projects.push(project)
+        sm.updateVerticalDisplay()
+    },
+    registerEmployee(employee) {
+        this.employees.push(employee)
+    },
+    employeeExists(name) {
+        return this.employees.filter(employee => employee.name !== null).map(employee => employee.name.toLowerCase()).includes(name.toLowerCase())
+    },
+    getEmployeeFromName(name) {
+        return this.employees.find(employee => employee.name.toLowerCase() == name.toLowerCase())
+    },
+    calculateDateRange() {
+        let temporary = this.earliestDate
+        this.earliestDate = this.latestDate
+        this.latestDate = temporary
+        
+        this.projects.forEach(project => {
+            for(let employeeSlot in project.employeeSlots[this.visibleType]) {
+                if(project.employeeSlots[this.visibleType][employeeSlot].startDate < this.earliestDate) this.earliestDate = project.employeeSlots[this.visibleType][employeeSlot].startDate
+                if(project.employeeSlots[this.visibleType][employeeSlot].endDate > this.latestDate) this.latestDate = project.employeeSlots[this.visibleType][employeeSlot].endDate
+            }
+            if(project.startDate < this.earliestDate) this.earliestDate = project.startDate
+            if(project.endDate > this.latestDate) this.latestDate = project.endDate
+        })
     }
-})();
+};
 
 (function() {
     addEventListener('load', event => {
@@ -157,6 +149,9 @@ const state = (function() {
         //     sq.positioner.style.left = sq.contentPane.scrollLeft + 'px'
         //     sq.positioner.style.width = getXLocationFromID(state.latestDate) - sq.contentPane.scrollLeft + 'px'
         // }
+    })
+    sq.addTypeButton.addEventListener('mouseup', event => {
+
     })
 })()
 
