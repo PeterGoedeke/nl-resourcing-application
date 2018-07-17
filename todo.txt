@@ -11,9 +11,9 @@
 
 - Projects security status
 - Employee dialogue for leaving and joining and all of that
+- Zooming
+- Viewing and adding of different employee types
 
 - Undo?
 
-
-- LeaveSlot scrolls along with other things for some reason
-- Leave doesn't update when it's scrolled or anything like that 
+- What should happen when leave and workload overlaps, should there be an indicator?

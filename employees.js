@@ -11,6 +11,11 @@ let employeeProto = {
         this.label.addEventListener('blur', event => {
             if(this.label.value != this.name) this.label.value = this.name || 'Unnamed'
         })
+        this.display.addEventListener('mouseup', event => {
+            if(event.which == 3) {
+                openObjectDialogue(this, event)
+            }
+        })
     },
     updateVerticalDisplay(index) {
         this.display.style.top = sq.getElementTop(sq.typeLabel) + index * 25 + 'px'
@@ -42,6 +47,16 @@ let employeeProto = {
         })
         console.log(flattenedWorkload)
         return flattenedWorkload
+    },
+    delete() {
+        sq.contentPane.removeChild(this.display)
+        sq.rightSidebar.removeChild(this.label)
+        state.employees.splice(state.employees.indexOf(this), 1)
+        state.projects.forEach(project => {
+            project.employeeSlots[state.visibleType].forEach(employeeSlot => {
+                if(employeeSlot.employee === this) employeeSlot.removeEmployee()
+            })
+        })
     }
 }
 

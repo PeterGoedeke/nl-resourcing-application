@@ -21,11 +21,6 @@ let employeeSlotProto = {
             }
         })
     },
-    /*
-    temp(newWorkload) {
-        this[workloadInformation].length = 0
-        this[workloadInformation].push(...newWorkload)
-    }*/
     enterWorkloadInformation(id, value) {
         this.requestWorkload()[id] = value
         if(this.employee) this.employee.updateDisplay()
