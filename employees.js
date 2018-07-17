@@ -11,11 +11,7 @@ let employeeProto = {
         this.label.addEventListener('blur', event => {
             if(this.label.value != this.name) this.label.value = this.name || 'Unnamed'
         })
-        this.display.addEventListener('mouseup', event => {
-            if(event.which == 3) {
-                openObjectDialogue(this, event)
-            }
-        })
+        bindDialogueListeners.call(this)
     },
     updateVerticalDisplay(index) {
         this.display.style.top = sq.getElementTop(sq.typeLabel) + index * 25 + 'px'

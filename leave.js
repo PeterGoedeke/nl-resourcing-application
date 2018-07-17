@@ -23,12 +23,7 @@ let leaveSlotProto = {
         leave.container.appendChild(this.display)
         sq.rightSidebar.appendChild(this.label)
         this.initDraggable()
-
-        this.display.addEventListener('mouseup', event => {
-            if(event.which == 3) {
-                openObjectDialogue(this, event)
-            }
-        })
+        bindDialogueListeners.call(this)
     },
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) + 'px'

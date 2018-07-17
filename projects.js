@@ -6,11 +6,7 @@ let projectProto = {
             this.employeeSlots[state.visibleType][this.employeeSlots[state.visibleType].length - 1].updateDisplay()
             this.updateDisplay()
         })
-        this.display.addEventListener('mouseup', event => {
-            if(event.which == 3) {
-                openObjectDialogue(this, event)
-            }
-        })
+        bindDialogueListeners.call(this)
         this.label.addEventListener('change', event => {
             this.name = this.label.value
         })

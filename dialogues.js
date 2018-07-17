@@ -26,3 +26,16 @@ function openObjectDialogue(clickedObject, event) {
     dialogue.display.appendChild(deleteHostButton)
     dialogueInterface.registerDialogue(dialogue)
 }
+
+function bindDialogueListeners() {
+    this.display.addEventListener('mouseup', event => {
+        if(event.which == 3) {
+            openObjectDialogue(this, event)
+        }
+    })
+    this.label.addEventListener('mouseup', event => {
+        if(event.which == 3) {
+            openObjectDialogue(this, event)
+        }
+    })
+}

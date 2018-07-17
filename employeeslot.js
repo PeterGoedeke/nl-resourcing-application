@@ -14,12 +14,7 @@ let employeeSlotProto = {
         this.hostProject.container.appendChild(this.display)
         sq.rightSidebar.appendChild(this.label)
         this.initDraggable()
-
-        this.display.addEventListener('mouseup', event => {
-            if(event.which == 3) {
-                openObjectDialogue(this, event)
-            }
-        })
+        bindDialogueListeners.call(this)
     },
     enterWorkloadInformation(id, value) {
         this.requestWorkload()[id] = value
