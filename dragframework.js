@@ -39,9 +39,9 @@ let draggingInterface = (function() {
                                 state.baseDate --
                                 state.projects.forEach(project => {
                                     project.updateDisplay()
-                                    project.employeeSlots[state.visibleType].forEach(employeeSlot => employeeSlot.updateDisplay())
+                                    project.employeeSlots[state.visibleType.type].forEach(employeeSlot => employeeSlot.updateDisplay())
                                 })
-                                leave.leaveSlots[state.visibleType].forEach(leaveSlot => leaveSlot.updateDisplay())
+                                leave.leaveSlots[state.visibleType.type].forEach(leaveSlot => leaveSlot.updateDisplay())
                                 sq.contentPane.scrollLeft = sq.getTimeBlockWidth() * 2
                             }
                             sm.appendUntilFit()

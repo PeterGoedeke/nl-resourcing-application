@@ -49,7 +49,7 @@ let employeeProto = {
         sq.rightSidebar.removeChild(this.label)
         state.employees.splice(state.employees.indexOf(this), 1)
         state.projects.forEach(project => {
-            project.employeeSlots[state.visibleType].forEach(employeeSlot => {
+            project.employeeSlots[state.visibleType.type].forEach(employeeSlot => {
                 if(employeeSlot.employee === this) employeeSlot.removeEmployee()
             })
         })

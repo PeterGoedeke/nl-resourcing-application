@@ -11,6 +11,9 @@ const sq = {
     positioner: document.querySelector('.positioner'),
     createEmployeeButton: document.querySelector('.createEmployee'),
     createProjectButton: document.querySelector('.createProject'),
+    bottomMargin: document.querySelector('.bottomMargin'),
+    addTypeButton: document.querySelector('.addType'),
+    zoomContainer: document.querySelector('.zoomContainer'),
 
     getTimeBlockWidth() {
         //exists becuase timeBlocks are subject to change
@@ -72,7 +75,7 @@ const sm = {
         state.projects.forEach(project => project.updateVerticalDisplay())
         leave.updateVerticalDisplay()
         sq.typeLabel.style.height = state.employees.length * 25 + 'px'
-        sq.leaveLabel.style.height = leave.leaveSlots[state.visibleType].length * 25 + 'px'
+        sq.leaveLabel.style.height = leave.leaveSlots[state.visibleType.type].length * 25 + 'px'
         state.employees.forEach((employee, i) => employee.updateVerticalDisplay(i))
         this.fixContentPaneHeight()
     }
@@ -85,8 +88,8 @@ const state = {
     latestDate: 35,
     projects: [],
     employees: [],
-    employeeTypes: ['qs', 'pm', 'sm'],
-    visibleType: 'qs',
+    employeeTypes: [],
+    visibleType: null,
 
     registerProject(project) {
         this.projects.push(project)
@@ -94,6 +97,9 @@ const state = {
     },
     registerEmployee(employee) {
         this.employees.push(employee)
+    },
+    addEmployeeType(type) {
+        this.employeeTypes.push(type)
     },
     employeeExists(name) {
         return this.employees.filter(employee => employee.name !== null).map(employee => employee.name.toLowerCase()).includes(name.toLowerCase())
@@ -107,9 +113,9 @@ const state = {
         this.latestDate = temporary
         
         this.projects.forEach(project => {
-            for(let employeeSlot in project.employeeSlots[this.visibleType]) {
-                if(project.employeeSlots[this.visibleType][employeeSlot].startDate < this.earliestDate) this.earliestDate = project.employeeSlots[this.visibleType][employeeSlot].startDate
-                if(project.employeeSlots[this.visibleType][employeeSlot].endDate > this.latestDate) this.latestDate = project.employeeSlots[this.visibleType][employeeSlot].endDate
+            for(let employeeSlot in project.employeeSlots[this.visibleType.type]) {
+                if(project.employeeSlots[this.visibleType.type][employeeSlot].startDate < this.earliestDate) this.earliestDate = project.employeeSlots[this.visibleType.type][employeeSlot].startDate
+                if(project.employeeSlots[this.visibleType.type][employeeSlot].endDate > this.latestDate) this.latestDate = project.employeeSlots[this.visibleType.type][employeeSlot].endDate
             }
             if(project.startDate < this.earliestDate) this.earliestDate = project.startDate
             if(project.endDate > this.latestDate) this.latestDate = project.endDate
@@ -118,9 +124,13 @@ const state = {
 };
 
 (function() {
+    createEmployeeType('qs')
+    state.visibleType = state.employeeTypes[0]
+    console.log(state.visibleType.type)
+
     addEventListener('load', event => {
         sm.initTimeFrame()
-        sq.typeLabel.textContent = state.visibleType.toUpperCase()
+        sq.typeLabel.textContent = state.visibleType.type.toUpperCase()
     })
     addEventListener('resize', sm.appendUntilFit)
 
@@ -130,14 +140,14 @@ const state = {
         state.calculateDateRange()
     })
     sq.createEmployeeButton.addEventListener('mouseup', event => {
-        createEmployee(state.visibleType)
+        createEmployee(state.visibleType.type)
         sm.updateVerticalDisplay()
         state.calculateDateRange()
     })
     sq.createLeaveSlotButton.addEventListener('mouseup', event => {
-        leave.leaveSlots[state.visibleType].push(createLeaveSlot(state.visibleType))
+        leave.leaveSlots[state.visibleType.type].push(createLeaveSlot(state.visibleType.type))
         sm.updateVerticalDisplay()
-        leave.leaveSlots[state.visibleType][leave.leaveSlots[state.visibleType].length - 1].updateDisplay()
+        leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].length - 1].updateDisplay()
     })
     sq.contentPane.addEventListener('scroll', event => {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop
@@ -151,7 +161,7 @@ const state = {
         // }
     })
     sq.addTypeButton.addEventListener('mouseup', event => {
-
+        createEmployeeType()
     })
 })()
 
