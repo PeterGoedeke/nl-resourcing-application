@@ -30,6 +30,9 @@ const employeeTypeProto = {
                     leave.leaveSlots[displayInput.value].forEach(leaveSlot => {
                         leaveSlot.employeeType = displayInput.value
                     })
+                    delete leave.leaveSlots[this.type]
+
+                    state.employees.filter(employee => employee.employeeType == this.type).forEach(employee => employee.employeeType = displayInput.value)
                     this.type = displayInput.value
                     this.display.removeChild(displayInput)
                     this.display.appendChild(document.createTextNode(this.type))
