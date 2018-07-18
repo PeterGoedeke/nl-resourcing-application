@@ -51,6 +51,7 @@ let employeeSlotProto = {
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) + 10 + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) - 20 + 'px'
+        this.label.value = this.employee && this.employee.name || 'Empty'
         this.refreshWorkloadInformation()
         this.refreshWorkloadDisplay()
     },
@@ -64,10 +65,10 @@ let employeeSlotProto = {
     }
 }
 
-function createEmployeeSlot(hostProject, employeeType, workload = Object.create(null)) {
+function createEmployeeSlot(hostProject, employeeType, workload = Object.create(null), employee = null, startDate, endDate) {
     let workloadInformation = Symbol('workload information')
     if(Object.keys(workload).length == 0) for(let i = hostProject.startDate; i < hostProject.endDate; i++) workload[i] = 5
-    let employee = null
+    if(!startDate && !endDate) [startDate, endDate] = [hostProject.startDate, hostProject.endDate]
 
     let display = document.createElement('form')
     display.className = 'employeeSlot'
@@ -80,7 +81,7 @@ function createEmployeeSlot(hostProject, employeeType, workload = Object.create(
     let employeeSlot = Object.assign(
         Object.create(employeeSlotProto),
         horizontalDraggable, slot,
-        {hostProject, employeeType, startDate: hostProject.startDate, endDate: hostProject.endDate, employee,
+        {hostProject, employeeType, startDate, endDate, employee,
         [workloadInformation]: workload,
         display, label}
     )

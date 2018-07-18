@@ -122,8 +122,10 @@ const state = {
     employeeExists(name) {
         return this.getVisibleEmployees().filter(employee => employee.name !== null).map(employee => employee.name.toLowerCase()).includes(name.toLowerCase())
     },
-    getEmployeeFromName(name) {
-        return this.getVisibleEmployees().find(employee => employee.name.toLowerCase() == name.toLowerCase())
+    getEmployeeFromName(name, type = this.visibleType.type) {
+        console.log(name, type, this.employees.filter(employee => employee.employeeType == type))
+        if(name === null) return null
+        return this.employees.filter(employee => employee.employeeType == type).find(employee => employee.name.toLowerCase() == name.toLowerCase())
     },
     getVisibleEmployees() {
         return this.employees.filter(employee => employee.employeeType == this.visibleType.type)
@@ -184,7 +186,9 @@ const state = {
 
     document.querySelector('.openNewWindow').addEventListener('mouseup', event => {
         save()
-        console.log('made it here')
+    })
+    document.querySelector('.zoomContainer').addEventListener('mouseup', event => {
+        load()
     })
 })()
 

@@ -76,8 +76,8 @@ let projectProto = {
     }
 }
 
-function createProject(name, group, security) {
-    let [startDate, endDate] = sq.getVisibleTimeBlockRange(true)
+function createProject(name, group, security, startDate, endDate, init = true) {
+    if(!startDate && !endDate) [startDate, endDate] = sq.getVisibleTimeBlockRange(true)
     let container = document.createElement('div')
     container.className = 'projectContainer'
     
@@ -109,7 +109,7 @@ function createProject(name, group, security) {
     
     let employeeSlots = {}
     state.employeeTypes.map(employeeType => employeeType.type).forEach(type => employeeSlots[type] = [])
-    for(let type in employeeSlots) employeeSlots[type].push(createEmployeeSlot(project, type))
+    if(init) for(let type in employeeSlots) employeeSlots[type].push(createEmployeeSlot(project, type))
     project.employeeSlots = employeeSlots
     
     state.registerProject(project)

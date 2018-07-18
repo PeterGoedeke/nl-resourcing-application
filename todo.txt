@@ -10,12 +10,15 @@
 - TypeLabel starts too large
 - Text isn't vertically centred in the type label and the other things in the left sidebar
 - EmployeeSlots need to extend with the extension of a project
+- Renaming an employee doesn't update him in his assigned employee slots
 
 - Projects security status
 - Employee dialogue for leaving and joining and all of that
 - Zooming
 - Reading and writing information to files
 - Total rows
+- Leave should just show as 5
+- Min height for projects
 
 - Undo?
 - How do you want sub-types of employee to be implemented?

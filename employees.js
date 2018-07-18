@@ -29,6 +29,7 @@ let employeeProto = {
             this.display.appendChild(workloadBlock)
         }
         this.display.style.width = sq.positioner.style.width
+        this.label.value = this.name
     },
     flattenWorkload() {
         let flattenedWorkload = {}
@@ -72,7 +73,7 @@ let employeeProto = {
     }
 }
 
-function createEmployee(employeeType) {
+function createEmployee(employeeType, name = null) {
     let display = document.createElement('div')
     display.className = 'employee'
 
@@ -82,7 +83,6 @@ function createEmployee(employeeType) {
     label.className = 'employeeLabel'
 
     let workload = {}
-    let name = null
     let employee = Object.assign(
         Object.create(employeeProto),
         {display, label,
