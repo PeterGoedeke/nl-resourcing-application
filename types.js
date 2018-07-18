@@ -17,7 +17,6 @@ const employeeTypeProto = {
             displayInput.className = 'employeeTypeInput'
             displayInput.value = this.type
             displayInput.addEventListener('blur', event => {
-                if(displayInput.value != this.type) {
                 if(displayInput.value != this.type && !state.employeeTypes.map(employeeType => employeeType.type).includes(displayInput.value.toUpperCase())) {
                     displayInput.value = displayInput.value.toUpperCase()
                     state.projects.forEach(project => {
@@ -38,6 +37,8 @@ const employeeTypeProto = {
                     this.display.removeChild(displayInput)
                     this.display.appendChild(document.createTextNode(this.type))
                     state.setVisibleType(state.visibleType)
+                } else {
+                    displayInput.value = this.type
                 }
             })
 
