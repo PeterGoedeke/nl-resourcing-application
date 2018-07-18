@@ -17,7 +17,9 @@ const employeeTypeProto = {
             displayInput.className = 'employeeTypeInput'
             displayInput.value = this.type
             displayInput.addEventListener('blur', event => {
-                if(displayInput.value != this.type && !state.employeeTypes.map(employeeType => employeeType.type).includes(displayInput.value.toUpperCase())) {
+                if(displayInput.value != this.type && !state.employeeTypes
+                    .map(employeeType => employeeType.type).includes(displayInput.value.toUpperCase())) {
+                    
                     displayInput.value = displayInput.value.toUpperCase()
                     state.projects.forEach(project => {
                         project.employeeSlots[displayInput.value] = project.employeeSlots[this.type].slice(0)
@@ -48,7 +50,17 @@ const employeeTypeProto = {
         })
     },
     delete() {
-
+        if(state.employeeTypes.length > 1) {
+            state.employees.filter(employee => employee.employeeType == this.type).forEach(employee => employee.delete())
+            sq.bottomMargin.removeChild(this.display)
+            state.projects.forEach(project => project.employeeSlots[this.type].forEach(employeeSlot => employeeSlot.delete()))
+            state.projects.forEach(project => delete project.employeeSlots[this.type])
+            leave.leaveSlots[this.type].forEach(leaveSlot => leaveSlot.delete())
+            delete leave.leaveSlots[this.type]
+            
+            state.employeeTypes.splice(state.employeeTypes.indexOf(this), 1)
+            if(state.visibleType == this) state.setVisibleType(state.employeeTypes[0])
+        }
     },
     toJSON() {
         return {type: this.type}

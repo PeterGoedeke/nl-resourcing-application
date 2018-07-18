@@ -56,12 +56,10 @@ let employeeSlotProto = {
         this.refreshWorkloadDisplay()
     },
     delete() {
-        if(this.hostProject.employeeSlots[this.employeeType].length > 1) {
-            this.hostProject.container.removeChild(this.display)
-            sq.rightSidebar.removeChild(this.label)
-            this.removeEmployee()
-            this.hostProject.employeeSlots[this.employeeType].splice(this.hostProject.employeeSlots[this.employeeType].indexOf(this), 1)
-        }
+        this.hostProject.container.removeChild(this.display)
+        sq.rightSidebar.removeChild(this.label)
+        this.removeEmployee()
+        this.hostProject.employeeSlots[this.employeeType].splice(this.hostProject.employeeSlots[this.employeeType].indexOf(this), 1)
     }
 }
 

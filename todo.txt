@@ -10,7 +10,6 @@
 - TypeLabel starts too large
 - Text isn't vertically centred in the type label and the other things in the left sidebar
 - EmployeeSlots need to extend with the extension of a project
-- Renaming an employee doesn't update him in his assigned employee slots
 - Lags when lots of projects are added and you scroll
 
 - Projects security status
