@@ -1,17 +1,5 @@
 fs = require('fs')
 
-// fs.stat('data.json', function(err, stat) {
-//     if(error == null) {
-//         //readfile
-//     } else if(err.code == 'ENOENT') {
-//         fs.writeFile('data.json', 'w')
-//     } else {
-        
-//     }
-// })
-
-//fs.readFilesync('', 'utf8')
-
 function save() {
     fs.writeFile('employeetypes.json', JSON.stringify(state.employeeTypes, null, 4), 'utf8', function(err) {
         if(err) throw err
