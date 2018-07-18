@@ -64,10 +64,9 @@ let employeeSlotProto = {
     }
 }
 
-function createEmployeeSlot(hostProject, employeeType) {
+function createEmployeeSlot(hostProject, employeeType, workload = Object.create(null)) {
     let workloadInformation = Symbol('workload information')
-    let workload = Object.create(null)
-    for(let i = hostProject.startDate; i < hostProject.endDate; i++) workload[i] = 5
+    if(Object.keys(workload).length == 0) for(let i = hostProject.startDate; i < hostProject.endDate; i++) workload[i] = 5
     let employee = null
 
     let display = document.createElement('form')

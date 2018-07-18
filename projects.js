@@ -58,6 +58,21 @@ let projectProto = {
         state.projects.splice(state.projects.indexOf(this), 1)
 
         sm.updateVerticalDisplay()
+    },
+    toJSON() {
+        let employeeSlotsToSave = {}
+        for(let type in this.employeeSlots) {
+            employeeSlotsToSave[type] = []
+            this.employeeSlots[type].forEach(employeeSlot => {
+                employeeSlotsToSave[type].push({
+                    employeeType: employeeSlot.employeeType, startDate: employeeSlot.startDate, endDate: employeeSlot.endDate, employee: employeeSlot.employee && employeeSlot.employee.name, workload: employeeSlot.requestWorkload()
+                })
+            })
+        }
+        return {
+            name: this.name, group: this.group, security: this.security, startDate: this.startDate, endDate: this.endDate,
+            employeeSlots: employeeSlotsToSave
+        }
     }
 }
 

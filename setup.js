@@ -181,6 +181,11 @@ const state = {
     sq.addTypeButton.addEventListener('mouseup', event => {
         createEmployeeType('NA')
     })
+
+    document.querySelector('.openNewWindow').addEventListener('mouseup', event => {
+        save()
+        console.log('made it here')
+    })
 })()
 
 function convertIDToDate(id) {
@@ -193,3 +198,13 @@ function convertIDToDate(id) {
 function getXLocationFromID(id) {
     return (id - state.baseDate) * state.scale 
 }
+
+function copy(o) {
+    var out, v, key;
+    out = Array.isArray(o) ? [] : {};
+    for (key in o) {
+        v = o[key];
+        out[key] = (typeof v === "object" && v !== null) ? copy(v) : v;
+    }
+    return out;
+ }

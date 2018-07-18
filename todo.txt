@@ -2,7 +2,6 @@
 - Positioner can get too long, meaning that you can scroll too far in either direction
 - If you let go of the drag while your mouse is over the sidebar it isn't so great
 - All little text boys need to highlight on select
-- sq doesn't need to use the module pattern (neither does state and some other things)
 - Dragging the left side of a project far towards the right bugs out (potentially the same for the other direction)
 - Employee slots can be entirely out of their projects
 - Tab order of the right sidebar is bad
@@ -10,15 +9,16 @@
 - EmployeeSlot input needs to be checked properly to see whether it is a number
 - TypeLabel starts too large
 - Text isn't vertically centred in the type label and the other things in the left sidebar
+- EmployeeSlots need to extend with the extension of a project
 
 - Projects security status
 - Employee dialogue for leaving and joining and all of that
 - Zooming
-- Viewing and adding of different employee types
 - Reading and writing information to files
-- EmployeeSlots need to extend with the extension of a project
+- Total rows
 
 - Undo?
+- How do you want sub-types of employee to be implemented?
 
 - What to do with projects which should have 0 of a type of employee?
 - What should happen when leave and workload overlaps, should there be an indicator?

@@ -64,6 +64,11 @@ let employeeProto = {
                 if(employeeSlot.employee === this) employeeSlot.removeEmployee()
             })
         })
+    },
+    toJSON() {
+        return {
+            name: this.name, employeeType: this.employeeType
+        }
     }
 }
 
