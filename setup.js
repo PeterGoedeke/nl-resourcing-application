@@ -74,10 +74,15 @@ const sm = {
     updateVerticalDisplay() {
         state.projects.forEach(project => project.updateVerticalDisplay())
         leave.updateVerticalDisplay()
-        sq.typeLabel.style.height = state.employees.length * 25 + 'px'
+        sq.typeLabel.style.height = state.getVisibleEmployees().length * 25 + 'px'
         sq.leaveLabel.style.height = leave.leaveSlots[state.visibleType.type].length * 25 + 'px'
-        state.employees.forEach((employee, i) => employee.updateVerticalDisplay(i))
+        state.getVisibleEmployees().forEach((employee, i) => employee.updateVerticalDisplay(i))
         this.fixContentPaneHeight()
+    },
+    updateDisplay() {
+        state.projects.forEach(project => {
+            for(let type in project.employeeSlots) project.employeeSlots[type].forEach(employeeSlot => employeeSlot.updateDisplay())
+        })
     }
 }
 
@@ -96,9 +101,11 @@ const state = {
         type.display.classList.add('selectedType')
         this.visibleType = type
         state.projects.forEach(project => project.showVisibleTypes())
+        leave.showVisibleTypes()
         state.employees.forEach(employee => employee.showVisibleTypes())
         sq.typeLabel.textContent = state.visibleType.type.toUpperCase()
         sm.updateVerticalDisplay()
+        sm.updateDisplay()
     },
     addEmployeeType(type) {
         this.employeeTypes.push(type)
@@ -113,10 +120,13 @@ const state = {
         this.employees.push(employee)
     },
     employeeExists(name) {
-        return this.employees.filter(employee => employee.name !== null).map(employee => employee.name.toLowerCase()).includes(name.toLowerCase())
+        return this.getVisibleEmployees().filter(employee => employee.name !== null).map(employee => employee.name.toLowerCase()).includes(name.toLowerCase())
     },
     getEmployeeFromName(name) {
-        return this.employees.find(employee => employee.name.toLowerCase() == name.toLowerCase())
+        return this.getVisibleEmployees().find(employee => employee.name.toLowerCase() == name.toLowerCase())
+    },
+    getVisibleEmployees() {
+        return this.employees.filter(employee => employee.employeeType == this.visibleType.type)
     },
     calculateDateRange() {
         let temporary = this.earliestDate
@@ -137,7 +147,7 @@ const state = {
 (function() {
     addEventListener('load', event => {
         sm.initTimeFrame()
-        createEmployeeType('qs')
+        createEmployeeType('QS')
         state.setVisibleType(state.employeeTypes[0])
     })
     addEventListener('resize', sm.appendUntilFit)

@@ -14,6 +14,17 @@ let leave = (function() {
                 leaveSlot.display.style.top = sq.getElementTop(sq.leaveLabel) + i * 25 + 'px'
                 leaveSlot.label.style.top = parseInt(leaveSlot.display.style.top) - sq.contentPane.scrollTop + 'px'
             })
+        },
+        showVisibleTypes() {
+            for(let type in leaveSlots) leaveSlots[type].forEach(leaveSlot => {
+                if(leaveSlot.employeeType == state.visibleType.type) {
+                    leaveSlot.display.style.display = 'block'
+                    leaveSlot.label.style.display = 'block'
+                } else {
+                    leaveSlot.display.style.display = 'none'
+                    leaveSlot.label.style.display = 'none'
+                }
+            })
         }
     }
 })();
@@ -32,7 +43,7 @@ let leaveSlotProto = {
     },
     refreshWorkloadInformation() {
         let workload = this.requestWorkload()
-        for(key in workload) if(key >= this.endDate || key < this.startDate) delete workload[key]
+        for(let key in workload) if(key >= this.endDate || key < this.startDate) delete workload[key]
         for(let i = this.startDate; i < this.endDate; i++) if(!workload[i]) {
             workload[i] = 'leave'
         }

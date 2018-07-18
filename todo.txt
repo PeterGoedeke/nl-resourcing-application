@@ -16,7 +16,9 @@
 - Zooming
 - Viewing and adding of different employee types
 - Reading and writing information to files
+- EmployeeSlots need to extend with the extension of a project
 
 - Undo?
 
+- What to do with projects which should have 0 of a type of employee?
 - What should happen when leave and workload overlaps, should there be an indicator?

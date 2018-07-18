@@ -32,7 +32,7 @@ const employeeTypeProto = {
                     })
                     this.type = displayInput.value
                     this.display.removeChild(displayInput)
-                    this.display.appendChild(document.createTextNode(this.type.toUpperCase()))
+                    this.display.appendChild(document.createTextNode(this.type))
                     state.setVisibleType(state.visibleType)
                 }
             })

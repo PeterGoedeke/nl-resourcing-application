@@ -51,7 +51,7 @@ let projectProto = {
     delete() {
         sq.contentPane.removeChild(this.container)
         sq.leftSidebar.removeChild(this.labelContainer)
-        for(type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {
+        for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {
             sq.rightSidebar.removeChild(employeeSlot.label)
             employeeSlot.removeEmployee()
         })

@@ -45,12 +45,14 @@ let employeeProto = {
         return flattenedWorkload
     },
     showVisibleTypes() {
-        if(this.type == state.visibleType.type) {
-            this.display.style.display = 'absolute'
-            this.label.style.display = 'absolute'
+        if(this.employeeType == state.visibleType.type) {
+            this.display.style.display = 'block'
+            this.label.style.display = 'block'
+            console.log('shown')
         } else {
             this.display.style.display = 'none'
             this.label.style.display = 'none'
+            console.log('hidden')
         }
     },
     delete() {
