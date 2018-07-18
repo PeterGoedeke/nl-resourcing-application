@@ -1,18 +1,10 @@
 [
     {
+        "name": "Francis",
+        "employeeType": "QS"
+    },
+    {
         "name": "James",
-        "employeeType": "QS"
-    },
-    {
-        "name": "Henry",
-        "employeeType": "QS"
-    },
-    {
-        "name": "",
-        "employeeType": "QS"
-    },
-    {
-        "name": null,
-        "employeeType": "QS"
+        "employeeType": "PM"
     }
 ]

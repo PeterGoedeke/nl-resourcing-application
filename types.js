@@ -47,6 +47,9 @@ const employeeTypeProto = {
     },
     delete() {
 
+    },
+    toJSON() {
+        return {type: this.type}
     }
 }
 
