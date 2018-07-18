@@ -181,7 +181,11 @@ const state = {
         // }
     })
     sq.addTypeButton.addEventListener('mouseup', event => {
-        createEmployeeType('NA')
+        let i = ''
+        while(state.employeeTypes.map(employeeType => employeeType.type).includes('NA' + i)) {
+            i ++
+        }
+        createEmployeeType('NA' + i)
     })
 
     document.querySelector('.openNewWindow').addEventListener('mouseup', event => {

@@ -18,6 +18,7 @@ const employeeTypeProto = {
             displayInput.value = this.type
             displayInput.addEventListener('blur', event => {
                 if(displayInput.value != this.type) {
+                if(displayInput.value != this.type && !state.employeeTypes.map(employeeType => employeeType.type).includes(displayInput.value.toUpperCase())) {
                     displayInput.value = displayInput.value.toUpperCase()
                     state.projects.forEach(project => {
                         project.employeeSlots[displayInput.value] = project.employeeSlots[this.type].slice(0)
