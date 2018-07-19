@@ -172,7 +172,7 @@ input {
     border: solid black 1px;
 }
 .projectDisplay {
-    height: 30px;
+    min-height: 30px;
     top: 35px;
     position: relative;
     visibility: visible;
@@ -194,6 +194,7 @@ input {
 }
 .projectLabelContainer {
     height: 30px;
+    min-height: 30px;
 }
 .createEmployeeSlot {
     position: absolute;
