@@ -3,7 +3,7 @@ let leave = (function() {
     sq.contentPane.appendChild(container)
 
     let leaveSlots = {}
-    state.employeeTypes.map(employeeType => employeeType.type).forEach(type => leaveSlots[type] = [])
+    //state.employeeTypes.map(employeeType => employeeType.type).forEach(type => leaveSlots[type] = [])
     return {
         container, 
         leaveSlots,
@@ -25,6 +25,18 @@ let leave = (function() {
                     leaveSlot.label.style.display = 'none'
                 }
             })
+        },
+        toJSON() {
+            let leaveSlotsToSave = {}
+            for(let type in leaveSlots) {
+                leaveSlotsToSave[type] = []
+                leaveSlots[type].forEach(leaveSlot => {
+                    leaveSlotsToSave[type].push({
+                        employeeType: leaveSlot.employeeType, startDate: leaveSlot.startDate, endDate: leaveSlot.endDate, employee: leaveSlot.employee && leaveSlot.employee.name
+                    })
+                })
+            }
+            return Object.assign({}, leaveSlotsToSave)
         }
     }
 })();
@@ -57,12 +69,11 @@ let leaveSlotProto = {
     }
 }
 
-function createLeaveSlot(employeeType) {
-    let [startDate, endDate] = sq.getVisibleTimeBlockRange(true)
+function createLeaveSlot(employeeType, employee = null, startDate, endDate) {
+    if(!startDate && !endDate) [startDate, endDate] = sq.getVisibleTimeBlockRange(true)
     let workloadInformation = Symbol('workload information')
     let workload = Object.create(null)
     for(let i = startDate; i < endDate; i++) workload[i] = 'leave'
-    let employee = null
 
     let display = document.createElement('div')
     display.className = 'employeeSlot'
