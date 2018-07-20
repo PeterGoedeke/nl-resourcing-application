@@ -197,10 +197,10 @@ const state = {
     })
 
     sq.zoomInButton.addEventListener('mouseup', event => {
-        
+        zoom.in()
     })
     sq.zoomOutButton.addEventListener('mouseup', event => {
-
+        zoom.out()
     })
 })()
 
@@ -212,5 +212,5 @@ function convertIDToDate(id) {
     return (timeOfMonth == 0 ? 'Early ' : 'Late ') + month + "/" + year
 }
 function getXLocationFromID(id) {
-    return (id - state.baseDate) * zoom.scale
+    return (id - state.baseDate) * 100 * zoom.scale
 }

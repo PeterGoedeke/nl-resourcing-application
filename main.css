@@ -130,6 +130,15 @@ input {
 .zoomContainer {
     width: 100px;
 }
+.zoomIn, .zoomDisplay, .zoomOut {
+    float: left;
+}
+.zoomIn, .zoomOut {
+    width: 25%;
+}
+.zoomDisplay {
+    width: 50%;
+}
 .openNewWindow {
     width: 50px;
 }
