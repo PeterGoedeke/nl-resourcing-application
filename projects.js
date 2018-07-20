@@ -21,6 +21,7 @@ let projectProto = {
         sq.leftSidebar.insertBefore(this.labelContainer, sq.createProjectButton)
         this.updateDisplay()
         this.employeeSlots[state.visibleType.type].forEach(employeeSlot => employeeSlot.updateDisplay())
+        this.updateZoom()
     },
     updateVerticalDisplay() {
         this.employeeSlots[state.visibleType.type].forEach((employeeSlot, i) => {
@@ -46,6 +47,15 @@ let projectProto = {
         this.employeeSlots[state.visibleType.type].forEach(employeeSlot => {
             employeeSlot.display.style.display = 'block'
             employeeSlot.label.style.display = 'block'
+        })
+    },
+    updateZoom() {
+        this.display.style.minHeight = 60 * zoom.scale + 'px'
+        this.labelContainer.style.height = 60 * zoom.scale + 'px'
+        this.labelContainer.style.minHeight = 60 * zoom.scale + 'px'
+        for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {
+            employeeSlot.display.style.height = 50 * zoom.scale + 'px'
+            employeeSlot.label.style.height = 50 * zoom.scale + 'px'
         })
     },
     delete() {

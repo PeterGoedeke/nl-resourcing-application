@@ -34,6 +34,17 @@ let employeeSlotProto = {
         for(let i = this.startDate; i < this.endDate; i++) {            
             let workloadBlock = document.createElement('input')
             workloadBlock.className = 'employeeSlotWorkloadBlock'
+            if(i == this.startDate) {
+                workloadBlock.style.width = 60 * zoom.scale + 'px'
+                workloadBlock.style.marginLeft = 20 * zoom.scale + 'px'
+            }
+            else if(i == this.endDate - 1) {
+                workloadBlock.style.width = 60 * zoom.scale + 'px'
+                workloadBlock.style.marginRight = 20 * zoom.scale + 'px'
+            }
+            else {
+                workloadBlock.style.width = 100 * zoom.scale + 'px'
+            }
             workloadBlock.type = 'text'
             workloadBlock.value = workload[i]
 
@@ -50,7 +61,7 @@ let employeeSlotProto = {
     },
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) + 20 * zoom.scale + 'px'
-        this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) - 20 * zoom.scale + 'px'
+        this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) - 40 * zoom.scale + 'px'
         this.label.value = this.employee && this.employee.name || 'Empty'
         this.refreshWorkloadInformation()
         this.refreshWorkloadDisplay()

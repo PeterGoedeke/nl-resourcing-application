@@ -70,6 +70,7 @@ const sm = {
         let timeBlock = document.createElement('div')
         timeBlock.className = 'timeBlock marginElement'
         timeBlock.textContent = dateID
+        timeBlock.style.width = 100 * zoom.scale + 'px'
         if(firstChild) sq.topAxisContainer.insertBefore(timeBlock, sq.topAxisContainer.firstChild)
         else sq.topAxisContainer.appendChild(timeBlock)
     },
@@ -83,6 +84,7 @@ const sm = {
     },
     updateDisplay() {
         state.projects.forEach(project => {
+            project.updateDisplay()
             for(let type in project.employeeSlots) project.employeeSlots[type].forEach(employeeSlot => employeeSlot.updateDisplay())
         })
     }

@@ -12,20 +12,11 @@ const zoom = (function() {
             workloadBlock.style.width = 60 * scale + 'px'
             workloadBlock.style.marginRight = 20 * scale + 'px'
         })
-        state.projects.forEach(project => {
-            project.display.style.minHeight = 60 * scale + 'px'
-            project.labelContainer.style.height = 60 * scale + 'px'
-            project.labelContainer.style.minHeight = 60 * scale + 'px'
-            for(let type in project.employeeSlots) project.employeeSlots[type].forEach(employeeSlot => {
-                employeeSlot.display.style.height = 50 * scale + 'px'
-                employeeSlot.label.style.height = 50 * scale + 'px'
-            })
-        })
-        state.employees.forEach(employee => {
-            employee.display.style.height = 50 * scale + 'px'
-            employee.label.style.height = 50 * scale + 'px'
-        })
+        state.projects.forEach(project => project.updateZoom())
+        state.employees.forEach(employee => employee.updateZoom())
+        sm.updateDisplay()
         sm.updateVerticalDisplay()
+        sq.positioner.style.width = getXLocationFromID(state.latestDate + 1) + 'px'
     }
     return {
         setZoom(zoom) {

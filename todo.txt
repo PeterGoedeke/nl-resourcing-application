@@ -24,6 +24,7 @@
 - There needs to be a catch if you try and remove all employee types
 - Deletion of Employee Types
 - Project shouldn't create an employee type to begin with
+- Timeblocks need grid children
 
 - Undo?
 - How do you want sub-types of employee to be implemented?

@@ -4,6 +4,7 @@ let employeeProto = {
         sq.rightSidebar.appendChild(this.label)
         this.updateVerticalDisplay()
         this.updateDisplay()
+        this.updateZoom()
 
         this.label.addEventListener('change', event => {
             if(!state.employeeExists(this.label.value) && this.label.value.toLowerCase() != 'empty') this.name = this.label.value
@@ -69,6 +70,10 @@ let employeeProto = {
             this.label.style.display = 'none'
             console.log('hidden')
         }
+    },
+    updateZoom() {
+        this.display.style.height = 50 * zoom.scale + 'px'
+        this.label.style.height = 50 * zoom.scale + 'px'
     },
     delete() {
         sq.contentPane.removeChild(this.display)
