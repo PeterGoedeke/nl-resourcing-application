@@ -25,6 +25,7 @@
 
 - Undo?
 - How do you want sub-types of employee to be implemented?
+- Ctrl + scroll = zoom?
 
 - What to do with projects which should have 0 of a type of employee?
 - What should happen when leave and workload overlaps, should there be an indicator?
@@ -34,3 +35,9 @@
 
 - Rewrite reading files with promises
 - Rewrite screen display in a more screen moduled fashion and use css flow better
+
+
+
+Meeting with Client:
+- Change leave to 5
+- Give projects a minimum height

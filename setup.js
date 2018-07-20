@@ -14,6 +14,8 @@ const sq = {
     bottomMargin: document.querySelector('.bottomMargin'),
     addTypeButton: document.querySelector('.addType'),
     zoomContainer: document.querySelector('.zoomContainer'),
+    zoomInButton: document.querySelector('.zoomIn'),
+    zoomOutButton: document.querySelector('.zoomOut'),
 
     getTimeBlockWidth() {
         //exists becuase timeBlocks are subject to change
@@ -87,7 +89,6 @@ const sm = {
 }
 
 const state = {
-    scale: 50,
     baseDate: 29,
     earliestDate: 29,
     latestDate: 35,
@@ -147,12 +148,20 @@ const state = {
 };
 
 (function() {
+    //let ctrlPressed = false
     addEventListener('load', event => {
         sm.initTimeFrame()
         createEmployeeType('QS')
         state.setVisibleType(state.employeeTypes[0])
     })
     addEventListener('resize', sm.appendUntilFit)
+
+    // addEventListener('keypress', event => {
+    //     if(event.which == 17) ctrlPressed = true 
+    // })
+    // addEventListener('scroll', event => {
+    //     if(event.ctrlKey) console.log('ay')
+    // })
 
     sq.createProjectButton.addEventListener('mouseup', event => {
         createProject('Default', null, 'Secure')
@@ -188,11 +197,11 @@ const state = {
         createEmployeeType('NA' + i)
     })
 
-    document.querySelector('.openNewWindow').addEventListener('mouseup', event => {
-        save()
+    sq.zoomInButton.addEventListener('mouseup', event => {
+        
     })
-    document.querySelector('.zoomContainer').addEventListener('mouseup', event => {
-        load()
+    sq.zoomOutButton.addEventListener('mouseup', event => {
+
     })
 })()
 
@@ -204,7 +213,7 @@ function convertIDToDate(id) {
     return (timeOfMonth == 0 ? 'Early ' : 'Late ') + month + "/" + year
 }
 function getXLocationFromID(id) {
-    return (id - state.baseDate) * state.scale 
+    return (id - state.baseDate) * zoom.scale
 }
 
 function copy(o) {
