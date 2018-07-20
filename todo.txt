@@ -13,6 +13,7 @@
 - Lags when lots of projects are added and you scroll
 - Labels start too big and get smaller when things are added
 - The separators need to be in front of the rest of the display
+- Buttons for adding employee slots get out of position when zoomed out
 
 - Projects security status
 - Employee dialogue for leaving and joining and all of that

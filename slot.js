@@ -1,5 +1,6 @@
 let slot = {
     initSlot() {
+        this.updateZoom()
         this.label.addEventListener('change', event => {
             if(state.employeeExists(this.label.value)) {
                 this.assignEmployee(state.getEmployeeFromName(this.label.value))
@@ -41,4 +42,8 @@ let slot = {
             this.employee.updateDisplay()
         }
     },
+    updateZoom() {
+        this.display.style.height = 50 * zoom.scale + 'px'
+        this.label.style.height = 50 * zoom.scale + 'px'
+    }
 }

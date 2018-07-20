@@ -40,6 +40,7 @@ let employeeProto = {
             let workloadBlock = document.createElement('div')
             workloadBlock.className = 'employeeWorkloadBlock'
             workloadBlock.style.left = getXLocationFromID(key) + 'px'
+            workloadBlock.style.width = 100 * zoom.scale + 'px'
             workloadBlock.style.backgroundColor = workload[key] == 'leave' ? 'white' : ((workload[key] == 4 || workload[key] == 5) ? 'green' : (workload[key] < 4 ? 'yellow' : 'red'))
             if(!isNaN(workload[key])) workloadBlock.textContent = workload[key]
             this.display.appendChild(workloadBlock)

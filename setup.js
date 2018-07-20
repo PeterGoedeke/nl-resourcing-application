@@ -87,6 +87,8 @@ const sm = {
             project.updateDisplay()
             for(let type in project.employeeSlots) project.employeeSlots[type].forEach(employeeSlot => employeeSlot.updateDisplay())
         })
+        state.employees.forEach(employee => employee.updateDisplay())
+        leave.updateDisplay()
     }
 }
 

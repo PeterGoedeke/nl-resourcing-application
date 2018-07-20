@@ -14,9 +14,10 @@ const zoom = (function() {
         })
         state.projects.forEach(project => project.updateZoom())
         state.employees.forEach(employee => employee.updateZoom())
+        leave.updateZoom()
+        sq.positioner.style.width = getXLocationFromID(state.latestDate + 1) + 'px'
         sm.updateDisplay()
         sm.updateVerticalDisplay()
-        sq.positioner.style.width = getXLocationFromID(state.latestDate + 1) + 'px'
     }
     return {
         setZoom(zoom) {
@@ -26,14 +27,13 @@ const zoom = (function() {
         in() {
             if(scale >= 0.9) scale = 1
             else scale += 0.1
-            console.log(scale)
             updateZoom()
         },
         out() {
             if(scale <= 0.2) scale = 0.1
             else scale -= 0.1
-            console.log(scale)
             updateZoom()
+            sm.appendUntilFit()
         },
         get scale() { return scale }
     }

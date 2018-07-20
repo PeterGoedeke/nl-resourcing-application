@@ -53,10 +53,7 @@ let projectProto = {
         this.display.style.minHeight = 60 * zoom.scale + 'px'
         this.labelContainer.style.height = 60 * zoom.scale + 'px'
         this.labelContainer.style.minHeight = 60 * zoom.scale + 'px'
-        for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {
-            employeeSlot.display.style.height = 50 * zoom.scale + 'px'
-            employeeSlot.label.style.height = 50 * zoom.scale + 'px'
-        })
+        for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.updateZoom())
     },
     delete() {
         sq.contentPane.removeChild(this.container)

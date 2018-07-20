@@ -6,11 +6,14 @@ let leave = (function() {
     return {
         container, 
         leaveSlots,
+        updateDisplay() {
+            for(let type in leaveSlots) leaveSlots[type].forEach(leaveSlot => leaveSlot.updateDisplay())
+        },
         updateVerticalDisplay() {
             this.container.style.top = sq.getElementTop(sq.leaveLabel) + 'px'
 
             this.leaveSlots[state.visibleType.type].forEach((leaveSlot, i) => {
-                leaveSlot.display.style.top = sq.getElementTop(sq.leaveLabel) + i * 25 * zoom.scale + 'px'
+                leaveSlot.display.style.top = sq.getElementTop(sq.leaveLabel) + i * 50 * zoom.scale + 'px'
                 leaveSlot.label.style.top = parseInt(leaveSlot.display.style.top) - sq.contentPane.scrollTop + 'px'
             })
         },
@@ -24,6 +27,9 @@ let leave = (function() {
                     leaveSlot.label.style.display = 'none'
                 }
             })
+        },
+        updateZoom() {
+            for(let type in this.leaveSlots) this.leaveSlots[type].forEach(leaveSlot => leaveSlot.updateZoom())
         },
         toJSON() {
             let leaveSlotsToSave = {}

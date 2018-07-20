@@ -234,6 +234,7 @@ input {
 }
 .employeeSlotWorkloadBlock {
     width: 50px;
+    height: 100%;
     display: inline-block;
 }
 
