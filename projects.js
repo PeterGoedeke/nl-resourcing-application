@@ -30,12 +30,13 @@ let projectProto = {
         })
         this.display.style.height = this.employeeSlots[state.visibleType.type].length * 50 * zoom.scale + 10 * zoom.scale + 'px'
         this.labelContainer.style.height = this.display.style.height
-        this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 25 + 'px'
+        this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 50 * zoom.scale + 'px'
     },
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
-        this.createEmployeeSlotButton.style.left = parseInt(this.display.style.left) + parseInt(this.display.style.width) + 10 + 'px'
+        this.createEmployeeSlotButton.style.left = parseInt(this.display.style.left) + parseInt(this.display.style.width) + 15 * zoom.scale + 2.5 + 'px'
+        this.createEmployeeSlotButton.style.height = 40 * zoom.scale + 'px'
         this.showVisibleTypes()
         sm.updateVerticalDisplay()
     },
@@ -54,6 +55,7 @@ let projectProto = {
         this.labelContainer.style.height = 60 * zoom.scale + 'px'
         this.labelContainer.style.minHeight = 60 * zoom.scale + 'px'
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.updateZoom())
+        this.createEmployeeSlotButton.style.height = 50 * zoom.scale + 'px'
     },
     delete() {
         sq.contentPane.removeChild(this.container)
