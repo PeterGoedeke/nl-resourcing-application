@@ -19,9 +19,9 @@ let projectProto = {
         this.labelContainer.appendChild(this.verticalDragger)
         this.labelContainer.appendChild(this.label)
         sq.leftSidebar.insertBefore(this.labelContainer, sq.createProjectButton)
-        this.updateDisplay()
         this.employeeSlots[state.visibleType.type].forEach(employeeSlot => employeeSlot.updateDisplay())
         this.updateZoom()
+        this.updateDisplay()
     },
     updateVerticalDisplay() {
         this.employeeSlots[state.visibleType.type].forEach((employeeSlot, i) => {
@@ -35,10 +35,21 @@ let projectProto = {
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
-        this.createEmployeeSlotButton.style.left = parseInt(this.display.style.left) + parseInt(this.display.style.width) + 15 * zoom.scale + 2.5 + 'px'
+        this.updateCreateEmployeeSlotButton()
         this.createEmployeeSlotButton.style.height = 40 * zoom.scale + 'px'
         this.showVisibleTypes()
         sm.updateVerticalDisplay()
+    },
+    updateCreateEmployeeSlotButton() {
+        const lastEmployeeSlot = this.employeeSlots[state.visibleType.type][this.employeeSlots[state.visibleType.type].length - 1]
+        const lastEmployeeSlotRight = parseInt(lastEmployeeSlot.display.style.left) + parseInt(lastEmployeeSlot.display.style.width)
+        const projectRight = parseInt(this.display.style.left) + parseInt(this.display.style.width)
+        if(lastEmployeeSlotRight > projectRight) {
+            this.createEmployeeSlotButton.style.left = lastEmployeeSlotRight + 15 * zoom.scale + 2.5 + 'px'
+        }
+        else {
+            this.createEmployeeSlotButton.style.left = projectRight + 15 * zoom.scale + 2.5 + 'px'
+        }
     },
     showVisibleTypes() {
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {
