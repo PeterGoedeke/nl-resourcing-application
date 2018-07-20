@@ -49,8 +49,8 @@ let employeeSlotProto = {
         }
     },
     updateDisplay() {
-        this.display.style.left = getXLocationFromID(this.startDate) + 10 + 'px'
-        this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) - 20 + 'px'
+        this.display.style.left = getXLocationFromID(this.startDate) + 20 * zoom.scale + 'px'
+        this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) - 20 * zoom.scale + 'px'
         this.label.value = this.employee && this.employee.name || 'Empty'
         this.refreshWorkloadInformation()
         this.refreshWorkloadDisplay()

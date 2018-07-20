@@ -227,6 +227,7 @@ input {
     width: 50px;
     display: inline-block;
 }
+
 .employeeSlotWorkloadBlock:first-child {
     width: 30px;
     margin-left: 10px;

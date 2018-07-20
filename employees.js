@@ -29,7 +29,7 @@ let employeeProto = {
         bindDialogueListeners.call(this)
     },
     updateVerticalDisplay(index) {
-        this.display.style.top = sq.getElementTop(sq.typeLabel) + index * 25 + 'px'
+        this.display.style.top = sq.getElementTop(sq.typeLabel) + index * 50 * zoom.scale + 'px'
         this.label.style.top = parseInt(this.display.style.top) - sq.contentPane.scrollTop + 'px'
     },
     updateDisplay() {
@@ -57,7 +57,6 @@ let employeeProto = {
                 }
             }
         })
-        console.log(flattenedWorkload)
         return flattenedWorkload
     },
     showVisibleTypes() {

@@ -3,7 +3,6 @@ let leave = (function() {
     sq.contentPane.appendChild(container)
 
     let leaveSlots = {}
-    //state.employeeTypes.map(employeeType => employeeType.type).forEach(type => leaveSlots[type] = [])
     return {
         container, 
         leaveSlots,
@@ -11,7 +10,7 @@ let leave = (function() {
             this.container.style.top = sq.getElementTop(sq.leaveLabel) + 'px'
 
             this.leaveSlots[state.visibleType.type].forEach((leaveSlot, i) => {
-                leaveSlot.display.style.top = sq.getElementTop(sq.leaveLabel) + i * 25 + 'px'
+                leaveSlot.display.style.top = sq.getElementTop(sq.leaveLabel) + i * 25 * zoom.scale + 'px'
                 leaveSlot.label.style.top = parseInt(leaveSlot.display.style.top) - sq.contentPane.scrollTop + 'px'
             })
         },

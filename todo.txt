@@ -11,6 +11,8 @@
 - Text isn't vertically centred in the type label and the other things in the left sidebar
 - EmployeeSlots need to extend with the extension of a project
 - Lags when lots of projects are added and you scroll
+- Labels start too big and get smaller when things are added
+- The separators need to be in front of the rest of the display
 
 - Projects security status
 - Employee dialogue for leaving and joining and all of that

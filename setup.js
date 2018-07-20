@@ -53,7 +53,7 @@ const sq = {
 const sm = {
     initTimeFrame() {
         for(let i = state.baseDate; i <= state.latestDate; i++) sm.appendTimeBlock(i)
-        sm.appendUntilFit()
+        this.appendUntilFit()
     },
     appendUntilFit() {
         let timeBlocks = sq.topAxisContainer.childNodes.length
@@ -76,8 +76,8 @@ const sm = {
     updateVerticalDisplay() {
         state.projects.forEach(project => project.updateVerticalDisplay())
         leave.updateVerticalDisplay()
-        sq.typeLabel.style.height = state.getVisibleEmployees().length * 25 + 'px'
-        sq.leaveLabel.style.height = leave.leaveSlots[state.visibleType.type].length * 25 + 'px'
+        sq.typeLabel.style.height = state.getVisibleEmployees().length * 50 * zoom.scale + 'px'
+        sq.leaveLabel.style.height = leave.leaveSlots[state.visibleType.type].length * 50 * zoom.scale + 'px'
         state.getVisibleEmployees().forEach((employee, i) => employee.updateVerticalDisplay(i))
         this.fixContentPaneHeight()
     },
@@ -124,7 +124,6 @@ const state = {
         return this.getVisibleEmployees().filter(employee => employee.name !== null).map(employee => employee.name.toLowerCase()).includes(name.toLowerCase())
     },
     getEmployeeFromName(name, type = this.visibleType.type) {
-        console.log(name, type, this.employees.filter(employee => employee.employeeType == type))
         if(name === null) return null
         return this.employees.filter(employee => employee.employeeType == type).find(employee => employee.name.toLowerCase() == name.toLowerCase())
     },
@@ -215,13 +214,3 @@ function convertIDToDate(id) {
 function getXLocationFromID(id) {
     return (id - state.baseDate) * zoom.scale
 }
-
-function copy(o) {
-    var out, v, key;
-    out = Array.isArray(o) ? [] : {};
-    for (key in o) {
-        v = o[key];
-        out[key] = (typeof v === "object" && v !== null) ? copy(v) : v;
-    }
-    return out;
- }
