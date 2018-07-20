@@ -8,5 +8,5 @@ function logError(err) {
     fs.writeFile('./errors/Error' + Date.now() + '.txt', err.stack, 'utf8', function(err) {
         if(err) throw err
     })
-    console.log(err)
+   throw err
 }
