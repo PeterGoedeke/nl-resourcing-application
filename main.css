@@ -80,12 +80,17 @@ input {
     white-space: nowrap;
     overflow: hidden;
     left: 175px;
+    padding-bottom: 1000px;
+    margin-bottom: -1000px;
+    visibility: hidden;
 }
 .timeBlock {
+    height: 30px;
     display: inline-block;
     width: 50px;
     position: relative;
     box-sizing: border-box;
+    visibility: visible;
 }
 .mainWindow {
     top: 0px;
@@ -293,6 +298,16 @@ input {
     background-color: ghostwhite;
 }
 
+.gridLine {
+    box-sizing: initial;
+    background-color: black;
+    border: 0;
+    position: absolute;
+    width: 1px;
+    left: -1px;
+    height: 10000px;
+    pointer-events: none;
+}
 .positioner {
     position: absolute;
     visibility: hidden;

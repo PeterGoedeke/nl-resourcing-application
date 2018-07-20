@@ -11,6 +11,7 @@ const sq = {
     positioner: document.querySelector('.positioner'),
     createEmployeeButton: document.querySelector('.createEmployee'),
     createProjectButton: document.querySelector('.createProject'),
+    topMargin: document.querySelector('.topMargin'),
     bottomMargin: document.querySelector('.bottomMargin'),
     addTypeButton: document.querySelector('.addType'),
     zoomContainer: document.querySelector('.zoomContainer'),
@@ -68,9 +69,13 @@ const sm = {
     },
     appendTimeBlock(dateID, firstChild = false) {
         let timeBlock = document.createElement('div')
-        timeBlock.className = 'timeBlock marginElement'
+        timeBlock.className = 'timeBlock'
         timeBlock.textContent = dateID
         timeBlock.style.width = 100 * zoom.scale + 'px'
+
+        let gridLine = document.createElement('div')
+        gridLine.className = 'gridLine'
+        timeBlock.appendChild(gridLine)
         if(firstChild) sq.topAxisContainer.insertBefore(timeBlock, sq.topAxisContainer.firstChild)
         else sq.topAxisContainer.appendChild(timeBlock)
     },
