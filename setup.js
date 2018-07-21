@@ -80,7 +80,7 @@ const sm = {
         else sq.topAxisContainer.appendChild(timeBlock)
     },
     updateVerticalDisplay() {
-        state.projects.forEach(project => project.updateVerticalDisplay())
+        state.projects.forEach((project, i) => project.updateVerticalDisplay(i))
         leave.updateVerticalDisplay()
         sq.typeLabel.style.height = state.getVisibleEmployees().length * 50 * zoom.scale + 'px'
         sq.leaveLabel.style.height = leave.leaveSlots[state.visibleType.type].length * 50 * zoom.scale + 'px'
@@ -173,7 +173,7 @@ const state = {
 
     sq.createProjectButton.addEventListener('mouseup', event => {
         createProject('Default', null, 'Secure')
-        sm.fixContentPaneHeight()
+        sm.updateVerticalDisplay()
         state.calculateDateRange()
     })
     sq.createEmployeeButton.addEventListener('mouseup', event => {
@@ -190,7 +190,7 @@ const state = {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop
         sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
         sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
-        sm.updateVerticalDisplay()
+        //sm.updateVerticalDisplay()
         //console.log(sq.getVisibleTimeBlockRange()[0] - 1, state.earliestDate)
         //if(sq.topAxisContainer.firstChild.textContent < state.earliestDate && sq.getVisibleTimeBlockRange()[0] - 1 > sq.topAxisContainer.firstChild.textContent && !draggingInterface.currentlyDragging) {
             //console.log('hi')

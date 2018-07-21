@@ -232,12 +232,16 @@ input {
     z-index: 1;
     overflow: hidden;
 }
+.employeeSlotLabelContainer {
+    border: 0;
+    visibility: hidden;
+    position: relative;
+}
 .employeeSlotLabel {
     height: 25px;
     width: 86px;
-    position: absolute;
-    top: 30px;
     box-sizing: border-box;
+    visibility: visible;
 }
 .employeeSlotWorkloadBlock {
     width: 50px;

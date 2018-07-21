@@ -20,15 +20,14 @@ let projectProto = {
         this.labelContainer.appendChild(this.verticalDragger)
         this.labelContainer.appendChild(this.label)
         sq.leftSidebar.insertBefore(this.labelContainer, sq.createProjectButton)
+        sq.rightSidebar.appendChild(this.employeeSlotLabelContainer)
         this.employeeSlots[state.visibleType.type].forEach(employeeSlot => employeeSlot.updateDisplay())
         this.updateZoom()
         this.updateDisplay()
     },
-    updateVerticalDisplay() {
-        this.employeeSlots[state.visibleType.type].forEach((employeeSlot, i) => {
-            employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 50 * zoom.scale + 'px'
-            employeeSlot.label.style.top = parseInt(employeeSlot.display.style.top) - sq.contentPane.scrollTop + 'px'
-        })
+    updateVerticalDisplay(i) {
+        this.employeeSlots[state.visibleType.type].forEach((employeeSlot, i) => employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 50 * zoom.scale + 'px')
+        if(i) this.employeeSlotLabelContainer.style.top = i * 10 * zoom.scale + 'px'
         this.display.style.height = this.employeeSlots[state.visibleType.type].length * 50 * zoom.scale + 10 * zoom.scale + 'px'
         this.labelContainer.style.height = this.display.style.height
         this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 50 * zoom.scale + 'px'
@@ -107,7 +106,6 @@ function createProject(name, group, security, startDate, endDate, init = true) {
 
     let labelContainer = document.createElement('div')
     labelContainer.className = 'projectLabelContainer'
-
     let verticalDragger = document.createElement('div')
     verticalDragger.className = 'projectVerticalDragger'
 
@@ -115,6 +113,9 @@ function createProject(name, group, security, startDate, endDate, init = true) {
     label.type = 'text'
     label.className = 'projectLabel'
     label.value = name
+
+    let employeeSlotLabelContainer = document.createElement('div')
+    employeeSlotLabelContainer.className = 'employeeSlotLabelContainer'
 
     let createEmployeeSlotButton = document.createElement('div')
     createEmployeeSlotButton.className = 'createEmployeeSlot'
@@ -124,7 +125,7 @@ function createProject(name, group, security, startDate, endDate, init = true) {
     let project = Object.assign(
         Object.create(projectProto),
         horizontalDraggable,
-        {container, display, label, labelContainer, verticalDragger, createEmployeeSlotButton, dragging,
+        {container, display, label, labelContainer, verticalDragger, employeeSlotLabelContainer, createEmployeeSlotButton, dragging,
             name, group, security, startDate, endDate}
     )
     
