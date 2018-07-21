@@ -46,6 +46,7 @@ const employeeTypeProto = {
 
             this.display.removeChild(this.display.firstChild)
             this.display.appendChild(displayInput)
+            initInput(displayInput)
             displayInput.focus()
         })
     },
