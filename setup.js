@@ -85,7 +85,6 @@ const sm = {
         leave.updateVerticalDisplay()
         sq.typeLabel.style.height = state.getVisibleEmployees().length * 50 * zoom.scale + 'px'
         sq.leaveLabel.style.height = leave.leaveSlots[state.visibleType.type].length * 50 * zoom.scale + 'px'
-        sq.employeeContainer.style.top = 50 * zoom.scale + state.projects.length * 10 * zoom.scale + 'px'
         state.getVisibleEmployees().forEach((employee, i) => employee.updateVerticalDisplay(i))
         this.fixContentPaneHeight()
     },
@@ -192,7 +191,6 @@ const state = {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop
         sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
         sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
-        //sm.updateVerticalDisplay()
         //console.log(sq.getVisibleTimeBlockRange()[0] - 1, state.earliestDate)
         //if(sq.topAxisContainer.firstChild.textContent < state.earliestDate && sq.getVisibleTimeBlockRange()[0] - 1 > sq.topAxisContainer.firstChild.textContent && !draggingInterface.currentlyDragging) {
             //console.log('hi')
