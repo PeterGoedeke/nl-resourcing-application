@@ -1,12 +1,6 @@
 - Positioner can get too long, meaning that you can scroll too far in either direction
-- All little text boys need to highlight on select
 - Dragging the left side of a project far towards the right bugs out (potentially the same for the other direction)
-- Employee slots can be entirely out of their projects
-- Tab order of the right sidebar is bad
-- There was a bug where getting the employee from name was running when it wasn't meant to (even when the employee didn't exist)
-- EmployeeSlot input needs to be checked properly to see whether it is a number
-- TypeLabel starts too large
-- Text isn't vertically centred in the type label and the other things in the left sidebar
+
 - EmployeeSlots need to extend with the extension of a project
 - Lags when lots of projects are added and you scroll
 - Labels start too big and get smaller when things are added
@@ -30,6 +24,8 @@
 - Undo?
 - How do you want sub-types of employee to be implemented?
 - Ctrl + scroll = zoom?
+- Is it a problem that employee slots can be entirely out of their projects?
+- What do you want the tab order of the application to be?
 
 - What to do with projects which should have 0 of a type of employee?
 - What should happen when leave and workload overlaps, should there be an indicator?
