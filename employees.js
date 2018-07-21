@@ -2,7 +2,7 @@ let employeeProto = {
     initDisplay() {
         initInput(this.label)
         sq.contentPane.appendChild(this.display)
-        sq.rightSidebar.appendChild(this.label)
+        sq.employeeContainer.appendChild(this.label)
         this.updateVerticalDisplay()
         this.updateDisplay()
         this.updateZoom()
@@ -79,7 +79,7 @@ let employeeProto = {
     },
     delete() {
         sq.contentPane.removeChild(this.display)
-        sq.rightSidebar.removeChild(this.label)
+        sq.employeeContainer.removeChild(this.label)
         state.employees.splice(state.employees.indexOf(this), 1)
         state.projects.forEach(project => {
             project.employeeSlots[state.visibleType.type].forEach(employeeSlot => {

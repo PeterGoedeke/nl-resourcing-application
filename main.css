@@ -173,7 +173,7 @@ input {
     align-items: center;
     justify-content: center;
 }
-.leaveSlotLabelContainer {
+.leaveSlotLabelContainer, employeeContainer {
     position: relative;
     visibility: hidden;
     border: 0;

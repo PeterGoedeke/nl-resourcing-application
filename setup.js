@@ -17,6 +17,7 @@ const sq = {
     zoomContainer: document.querySelector('.zoomContainer'),
     zoomInButton: document.querySelector('.zoomIn'),
     zoomOutButton: document.querySelector('.zoomOut'),
+    employeeContainer: document.querySelector('.employeeContainer'),
 
     getTimeBlockWidth() {
         //exists becuase timeBlocks are subject to change
@@ -84,6 +85,7 @@ const sm = {
         leave.updateVerticalDisplay()
         sq.typeLabel.style.height = state.getVisibleEmployees().length * 50 * zoom.scale + 'px'
         sq.leaveLabel.style.height = leave.leaveSlots[state.visibleType.type].length * 50 * zoom.scale + 'px'
+        sq.employeeContainer.style.top = 50 * zoom.scale + state.projects.length * 10 * zoom.scale + 'px'
         state.getVisibleEmployees().forEach((employee, i) => employee.updateVerticalDisplay(i))
         this.fixContentPaneHeight()
     },

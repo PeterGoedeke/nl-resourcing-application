@@ -4,7 +4,7 @@ let leave = (function() {
 
     let leaveSlotLabelContainer = document.createElement('div')
     leaveSlotLabelContainer.className = 'leaveSlotLabelContainer'
-    sq.rightSidebar.appendChild(leaveSlotLabelContainer)
+    sq.rightSidebar.insertBefore(leaveSlotLabelContainer, sq.employeeContainer)
 
     let leaveSlots = {}
     return {
