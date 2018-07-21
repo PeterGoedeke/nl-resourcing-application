@@ -3,19 +3,12 @@
 
 - Attempting to resize a project to zero from the left drags it to the side in a weird way
 - End of the project is out of line with the gridlines
-- Add display for zooming
 
 - Projects security status
 - Employee dialogue for leaving and joining and all of that
-- Zooming
 - Reading and writing information to files
 - Total rows
 - Leave should just show as 5
-- Min height for projects
-- There needs to be a catch if you try and remove all employee types
-- Deletion of Employee Types
-- Project shouldn't create an employee type to begin with
-- Timeblocks need grid children
 
 - Undo?
 - How do you want sub-types of employee to be implemented?
@@ -25,6 +18,7 @@
 - How do you want the behaviour of extending the duration of a project to work with the employee slots?
 - Resizing isn't nice at small sizes, what do you want me to do about it?
 - Do you need finer resizing?
+- Should projects create an employee to begin with?
 
 - What to do with projects which should have 0 of a type of employee?
 - What should happen when leave and workload overlaps, should there be an indicator?
@@ -40,3 +34,4 @@
 Meeting with Client:
 - Change leave to 5
 - Give projects a minimum height
+- Unsecured Projects only change the appearance, not the data

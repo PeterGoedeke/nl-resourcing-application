@@ -7,7 +7,7 @@ let projectProto = {
             this.employeeSlots[state.visibleType.type][this.employeeSlots[state.visibleType.type].length - 1].updateDisplay()
             this.updateDisplay()
         })
-        bindDialogueListeners.call(this)
+        bindDialogueListeners.call(this, 'project')
         this.label.addEventListener('change', event => {
             this.name = this.label.value
         })
@@ -63,6 +63,9 @@ let projectProto = {
             employeeSlot.display.style.display = 'block'
             employeeSlot.label.style.display = 'block'
         })
+    },
+    toggleSecurity() {
+        this.security = !this.display.classList.toggle('unsecured')
     },
     updateZoom() {
         this.display.style.minHeight = 60 * zoom.scale + 'px'

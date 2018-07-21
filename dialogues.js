@@ -10,7 +10,7 @@ let dialogueProto = {
     }
 }
 
-function openObjectDialogue(clickedObject, event) {
+function openObjectDialogue(clickedObject, event, type) {
     let dialogue = Object.create(dialogueProto)
     dialogue.initDisplay(event)
     dialogue.display.className = 'dialogue'
@@ -23,19 +23,28 @@ function openObjectDialogue(clickedObject, event) {
         sm.updateVerticalDisplay()
     })
 
+    if(type == 'project') {
+        let toggleSecurityButton = document.createElement('div')
+        toggleSecurityButton.className = 'toggleSecurityButton'
+        toggleSecurityButton.addEventListener('mouseup', event => {
+            clickedObject.toggleSecurity()
+        })
+        dialogue.display.appendChild(toggleSecurityButton)
+    }
+
     dialogue.display.appendChild(deleteHostButton)
     dialogueInterface.registerDialogue(dialogue)
 }
 
-function bindDialogueListeners() {
+function bindDialogueListeners(type) {
     this.display.addEventListener('mouseup', event => {
         if(event.which == 3) {
-            openObjectDialogue(this, event)
+            openObjectDialogue(this, event, type)
         }
     })
     this.label.addEventListener('mouseup', event => {
         if(event.which == 3) {
-            openObjectDialogue(this, event)
+            openObjectDialogue(this, event, type)
         }
     })
 }

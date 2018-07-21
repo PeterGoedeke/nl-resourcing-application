@@ -204,6 +204,10 @@ input {
     visibility: visible;
     overflow: hidden;
 }
+.unsecured {
+    background: url(unsecureproject.png);
+    opacity: 0.5;
+}
 .projectContainer {
     top: 30px;
     visibility: hidden;
@@ -298,6 +302,11 @@ input {
     z-index: 5;
 }
 .deleteHostButton {
+    margin: 0 auto;
+    width: 30px;
+    height: 30px;
+}
+.toggleSecurityButton {
     margin: 0 auto;
     width: 30px;
     height: 30px;

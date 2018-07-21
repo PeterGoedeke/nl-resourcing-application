@@ -176,7 +176,7 @@ const state = {
     // })
 
     sq.createProjectButton.addEventListener('mouseup', event => {
-        createProject('Default', null, 'Secure')
+        createProject('Default', null, true)
         sm.updateVerticalDisplay()
         state.calculateDateRange()
     })
