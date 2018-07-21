@@ -7,6 +7,7 @@
 - Buttons for adding employee slots get out of position when zoomed out
 - Attempting to resize a project to zero from the left drags it to the side in a weird way
 - End of the project is out of line with the gridlines
+- Add display for zooming
 
 - Projects security status
 - Employee dialogue for leaving and joining and all of that
@@ -26,6 +27,8 @@
 - Is it a problem that employee slots can be entirely out of their projects?
 - What do you want the tab order of the application to be?
 - How do you want the behaviour of extending the duration of a project to work with the employee slots?
+- Resizing isn't nice at small sizes, what do you want me to do about it?
+- Do you need finer resizing?
 
 - What to do with projects which should have 0 of a type of employee?
 - What should happen when leave and workload overlaps, should there be an indicator?

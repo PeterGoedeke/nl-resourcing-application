@@ -20,7 +20,7 @@ let projectProto = {
         this.labelContainer.appendChild(this.verticalDragger)
         this.labelContainer.appendChild(this.label)
         sq.leftSidebar.insertBefore(this.labelContainer, sq.createProjectButton)
-        sq.rightSidebar.appendChild(this.employeeSlotLabelContainer)
+        sq.rightSidebar.insertBefore(this.employeeSlotLabelContainer, leave.leaveSlotLabelContainer)
         this.employeeSlots[state.visibleType.type].forEach(employeeSlot => employeeSlot.updateDisplay())
         this.updateZoom()
         this.updateDisplay()

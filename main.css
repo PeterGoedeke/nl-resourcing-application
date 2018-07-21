@@ -173,6 +173,11 @@ input {
     align-items: center;
     justify-content: center;
 }
+.leaveSlotLabelContainer {
+    position: relative;
+    visibility: hidden;
+    border: 0;
+}
 .contentPane {
     position: relative;
     height: 100%;

@@ -2,20 +2,22 @@ let leave = (function() {
     let container = document.createElement('div')
     sq.contentPane.appendChild(container)
 
+    let leaveSlotLabelContainer = document.createElement('div')
+    leaveSlotLabelContainer.className = 'leaveSlotLabelContainer'
+    sq.rightSidebar.appendChild(leaveSlotLabelContainer)
+
     let leaveSlots = {}
     return {
-        container, 
+        container, leaveSlotLabelContainer,
         leaveSlots,
         updateDisplay() {
             for(let type in leaveSlots) leaveSlots[type].forEach(leaveSlot => leaveSlot.updateDisplay())
         },
         updateVerticalDisplay() {
             this.container.style.top = sq.getElementTop(sq.leaveLabel) + 'px'
+            this.leaveSlotLabelContainer.style.top = 50 * zoom.scale + state.projects.length * 10 * zoom.scale + 'px'
 
-            this.leaveSlots[state.visibleType.type].forEach((leaveSlot, i) => {
-                leaveSlot.display.style.top = sq.getElementTop(sq.leaveLabel) + i * 50 * zoom.scale + 'px'
-                leaveSlot.label.style.top = parseInt(leaveSlot.display.style.top) - sq.contentPane.scrollTop + 'px'
-            })
+            this.leaveSlots[state.visibleType.type].forEach((leaveSlot, i) => leaveSlot.display.style.top = sq.getElementTop(sq.leaveLabel) + i * 50 * zoom.scale + 'px')
         },
         showVisibleTypes() {
             for(let type in leaveSlots) leaveSlots[type].forEach(leaveSlot => {
@@ -49,7 +51,7 @@ let leave = (function() {
 let leaveSlotProto = {
     initDisplay() {
         leave.container.appendChild(this.display)
-        sq.rightSidebar.appendChild(this.label)
+        leave.leaveSlotLabelContainer.appendChild(this.label)
         this.initDraggable()
         bindDialogueListeners.call(this)
     },
