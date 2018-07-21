@@ -1,5 +1,6 @@
 let projectProto = {
     initDisplay() {
+        initInput(this.label)
         this.initDraggable()
         this.createEmployeeSlotButton.addEventListener('mouseup', (event) => {
             this.employeeSlots[state.visibleType.type].push(createEmployeeSlot(this, state.visibleType.type))

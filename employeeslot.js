@@ -55,7 +55,7 @@ let employeeSlotProto = {
                     this.enterWorkloadInformation.call(this, i, workloadBlock.value)
                 }
             })
-
+            initInput(workloadBlock)
             this.display.appendChild(workloadBlock)
         }
     },

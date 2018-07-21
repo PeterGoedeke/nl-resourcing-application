@@ -233,3 +233,7 @@ function convertIDToDate(id) {
 function getXLocationFromID(id) {
     return (id - state.baseDate) * 100 * zoom.scale
 }
+
+function initInput(input) {
+    input.addEventListener('focus', event => input.select())
+}

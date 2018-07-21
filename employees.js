@@ -1,5 +1,6 @@
 let employeeProto = {
     initDisplay() {
+        initInput(this.label)
         sq.contentPane.appendChild(this.display)
         sq.rightSidebar.appendChild(this.label)
         this.updateVerticalDisplay()

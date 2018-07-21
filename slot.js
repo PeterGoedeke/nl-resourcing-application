@@ -1,5 +1,6 @@
 let slot = {
     initSlot() {
+        initInput(this.label)
         this.updateZoom()
         this.label.addEventListener('change', event => {
             if(state.employeeExists(this.label.value)) {
