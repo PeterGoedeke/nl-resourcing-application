@@ -164,6 +164,7 @@ const state = {
         createEmployeeType('QS')
         state.setVisibleType(state.employeeTypes[0])
         zoom.updateDisplay()
+        zoom.initDisplay()
     })
     addEventListener('resize', sm.appendUntilFit)
 

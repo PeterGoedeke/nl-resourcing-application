@@ -23,17 +23,43 @@ const zoom = (function() {
     function updateDisplay() {
         sq.zoomDisplay.textContent = Math.round(scale * 200) + '%'
     }
+    function roundToNearest(scale) {
+        return Math.round(scale * 10) / 10
+    }
     return {
+        initDisplay() {
+            sq.zoomDisplay.addEventListener('dblclick', event => {
+                let displayInput = document.createElement('input')
+                displayInput.type = 'text';
+                displayInput.className = 'employeeTypeInput'
+                displayInput.value = Math.round(scale * 200) + '%'
+    
+                displayInput.addEventListener('blur', event => {
+                    scale = parseInt(displayInput.value) / 200
+                    if(scale < 0.1) scale = 0.1
+                    else if(scale > 1) scale = 1
+                    sq.zoomDisplay.removeChild(displayInput)
+                    updateZoom()
+                    sm.appendUntilFit()
+                })
+                sq.zoomDisplay.removeChild(sq.zoomDisplay.firstChild)
+                sq.zoomDisplay.appendChild(displayInput)
+                initInput(displayInput)
+                displayInput.focus()
+            })
+        },
         setZoom(zoom) {
             scale = zoom
             updateZoom()
         },
         in() {
+            scale = roundToNearest(scale)
             if(scale >= 0.9) scale = 1
             else scale += 0.1
             updateZoom()
         },
         out() {
+            scale = roundToNearest(scale)
             if(scale <= 0.2) scale = 0.1
             else scale -= 0.1
             updateZoom()
