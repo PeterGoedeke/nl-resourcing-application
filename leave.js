@@ -15,7 +15,7 @@ let leave = (function() {
         },
         updateVerticalDisplay() {
             this.container.style.top = sq.getElementTop(sq.leaveLabel) + 'px'
-            this.leaveSlotLabelContainer.style.top = 50 * zoom.scale + state.projects.length * 10 * zoom.scale + 'px'
+            this.leaveSlotLabelContainer.style.top = 25 + state.projects.length * 10 * zoom.scale + 'px'
 
             this.leaveSlots[state.visibleType.type].forEach((leaveSlot, i) => leaveSlot.display.style.top = sq.getElementTop(sq.leaveLabel) + i * 50 * zoom.scale + 'px')
         },

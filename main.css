@@ -249,6 +249,7 @@ input {
     width: 86px;
     box-sizing: border-box;
     visibility: visible;
+    display: block;
 }
 .employeeSlotWorkloadBlock {
     width: 50px;
