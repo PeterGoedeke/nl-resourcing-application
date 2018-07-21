@@ -27,7 +27,10 @@ let projectProto = {
     },
     updateVerticalDisplay(i) {
         this.employeeSlots[state.visibleType.type].forEach((employeeSlot, i) => employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 50 * zoom.scale + 'px')
-        if(i) this.employeeSlotLabelContainer.style.top = i * 10 * zoom.scale + 'px'
+        if(i) {
+            this.employeeSlotLabelContainer.style.top = i * 10 * zoom.scale + 'px'
+            this.employeeSlotLabelContainer.style.minHeight = 50 * zoom.scale + 'px'
+        }
         this.display.style.height = this.employeeSlots[state.visibleType.type].length * 50 * zoom.scale + 10 * zoom.scale + 'px'
         this.labelContainer.style.height = this.display.style.height
         this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 50 * zoom.scale + 'px'
