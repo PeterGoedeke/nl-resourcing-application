@@ -70,7 +70,7 @@ let leaveSlotProto = {
     },
     delete() {
         leave.container.removeChild(this.display)
-        sq.rightSidebar.removeChild(this.label)
+        leave.leaveSlotLabelContainer.removeChild(this.label)
         this.removeEmployee()
         leave.leaveSlots[this.employeeType].splice(leave.leaveSlots[this.employeeType].indexOf(this), 1)
     }
