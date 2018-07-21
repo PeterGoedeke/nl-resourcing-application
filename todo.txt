@@ -1,8 +1,6 @@
 - Positioner can get too long, meaning that you can scroll too far in either direction
 - Dragging the left side of a project far towards the right bugs out (potentially the same for the other direction)
 
-- The separators need to be in front of the rest of the display
-- Buttons for adding employee slots get out of position when zoomed out
 - Attempting to resize a project to zero from the left drags it to the side in a weird way
 - End of the project is out of line with the gridlines
 - Add display for zooming

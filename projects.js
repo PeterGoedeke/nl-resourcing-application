@@ -38,7 +38,7 @@ let projectProto = {
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
-        this.updateCreateEmployeeSlotButton()
+        if(this.employeeSlots[state.visibleType.type].length >= 1) this.updateCreateEmployeeSlotButton()
         this.createEmployeeSlotButton.style.height = 40 * zoom.scale + 'px'
         this.showVisibleTypes()
         sm.updateVerticalDisplay()
