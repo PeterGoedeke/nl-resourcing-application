@@ -153,6 +153,9 @@ input {
     width: 175px;
     float: left;
     overflow: hidden;
+    padding-right: 10000px;
+    margin-right: -10000px;
+    box-sizing: initial;
 }
 .leftSidebar, .rightSidebar {
     height: 100%;
