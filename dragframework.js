@@ -85,7 +85,8 @@ let draggingInterface = (function() {
             currentlyDragging = draggedObject
             currentlyDragging.dragging = true
             direction = directionParam
-        }
+        },
+        get currentlyDragging() { return currentlyDragging }
     }
 })()
 

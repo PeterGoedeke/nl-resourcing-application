@@ -191,11 +191,14 @@ const state = {
         sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
         sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
         sm.updateVerticalDisplay()
-        // if(sq.getVisibleTimeBlockRange()[0] - 1 > state.earliestDate) {
-        //     console.log('ello')
-        //     sq.positioner.style.left = sq.contentPane.scrollLeft + 'px'
-        //     sq.positioner.style.width = getXLocationFromID(state.latestDate) - sq.contentPane.scrollLeft + 'px'
-        // }
+        //console.log(sq.getVisibleTimeBlockRange()[0] - 1, state.earliestDate)
+        //if(sq.topAxisContainer.firstChild.textContent < state.earliestDate && sq.getVisibleTimeBlockRange()[0] - 1 > sq.topAxisContainer.firstChild.textContent && !draggingInterface.currentlyDragging) {
+            //console.log('hi')
+            // state.baseDate = sq.getVisibleTimeBlockRange()[0] - 2
+            // sq.positioner.style.left = sq.contentPane.scrollLeft + 'px'
+            // sq.positioner.style.width = getXLocationFromID(state.latestDate) - sq.contentPane.scrollLeft + 'px'
+            // sm.updateDisplay()
+        //}
     })
     sq.addTypeButton.addEventListener('mouseup', event => {
         let i = ''
@@ -212,6 +215,13 @@ const state = {
         zoom.out()
     })
 })()
+
+function test() {
+    state.baseDate = sq.getVisibleTimeBlockRange()[0] - 2
+    sq.positioner.style.left = sq.contentPane.scrollLeft + 'px'
+    sq.positioner.style.width = getXLocationFromID(state.latestDate) - sq.contentPane.scrollLeft + 'px'
+    sm.updateDisplay()
+}
 
 function convertIDToDate(id) {
     let year = 2000
