@@ -16,6 +16,7 @@ const sq = {
     addTypeButton: document.querySelector('.addType'),
     zoomContainer: document.querySelector('.zoomContainer'),
     zoomInButton: document.querySelector('.zoomIn'),
+    zoomDisplay: document.querySelector('.zoomDisplay'),
     zoomOutButton: document.querySelector('.zoomOut'),
     employeeContainer: document.querySelector('.employeeContainer'),
 
@@ -162,6 +163,7 @@ const state = {
         sm.initTimeFrame()
         createEmployeeType('QS')
         state.setVisibleType(state.employeeTypes[0])
+        zoom.updateDisplay()
     })
     addEventListener('resize', sm.appendUntilFit)
 

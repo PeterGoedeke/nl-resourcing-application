@@ -18,6 +18,10 @@ const zoom = (function() {
         sq.positioner.style.width = getXLocationFromID(state.latestDate + 1) + 'px'
         sm.updateDisplay()
         sm.updateVerticalDisplay()
+        updateDisplay()
+    }
+    function updateDisplay() {
+        sq.zoomDisplay.textContent = Math.round(scale * 200) + '%'
     }
     return {
         setZoom(zoom) {
@@ -35,6 +39,7 @@ const zoom = (function() {
             updateZoom()
             sm.appendUntilFit()
         },
+        updateDisplay,
         get scale() { return scale }
     }
 })()
