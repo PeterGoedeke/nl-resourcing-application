@@ -1,5 +1,4 @@
 - Positioner can get too long, meaning that you can scroll too far in either direction
-- If you let go of the drag while your mouse is over the sidebar it isn't so great
 - All little text boys need to highlight on select
 - Dragging the left side of a project far towards the right bugs out (potentially the same for the other direction)
 - Employee slots can be entirely out of their projects
