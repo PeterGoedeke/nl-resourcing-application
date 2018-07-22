@@ -39,6 +39,7 @@ const employeeTypeProto = {
                     this.display.removeChild(displayInput)
                     this.display.appendChild(document.createTextNode(this.type))
                     state.setVisibleType(state.visibleType)
+                    save.all()
                 } else {
                     displayInput.value = this.type
                 }

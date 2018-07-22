@@ -212,6 +212,7 @@ const state = {
             i ++
         }
         createEmployeeType('NA' + i)
+        save.employeeTypes()
     })
 
     sq.zoomInButton.addEventListener('mouseup', event => {
