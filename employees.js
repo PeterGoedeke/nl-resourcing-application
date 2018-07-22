@@ -8,7 +8,9 @@ let employeeProto = {
         this.updateZoom()
 
         this.label.addEventListener('change', event => {
-            if(!state.employeeExists(this.label.value) && this.label.value.toLowerCase() != 'empty') this.name = this.label.value
+            if(!state.employeeExists(this.label.value) && this.label.value.toLowerCase() != 'empty') {
+                this.name = this.label.value
+            }
         })
         this.label.addEventListener('blur', event => {
             if(this.label.value == false) {
@@ -19,14 +21,15 @@ let employeeProto = {
                         if(employeeSlot.employee === this) employeeSlot.removeEmployee()
                     })
                 })
-                return
-            }
-            if(this.label.value != this.name) this.label.value = this.name || 'Unnamed'
-            state.projects.forEach(project => {
-                project.employeeSlots[state.visibleType.type].forEach(employeeSlot => {
-                    if(employeeSlot.employee === this) employeeSlot.label.value = this.name
+            } else if(this.label.value != this.name) {
+                this.label.value = this.name || 'Unnamed'
+                state.projects.forEach(project => {
+                    project.employeeSlots[state.visibleType.type].forEach(employeeSlot => {
+                        if(employeeSlot.employee === this) employeeSlot.label.value = this.name
+                    })
                 })
-            })
+            }
+            save.employees()
         })
         bindDialogueListeners.call(this)
     },
