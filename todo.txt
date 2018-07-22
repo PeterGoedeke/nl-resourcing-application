@@ -1,24 +1,29 @@
 - Positioner can get too long, meaning that you can scroll too far in either direction
 - Dragging the left side of a project far towards the right bugs out (potentially the same for the other direction)
-
+- EmployeeSlots are out of line from their labels
 - Attempting to resize a project to zero from the left drags it to the side in a weird way
 - End of the project is out of line with the gridlines
 
-- Projects security status
-- Employee dialogue for leaving and joining and all of that
-- Reading and writing information to files
 - Total rows
 - Leave should just show as 5
 
 - Undo?
 - How do you want sub-types of employee to be implemented?
-- Ctrl + scroll = zoom?
-- Is it a problem that employee slots can be entirely out of their projects?
-- What do you want the tab order of the application to be?
-- How do you want the behaviour of extending the duration of a project to work with the employee slots?
+- Ctrl + scroll = zoom? no
+- Is it a problem that employee slots can be entirely out of their projects? Don't think that it's actaully adding any value, other than discipline
+- What do you want the tab order of the application to be? doesn't matter
+- How do you want the behaviour of extending the duration of a project to work with the employee slots? everyone should resize with
 - Resizing isn't nice at small sizes, what do you want me to do about it?
 - Do you need finer resizing?
 - Should projects create an employee to begin with?
+
+- Unsecured should float to the bottom of the list
+- Interiors stream
+- Needs to be orange when he has nothing and from the start
+- Touchscreen and arrow keys
+- Don't need to sort, just need to be able to group
+- Do you need to be able to hide stuff before a certain date manually?
+- Change zoom so that the scale shows up to two years of time
 
 - What to do with projects which should have 0 of a type of employee?
 - What should happen when leave and workload overlaps, should there be an indicator?

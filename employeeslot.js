@@ -53,6 +53,7 @@ let employeeSlotProto = {
                     workloadBlock.value = workloadBlock.value = workload[i]
                 } else {
                     this.enterWorkloadInformation.call(this, i, workloadBlock.value)
+                    save.projects()
                 }
             })
             initInput(workloadBlock)

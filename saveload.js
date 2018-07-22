@@ -1,19 +1,39 @@
 fs = require('fs')
 
-function save() {
-    fs.writeFile('./data/employeetypes.json', JSON.stringify(state.employeeTypes, null, 4), 'utf8', function(err) {
-        if(err) throw err
-    })
-    fs.writeFile('./data/projects.json', JSON.stringify(state.projects, null, 4), 'utf8', function(err) {
-        if(err) throw err
-    })
-    fs.writeFile('./data/employees.json', JSON.stringify(state.employees, null, 4), 'utf8', function(err) {
-        if(err) throw err
-    })
-    fs.writeFile('./data/leave.json', JSON.stringify(leave, null, 4), 'utf8', function(err) {
-        if(err) throw err
-    })
-}
+const save = (function() {
+    return {
+        all() {
+            this.employeeTypes()
+            this.employees()
+            this.projects()
+            this.leave()
+        },
+        employeeTypes() {
+            fs.writeFile('./data/employeetypes.json', JSON.stringify(state.employeeTypes, null, 4), 'utf8', function(err) {
+                if(err) throw err
+            })
+            console.log('saved employee types')
+        },
+        employees() {
+            fs.writeFile('./data/employees.json', JSON.stringify(state.employees, null, 4), 'utf8', function(err) {
+                if(err) throw err
+            })
+            console.log('saved employees')
+        },
+        projects() {
+            fs.writeFile('./data/projects.json', JSON.stringify(state.projects, null, 4), 'utf8', function(err) {
+                if(err) throw err
+            })
+            console.log('saved projects')
+        },
+        leave() {
+            fs.writeFile('./data/leave.json', JSON.stringify(leave, null, 4), 'utf8', function(err) {
+                if(err) throw err
+            })
+            console.log('saved leave')
+        }
+    }
+})()
 
 function load() {
     fs.readFile('./data/employeetypes.json', function(err, data) {

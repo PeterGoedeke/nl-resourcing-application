@@ -179,16 +179,19 @@ const state = {
         createProject('Default', null, true)
         sm.updateVerticalDisplay()
         state.calculateDateRange()
+        save.projects()
     })
     sq.createEmployeeButton.addEventListener('mouseup', event => {
         createEmployee(state.visibleType.type)
         sm.updateVerticalDisplay()
         state.calculateDateRange()
+        save.employees()
     })
     sq.createLeaveSlotButton.addEventListener('mouseup', event => {
         leave.leaveSlots[state.visibleType.type].push(createLeaveSlot(state.visibleType.type))
         sm.updateVerticalDisplay()
         leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].length - 1].updateDisplay()
+        save.leave()
     })
     sq.contentPane.addEventListener('scroll', event => {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop
