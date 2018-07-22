@@ -19,6 +19,7 @@ const zoom = (function() {
         sm.updateDisplay()
         sm.updateVerticalDisplay()
         updateDisplay()
+        sm.fixContentPaneHeight()
     }
     function updateDisplay() {
         sq.zoomDisplay.textContent = Math.round(scale * 200) + '%'
