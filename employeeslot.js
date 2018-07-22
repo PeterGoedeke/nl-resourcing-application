@@ -90,7 +90,7 @@ function createEmployeeSlot(hostProject, employeeType, workload = Object.create(
     let label = document.createElement('input')
     label.type = 'text'
     label.value = 'Empty'
-    label.className = 'employeeSlotLabel'
+    label.className = 'employeeLabel'
 
     let employeeSlot = Object.assign(
         Object.create(employeeSlotProto),

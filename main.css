@@ -249,7 +249,7 @@ input {
     visibility: hidden;
     position: relative;
 }
-.employeeSlotLabel {
+.employeeLabel {
     height: 25px;
     width: 86px;
     box-sizing: border-box;
@@ -278,11 +278,6 @@ input {
     position: absolute;
     overflow: hidden;
     visibility: hidden;
-}
-.employeeLabel {
-    height: 25px;
-    width: 86px;
-    visibility: visible;
 }
 .employeeWorkloadBlock {
     width: 50px;

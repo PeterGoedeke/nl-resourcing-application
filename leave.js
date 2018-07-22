@@ -91,7 +91,7 @@ function createLeaveSlot(employeeType, employee = null, startDate, endDate) {
     let label = document.createElement('input')
     label.type = 'text'
     label.value = 'Empty'
-    label.className = 'employeeSlotLabel'
+    label.className = 'employeeLabel'
 
     let leaveSlot = Object.assign(
         Object.create(leaveSlotProto),
