@@ -6,15 +6,13 @@ let slot = {
             if(state.employeeExists(this.label.value)) {
                 this.assignEmployee(state.getEmployeeFromName(this.label.value))
                 this.label.value = this.employee.name
-                if(this.hostProject) save.projects()
-                else save.leave()
+                this.save()
             }
         })
         this.label.addEventListener('blur', event => {
             if(this.label.value === '') {
                 this.removeEmployee()
-                if(this.hostProject) save.projects()
-                else save.leave()
+                this.save()
             }
             if(!state.employeeExists(this.label.value)) {
                 this.label.value = this.employee && this.employee.name || 'Empty'

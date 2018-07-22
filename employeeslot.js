@@ -73,6 +73,9 @@ let employeeSlotProto = {
         this.hostProject.employeeSlotLabelContainer.removeChild(this.label)
         this.removeEmployee()
         this.hostProject.employeeSlots[this.employeeType].splice(this.hostProject.employeeSlots[this.employeeType].indexOf(this), 1)
+    },
+    save() {
+        save.projects()
     }
 }
 

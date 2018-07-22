@@ -86,6 +86,9 @@ let projectProto = {
 
         sm.updateVerticalDisplay()
     },
+    save() {
+        save.projects()
+    },
     toJSON() {
         let employeeSlotsToSave = {}
         for(let type in this.employeeSlots) {

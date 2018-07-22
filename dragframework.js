@@ -152,5 +152,6 @@ let horizontalDraggable = {
         else if(direction == 'right' && this.startDate == this.endDate) this.endDate ++
         this.updateDisplay()
         state.calculateDateRange()
+        this.save()
     }
 }

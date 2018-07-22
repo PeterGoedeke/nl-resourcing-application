@@ -73,6 +73,9 @@ let leaveSlotProto = {
         leave.leaveSlotLabelContainer.removeChild(this.label)
         this.removeEmployee()
         leave.leaveSlots[this.employeeType].splice(leave.leaveSlots[this.employeeType].indexOf(this), 1)
+    },
+    save() {
+        save.leave()
     }
 }
 
