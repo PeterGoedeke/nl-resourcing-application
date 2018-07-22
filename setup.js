@@ -160,9 +160,8 @@ const state = {
 (function() {
     //let ctrlPressed = false
     addEventListener('load', event => {
+        load()
         sm.initTimeFrame()
-        createEmployeeType('QS')
-        state.setVisibleType(state.employeeTypes[0])
         zoom.updateDisplay()
         zoom.initDisplay()
     })
