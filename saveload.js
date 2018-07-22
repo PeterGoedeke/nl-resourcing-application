@@ -35,6 +35,15 @@ const save = (function() {
     }
 })()
 
+function testData(data) {
+    try {
+        JSON.parse(data)
+    } catch(error) {
+        return false
+    }
+    return true
+}
+
 function load() {
     fs.readFile('./data/employeetypes.json', function(err, data) {
         JSON.parse(data).forEach(employeeType => createEmployeeType(employeeType.type))

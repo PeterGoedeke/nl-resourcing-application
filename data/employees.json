@@ -1,6 +1,14 @@
 [
     {
-        "name": "James",
-        "employeeType": "QS"
+        "name": "harry",
+        "employeeType": "J"
+    },
+    {
+        "name": "henry",
+        "employeeType": "J"
+    },
+    {
+        "name": null,
+        "employeeType": "H"
     }
 ]
