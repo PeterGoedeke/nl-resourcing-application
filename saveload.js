@@ -45,6 +45,20 @@ function testData(data) {
 }
 
 function load() {
+    if(!fs.existsSync('./data/employeetypes.json')) fs.writeFile('./data/employeetypes.json', '', 'utf8', function(err) {
+        if(err) throw err
+    })
+    if(!fs.existsSync('./data/employees.json')) fs.writeFile('./data/employees.json', '', 'utf8', function(err) {
+        if(err) throw err
+    })
+    if(!fs.existsSync('./data/projects.json')) fs.writeFile('./data/projects.json', '', 'utf8', function(err) {
+        if(err) throw err
+    })
+    if(!fs.existsSync('./data/leave.json')) fs.writeFile('./data/leave.json', '', 'utf8', function(err) {
+        if(err) throw err
+    })
+
+
     fs.readFile('./data/employeetypes.json', function(err, data) {
         JSON.parse(data).forEach(employeeType => createEmployeeType(employeeType.type))
         fs.readFile('./data/employees.json', function(err, data) {
