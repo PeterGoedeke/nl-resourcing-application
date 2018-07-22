@@ -3,6 +3,7 @@
 - EmployeeSlots are out of line from their labels
 - Attempting to resize a project to zero from the left drags it to the side in a weird way
 - End of the project is out of line with the gridlines
+- Employee slot labels can be out of line if previous projects have no employee slot labels
 
 - Total rows
 - Leave should just show as 5

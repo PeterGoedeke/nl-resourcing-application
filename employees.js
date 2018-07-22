@@ -35,7 +35,6 @@ let employeeProto = {
     },
     updateVerticalDisplay(index) {
         this.display.style.top = sq.getElementTop(sq.typeLabel) + index * 50 * zoom.scale + 'px'
-        this.label.style.top = parseInt(this.display.style.top) - sq.contentPane.scrollTop + 'px'
     },
     updateDisplay() {
         while(this.display.firstChild) this.display.removeChild(this.display.firstChild)

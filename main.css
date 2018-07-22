@@ -176,10 +176,8 @@ input {
     align-items: center;
     justify-content: center;
 }
-.leaveSlotLabelContainer {
-    position: relative;
-}
 .leaveSlotLabelContainer, .employeeContainer {
+    position: relative;
     visibility: hidden;
     border: 0;
 }
@@ -284,7 +282,6 @@ input {
 .employeeLabel {
     height: 25px;
     width: 86px;
-    position: absolute;
     visibility: visible;
 }
 .employeeWorkloadBlock {
