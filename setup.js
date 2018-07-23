@@ -55,7 +55,8 @@ const sq = {
 
 const sm = {
     initTimeFrame() {
-        state.calculateDateRange()
+        if(state.projects.length > 0 || leave.leaveSlots.length > 0) state.calculateDateRange()
+        //state.baseDate = state.earliestDate - 1
         this.refreshTimeBlocks()
         this.appendUntilFit()
     },
@@ -71,7 +72,6 @@ const sm = {
     refreshTimeBlocks() {
         while(sq.topAxisContainer.firstChild) sq.topAxisContainer.removeChild(sq.topAxisContainer.firstChild)
         for(let i = state.earliestDate; i <= state.latestDate + 1; i++) sm.appendTimeBlock(i)
-        console.log(state.earliestDate, state.latestDate)
     },
     fixContentPaneHeight() {
         sq.positioner.style.top = sq.getElementTop(sq.createEmployeeButton) + 'px'

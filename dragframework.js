@@ -58,6 +58,7 @@ let draggingInterface = (function() {
                         currentlyDragging.drag(event, direction)
                         if(direction == 'right') {
                             sq.contentPane.scrollLeft += 6
+                            console.log(sq.getVisibleTimeBlockRange()[1], parseInt(sq.topAxisContainer.lastChild.textContent))
                             if(sq.getVisibleTimeBlockRange()[1] == parseInt(sq.topAxisContainer.lastChild.textContent)) {
                                 sm.appendTimeBlock(parseInt(sq.topAxisContainer.lastChild.textContent) + 1)
                                 sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
