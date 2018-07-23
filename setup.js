@@ -100,6 +100,7 @@ const sm = {
         this.fixContentPaneHeight()
     },
     updateDisplay() {
+        sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
         state.projects.forEach(project => {
             project.updateDisplay()
             for(let type in project.employeeSlots) project.employeeSlots[type].forEach(employeeSlot => employeeSlot.updateDisplay())
