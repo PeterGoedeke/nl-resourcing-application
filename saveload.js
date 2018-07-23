@@ -41,6 +41,7 @@ function testData(data) {
 }
 
 function load() {
+    let [loadedProjects, loadedLeave] = [false, false]
     if(!fs.existsSync('./data/employeetypes.json')) fs.writeFile('./data/employeetypes.json', '', 'utf8', function(err) {
         if(err) throw err
     })
@@ -81,6 +82,8 @@ function load() {
                             project.updateDisplay()
                         })
                     }
+                    loadedProjects = true
+                    if(loadedProjects && loadedLeave) initLoad()
                 })
                 fs.readFile('./data/leave.json', function(err, data) {
                     if(err) throw err
@@ -96,7 +99,8 @@ function load() {
                             leave.leaveSlots[type][leave.leaveSlots[type].length - 1].updateDisplay()
                         })
                     }
-                    initLoad()
+                    loadedLeave = true
+                    if(loadedProjects && loadedLeave) initLoad()
                 })
             })
         })

@@ -13,7 +13,6 @@
 - The actual workload bar for employees is sometimes in the wrong position
 - Employee slots can clip in length, again...
 - Deleting things while scrolled down can be strange
-- Might be possible to result in leave slots (potentially employee slots too) to not update when an employee is removed
 - EmployeeSlotContainer is slightly sligthly out of line before leave slots have been added
 
 - Total rows
