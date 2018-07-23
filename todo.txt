@@ -12,6 +12,7 @@
 - Labels are completely out of position a lot of the time
 - The actual workload bar for employees is sometimes in the wrong position
 - Employee slots can clip in length, again...
+- Deleting things while scrolled down can be strange
 
 - Total rows
 - Leave should just show as 5

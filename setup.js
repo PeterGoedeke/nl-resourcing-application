@@ -92,10 +92,10 @@ const sm = {
     },
     updateVerticalDisplay() {
         state.projects.forEach((project, i) => project.updateVerticalDisplay(i))
-        state.employees.forEach((employee, i) => employee.updateVerticalDisplay(i))
         leave.updateVerticalDisplay()
         sq.typeLabel.style.height = state.getVisibleEmployees().length * 50 * zoom.scale + 'px'
         sq.leaveLabel.style.height = leave.leaveSlots[state.visibleType.type].length * 50 * zoom.scale + 'px'
+        state.employees.forEach((employee, i) => employee.updateVerticalDisplay(i))
         sq.employeeContainer.style.top = 50 + state.projects.length * 10 * zoom.scale + 'px'
         this.fixContentPaneHeight()
     },
