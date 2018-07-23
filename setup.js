@@ -210,6 +210,7 @@ const state = {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop
         sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
         sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
+        sm.fixContentPaneHeight()
         //console.log(sq.getVisibleTimeBlockRange()[0] - 1, state.earliestDate)
         //if(sq.topAxisContainer.firstChild.textContent < state.earliestDate && sq.getVisibleTimeBlockRange()[0] - 1 > sq.topAxisContainer.firstChild.textContent && !draggingInterface.currentlyDragging) {
             //console.log('hi')

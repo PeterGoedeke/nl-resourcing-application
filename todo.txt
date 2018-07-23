@@ -6,7 +6,6 @@
 - Employee slot labels can be out of line if previous projects have no employee slot labels
 
 - Leave slots can get super out of position when zooming around
-- You can't scroll vertically as far as you should be able to sometimes
 - Lag when you zoom out and can see a lot of elements
 - Deleting things while scrolled down can be strange
 - EmployeeSlotContainer is slightly sligthly out of line before leave slots have been added
