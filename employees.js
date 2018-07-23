@@ -7,11 +7,6 @@ let employeeProto = {
         this.updateDisplay()
         this.updateZoom()
 
-        this.label.addEventListener('change', event => {
-            if(!state.employeeExists(this.label.value) && this.label.value.toLowerCase() != 'empty') {
-                this.name = this.label.value
-            }
-        })
         this.label.addEventListener('blur', event => {
             if(this.label.value == false) {
                 this.name = null
@@ -21,13 +16,15 @@ let employeeProto = {
                         if(employeeSlot.employee === this) employeeSlot.removeEmployee()
                     })
                 })
+                leave.leaveSlots[state.visibleType.type].forEach(leaveSlot => { if(leaveSlot.employee === this) leaveSlot.removeEmployee() })
             } else if(this.label.value != this.name) {
-                this.label.value = this.name || 'Unnamed'
+                this.name = this.label.value
                 state.projects.forEach(project => {
                     project.employeeSlots[state.visibleType.type].forEach(employeeSlot => {
                         if(employeeSlot.employee === this) employeeSlot.label.value = this.name
                     })
                 })
+                leave.leaveSlots[state.visibleType.type].forEach(leaveSlot => { if(leaveSlot.employee === this) leaveSlot.label.value = this.name })
             }
             save.employees()
         })
