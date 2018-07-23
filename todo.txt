@@ -9,9 +9,8 @@
 - You can't scroll vertically as far as you should be able to sometimes
 - Sometimes the employee box is totally out of line, potentially because there are no leave slots
 - Lag when you zoom out and can see a lot of elements
-- Employee slot labels go out of line when you remove one
 - Labels are completely out of position a lot of the time
-- The actaul workload bar for employees is sometimes in the wrong position
+- The actual workload bar for employees is sometimes in the wrong position
 - Employee slots can clip in length, again...
 
 - Total rows
