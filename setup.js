@@ -22,7 +22,7 @@ const sq = {
 
     getTimeBlockWidth() {
         //exists becuase timeBlocks are subject to change
-        return document.querySelector('.timeBlock').offsetWidth
+        return 100 * zoom.scale
     },  
     getVisibleTimeBlockRange(border = false) {
         let firstTimeBlockOnScreen = Math.floor(this.contentPane.scrollLeft / this.getTimeBlockWidth()) + state.baseDate
@@ -55,16 +55,23 @@ const sq = {
 
 const sm = {
     initTimeFrame() {
-        for(let i = state.baseDate; i <= state.latestDate; i++) sm.appendTimeBlock(i)
+        state.calculateDateRange()
+        this.refreshTimeBlocks()
         this.appendUntilFit()
     },
     appendUntilFit() {
         let timeBlocks = sq.topAxisContainer.childNodes.length
         const contentWidth = sq.contentPane.offsetWidth
+        if(!sq.topAxisContainer.firstChild) sm.appendTimeBlock(state.earliestDate)
         while((sq.getTimeBlockWidth() * timeBlocks) < contentWidth) {
             sm.appendTimeBlock(Number(sq.topAxisContainer.lastChild.textContent) + 1)
             timeBlocks ++
         }
+    },
+    refreshTimeBlocks() {
+        while(sq.topAxisContainer.firstChild) sq.topAxisContainer.removeChild(sq.topAxisContainer.firstChild)
+        for(let i = state.earliestDate; i <= state.latestDate + 1; i++) sm.appendTimeBlock(i)
+        console.log(state.earliestDate, state.latestDate)
     },
     fixContentPaneHeight() {
         sq.positioner.style.top = sq.getElementTop(sq.createEmployeeButton) + 'px'
@@ -155,6 +162,7 @@ const state = {
             if(project.startDate < this.earliestDate) this.earliestDate = project.startDate
             if(project.endDate > this.latestDate) this.latestDate = project.endDate
         })
+        console.log(this.earliestDate, this.latestDate)
     }
 };
 
@@ -162,9 +170,6 @@ const state = {
     //let ctrlPressed = false
     addEventListener('load', event => {
         load()
-        sm.initTimeFrame()
-        zoom.updateDisplay()
-        zoom.initDisplay()
     })
     addEventListener('resize', sm.appendUntilFit)
 

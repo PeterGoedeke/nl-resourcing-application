@@ -2,6 +2,7 @@ const zoom = (function() {
     let scale = 0.5
     function updateZoom() {
         sq.contentPane.scrollTop = 0
+        sq.contentPane.scrollLeft = 0
         Array.from(document.querySelectorAll('.timeBlock')).forEach(timeBlock => timeBlock.style.width = 100 * scale + 'px')
         Array.from(document.querySelectorAll('.employeeWorkloadBlock')).forEach(workloadBlock => workloadBlock.style.width = 100 * scale + 'px')
         Array.from(document.querySelectorAll('.employeeSlotWorkloadBlock')).forEach(workloadBlock => workloadBlock.style.width = 100 * scale + 'px')
@@ -21,6 +22,8 @@ const zoom = (function() {
         sm.updateVerticalDisplay()
         updateDisplay()
         sm.fixContentPaneHeight()
+        sm.appendUntilFit()
+        sm.refreshTimeBlocks()
     }
     function updateDisplay() {
         sq.zoomDisplay.textContent = Math.round(scale * 200) + '%'
@@ -42,7 +45,6 @@ const zoom = (function() {
                     else if(scale > 1) scale = 1
                     sq.zoomDisplay.removeChild(displayInput)
                     updateZoom()
-                    sm.appendUntilFit()
                 })
                 sq.zoomDisplay.removeChild(sq.zoomDisplay.firstChild)
                 sq.zoomDisplay.appendChild(displayInput)
@@ -65,7 +67,6 @@ const zoom = (function() {
             if(scale <= 0.2) scale = 0.1
             else scale -= 0.1
             updateZoom()
-            sm.appendUntilFit()
         },
         updateDisplay,
         get scale() { return scale }

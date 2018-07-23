@@ -109,6 +109,7 @@ let horizontalDraggable = {
             } = calculateCursors.call(this)
             if(cursorPastLeftSide && cursorCloseToLeftSide) {
                 draggingInterface.registerDragging(this, 'left')
+                console.log('ay')
             }
             else if(cursorBeforeRightSide && cursorCloseToRightSide) {
                 draggingInterface.registerDragging(this, 'right')

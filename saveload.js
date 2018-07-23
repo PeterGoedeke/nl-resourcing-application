@@ -96,11 +96,18 @@ function load() {
                             leave.leaveSlots[type][leave.leaveSlots[type].length - 1].updateDisplay()
                         })
                     }
-                    sm.updateDisplay()
-                    sm.updateVerticalDisplay()
-                    state.calculateDateRange()
+                    initLoad()
                 })
             })
         })
     })
+}
+
+function initLoad() {
+    sm.initTimeFrame()
+    sq.positioner.style.width = getXLocationFromID(state.latestDate + 1) + 'px'
+    sm.updateDisplay()
+    sm.updateVerticalDisplay()
+    zoom.updateDisplay()
+    zoom.initDisplay()
 }
