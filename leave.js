@@ -70,6 +70,7 @@ let leaveSlotProto = {
         this.setEmployeeWorkload()
     },
     delete() {
+        sm.validateScroll(this.display)
         leave.container.removeChild(this.display)
         leave.leaveSlotLabelContainer.removeChild(this.label)
         this.removeEmployee()

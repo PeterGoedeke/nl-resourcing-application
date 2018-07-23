@@ -7,13 +7,11 @@
 
 - Leave slots can get super out of position when zooming around
 - You can't scroll vertically as far as you should be able to sometimes
-- Sometimes the employee box is totally out of line, potentially because there are no leave slots
 - Lag when you zoom out and can see a lot of elements
-- Labels are completely out of position a lot of the time
-- The actual workload bar for employees is sometimes in the wrong position
-- Employee slots can clip in length, again...
 - Deleting things while scrolled down can be strange
 - EmployeeSlotContainer is slightly sligthly out of line before leave slots have been added
+- Can't scroll by scrolling the sidebar
+- Sometimes doesn't load the timeblocks when opened...? maybe to do with having no files open, probably the gate?
 
 - Total rows
 - Leave should just show as 5
@@ -51,3 +49,7 @@ Meeting with Client:
 - Change leave to 5
 - Give projects a minimum height
 - Unsecured Projects only change the appearance, not the data
+
+Optimization ideas:
+- When zoomed out remove workload blocks and make them appear on click
+- Only update the vertical display of objects before the one changed (every object can have an index property)

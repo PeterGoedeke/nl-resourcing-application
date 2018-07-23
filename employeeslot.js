@@ -69,6 +69,7 @@ let employeeSlotProto = {
         this.hostProject.updateCreateEmployeeSlotButton()
     },
     delete() {
+        sm.validateScroll(this.display)
         this.hostProject.container.removeChild(this.display)
         this.hostProject.employeeSlotLabelContainer.removeChild(this.label)
         this.removeEmployee()

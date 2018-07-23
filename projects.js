@@ -80,6 +80,7 @@ let projectProto = {
         this.createEmployeeSlotButton.style.height = 50 * zoom.scale + 'px'
     },
     delete() {
+        sm.validateScroll(this.display)
         sq.contentPane.removeChild(this.container)
         sq.leftSidebar.removeChild(this.labelContainer)
         sq.rightSidebar.removeChild(this.employeeSlotLabelContainer)

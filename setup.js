@@ -99,6 +99,11 @@ const sm = {
         sq.employeeContainer.style.top = 50 + state.projects.length * 10 * zoom.scale + 'px'
         this.fixContentPaneHeight()
     },
+    validateScroll(display) {
+        if(sq.contentPane.scrollTop >= (sq.contentPane.scrollHeight - sq.contentPane.offsetHeight - display.offsetHeight)) {
+            sq.contentPane.scrollTop -= (display.offsetHeight + 25)
+        }
+    },
     updateDisplay() {
         sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
         state.projects.forEach(project => {

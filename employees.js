@@ -84,6 +84,7 @@ let employeeProto = {
         this.label.style.height = 50 * zoom.scale + 'px'
     },
     delete() {
+        sm.validateScroll(this.display)
         sq.contentPane.removeChild(this.display)
         sq.employeeContainer.removeChild(this.label)
         state.employees.splice(state.employees.indexOf(this), 1)
