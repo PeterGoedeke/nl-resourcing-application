@@ -66,7 +66,7 @@ let employeeSlotProto = {
         this.label.value = this.employee && this.employee.name || 'Empty'
         this.refreshWorkloadInformation()
         this.refreshWorkloadDisplay()
-        //this.hostProject.updateCreateEmployeeSlotButton()
+        this.hostProject.updateCreateEmployeeSlotButton()
     },
     delete() {
         this.hostProject.container.removeChild(this.display)

@@ -40,20 +40,22 @@ let projectProto = {
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
-        if(this.employeeSlots[state.visibleType.type].length >= 1) this.updateCreateEmployeeSlotButton()
+        this.updateCreateEmployeeSlotButton()
         this.createEmployeeSlotButton.style.height = 40 * zoom.scale + 'px'
         this.showVisibleTypes()
         sm.updateVerticalDisplay()
     },
     updateCreateEmployeeSlotButton() {
-        const lastEmployeeSlot = this.employeeSlots[state.visibleType.type][this.employeeSlots[state.visibleType.type].length - 1]
-        const lastEmployeeSlotRight = parseInt(lastEmployeeSlot.display.style.left) + parseInt(lastEmployeeSlot.display.style.width)
-        const projectRight = parseInt(this.display.style.left) + parseInt(this.display.style.width)
-        if(lastEmployeeSlotRight > projectRight) {
-            this.createEmployeeSlotButton.style.left = lastEmployeeSlotRight + 15 * zoom.scale + 2.5 + 'px'
-        }
-        else {
-            this.createEmployeeSlotButton.style.left = projectRight + 15 * zoom.scale + 2.5 + 'px'
+        if(this.employeeSlots[state.visibleType.type].length >= 1) {
+            const lastEmployeeSlot = this.employeeSlots[state.visibleType.type][this.employeeSlots[state.visibleType.type].length - 1]
+            const lastEmployeeSlotRight = parseInt(lastEmployeeSlot.display.style.left) + parseInt(lastEmployeeSlot.display.style.width)
+            const projectRight = parseInt(this.display.style.left) + parseInt(this.display.style.width)
+            if(lastEmployeeSlotRight > projectRight) {
+                this.createEmployeeSlotButton.style.left = lastEmployeeSlotRight + 15 * zoom.scale + 2.5 + 'px'
+            }
+            else {
+                this.createEmployeeSlotButton.style.left = projectRight + 15 * zoom.scale + 2.5 + 'px'
+            }
         }
     },
     showVisibleTypes() {
