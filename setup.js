@@ -55,28 +55,26 @@ const sq = {
 
 const sm = {
     initTimeFrame() {
+        
         if(state.projects.length > 0 || leave.leaveSlots.length > 0) state.calculateDateRange()
-        //state.baseDate = state.earliestDate - 1
-        this.refreshTimeBlocks()
+        state.baseDate = state.earliestDate - 1
+        this.appendTimeBlock(state.baseDate)
+        if(state.earliestDate < state.baseDate) for(let i = state.earliestDate; i < state.baseDate; i++) this.appendTimeBlock(i, false, true)
+        if(state.latestDate > state.earliestDate) for(let i = state.baseDate + 1; i <= state.latestDate; i++) this.appendTimeBlock(i)
         this.appendUntilFit()
     },
     appendUntilFit() {
         let timeBlocks = sq.topAxisContainer.childNodes.length
         const contentWidth = sq.contentPane.offsetWidth
-        if(!sq.topAxisContainer.firstChild) sm.appendTimeBlock(state.earliestDate)
         while((sq.getTimeBlockWidth() * timeBlocks) < contentWidth) {
             sm.appendTimeBlock(Number(sq.topAxisContainer.lastChild.textContent) + 1)
             timeBlocks ++
         }
     },
-    refreshTimeBlocks() {
-        while(sq.topAxisContainer.firstChild) sq.topAxisContainer.removeChild(sq.topAxisContainer.firstChild)
-        for(let i = state.earliestDate; i <= state.latestDate + 1; i++) sm.appendTimeBlock(i)
-    },
     fixContentPaneHeight() {
         sq.positioner.style.top = sq.getElementTop(sq.createEmployeeButton) + 'px'
     },
-    appendTimeBlock(dateID, firstChild = false) {
+    appendTimeBlock(dateID, firstChild = false, beforeBase = false) {
         let timeBlock = document.createElement('div')
         timeBlock.className = 'timeBlock'
         timeBlock.textContent = dateID
@@ -86,6 +84,10 @@ const sm = {
         gridLine.className = 'gridLine'
         timeBlock.appendChild(gridLine)
         if(firstChild) sq.topAxisContainer.insertBefore(timeBlock, sq.topAxisContainer.firstChild)
+        else if(beforeBase) {
+            const baseBlock = Array.from(sq.topAxisContainer.childNodes).find(timeBlock => timeBlock.textContent == state.baseDate)
+            sq.topAxisContainer.insertBefore(timeBlock, baseBlock)
+        }
         else sq.topAxisContainer.appendChild(timeBlock)
     },
     updateVerticalDisplay() {

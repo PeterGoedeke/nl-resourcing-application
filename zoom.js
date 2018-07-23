@@ -23,7 +23,7 @@ const zoom = (function() {
         updateDisplay()
         sm.fixContentPaneHeight()
         sm.appendUntilFit()
-        sm.refreshTimeBlocks()
+        //Append Until Fit is not good enough for some zoom needs
     }
     function updateDisplay() {
         sq.zoomDisplay.textContent = Math.round(scale * 200) + '%'
