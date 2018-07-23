@@ -6,13 +6,11 @@
 - Employee slot labels can be out of line if previous projects have no employee slot labels
 
 - Leave slots can get super out of position when zooming around
-- Timeblocks sometimes don't update / scroll
 - You can't scroll vertically as far as you should be able to sometimes
 - Sometimes the employee box is totally out of line, potentially because there are no leave slots
 - Lag when you zoom out and can see a lot of elements
 - Employee slot labels go out of line when you remove one
 - Labels are completely out of position a lot of the time
-- Dragging to the side doesn't work if there are timeblocks past the edge...?
 - The actaul workload bar for employees is sometimes in the wrong position
 - Employee slots can clip in length, again...
 

@@ -182,6 +182,9 @@ input {
     visibility: hidden;
     border: 0;
 }
+.leaveSlotLabelContainer {
+    min-height: 50px;
+}
 .contentPane {
     position: relative;
     height: 100%;
