@@ -8,7 +8,7 @@ let employeeProto = {
         this.updateZoom()
 
         this.label.addEventListener('blur', event => {
-            if(state.getEmployeeFromName(this.label.value)) {
+            if(state.employeeExists(this.label.value)) {
                 this.label.value = this.name || 'Unnamed'
             }
             else if(this.label.value == false) {
