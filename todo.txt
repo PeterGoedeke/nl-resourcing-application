@@ -8,8 +8,6 @@
 - Leave slots can get super out of position when zooming around
 - Timeblocks sometimes don't update / scroll
 - You can't scroll as far as you should be able to sometimes
-- Can't drag past boundaries after loading
-- Timeblocks positioned wrong on loading if you have previously dragged towards the left
 - Can't click through separators
 - Sometimes the employee box is totally out of line, potentially because there are no leave slots
 - Lag when you zoom out and can see a lot of elements
