@@ -1,5 +1,4 @@
 To-do list:
-- Employeeslots should resize with project exactly
 - Leave should be shown as five instead of white
 - Unsecured projects should float to the bottom
 - Employees need to be able to be marked as leaving and joining
@@ -18,12 +17,14 @@ Known bugs:
 - Can't scroll by scrolling the sidebar
 - Lag when you zoom out and can see a lot of elements
 - Update Vertical Display is called heaps when loading
+- Employee displays are out of line with the vertical gridlines
 
 Questions for client:
 - Do you need finer resizing?
 - Should projects create an employee to begin with?
 - Should it load in a little bit scrolled along to the current date or something?
 - Do you need to be able to hide stuff before a certain date manually?
+- Is it a problem that you can enter negative workloads?
 
 Optimization ideas:
 - When zoomed out remove workload blocks and make them appear on click
