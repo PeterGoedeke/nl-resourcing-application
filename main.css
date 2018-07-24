@@ -158,6 +158,7 @@ input {
     margin-right: -10000px;
     box-sizing: initial;
 }
+
 .leftSidebar, .rightSidebar {
     height: 100%;
     width: 50%;
@@ -201,7 +202,7 @@ input {
 }
 .projectDisplay {
     min-height: 30px;
-    top: 35px;
+    top: 30px;
     position: relative;
     visibility: visible;
     overflow: hidden;

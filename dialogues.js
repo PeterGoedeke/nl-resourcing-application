@@ -18,14 +18,19 @@ function openObjectDialogue(clickedObject, event, type) {
     let deleteHostButton = document.createElement('div')
     deleteHostButton.className = 'deleteHostButton'
     deleteHostButton.addEventListener('mouseup', event => {
-        clickedObject.delete()
-        dialogueInterface.closeDialogue()
-        safe(sm.updateVerticalDisplay())
-        if(type == 'project') save.projects()
-        else if(type == 'employee') save.employees()
-        else if(type == 'leaveSlot') save.leave()
-        else if(type == 'employeeType') save.employeeTypes()
-        else save.all()
+        let promise = new Promise(function(resolve) {
+            clickedObject.delete()
+            resolve()
+        })
+        promise.then(() => {
+            dialogueInterface.closeDialogue()
+            if(type == 'project') save.projects()
+            else if(type == 'employee') save.employees()
+            else if(type == 'leaveSlot') save.leave()
+            else if(type == 'employeeType') save.employeeTypes()
+            else save.all()
+            safe(sm.updateVerticalDisplay())
+        })
     })
 
     if(type == 'project') {
