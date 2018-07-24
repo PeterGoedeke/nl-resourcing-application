@@ -143,12 +143,18 @@ const state = {
         sm.updateVerticalDisplay()
         sm.updateDisplay()
     },
+    getIndexBeforeFirstGroup() {
+        const index = state.projects.findIndex(project => project.group != null || !project.security) - 1
+        //return (index == -1 ? state : )
+    },
     getIndexBeforeGroup(group) {
-
+        if(!this.projects.map(project => project.group).includes(group)) return this.getIndexBeforeUnsecured()
+        return this.projects.map(project => project.group).indexOf(group) - 1
     },
     getIndexBeforeUnsecured() {
         if(!this.projects.map(project => project.security).includes(false)) return state.projects.length
-        return this.projects.map(project => project.security).indexOf(false) - 1
+        const index = this.projects.map(project => project.security).indexOf(false) - 1
+        return (index == -1 ? 0 : index)
     },
     addEmployeeType(type) {
         this.employeeTypes.push(type)

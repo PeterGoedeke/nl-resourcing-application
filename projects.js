@@ -16,25 +16,13 @@ let projectProto = {
         this.verticalDragger.addEventListener('drag', event => {
 
         })
-        const firstUnsecuredProjectContainer = document.querySelector('.unsecuredContainer')
-        const firstUnsecuredProjectLabel = document.querySelector('.unsecuredLabel')
-        const firstUnsecuredEmployeeLabelContainer = document.querySelector('.unsecuredEmployeeLabelContainer')
-        
         this.container.appendChild(this.createEmployeeSlotButton)
         this.container.appendChild(this.display)
-        
         this.labelContainer.appendChild(this.verticalDragger)
         this.labelContainer.appendChild(this.label)
-
-        if(firstUnsecuredProjectContainer && firstUnsecuredProjectLabel && firstUnsecuredEmployeeLabelContainer && this.security) {
-            sq.contentPane.insertBefore(this.container, firstUnsecuredProjectContainer)
-            sq.leftSidebar.insertBefore(this.labelContainer, firstUnsecuredProjectLabel)
-            sq.rightSidebar.insertBefore(this.employeeSlotLabelContainer, firstUnsecuredEmployeeLabelContainer)
-        } else {
-            sq.contentPane.appendChild(this.container)
-            sq.leftSidebar.insertBefore(this.labelContainer, sq.createProjectButton)
-            sq.rightSidebar.insertBefore(this.employeeSlotLabelContainer, leave.leaveSlotLabelContainer)
-        }
+        sq.contentPane.appendChild(this.container)
+        sq.leftSidebar.insertBefore(this.labelContainer, sq.createProjectButton)
+        sq.rightSidebar.insertBefore(this.employeeSlotLabelContainer, leave.leaveSlotLabelContainer)
         this.employeeSlots[state.visibleType.type].forEach(employeeSlot => employeeSlot.updateDisplay())
         this.updateZoom()
         if(!this.security) {
@@ -44,6 +32,7 @@ let projectProto = {
             this.display.classList.add('unsecured')
         }
         this.updateDisplay()
+        if(this.security) this.move(state.getIndexBeforeUnsecured())
     },
     updateVerticalDisplay(i) {
         this.employeeSlots[state.visibleType.type].forEach((employeeSlot, i) => employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 50 * zoom.scale + 'px')
@@ -108,6 +97,10 @@ let projectProto = {
         this.employeeSlotLabelContainer.classList.toggle('unsecuredEmployeeLabelContainer')
         this.security = !this.display.classList.toggle('unsecured')
         save.projects()
+    },
+    setGroup(group) {
+        this.move(state.getIndexBeforeGroup(group))
+        this.group = group
     },
     move(newIndex) {
         state.projects.splice(state.projects.indexOf(this), 1)
