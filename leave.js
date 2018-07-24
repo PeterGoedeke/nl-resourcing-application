@@ -23,10 +23,10 @@ let leave = (function() {
             for(let type in leaveSlots) leaveSlots[type].forEach(leaveSlot => {
                 if(leaveSlot.employeeType == state.visibleType.type) {
                     leaveSlot.display.style.display = 'block'
-                    leaveSlot.label.style.display = 'block'
+                    leaveSlot.labelWrapper.style.display = 'block'
                 } else {
                     leaveSlot.display.style.display = 'none'
-                    leaveSlot.label.style.display = 'none'
+                    leaveSlot.labelWrapper.style.display = 'none'
                 }
             })
         },
@@ -51,7 +51,9 @@ let leave = (function() {
 let leaveSlotProto = {
     initDisplay() {
         sq.contentPane.appendChild(this.display)
-        leave.leaveSlotLabelContainer.appendChild(this.label)
+        this.labelWrapper.appendChild(this.label)
+        this.labelWrapper.appendChild(this.autocompleteLabel)
+        leave.leaveSlotLabelContainer.appendChild(this.labelWrapper)
         this.initDraggable()
         bindDialogueListeners.call(this)
     },
@@ -72,7 +74,7 @@ let leaveSlotProto = {
     delete() {
         sm.validateScroll(this.display)
         sq.contentPane.removeChild(this.display)
-        leave.leaveSlotLabelContainer.removeChild(this.label)
+        leave.leaveSlotLabelContainer.removeChild(this.labelWrapper)
         this.removeEmployee()
         leave.leaveSlots[this.employeeType].splice(leave.leaveSlots[this.employeeType].indexOf(this), 1)
     },
@@ -93,14 +95,21 @@ function createLeaveSlot(employeeType, employee = null, startDate, endDate) {
     let label = document.createElement('input')
     label.type = 'text'
     label.value = 'Empty'
-    label.className = 'employeeLabel'
+    label.className = 'employeeSlotLabel'
+
+    let labelWrapper = document.createElement('div')
+    labelWrapper.className = 'employeeSlotLabelWrapper'
+    let autocompleteLabel = document.createElement('input')
+    autocompleteLabel.type = 'text'
+    autocompleteLabel.disabled = true
+    autocompleteLabel.className = 'autocompleteLabel'
 
     let leaveSlot = Object.assign(
         Object.create(leaveSlotProto),
         horizontalDraggable, slot,
         {employeeType, startDate, endDate, employee,
         [workloadInformation]: workload,
-        display, label}
+        display, label, labelWrapper, autocompleteLabel}
     )
     leaveSlot.initDisplay()
     leaveSlot.initSlot()
