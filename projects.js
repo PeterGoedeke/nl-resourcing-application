@@ -32,7 +32,8 @@ let projectProto = {
             this.display.classList.add('unsecured')
         }
         this.updateDisplay()
-        if(this.security) this.move(state.getIndexBeforeFirstGroup())
+        if(this.security && this.group == null) this.move(state.getIndexBeforeFirstGroup(this))
+        if(this.group) this.move(state.getIndexBeforeGroup(this.group))
     },
     updateVerticalDisplay(i) {
         this.employeeSlots[state.visibleType.type].forEach((employeeSlot, i) => employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 50 * zoom.scale + 'px')
@@ -91,7 +92,7 @@ let projectProto = {
         })
     },
     toggleSecurity() {
-        this.move(this.security ? state.getIndexBeforeUnsecured() : state.getIndexBeforeFirstGroup())
+        this.move(this.security ? state.getIndexBeforeUnsecured(this) : state.getIndexBeforeFirstGroup(this))
         this.container.classList.toggle('unsecuredContainer')
         this.labelContainer.classList.toggle('unsecuredLabel')
         this.employeeSlotLabelContainer.classList.toggle('unsecuredEmployeeLabelContainer')
@@ -99,8 +100,14 @@ let projectProto = {
         save.projects()
     },
     setGroup(group) {
-        this.move(state.getIndexBeforeGroup(group))
+        this.move(state.getIndexBeforeGroup(this, group))
         this.group = group
+        save.projects()
+    },
+    removeGroup() {
+        this.group = null
+        this.move(state.getIndexBeforeFirstGroup(this))
+        save.projects()
     },
     move(newIndex) {
         state.projects.splice(state.projects.indexOf(this), 1)
