@@ -48,9 +48,22 @@ let employeeProto = {
             workloadBlock.className = 'employeeWorkloadBlock'
             workloadBlock.style.left = getXLocationFromID(key) + 'px'
             workloadBlock.style.width = 100 * zoom.scale + 'px'
-            workloadBlock.style.backgroundColor = (workload[key] == 4 || workload[key] == 5) ? 'green' : (workload[key] < 4 ? 'yellow' : 'red')
-            if(this.joiningDate && key < this.joiningDate) workloadBlock.classList.add('unsecured')
-            if(this.leavingDate && key >= this.leavingDate) workloadBlock.classList.add('unsecured')
+            const colour = (workload[key] == 4 || workload[key] == 5) ? 'green' : (workload[key] < 4 ? 'yellow' : 'red')
+            if(this.joiningDate && key < this.joiningDate || this.leavingDate && key >= this.leavingDate) {
+                workloadBlock.style.background = `repeating-linear-gradient(45deg, ${colour}, white 5px, ${colour} 5px, white 5px)`
+            }
+
+            // .hashed {
+            //     background: repeating-linear-gradient(
+            //         -55deg,
+            //         green,
+            //         red 10px,
+            //         green 10px,
+            //         red 10px
+            //     );
+            // }
+
+            else workloadBlock.style.backgroundColor = colour
             workloadBlock.textContent = workload[key]
             this.display.appendChild(workloadBlock)
         }
