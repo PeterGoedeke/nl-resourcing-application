@@ -51,7 +51,7 @@ let leave = (function() {
 
 let leaveSlotProto = {
     initDisplay() {
-        leave.container.appendChild(this.display)
+        sq.contentPane.appendChild(this.display)
         leave.leaveSlotLabelContainer.appendChild(this.label)
         this.initDraggable()
         bindDialogueListeners.call(this)
@@ -72,7 +72,7 @@ let leaveSlotProto = {
     },
     delete() {
         sm.validateScroll(this.display)
-        leave.container.removeChild(this.display)
+        sq.contentPane.removeChild(this.display)
         leave.leaveSlotLabelContainer.removeChild(this.label)
         this.removeEmployee()
         leave.leaveSlots[this.employeeType].splice(leave.leaveSlots[this.employeeType].indexOf(this), 1)
