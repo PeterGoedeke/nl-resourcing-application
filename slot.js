@@ -3,17 +3,17 @@ let slot = {
         initInput(this.label)
         this.updateZoom()
         this.label.addEventListener('keyup', event => {
-            if(this.label.value) {
+            if(event.which == 13) {
+                this.label.value = this.autocompleteLabel.value
+                this.assignEmployeeFromLabel()
+            }
+            else if(this.label.value) {
                 let value = state.getVisibleEmployees().map(employee => employee.name).find(name => name.startsWith(this.label.value)) || ''
                 this.autocompleteLabel.value = value
             }
         })
         this.label.addEventListener('change', event => {
-            if(state.employeeExists(this.label.value)) {
-                this.assignEmployee(state.getEmployeeFromName(this.label.value))
-                this.label.value = this.employee.name
-                this.save()
-            }
+            this.assignEmployeeFromLabel()
         })
         this.label.addEventListener('blur', event => {
             this.autocompleteLabel.value = ''
@@ -25,6 +25,13 @@ let slot = {
                 this.label.value = this.employee && this.employee.name || 'Empty'
             }
         })
+    },
+    assignEmployeeFromLabel() {
+        if(state.employeeExists(this.label.value)) {
+            this.assignEmployee(state.getEmployeeFromName(this.label.value))
+            this.label.value = this.employee.name
+            this.save()
+        }
     },
     requestWorkload() {
         return this[Object.getOwnPropertySymbols(this)[0]]
