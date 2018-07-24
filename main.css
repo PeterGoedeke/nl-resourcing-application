@@ -163,7 +163,7 @@ input {
     height: 100%;
     width: 50%;
     float: left;
-    padding-top: 35px;
+    padding-top: 33px;
     box-sizing: border-box;
 }
 .createProject, .createLeaveSlot, .createEmployee {
