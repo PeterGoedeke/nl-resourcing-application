@@ -92,12 +92,12 @@ let employeeProto = {
     },
     toJSON() {
         return {
-            name: this.name, employeeType: this.employeeType
+            name: this.name, employeeType: this.employeeType, joiningDate: this.joiningDate, leavingDate: this.leavingDate
         }
     }
 }
 
-function createEmployee(employeeType, name = null) {
+function createEmployee(employeeType, name = null, joiningDate = null, leavingDate = null) {
     let display = document.createElement('div')
     display.className = 'employee'
 
@@ -110,7 +110,7 @@ function createEmployee(employeeType, name = null) {
     let employee = Object.assign(
         Object.create(employeeProto),
         {display, label,
-        employeeType, name, workload}
+        employeeType, name, workload, joiningDate, leavingDate}
     )
     state.registerEmployee(employee)
     employee.initDisplay()

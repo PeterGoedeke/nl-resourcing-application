@@ -24,6 +24,7 @@ Questions for client:
 - Do you need to be able to hide stuff before a certain date manually?
 - Is it a problem that you can enter negative workloads?
 - How do you want join and leave dates to be removed?
+- Do you want me to change marking employee leave and start dates to just where did they open the dialogue?
 
 Optimization ideas:
 - When zoomed out remove workload blocks and make them appear on click

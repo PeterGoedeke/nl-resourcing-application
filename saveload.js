@@ -65,7 +65,9 @@ function load() {
         state.setVisibleType(state.employeeTypes[0])
         fs.readFile('./data/employees.json', function(err, data) {
             if(err) throw err
-            if(testData(data)) JSON.parse(data).forEach(employeeInformation => createEmployee(employeeInformation.employeeType, employeeInformation.name))
+            if(testData(data)) JSON.parse(data).forEach(employeeInformation => createEmployee(
+                employeeInformation.employeeType, employeeInformation.name, employeeInformation.joiningDate, employeeInformation.leavingDate
+            ))
             fs.readFile('./data/projects.json', function(err, data) {
                 if(err) throw err
                 if(testData(data)) JSON.parse(data).forEach(projectInformation => {

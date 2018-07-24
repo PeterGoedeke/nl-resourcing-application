@@ -6,6 +6,7 @@ let mark = (function() {
             if(currentlyMarking.display.contains(event.target)) {
                 currentlyMarking[key] = sq.getNearestTimeBlock(sq.getCursorXLocation(event.pageX))
                 currentlyMarking.updateDisplay()
+                save.employees()
             }
             currentlyMarking = null
             document.querySelector('body').style.cursor = 'initial'
