@@ -145,7 +145,7 @@ let horizontalDraggable = {
     },
     stopDrag(direction) {
         sq.contentPane.style.cursor = 'auto'
-        if(this.security) {
+        if(this.employeeSlotLabelContainer) {
             const fromEnd = direction == 'right'
             let amount
             if(fromEnd) amount = sq.getNearestTimeBlock(parseInt(this.display.style.left) + parseInt(this.display.style.width)) - this.endDate
