@@ -86,8 +86,6 @@ let projectProto = {
         sq.rightSidebar.removeChild(this.employeeSlotLabelContainer)
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.delete())
         state.projects.splice(state.projects.indexOf(this), 1)
-
-        sm.updateVerticalDisplay()
     },
     save() {
         save.projects()
