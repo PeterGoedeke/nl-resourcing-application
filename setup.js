@@ -144,22 +144,19 @@ const state = {
         sm.updateDisplay()
     },
     getIndexBeforeFirstGroup(exclude) {
-        console.log('getIndexBeforeFirstGroup')
         if(this.projects.filter(project => project !== exclude).map(project => project.group).every(group => group == null)) return this.getIndexBeforeUnsecured(exclude)
-        const index = state.projects.findIndex(project => project.group != null) - 1
+        const index = state.projects.filter(project => project !== exclude).findIndex(project => project.group != null)
         console.log(index)
         return (index == -1 ? 0 : index)
     },
     getIndexBeforeGroup(exclude, group) {
-        console.log('getIndexBeforeGroup')
         if(!this.projects.filter(project => project !== exclude).map(project => project.group).includes(group)) return this.getIndexBeforeUnsecured(exclude)
-        const index = this.projects.map(project => project.group).indexOf(group) - 1
+        const index = this.projects.filter(project => project !== exclude).map(project => project.group).indexOf(group)
         return (index == -1 ? 0 : index)
     },
     getIndexBeforeUnsecured(exclude) {
-        console.log('getIndexBeforeUnsecured')
         if(!this.projects.filter(project => project !== exclude).map(project => project.security).includes(false)) return state.projects.length
-        const index = this.projects.map(project => project.security).indexOf(false) - 1
+        const index = this.projects.filter(project => project !== exclude).map(project => project.security).indexOf(false)
         return (index == -1 ? 0 : index)
     },
     addEmployeeType(type) {

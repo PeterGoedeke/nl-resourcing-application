@@ -2,14 +2,14 @@ let dog = {
     a: 'b',
     c: 'd',
     move(newIndex) {
-        array.splice(array.indexOf(this), 1)
+        array[array.indexOf(this)] = 0
         array.splice(newIndex, 0, this)
+        array.splice(array.indexOf(0), 1)
     }
 }
 
-let array = [0, dog, 5, 7, 9]
+let array = [3, dog, 5, 7, 9]
 
 dog.move(2)
-dog.move(50)
 
 console.log(array)

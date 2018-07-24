@@ -33,7 +33,7 @@ let projectProto = {
         }
         this.updateDisplay()
         if(this.security && this.group == null) this.move(state.getIndexBeforeFirstGroup(this))
-        if(this.group) this.move(state.getIndexBeforeGroup(this.group))
+        if(this.group) this.move(state.getIndexBeforeGroup(this, this.group))
     },
     updateVerticalDisplay(i) {
         this.employeeSlots[state.visibleType.type].forEach((employeeSlot, i) => employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 50 * zoom.scale + 'px')
