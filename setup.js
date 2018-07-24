@@ -149,7 +149,9 @@ const state = {
         leave.leaveSlots[type.type] = []
     },
     registerProject(project) {
-        this.projects.push(project)
+        if(project.security) {
+            this.projects.splice(this.projects.indexOf(this.projects.find(project => !project.security)), 0, project)
+        } else this.projects.push(project)
         sm.updateVerticalDisplay()
     },
     registerEmployee(employee) {

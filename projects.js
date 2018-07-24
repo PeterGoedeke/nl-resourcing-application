@@ -26,7 +26,7 @@ let projectProto = {
         this.labelContainer.appendChild(this.verticalDragger)
         this.labelContainer.appendChild(this.label)
 
-        if(firstUnsecuredProjectContainer && firstUnsecuredProjectLabel && firstUnsecuredEmployeeLabelContainer) {
+        if(firstUnsecuredProjectContainer && firstUnsecuredProjectLabel && firstUnsecuredEmployeeLabelContainer && this.security) {
             sq.contentPane.insertBefore(this.container, firstUnsecuredProjectContainer)
             sq.leftSidebar.insertBefore(this.labelContainer, firstUnsecuredProjectLabel)
             sq.rightSidebar.insertBefore(this.employeeSlotLabelContainer, firstUnsecuredEmployeeLabelContainer)
