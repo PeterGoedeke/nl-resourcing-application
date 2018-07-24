@@ -110,6 +110,21 @@ let projectProto = {
         this.initDisplay()
         save.projects()
     },
+    move(newIndex) {
+        state.projects.splice(state.projects.indexOf(this), 1)
+        state.projects.splice(newIndex, 0, this)
+        const projectAfter = state.projects[newIndex + 1]
+        if(projectAfter) {
+            sq.contentPane.insertBefore(this.container, projectAfter.container)
+            sq.leftSidebar.insertBefore(this.labelContainer, projectAfter.labelContainer)
+            sq.rightSidebar.insertBefore(this.employeeSlotLabelContainer, projectAfter.employeeSlotLabelContainer)
+        } else {
+            sq.contentPane.appendChild(this.container) // this line might result in problems...?
+            sq.leftSidebar.insertBefore(this.labelContainer, sq.createProjectButton)
+            sq.rightSidebar.insertBefore(this.employeeSlotLabelContainer, leave.leaveSlotLabelContainer)
+        }
+        sm.updateVerticalDisplay()
+    },
     updateZoom() {
         this.display.style.minHeight = 60 * zoom.scale + 'px'
         this.labelContainer.style.height = 60 * zoom.scale + 'px'
@@ -117,16 +132,16 @@ let projectProto = {
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.updateZoom())
         this.createEmployeeSlotButton.style.height = 50 * zoom.scale + 'px'
     },
-    delete(shiftToEnd = false) {
+    removeDisplay() {
         sm.validateScroll(this.display)
         sq.contentPane.removeChild(this.container)
         sq.leftSidebar.removeChild(this.labelContainer)
         sq.rightSidebar.removeChild(this.employeeSlotLabelContainer)
-        if(!shiftToEnd) {
-            for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.delete())
-            state.projects.splice(state.projects.indexOf(this), 1)   
-        }
-        else state.registerProject(this, true)
+    },
+    delete() {
+        this.removeDisplay()
+        for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.delete())
+        state.projects.splice(state.projects.indexOf(this), 1)   
     },
     save() {
         save.projects()
@@ -148,7 +163,7 @@ let projectProto = {
     }
 }
 
-function createProject(name, group, security = false, startDate, endDate, init = true) {
+function createProject(name, group = null, security = false, startDate, endDate, init = true) {
     if(!startDate && !endDate) [startDate, endDate] = sq.getVisibleTimeBlockRange(true)
     let container = document.createElement('div')
     container.className = 'projectContainer'

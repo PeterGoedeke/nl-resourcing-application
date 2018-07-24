@@ -14,7 +14,6 @@ Known bugs:
 - Lag when you zoom out and can see a lot of elements
 - Update Vertical Display is called heaps when loading
 - Employee displays are out of line with the vertical gridlines
-- Marking a project as secure can get things out of order
 - Can't rename employees who have bad capitals
 
 Questions for client:
