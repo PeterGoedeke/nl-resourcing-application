@@ -42,16 +42,16 @@ function testData(data) {
 
 function load() {
     let [loadedProjects, loadedLeave] = [false, false]
-    if(!fs.existsSync('./data/employeetypes.json')) fs.writeFile('./data/employeetypes.json', '', 'utf8', function(err) {
+    if(!fs.existsSync('./data/employeetypes.json')) fs.writeFileSync('./data/employeetypes.json', '', 'utf8', function(err) {
         if(err) throw err
     })
-    if(!fs.existsSync('./data/employees.json')) fs.writeFile('./data/employees.json', '', 'utf8', function(err) {
+    if(!fs.existsSync('./data/employees.json')) fs.writeFileSync('./data/employees.json', '', 'utf8', function(err) {
         if(err) throw err
     })
-    if(!fs.existsSync('./data/projects.json')) fs.writeFile('./data/projects.json', '', 'utf8', function(err) {
+    if(!fs.existsSync('./data/projects.json')) fs.writeFileSync('./data/projects.json', '', 'utf8', function(err) {
         if(err) throw err
     })
-    if(!fs.existsSync('./data/leave.json')) fs.writeFile('./data/leave.json', '', 'utf8', function(err) {
+    if(!fs.existsSync('./data/leave.json')) fs.writeFileSync('./data/leave.json', '', 'utf8', function(err) {
         if(err) throw err
     })
 
