@@ -43,6 +43,11 @@ const sq = {
         state.projects.forEach(project => totalProjectHeight += project.display.offsetHeight)
         return totalProjectHeight
     },
+    getTotalLeaveHeight() {
+        let totalLeaveHeight = 0
+        leave.leaveSlots[state.visibleType.type].forEach(leaveSlot => totalLeaveHeight += leaveSlot.display.offsetHeight)
+        return totalLeaveHeight
+    },
     getCursorXLocation(absoluteCursorPosition) {
         return absoluteCursorPosition + this.contentPane.scrollLeft - this.contentPane.getBoundingClientRect().left
     },

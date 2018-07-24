@@ -38,7 +38,7 @@ let employeeProto = {
         bindDialogueListeners.call(this)
     },
     updateVerticalDisplay(index) {
-        this.display.style.top = sq.getElementTop(sq.typeLabel) + index * 50 * zoom.scale + 'px'
+        this.display.style.top = sq.getTotalProjectHeight() + sq.getTotalLeaveHeight() + 80 + 10 * zoom.scale + index * 50 * zoom.scale + 'px'
     },
     updateDisplay() {
         while(this.display.firstChild) this.display.removeChild(this.display.firstChild)
