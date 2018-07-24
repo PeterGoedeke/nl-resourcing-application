@@ -94,11 +94,11 @@ let projectProto = {
     showVisibleTypes() {
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {
             employeeSlot.display.style.display = 'none'
-            employeeSlot.label.style.display = 'none'
+            employeeSlot.labelWrapper.style.display = 'none'
         })
         this.employeeSlots[state.visibleType.type].forEach(employeeSlot => {
             employeeSlot.display.style.display = 'block'
-            employeeSlot.label.style.display = 'block'
+            employeeSlot.labelWrapper.style.display = 'block'
         })
     },
     toggleSecurity() {

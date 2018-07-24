@@ -1,5 +1,4 @@
 To-do list:
-- Employees need to be able to be marked as leaving and joining
 - Need to be able to group projects
 - Autocomplete while assigning employees
 - Add an interiors stream
@@ -16,6 +15,8 @@ Known bugs:
 - Lag when you zoom out and can see a lot of elements
 - Update Vertical Display is called heaps when loading
 - Employee displays are out of line with the vertical gridlines
+- Marking a project as secure can get things out of order
+- Can't rename employees who have bad capitals
 
 Questions for client:
 - Do you need finer resizing?
@@ -25,6 +26,7 @@ Questions for client:
 - Is it a problem that you can enter negative workloads?
 - How do you want join and leave dates to be removed?
 - Do you want me to change marking employee leave and start dates to just where did they open the dialogue?
+- Should the program auto-fix bad capital letters?
 
 Optimization ideas:
 - When zoomed out remove workload blocks and make them appear on click

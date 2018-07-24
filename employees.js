@@ -52,17 +52,6 @@ let employeeProto = {
             if(this.joiningDate && key < this.joiningDate || this.leavingDate && key >= this.leavingDate) {
                 workloadBlock.style.background = `repeating-linear-gradient(45deg, ${colour}, white 5px, ${colour} 5px, white 5px)`
             }
-
-            // .hashed {
-            //     background: repeating-linear-gradient(
-            //         -55deg,
-            //         green,
-            //         red 10px,
-            //         green 10px,
-            //         red 10px
-            //     );
-            // }
-
             else workloadBlock.style.backgroundColor = colour
             workloadBlock.textContent = workload[key]
             this.display.appendChild(workloadBlock)

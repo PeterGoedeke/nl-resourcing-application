@@ -47,6 +47,6 @@ let slot = {
     },
     updateZoom() {
         this.display.style.height = 50 * zoom.scale + 'px'
-        this.label.style.height = 50 * zoom.scale + 'px'
+        this.labelWrapper.style.height = 50 * zoom.scale + 'px'
     }
 }

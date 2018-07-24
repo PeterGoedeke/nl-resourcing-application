@@ -12,7 +12,9 @@ let employeeSlotProto = {
         this.refreshWorkloadDisplay()
         this.display.style.display = 'none'
         this.hostProject.container.appendChild(this.display)
-        this.hostProject.employeeSlotLabelContainer.appendChild(this.label)
+        this.labelWrapper.appendChild(this.label)
+        this.labelWrapper.appendChild(this.autocompleteLabel)
+        this.hostProject.employeeSlotLabelContainer.appendChild(this.labelWrapper)
         this.initDraggable()
         bindDialogueListeners.call(this)
     },
@@ -71,7 +73,7 @@ let employeeSlotProto = {
     delete() {
         if(this.hostProject.employeeSlots[state.visibleType.type].length > 1) sm.validateScroll(this.display)
         this.hostProject.container.removeChild(this.display)
-        this.hostProject.employeeSlotLabelContainer.removeChild(this.label)
+        this.hostProject.employeeSlotLabelContainer.removeChild(this.labelWrapper)
         this.removeEmployee()
         this.hostProject.employeeSlots[this.employeeType].splice(this.hostProject.employeeSlots[this.employeeType].indexOf(this), 1)
     },
@@ -91,14 +93,21 @@ function createEmployeeSlot(hostProject, employeeType, workload = Object.create(
     let label = document.createElement('input')
     label.type = 'text'
     label.value = 'Empty'
-    label.className = 'employeeLabel'
+    label.className = 'employeeSlotLabel'
+
+    let labelWrapper = document.createElement('div')
+    labelWrapper.className = 'employeeSlotLabelWrapper'
+    let autocompleteLabel = document.createElement('input')
+    autocompleteLabel.type = 'text'
+    autocompleteLabel.disabled = true
+    autocompleteLabel.className = 'autocompleteLabel'
 
     let employeeSlot = Object.assign(
         Object.create(employeeSlotProto),
         horizontalDraggable, slot,
         {hostProject, employeeType, startDate, endDate, employee,
         [workloadInformation]: workload,
-        display, label}
+        display, label, labelWrapper, autocompleteLabel}
     )
     employeeSlot.initDisplay()
     employeeSlot.initSlot()
