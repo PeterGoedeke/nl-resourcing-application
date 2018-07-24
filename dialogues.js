@@ -20,7 +20,7 @@ function openObjectDialogue(clickedObject, event, type) {
     deleteHostButton.addEventListener('mouseup', event => {
         clickedObject.delete()
         dialogueInterface.closeDialogue()
-        sm.updateVerticalDisplay()
+        safe(sm.updateVerticalDisplay())
         if(type == 'project') save.projects()
         else if(type == 'employee') save.employees()
         else if(type == 'leaveSlot') save.leave()

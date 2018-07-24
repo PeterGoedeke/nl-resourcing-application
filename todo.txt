@@ -11,6 +11,8 @@
 - EmployeeSlotContainer is slightly sligthly out of line before leave slots have been added
 - Can't scroll by scrolling the sidebar
 - Sometimes doesn't load the timeblocks when opened...? maybe to do with having no files open, probably the gate?
+- Leaveslots and potentially employee displays can get out of position when deleting while scrolled down
+- All the stuff in the content pane is 5 pixels too far down
 
 - Total rows
 - Leave should just show as 5
