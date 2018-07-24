@@ -3,7 +3,7 @@ let slot = {
         initInput(this.label)
         this.updateZoom()
         this.label.addEventListener('keyup', event => {
-            if(event.which == 13) {
+            if(event.which == 13 && this.autocompleteLabel.value) {
                 this.label.value = this.autocompleteLabel.value
                 this.assignEmployeeFromLabel()
                 tab.after(this.label, this)
