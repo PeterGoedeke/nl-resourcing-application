@@ -148,8 +148,11 @@ const state = {
         this.projects.forEach(project => project.employeeSlots[type.type] = [])
         leave.leaveSlots[type.type] = []
     },
-    registerProject(project) {
-        if(project.security && this.projects.includes(project => !project.security)) {
+    registerProject(project, destructive = false) {
+        if(destructive) {
+            this.projects.splice(this.projects.indexOf(project), 1)
+        }
+        if(project.security && this.projects.map(project => project.security).includes(false)) {
             this.projects.splice(this.projects.indexOf(this.projects.find(project => !project.security)), 0, project)
         } else this.projects.push(project)
         sm.updateVerticalDisplay()

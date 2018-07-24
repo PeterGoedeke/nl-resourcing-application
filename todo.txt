@@ -1,6 +1,5 @@
 To-do list:
 - Need to be able to group projects
-- Autocomplete while assigning employees
 - Add an interiors stream
 - Add total rows for regular and interiors
 - Arrow key navigation

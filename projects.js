@@ -122,9 +122,11 @@ let projectProto = {
         sq.contentPane.removeChild(this.container)
         sq.leftSidebar.removeChild(this.labelContainer)
         sq.rightSidebar.removeChild(this.employeeSlotLabelContainer)
-        if(!shiftToEnd) for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.delete())
-        else state.projects.push(this)
-        state.projects.splice(state.projects.indexOf(this), 1)   
+        if(!shiftToEnd) {
+            for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.delete())
+            state.projects.splice(state.projects.indexOf(this), 1)   
+        }
+        else state.registerProject(this, true)
     },
     save() {
         save.projects()
