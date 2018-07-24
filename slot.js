@@ -2,6 +2,12 @@ let slot = {
     initSlot() {
         initInput(this.label)
         this.updateZoom()
+        this.label.addEventListener('keyup', event => {
+            if(this.label.value) {
+                let value = state.getVisibleEmployees().map(employee => employee.name).find(name => name.startsWith(this.label.value)) || ''
+                this.autocompleteLabel.value = value
+            }
+        })
         this.label.addEventListener('change', event => {
             if(state.employeeExists(this.label.value)) {
                 this.assignEmployee(state.getEmployeeFromName(this.label.value))
@@ -10,6 +16,7 @@ let slot = {
             }
         })
         this.label.addEventListener('blur', event => {
+            this.autocompleteLabel.value = ''
             if(this.label.value === '') {
                 this.removeEmployee()
                 this.save()
