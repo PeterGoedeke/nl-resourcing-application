@@ -92,6 +92,7 @@ let projectProto = {
         })
     },
     toggleSecurity() {
+        this.group = null
         this.move(this.security ? state.getIndexBeforeUnsecured(this) : state.getIndexBeforeFirstGroup(this))
         this.container.classList.toggle('unsecuredContainer')
         this.labelContainer.classList.toggle('unsecuredLabel')
@@ -100,6 +101,7 @@ let projectProto = {
         save.projects()
     },
     setGroup(group) {
+        this.security = true
         this.move(state.getIndexBeforeGroup(this, group))
         this.group = group
         save.projects()
