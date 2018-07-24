@@ -46,7 +46,7 @@ const sq = {
     getTotalLeaveHeight() {
         let totalLeaveHeight = 0
         leave.leaveSlots[state.visibleType.type].forEach(leaveSlot => totalLeaveHeight += leaveSlot.display.offsetHeight)
-        return totalLeaveHeight
+        return totalLeaveHeight > 50 ? totalLeaveHeight : 50
     },
     getCursorXLocation(absoluteCursorPosition) {
         return absoluteCursorPosition + this.contentPane.scrollLeft - this.contentPane.getBoundingClientRect().left
