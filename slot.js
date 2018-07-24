@@ -6,6 +6,7 @@ let slot = {
             if(event.which == 13) {
                 this.label.value = this.autocompleteLabel.value
                 this.assignEmployeeFromLabel()
+                tab.after(this.label, this)
             }
             else if(this.label.value) {
                 let value = state.getVisibleEmployees().map(employee => employee.name).find(name => name.startsWith(this.label.value)) || ''
