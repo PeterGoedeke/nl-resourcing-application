@@ -64,7 +64,6 @@ const sq = {
 
 const sm = {
     initTimeFrame() {
-        
         if(state.projects.length > 0 || leave.leaveSlots.length > 0) state.calculateDateRange()
         state.baseDate = state.earliestDate - 1
         this.appendTimeBlock(state.baseDate)
@@ -178,6 +177,10 @@ const state = {
             }
             if(project.startDate < this.earliestDate) this.earliestDate = project.startDate
             if(project.endDate > this.latestDate) this.latestDate = project.endDate
+        })
+        leave.leaveSlots[state.visibleType.type].forEach(leaveSlot => {
+            if(leaveSlot.startDate < this.earliestDate) this.earliestDate = leaveSlot.startDate
+            if(leaveSlot.endDate > this.latestDate) this.latestDate = leaveSlot.endDate
         })
         console.log(this.earliestDate, this.latestDate)
     }
