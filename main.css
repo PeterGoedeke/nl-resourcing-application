@@ -309,6 +309,18 @@ input {
     width: 30px;
     height: 30px;
 }
+.markJoiningDateButton, .markLeavingDateButton {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    bottom: 0;
+}
+.markJoiningDateButton {
+    left: 0;
+}
+.markLeavingDateButton {
+    right: 0;
+}
 
 .employeeType {
     width: 50px;

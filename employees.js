@@ -35,7 +35,7 @@ let employeeProto = {
             }
             save.employees()
         })
-        bindDialogueListeners.call(this)
+        bindDialogueListeners.call(this, 'employee')
     },
     updateVerticalDisplay(index) {
         this.display.style.top = sq.getTotalProjectHeight() + sq.getTotalLeaveHeight() + 80 + 10 * zoom.scale + index * 50 * zoom.scale + 'px'
@@ -49,6 +49,8 @@ let employeeProto = {
             workloadBlock.style.left = getXLocationFromID(key) + 'px'
             workloadBlock.style.width = 100 * zoom.scale + 'px'
             workloadBlock.style.backgroundColor = (workload[key] == 4 || workload[key] == 5) ? 'green' : (workload[key] < 4 ? 'yellow' : 'red')
+            if(this.joiningDate && key < this.joiningDate) workloadBlock.classList.add('unsecured')
+            if(this.leavingDate && key >= this.leavingDate) workloadBlock.classList.add('unsecured')
             workloadBlock.textContent = workload[key]
             this.display.appendChild(workloadBlock)
         }

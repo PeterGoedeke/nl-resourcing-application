@@ -37,6 +37,23 @@ function openObjectDialogue(clickedObject, event, type) {
         })
         dialogue.display.appendChild(toggleSecurityButton)
     }
+    else if(type == 'employee') {
+        let markJoiningDateButton = document.createElement('div')
+        markJoiningDateButton.className = 'markJoiningDateButton'
+        markJoiningDateButton.addEventListener('mouseup', event => {
+            mark.registerMarking(clickedObject, false)
+            dialogueInterface.closeDialogue()
+        })
+
+        let markLeavingDateButton = document.createElement('div')
+        markLeavingDateButton.className = 'markLeavingDateButton'
+        markLeavingDateButton.addEventListener('mouseup', event => {
+            mark.registerMarking(clickedObject)
+            dialogueInterface.closeDialogue()
+        })
+        dialogue.display.appendChild(markJoiningDateButton)
+        dialogue.display.appendChild(markLeavingDateButton)
+    }
 
     dialogue.display.appendChild(deleteHostButton)
     dialogueInterface.registerDialogue(dialogue)

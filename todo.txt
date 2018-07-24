@@ -1,5 +1,4 @@
 To-do list:
-- Unsecured projects should float to the bottom
 - Employees need to be able to be marked as leaving and joining
 - Need to be able to group projects
 - Autocomplete while assigning employees
@@ -24,6 +23,7 @@ Questions for client:
 - Should it load in a little bit scrolled along to the current date or something?
 - Do you need to be able to hide stuff before a certain date manually?
 - Is it a problem that you can enter negative workloads?
+- How do you want join and leave dates to be removed?
 
 Optimization ideas:
 - When zoomed out remove workload blocks and make them appear on click
@@ -37,3 +37,5 @@ Possible refactorings:
 - Split saveload into two files
 - Split setup into multiple files
 - Replace let for in loops with const for in loops
+- Replace most mouseup event listeners with HTML5 onclicks
+- Rewrite dialogues with mixins
