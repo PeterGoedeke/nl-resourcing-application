@@ -33,6 +33,7 @@ function openObjectDialogue(clickedObject, event, type) {
         toggleSecurityButton.className = 'toggleSecurityButton'
         toggleSecurityButton.addEventListener('mouseup', event => {
             clickedObject.toggleSecurity()
+            dialogueInterface.closeDialogue()
         })
         dialogue.display.appendChild(toggleSecurityButton)
     }
