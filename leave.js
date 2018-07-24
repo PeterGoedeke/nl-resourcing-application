@@ -18,7 +18,6 @@ let leave = (function() {
             this.leaveSlotLabelContainer.style.top = 25 + state.projects.length * 10 * zoom.scale + 'px'
 
             this.leaveSlots[state.visibleType.type].forEach((leaveSlot, i) => leaveSlot.display.style.top = sq.getTotalProjectHeight() + 55 + 10 * zoom.scale + i * 50 * zoom.scale + 'px')
-            console.log(sq.getElementTop(this.leaveSlotLabelContainer))
         },
         showVisibleTypes() {
             for(let type in leaveSlots) leaveSlots[type].forEach(leaveSlot => {

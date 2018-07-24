@@ -2,12 +2,12 @@ let projectProto = {
     initDisplay() {
         initInput(this.label)
         this.initDraggable()
-        this.createEmployeeSlotButton.addEventListener('mouseup', (event) => {
+        this.createEmployeeSlotButton.onclick = () => {
             this.employeeSlots[state.visibleType.type].push(createEmployeeSlot(this, state.visibleType.type))
             this.employeeSlots[state.visibleType.type][this.employeeSlots[state.visibleType.type].length - 1].updateDisplay()
             this.updateDisplay()
             save.projects()
-        })
+        }
         bindDialogueListeners.call(this, 'project')
         this.label.addEventListener('change', event => {
             this.name = this.label.value
@@ -106,6 +106,8 @@ let projectProto = {
         this.labelContainer.classList.toggle('unsecuredLabel')
         this.employeeSlotLabelContainer.classList.toggle('unsecuredEmployeeLabelContainer')
         this.security = !this.display.classList.toggle('unsecured')
+        this.delete(true)
+        this.initDisplay()
         save.projects()
     },
     updateZoom() {
@@ -115,13 +117,14 @@ let projectProto = {
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.updateZoom())
         this.createEmployeeSlotButton.style.height = 50 * zoom.scale + 'px'
     },
-    delete() {
+    delete(shiftToEnd = false) {
         sm.validateScroll(this.display)
         sq.contentPane.removeChild(this.container)
         sq.leftSidebar.removeChild(this.labelContainer)
         sq.rightSidebar.removeChild(this.employeeSlotLabelContainer)
-        for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.delete())
-        state.projects.splice(state.projects.indexOf(this), 1)
+        if(!shiftToEnd) for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.delete())
+        else state.projects.push(this)
+        state.projects.splice(state.projects.indexOf(this), 1)   
     },
     save() {
         save.projects()
