@@ -32,7 +32,7 @@ let projectProto = {
             this.display.classList.add('unsecured')
         }
         this.updateDisplay()
-        if(this.security) this.move(state.getIndexBeforeUnsecured())
+        if(this.security) this.move(state.getIndexBeforeFirstGroup())
     },
     updateVerticalDisplay(i) {
         this.employeeSlots[state.visibleType.type].forEach((employeeSlot, i) => employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 50 * zoom.scale + 'px')
@@ -91,7 +91,7 @@ let projectProto = {
         })
     },
     toggleSecurity() {
-        this.move(this.security ? state.getIndexBeforeUnsecured() : state.getIndexBeforeUnsecured() + 1)
+        this.move(this.security ? state.getIndexBeforeUnsecured() : state.getIndexBeforeFirstGroup())
         this.container.classList.toggle('unsecuredContainer')
         this.labelContainer.classList.toggle('unsecuredLabel')
         this.employeeSlotLabelContainer.classList.toggle('unsecuredEmployeeLabelContainer')

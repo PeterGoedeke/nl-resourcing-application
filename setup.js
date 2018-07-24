@@ -144,12 +144,14 @@ const state = {
         sm.updateDisplay()
     },
     getIndexBeforeFirstGroup() {
-        const index = state.projects.findIndex(project => project.group != null || !project.security) - 1
-        //return (index == -1 ? state : )
+        if(this.projects.map(project => project.group).every(group => group == null)) return this.getIndexBeforeUnsecured()
+        const index = state.projects.findIndex(project => project.group != null) - 1
+        return (index == -1 ? 0 : index)
     },
     getIndexBeforeGroup(group) {
         if(!this.projects.map(project => project.group).includes(group)) return this.getIndexBeforeUnsecured()
-        return this.projects.map(project => project.group).indexOf(group) - 1
+        const index = this.projects.map(project => project.group).indexOf(group) - 1
+        return (index == -1 ? 0 : index)
     },
     getIndexBeforeUnsecured() {
         if(!this.projects.map(project => project.security).includes(false)) return state.projects.length
