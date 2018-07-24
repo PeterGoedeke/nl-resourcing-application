@@ -25,6 +25,12 @@ let projectProto = {
         sq.rightSidebar.insertBefore(this.employeeSlotLabelContainer, leave.leaveSlotLabelContainer)
         this.employeeSlots[state.visibleType.type].forEach(employeeSlot => employeeSlot.updateDisplay())
         this.updateZoom()
+        if(!this.security) {
+            this.container.classList.add('unsecuredContainer')
+            this.labelContainer.classList.add('unsecuredLabel')
+            this.employeeSlotLabelContainer.classList.add('unsecuredEmployeeLabelContainer')
+            this.display.classList.add('unsecured')
+        }
         this.updateDisplay()
     },
     updateVerticalDisplay(i) {
@@ -122,7 +128,7 @@ let projectProto = {
     }
 }
 
-function createProject(name, group, security, startDate, endDate, init = true) {
+function createProject(name, group, security = false, startDate, endDate, init = true) {
     if(!startDate && !endDate) [startDate, endDate] = sq.getVisibleTimeBlockRange(true)
     let container = document.createElement('div')
     container.className = 'projectContainer'

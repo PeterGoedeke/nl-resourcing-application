@@ -1,5 +1,4 @@
 To-do list:
-- Leave should be shown as five instead of white
 - Unsecured projects should float to the bottom
 - Employees need to be able to be marked as leaving and joining
 - Need to be able to group projects
