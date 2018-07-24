@@ -1,52 +1,39 @@
+To-do list:
+- Employeeslots should resize with project exactly
+- Leave should be shown as five instead of white
+- Unsecured projects should float to the bottom
+- Employees need to be able to be marked as leaving and joining
+- Need to be able to group projects
+- Autocomplete while assigning employees
+- Add an interiors stream
+- Add total rows for regular and interiors
+- Arrow key navigation
+- Employee displays need to have orange zeros the entire time
+- Add an undo button
+- Make maximum zoom two years
+- Touchscreen
+
+Known bugs:
 - Positioner can get too long, meaning that you can scroll too far in either direction
 - Can't scroll by scrolling the sidebar
 - Lag when you zoom out and can see a lot of elements
 - Update Vertical Display is called heaps when loading
 
-- When zoomed out everything looks awful and gets too small
-
-- Total rows
-- Leave should just show as 5
-
-- Undo?
-- How do you want sub-types of employee to be implemented?
-- Ctrl + scroll = zoom? no
-- Is it a problem that employee slots can be entirely out of their projects? Don't think that it's actaully adding any value, other than discipline
-- What do you want the tab order of the application to be? doesn't matter
-- How do you want the behaviour of extending the duration of a project to work with the employee slots? everyone should resize with
-- Resizing isn't nice at small sizes, what do you want me to do about it?
+Questions for client:
 - Do you need finer resizing?
 - Should projects create an employee to begin with?
 - Should it load in a little bit scrolled along to the current date or something?
-
-- Unsecured should float to the bottom of the list
-- Interiors stream
-- Needs to be orange when he has nothing and from the start
-- Touchscreen and arrow keys
-- Don't need to sort, just need to be able to group
 - Do you need to be able to hide stuff before a certain date manually?
-- Change zoom so that the scale shows up to two years of time
-
-- What to do with projects which should have 0 of a type of employee?
-- What should happen when leave and workload overlaps, should there be an indicator?
-
-
-
-
-- Rewrite reading files with promises
-- Rewrite screen display in a more screen moduled fashion and use css flow better
-- Split saveload into two files
-- Split setup into multiple files
-
-
-
-Meeting with Client:
-- Change leave to 5
-- Give projects a minimum height
-- Unsecured Projects only change the appearance, not the data
 
 Optimization ideas:
 - When zoomed out remove workload blocks and make them appear on click
 - Only update the vertical display of objects before the one changed (every object can have an index property)
 - Should cache some functions
 - Add console logs to each function and see when they're called when they shouldn't be
+
+Possible refactorings:
+- Rewrite reading files with promises
+- Rewrite screen display in a more screen moduled fashion and use css flow better
+- Split saveload into two files
+- Split setup into multiple files
+- Replace let for in loops with const for in loops

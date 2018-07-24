@@ -45,6 +45,21 @@ let projectProto = {
         this.showVisibleTypes()
         sm.updateVerticalDisplay()
     },
+    resizeEmployeeSlots(amount, fromEnd = true) {
+        let employees = []
+        for(const type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employees.push(employeeSlot))
+        employees.forEach(employee => {
+            if(fromEnd) {
+                employee.endDate += amount
+                if(employee.endDate <= employee.startDate) employee.endDate = employee.startDate + 1
+                employee.updateDisplay()
+            } else {
+                employee.startDate += amount
+                if(employee.startDate >= employee.endDate) employee.startDate = employee.endDate - 1
+                employee.updateDisplay()
+            }
+        })
+    },
     updateCreateEmployeeSlotButton() {
         const projectRight = parseInt(this.display.style.left) + parseInt(this.display.style.width)
         if(this.employeeSlots[state.visibleType.type].length >= 1) {

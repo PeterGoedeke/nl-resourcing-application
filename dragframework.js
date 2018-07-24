@@ -145,6 +145,13 @@ let horizontalDraggable = {
     },
     stopDrag(direction) {
         sq.contentPane.style.cursor = 'auto'
+        if(this.security) {
+            const fromEnd = direction == 'right'
+            let amount
+            if(fromEnd) amount = sq.getNearestTimeBlock(parseInt(this.display.style.left) + parseInt(this.display.style.width)) - this.endDate
+            else amount = sq.getNearestTimeBlock(parseInt(this.display.style.left)) - this.startDate
+            this.resizeEmployeeSlots(amount, fromEnd)
+        }
         this.startDate = sq.getNearestTimeBlock(parseInt(this.display.style.left))
         if(this.startDate < sq.getVisibleTimeBlockRange()[0] && direction == 'left') this.startDate = sq.getVisibleTimeBlockRange(true)[0]
         this.endDate = sq.getNearestTimeBlock(parseInt(this.display.style.left) + parseInt(this.display.style.width))
