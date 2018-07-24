@@ -1,14 +1,11 @@
 - Positioner can get too long, meaning that you can scroll too far in either direction
-- Dragging the left side of a project far towards the right bugs out (potentially the same for the other direction)
 - EmployeeSlots are out of line from their labels
-- Attempting to resize a project to zero from the left drags it to the side in a weird way
-- End of the project is out of line with the gridlines
-- Employee slot labels can be out of line if previous projects have no employee slot labels
 
 - Leave slots can get super out of position when zooming around
 - Lag when you zoom out and can see a lot of elements
 - Can't scroll by scrolling the sidebar
 - Update Vertical Display is called heaps when loading
+- When zoomed out everything looks awful and gets too small
 
 - Total rows
 - Leave should just show as 5
@@ -22,6 +19,7 @@
 - Resizing isn't nice at small sizes, what do you want me to do about it?
 - Do you need finer resizing?
 - Should projects create an employee to begin with?
+- Should it load in a little bit scrolled along to the current date or something?
 
 - Unsecured should float to the bottom of the list
 - Interiors stream
@@ -39,6 +37,8 @@
 
 - Rewrite reading files with promises
 - Rewrite screen display in a more screen moduled fashion and use css flow better
+- Split saveload into two files
+- Split setup into multiple files
 
 
 
@@ -51,3 +51,4 @@ Optimization ideas:
 - When zoomed out remove workload blocks and make them appear on click
 - Only update the vertical display of objects before the one changed (every object can have an index property)
 - Should cache some functions
+- Add console logs to each function and see when they're called when they shouldn't be

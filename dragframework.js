@@ -58,7 +58,6 @@ let draggingInterface = (function() {
                         currentlyDragging.drag(event, direction)
                         if(direction == 'right') {
                             sq.contentPane.scrollLeft += 6
-                            console.log(sq.getVisibleTimeBlockRange()[1], parseInt(sq.topAxisContainer.lastChild.textContent))
                             if(sq.getVisibleTimeBlockRange()[1] == parseInt(sq.topAxisContainer.lastChild.textContent)) {
                                 sm.appendTimeBlock(parseInt(sq.topAxisContainer.lastChild.textContent) + 1)
                                 sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
@@ -110,7 +109,6 @@ let horizontalDraggable = {
             } = calculateCursors.call(this)
             if(cursorPastLeftSide && cursorCloseToLeftSide) {
                 draggingInterface.registerDragging(this, 'left')
-                console.log('ay')
             }
             else if(cursorBeforeRightSide && cursorCloseToRightSide) {
                 draggingInterface.registerDragging(this, 'right')
@@ -138,7 +136,7 @@ let horizontalDraggable = {
     drag(event, side) {
         sq.contentPane.style.cursor = 'e-resize'
         if(side == 'left') {
-            this.display.style.left = sq.getCursorXLocation(event.pageX) + 'px'
+            if(sq.getCursorXLocation(event.pageX) < getXLocationFromID(this.endDate)) this.display.style.left = sq.getCursorXLocation(event.pageX) + 'px'
             this.display.style.width = getXLocationFromID(this.endDate) - sq.getCursorXLocation(event.pageX) + 'px'
         }
         else if(side == 'right') {
