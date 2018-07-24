@@ -15,6 +15,15 @@ const tab = (function() {
                     hostObject.hostProject.employeeSlots[state.visibleType.type][indexInProject + 1].label.focus()
                 }
             }
+            else {
+                const indexInLeave = leave.leaveSlots[state.visibleType.type].indexOf(hostObject)
+                const lastIndexInLeave = leave.leaveSlots[state.visibleType.type].length - 1
+                if(indexInLeave == lastIndexInLeave) {
+                    if(state.getVisibleEmployees().length > 0) state.getVisibleEmployees()[0].label.focus()
+                } else {
+                    leave.leaveSlots[state.visibleType.type][indexInLeave + 1].label.focus()
+                }
+            }
         }
     }
 })()
