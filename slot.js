@@ -9,7 +9,7 @@ let slot = {
                 tab.after(this.label, this)
             }
             else if(this.label.value) {
-                let value = state.getVisibleEmployees().map(employee => employee.name).find(name => name.startsWith(this.label.value)) || ''
+                let value = state.getVisibleEmployees().map(employee => employee.name).sort().find(name => name.startsWith(this.label.value)) || ''
                 this.autocompleteLabel.value = value
             }
         })
