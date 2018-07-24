@@ -16,6 +16,7 @@ Known bugs:
 - Employee displays are out of line with the vertical gridlines
 - Can't rename employees who have bad capitals
 - Projects can't be set back to default name and have no text if you leave their name empty
+- If you extend the duration of a project, the employeeslots can go off the screen and break the application
 
 Questions for client:
 - Do you need finer resizing?

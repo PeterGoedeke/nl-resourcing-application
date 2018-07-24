@@ -35,7 +35,64 @@ function openObjectDialogue(clickedObject, event, type) {
             clickedObject.toggleSecurity()
             dialogueInterface.closeDialogue()
         })
+        let assignGroupWrapper = document.createElement('div')
+        assignGroupWrapper.className = 'assignGroupWrapper'
+        let assignGroupLabel = document.createElement('input')
+        assignGroupLabel.className = 'assignGroupLabel'
+        assignGroupLabel.type = 'text'
+        assignGroupLabel.value = clickedObject.group || 'No Group'
+
+        assignGroupLabel.addEventListener('keyup', event => {
+            if(event.which == 13) {
+                assignGroupLabel.value = assignGroupAutocomplete.value
+                console.log(assignGroupLabel.value )
+                clickedObject.setGroup(assignGroupLabel.value)
+            }
+            else if(assignGroupLabel.value) {
+                let value = state.groups.map(group => group.name).sort().find(name => name.startsWith(assignGroupLabel.value)) || ''
+                assignGroupAutocomplete.value = value
+            }
+        })
+        assignGroupLabel.addEventListener('change', event => {
+            if(state.groups.map(group => group.name).includes(assignGroupLabel.value)) {
+                clickedObject.setGroup(assignGroupLabel.value)
+                projects.save()
+            }
+        })
+        // this.label.addEventListener('change', event => {
+        //     if(state.employeeExists(this.label.value)) {
+        //         this.assignEmployee(state.getEmployeeFromName(this.label.value))
+        //         this.label.value = this.employee.name
+        //         this.save()
+        //     }
+        // })
+        assignGroupLabel.addEventListener('blur', event => {
+            assignGroupAutocomplete.value = ''
+            if(assignGroupLabel === '') {
+                clickedObject.removeGroup()
+                save.projects()
+            }
+            if(!state.groups.map(group => group.name).includes(assignGroupLabel.value)) {
+                state.groups.push(createGroup(assignGroupLabel.value, colourPicker.value))
+            }
+        })
+        initInput(assignGroupLabel)
+
+        let assignGroupAutocomplete = document.createElement('input')
+        assignGroupAutocomplete.className = 'assignGroupAutocomplete'
+        assignGroupAutocomplete.type = 'text'
+        assignGroupAutocomplete.disabled = true
+
+        let colourPicker = document.createElement('input')
+        colourPicker.className = 'colourPicker'
+        colourPicker.type = 'color'
+
+        assignGroupWrapper.appendChild(assignGroupAutocomplete)
+        assignGroupWrapper.appendChild(assignGroupLabel)
+
         dialogue.display.appendChild(toggleSecurityButton)
+        dialogue.display.appendChild(assignGroupWrapper)
+        dialogue.display.appendChild(colourPicker)
     }
     else if(type == 'employee') {
         let markJoiningDateButton = document.createElement('div')

@@ -128,6 +128,7 @@ const state = {
     earliestDate: 29,
     latestDate: 35,
     projects: [],
+    groups: [],
     employees: [],
     employeeTypes: [],
     visibleType: null,
@@ -158,6 +159,12 @@ const state = {
         if(!this.projects.filter(project => project !== exclude).map(project => project.security).includes(false)) return state.projects.length
         const index = this.projects.filter(project => project !== exclude).map(project => project.security).indexOf(false)
         return (index == -1 ? 0 : index)
+    },
+    validateGroup(name) {
+        if(!this.groups.map(group => group.name).includes(name)) this.groups.splice(this.groups.map(group => group.name).indexOf(name), 1)
+    },
+    getColourFromGroup(name) {
+        return this.groups.map(group => group.colour).indexOf(this.groups.map(group => group.name).indexOf(name))
     },
     addEmployeeType(type) {
         this.employeeTypes.push(type)
