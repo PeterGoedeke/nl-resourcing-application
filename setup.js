@@ -143,18 +143,20 @@ const state = {
         sm.updateVerticalDisplay()
         sm.updateDisplay()
     },
+    getIndexBeforeGroup(group) {
+
+    },
+    getIndexBeforeUnsecured() {
+        if(!this.projects.map(project => project.security).includes(false)) return state.projects.length
+        return this.projects.map(project => project.security).indexOf(false) - 1
+    },
     addEmployeeType(type) {
         this.employeeTypes.push(type)
         this.projects.forEach(project => project.employeeSlots[type.type] = [])
         leave.leaveSlots[type.type] = []
     },
-    registerProject(project, destructive = false) {
-        if(destructive) {
-            this.projects.splice(this.projects.indexOf(project), 1)
-        }
-        if(project.security && this.projects.map(project => project.security).includes(false)) {
-            this.projects.splice(this.projects.indexOf(this.projects.find(project => !project.security)), 0, project)
-        } else this.projects.push(project)
+    registerProject(project) {
+        this.projects.push(project)
         sm.updateVerticalDisplay()
     },
     registerEmployee(employee) {

@@ -102,12 +102,11 @@ let projectProto = {
         })
     },
     toggleSecurity() {
+        this.move(this.security ? state.getIndexBeforeUnsecured() : state.getIndexBeforeUnsecured() + 1)
         this.container.classList.toggle('unsecuredContainer')
         this.labelContainer.classList.toggle('unsecuredLabel')
         this.employeeSlotLabelContainer.classList.toggle('unsecuredEmployeeLabelContainer')
         this.security = !this.display.classList.toggle('unsecured')
-        this.delete(true)
-        this.initDisplay()
         save.projects()
     },
     move(newIndex) {
@@ -132,14 +131,11 @@ let projectProto = {
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.updateZoom())
         this.createEmployeeSlotButton.style.height = 50 * zoom.scale + 'px'
     },
-    removeDisplay() {
+    delete() {
         sm.validateScroll(this.display)
         sq.contentPane.removeChild(this.container)
         sq.leftSidebar.removeChild(this.labelContainer)
         sq.rightSidebar.removeChild(this.employeeSlotLabelContainer)
-    },
-    delete() {
-        this.removeDisplay()
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.delete())
         state.projects.splice(state.projects.indexOf(this), 1)   
     },
