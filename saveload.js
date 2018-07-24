@@ -55,7 +55,6 @@ function load() {
         if(err) throw err
     })
 
-
     fs.readFile('./data/employeetypes.json', function(err, data) {
         if(err) throw err
         if(testData(data)) {
@@ -82,26 +81,26 @@ function load() {
                             project.updateDisplay()
                         })
                     }
-                    loadedProjects = true
-                    if(loadedProjects && loadedLeave) initLoad()
                 })
-                fs.readFile('./data/leave.json', function(err, data) {
-                    if(err) throw err
-                    let leaveInformation = null
-                    if(testData(data)) leaveInformation = JSON.parse(data)
-                    else leaveInformation = {}
-                    for(let employeeType in state.employeeTypes) leave.leaveSlots[employeeType.type] = []
-                    if(Object.keys(leaveInformation).length > 0) {
-                        for(let type in leaveInformation) leaveInformation[type].forEach(leaveSlot => {
-                            leave.leaveSlots[type].push(createLeaveSlot(
-                                type, state.getEmployeeFromName(leaveSlot.employee, leaveSlot.employeeType), leaveSlot.startDate, leaveSlot.endDate)
-                            )
-                            leave.leaveSlots[type][leave.leaveSlots[type].length - 1].updateDisplay()
-                        })
-                    }
-                    loadedLeave = true
-                    if(loadedProjects && loadedLeave) initLoad()
-                })
+                loadedProjects = true
+                if(loadedProjects && loadedLeave) initLoad()
+            })
+            fs.readFile('./data/leave.json', function(err, data) {
+                if(err) throw err
+                let leaveInformation = null
+                if(testData(data)) leaveInformation = JSON.parse(data)
+                else leaveInformation = {}
+                for(let employeeType in state.employeeTypes) leave.leaveSlots[employeeType.type] = []
+                if(Object.keys(leaveInformation).length > 0) {
+                    for(let type in leaveInformation) leaveInformation[type].forEach(leaveSlot => {
+                        leave.leaveSlots[type].push(createLeaveSlot(
+                            type, state.getEmployeeFromName(leaveSlot.employee, leaveSlot.employeeType), leaveSlot.startDate, leaveSlot.endDate)
+                        )
+                        leave.leaveSlots[type][leave.leaveSlots[type].length - 1].updateDisplay()
+                    })
+                }
+                loadedLeave = true
+                if(loadedProjects && loadedLeave) initLoad()
             })
         })
     })
