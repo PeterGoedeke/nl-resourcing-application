@@ -21,7 +21,6 @@ const sq = {
     employeeContainer: document.querySelector('.employeeContainer'),
 
     getTimeBlockWidth() {
-        //exists becuase timeBlocks are subject to change
         return 100 * zoom.scale
     },  
     getVisibleTimeBlockRange(border = false) {
@@ -38,6 +37,11 @@ const sq = {
             lastTimeBlockOnScreen ++
         }
         return [firstTimeBlockOnScreen, lastTimeBlockOnScreen]
+    },
+    getTotalProjectHeight() {
+        let totalProjectHeight = 0
+        state.projects.forEach(project => totalProjectHeight += project.display.offsetHeight)
+        return totalProjectHeight
     },
     getCursorXLocation(absoluteCursorPosition) {
         return absoluteCursorPosition + this.contentPane.scrollLeft - this.contentPane.getBoundingClientRect().left

@@ -10,8 +10,9 @@
 - Deleting things while scrolled down can be strange
 - EmployeeSlotContainer is slightly sligthly out of line before leave slots have been added
 - Can't scroll by scrolling the sidebar
-- All the stuff in the content pane is 5 pixels too far down
 - Update Vertical Display is called heaps when loading
+- Leaveslots bug when loaded if they were dragged to the left
+- Leaveslots have some really dumb container system which needs to be fixed or removed
 
 - Total rows
 - Leave should just show as 5
@@ -53,3 +54,4 @@ Meeting with Client:
 Optimization ideas:
 - When zoomed out remove workload blocks and make them appear on click
 - Only update the vertical display of objects before the one changed (every object can have an index property)
+- Should cache some functions
