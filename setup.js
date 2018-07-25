@@ -165,7 +165,7 @@ const state = {
         }
     },
     getColourFromGroup(name) {
-        return this.groups.map(group => group.colour).indexOf(this.groups.map(group => group.name).indexOf(`${name}`))
+        return this.groups.map(group => group.colour)[(this.groups.map(group => group.name).indexOf(`${name}`))]
     },
     addEmployeeType(type) {
         this.employeeTypes.push(type)
