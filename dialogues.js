@@ -6,7 +6,14 @@ let dialogueProto = {
         } else {
             this.display.style.top = event.pageY + 'px'
         }
-        this.display.style.left = event.pageX - 40 + 'px'
+        
+        if(event.pageX > sq.mainWindow.getBoundingClientRect().right - 50) {
+            this.display.style.left = sq.mainWindow.getBoundingClientRect().right - 90 + 'px'
+        } else if(event.pageX < sq.mainWindow.getBoundingClientRect().left + 50) {
+            this.display.style.left = 10 + 'px'
+        }else {
+            this.display.style.left = event.pageX - 40 + 'px'
+        }
     }
 }
 
