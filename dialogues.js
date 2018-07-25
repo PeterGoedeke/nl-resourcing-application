@@ -92,6 +92,10 @@ function openObjectDialogue(clickedObject, event, type) {
         colourPicker.className = 'colourPicker'
         colourPicker.type = 'color'
 
+        colourPicker.addEventListener('blur', event => {
+            if(assignGroupLabel.value && assignGroupLabel.value != 'No Group') state.setGroupColour(assignGroupLabel.value, colourPicker.value)
+        })
+
         assignGroupWrapper.appendChild(assignGroupAutocomplete)
         assignGroupWrapper.appendChild(assignGroupLabel)
 

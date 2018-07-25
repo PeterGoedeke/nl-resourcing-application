@@ -167,6 +167,15 @@ const state = {
     getColourFromGroup(name) {
         return this.groups.map(group => group.colour)[(this.groups.map(group => group.name).indexOf(`${name}`))]
     },
+    setGroupColour(name, colour) {
+        let group = this.groups[this.groups.map(group => group.name).indexOf(name)]
+        group.colour = colour
+        state.projects.forEach(project => {
+            console.log(project, colour)
+            if(project.group === group.name) project.display.style.backgroundColor = colour
+        })
+        console.log(group)
+    },
     addEmployeeType(type) {
         this.employeeTypes.push(type)
         this.projects.forEach(project => project.employeeSlots[type.type] = [])
