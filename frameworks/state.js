@@ -183,3 +183,7 @@ function initInput(input) {
 function safe(func) {
     setTimeout(func, 0)
 }
+
+function toTitleCase(string) {
+    return string.replace(/\b\w+/g, (string) => string.charAt(0).toUpperCase() + string.substr(1).toLowerCase())
+}
