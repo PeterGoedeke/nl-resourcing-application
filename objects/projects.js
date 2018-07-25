@@ -9,14 +9,15 @@ let projectProto = {
             save.projects()
         }
         bindDialogueListeners.call(this, 'project')
-        this.label.addEventListener('change', event => {
-            this.name = this.label.value
-            save.projects()
-        })
         this.label.addEventListener('blur', event => {
             if(!this.label.value) {
                 this.name = 'Default'
                 this.label.value = 'Default'
+                save.projects()
+            }
+            else {
+                this.name = toTitleCase(this.label.value)
+                this.label.value = this.name
                 save.projects()
             }
         })

@@ -23,7 +23,8 @@ let employeeProto = {
                 save.projects()
                 save.leave()
             } else if(this.label.value != this.name) {
-                this.name = this.label.value
+                this.name = toTitleCase(this.label.value)
+                this.label.value = this.name
                 state.projects.forEach(project => {
                     project.employeeSlots[state.visibleType.type].forEach(employeeSlot => {
                         if(employeeSlot.employee === this) employeeSlot.label.value = this.name
