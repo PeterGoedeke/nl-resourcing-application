@@ -15,6 +15,7 @@ Known bugs:
 - Update Vertical Display is called heaps when loading
 - Employee displays are out of line with the vertical gridlines
 - Won't autocomplete if you have bad capitals
+- There is a bug where groups can stick around
 
 Notes:
 - I changed the joining and marking behaviour
