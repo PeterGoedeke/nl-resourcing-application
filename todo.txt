@@ -1,5 +1,4 @@
 To-do list:
-- Saving and loading groups
 - Add an interiors stream
 - Add total rows for regular and interiors
 - Arrow key navigation
@@ -17,6 +16,9 @@ Known bugs:
 - Can't rename employees who have bad capitals
 - Projects can't be set back to default name and have no text if you leave their name empty
 - If you extend the duration of a project, the employeeslots can go off the screen and break the application
+
+Notes:
+- I changed the joining and marking behaviour
 
 Questions for client:
 - Do you need finer resizing?

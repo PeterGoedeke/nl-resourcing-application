@@ -14,6 +14,9 @@ let mark = (function() {
     })
     return {
         registerMarking(markedObject, leaving = true) {
+            markedObject.joiningDate = undefined
+            markedObject.leavingDate = undefined
+            markedObject.updateDisplay()
             currentlyMarking = markedObject
             key = leaving ? 'leavingDate' : 'joiningDate'
             document.querySelector('body').style.cursor = 'crosshair'
