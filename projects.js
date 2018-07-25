@@ -92,20 +92,25 @@ let projectProto = {
         })
     },
     toggleSecurity() {
+        state.validateGroup(this.group, this)
         this.group = null
         this.move(this.security ? state.getIndexBeforeUnsecured(this) : state.getIndexBeforeFirstGroup(this))
+        this.toggleSecurityClasses()
+        this.security = !this.security
+        save.projects()
+    },
+    toggleSecurityClasses() {
         this.container.classList.toggle('unsecuredContainer')
         this.labelContainer.classList.toggle('unsecuredLabel')
         this.employeeSlotLabelContainer.classList.toggle('unsecuredEmployeeLabelContainer')
-        this.security = !this.display.classList.toggle('unsecured')
-        save.projects()
+        this.display.classList.toggle('unsecured')
     },
     setGroup(group) {
+        if(!this.security) this.toggleSecurityClasses()
         this.security = true
         this.move(state.getIndexBeforeGroup(this, group))
         this.group = group
         this.display.style.backgroundColor = state.getColourFromGroup(group)
-        console.log(state.getColourFromGroup(group))
         save.projects()
     },
     removeGroup() {
@@ -142,6 +147,7 @@ let projectProto = {
         sq.contentPane.removeChild(this.container)
         sq.leftSidebar.removeChild(this.labelContainer)
         sq.rightSidebar.removeChild(this.employeeSlotLabelContainer)
+        state.validateGroup(this.group, this)
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.delete())
         state.projects.splice(state.projects.indexOf(this), 1)   
     },

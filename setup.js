@@ -147,7 +147,6 @@ const state = {
     getIndexBeforeFirstGroup(exclude) {
         if(this.projects.filter(project => project !== exclude).map(project => project.group).every(group => group == null)) return this.getIndexBeforeUnsecured(exclude)
         const index = state.projects.filter(project => project !== exclude).findIndex(project => project.group != null)
-        console.log(index)
         return (index == -1 ? 0 : index)
     },
     getIndexBeforeGroup(exclude, group) {
@@ -161,9 +160,9 @@ const state = {
         return (index == -1 ? 0 : index)
     },
     validateGroup(name, exclude) {
-        if(!this.projects.filter(project => project !== exclude).map(project => project.group).includes(`${name}`)) console.log('removing')
-        else console.log('not removing')
-        if(!this.projects.filter(project => project !== exclude).map(project => project.group).includes(`${name}`)) this.groups.splice(this.groups.map(group => group.name).indexOf(`${name}`), 1)
+        if(name) {
+            if(!this.projects.filter(project => project !== exclude).map(project => project.group).includes(`${name}`)) this.groups.splice(this.groups.map(group => group.name).indexOf(`${name}`), 1)
+        }
     },
     getColourFromGroup(name) {
         return this.groups.map(group => group.colour).indexOf(this.groups.map(group => group.name).indexOf(`${name}`))
