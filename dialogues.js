@@ -43,12 +43,13 @@ function openObjectDialogue(clickedObject, event, type) {
         assignGroupLabel.value = clickedObject.group || 'No Group'
 
         assignGroupLabel.addEventListener('keyup', event => {
-            if(event.which == 13) {
+            if(event.which == 13 && assignGroupAutocomplete.value) {
                 assignGroupLabel.value = assignGroupAutocomplete.value
-                console.log(assignGroupLabel.value )
                 clickedObject.setGroup(assignGroupLabel.value)
+                dialogueInterface.closeDialogue()
             }
             else if(assignGroupLabel.value) {
+                console.log(state.groups.map(group => group.name).sort())
                 let value = state.groups.map(group => group.name).sort().find(name => name.startsWith(assignGroupLabel.value)) || ''
                 assignGroupAutocomplete.value = value
             }
@@ -56,7 +57,7 @@ function openObjectDialogue(clickedObject, event, type) {
         assignGroupLabel.addEventListener('change', event => {
             if(state.groups.map(group => group.name).includes(assignGroupLabel.value)) {
                 clickedObject.setGroup(assignGroupLabel.value)
-                projects.save()
+                save.projects()
             }
         })
         // this.label.addEventListener('change', event => {
@@ -68,13 +69,17 @@ function openObjectDialogue(clickedObject, event, type) {
         // })
         assignGroupLabel.addEventListener('blur', event => {
             assignGroupAutocomplete.value = ''
-            if(assignGroupLabel === '') {
+            if(!assignGroupLabel.value) {
                 clickedObject.removeGroup()
                 save.projects()
             }
-            if(!state.groups.map(group => group.name).includes(assignGroupLabel.value)) {
+            else if(!state.groups.map(group => group.name).includes(assignGroupLabel.value) && assignGroupLabel.value != 'No Group') {
                 state.groups.push(createGroup(assignGroupLabel.value, colourPicker.value))
+                clickedObject.setGroup(assignGroupLabel.value)
             }
+            // else {
+            //     clickedObject.setGroup(assignGroupLabel.value)
+            // }
         })
         initInput(assignGroupLabel)
 

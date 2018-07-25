@@ -105,6 +105,7 @@ let projectProto = {
         this.move(state.getIndexBeforeGroup(this, group))
         this.group = group
         this.display.style.backgroundColor = state.getColourFromGroup(group)
+        console.log(state.getColourFromGroup(group))
         save.projects()
     },
     removeGroup() {
