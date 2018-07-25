@@ -25,6 +25,7 @@ let projectProto = {
         sq.rightSidebar.insertBefore(this.employeeSlotLabelContainer, leave.leaveSlotLabelContainer)
         this.employeeSlots[state.visibleType.type].forEach(employeeSlot => employeeSlot.updateDisplay())
         this.updateZoom()
+        if(this.group) this.display.style.backgroundColor = state.getColourFromGroup(this.group)
         if(!this.security) {
             this.container.classList.add('unsecuredContainer')
             this.labelContainer.classList.add('unsecuredLabel')

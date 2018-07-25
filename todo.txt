@@ -1,5 +1,4 @@
 To-do list:
-- Dialogue shouldn't go off left of screen
 - Saving and loading groups
 - Add an interiors stream
 - Add total rows for regular and interiors

@@ -56,7 +56,6 @@ function openObjectDialogue(clickedObject, event, type) {
                 dialogueInterface.closeDialogue()
             }
             else if(assignGroupLabel.value) {
-                console.log(state.groups.map(group => group.name).sort())
                 let value = state.groups.map(group => group.name).sort().find(name => name.startsWith(assignGroupLabel.value)) || ''
                 assignGroupAutocomplete.value = value
             }
@@ -83,6 +82,7 @@ function openObjectDialogue(clickedObject, event, type) {
             else if(!state.groups.map(group => group.name).includes(assignGroupLabel.value) && assignGroupLabel.value != 'No Group') {
                 state.groups.push(createGroup(assignGroupLabel.value, colourPicker.value))
                 clickedObject.setGroup(assignGroupLabel.value)
+                save.groups()
             }
             // else {
             //     clickedObject.setGroup(assignGroupLabel.value)

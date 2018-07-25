@@ -6,6 +6,7 @@ const save = (function() {
             this.employeeTypes()
             this.employees()
             this.projects()
+            this.groups()
             this.leave()
         },
         employeeTypes() {
@@ -15,6 +16,11 @@ const save = (function() {
         },
         employees() {
             fs.writeFile('./data/employees.json', JSON.stringify(state.employees, null, 4), 'utf8', function(err) {
+                if(err) throw err
+            })
+        },
+        groups() {
+            fs.writeFile('./data/groups.json', JSON.stringify(state.groups, null, 4), 'utf8', function(err) {
                 if(err) throw err
             })
         },
@@ -48,6 +54,9 @@ function load() {
     if(!fs.existsSync('./data/employees.json')) fs.writeFileSync('./data/employees.json', '', 'utf8', function(err) {
         if(err) throw err
     })
+    if(!fs.existsSync('./data/groups.json')) fs.writeFileSync('./data/groups.json', '', 'utf8', function(err) {
+        if(err) throw err
+    })
     if(!fs.existsSync('./data/projects.json')) fs.writeFileSync('./data/projects.json', '', 'utf8', function(err) {
         if(err) throw err
     })
@@ -68,24 +77,30 @@ function load() {
             if(testData(data)) JSON.parse(data).forEach(employeeInformation => createEmployee(
                 employeeInformation.employeeType, employeeInformation.name, employeeInformation.joiningDate, employeeInformation.leavingDate
             ))
-            fs.readFile('./data/projects.json', function(err, data) {
+            fs.readFile('./data/groups.json', function(err, data) {
                 if(err) throw err
-                if(testData(data)) JSON.parse(data).forEach(projectInformation => {
-                    let project = createProject(
-                        projectInformation.name, projectInformation.group, projectInformation.security, projectInformation.startDate, projectInformation.endDate, false
-                    )
-                    for(let type in projectInformation.employeeSlots) {
-                        projectInformation.employeeSlots[type].forEach(employeeSlot => {
-                            project.employeeSlots[type].push(createEmployeeSlot(
-                                project, employeeSlot.employeeType, employeeSlot.workload, state.getEmployeeFromName(employeeSlot.employee, employeeSlot.employeeType), employeeSlot.startDate, employeeSlot.endDate
-                            ))
-                            project.employeeSlots[type][project.employeeSlots[type].length - 1].updateDisplay()
-                            project.updateDisplay()
-                        })
-                    }
+                if(testData(data)) JSON.parse(data).forEach(group => {
+                    state.groups.push(createGroup(group.name, group.colour))
                 })
-                loadedProjects = true
-                if(loadedProjects && loadedLeave) initLoad()
+                fs.readFile('./data/projects.json', function(err, data) {
+                    if(err) throw err
+                    if(testData(data)) JSON.parse(data).forEach(projectInformation => {
+                        let project = createProject(
+                            projectInformation.name, projectInformation.group, projectInformation.security, projectInformation.startDate, projectInformation.endDate, false
+                        )
+                        for(let type in projectInformation.employeeSlots) {
+                            projectInformation.employeeSlots[type].forEach(employeeSlot => {
+                                project.employeeSlots[type].push(createEmployeeSlot(
+                                    project, employeeSlot.employeeType, employeeSlot.workload, state.getEmployeeFromName(employeeSlot.employee, employeeSlot.employeeType), employeeSlot.startDate, employeeSlot.endDate
+                                ))
+                                project.employeeSlots[type][project.employeeSlots[type].length - 1].updateDisplay()
+                                project.updateDisplay()
+                            })
+                        }
+                    })
+                    loadedProjects = true
+                    if(loadedProjects && loadedLeave) initLoad()
+                })
             })
             fs.readFile('./data/leave.json', function(err, data) {
                 if(err) throw err

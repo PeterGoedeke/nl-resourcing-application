@@ -161,7 +161,10 @@ const state = {
     },
     validateGroup(name, exclude) {
         if(name) {
-            if(!this.projects.filter(project => project !== exclude).map(project => project.group).includes(`${name}`)) this.groups.splice(this.groups.map(group => group.name).indexOf(`${name}`), 1)
+            if(!this.projects.filter(project => project !== exclude).map(project => project.group).includes(`${name}`)) {
+                this.groups.splice(this.groups.map(group => group.name).indexOf(`${name}`), 1)
+                save.groups()
+            }
         }
     },
     getColourFromGroup(name) {
@@ -171,10 +174,9 @@ const state = {
         let group = this.groups[this.groups.map(group => group.name).indexOf(name)]
         group.colour = colour
         state.projects.forEach(project => {
-            console.log(project, colour)
             if(project.group === group.name) project.display.style.backgroundColor = colour
         })
-        console.log(group)
+        save.groups()
     },
     addEmployeeType(type) {
         this.employeeTypes.push(type)
@@ -215,7 +217,6 @@ const state = {
             if(leaveSlot.startDate < this.earliestDate) this.earliestDate = leaveSlot.startDate
             if(leaveSlot.endDate > this.latestDate) this.latestDate = leaveSlot.endDate
         })
-        console.log(this.earliestDate, this.latestDate)
     }
 };
 
