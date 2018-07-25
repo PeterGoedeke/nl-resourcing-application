@@ -110,7 +110,7 @@ let projectProto = {
     },
     removeGroup() {
         this.display.style.backgroundColor = 'lightgrey'
-        state.validateGroup(this.group)
+        state.validateGroup(this.group, this)
         this.group = null
         this.move(state.getIndexBeforeFirstGroup(this))
         save.projects()

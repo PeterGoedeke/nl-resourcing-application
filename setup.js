@@ -160,11 +160,13 @@ const state = {
         const index = this.projects.filter(project => project !== exclude).map(project => project.security).indexOf(false)
         return (index == -1 ? 0 : index)
     },
-    validateGroup(name) {
-        if(!this.groups.map(group => group.name).includes(name)) this.groups.splice(this.groups.map(group => group.name).indexOf(name), 1)
+    validateGroup(name, exclude) {
+        if(!this.projects.filter(project => project !== exclude).map(project => project.group).includes(`${name}`)) console.log('removing')
+        else console.log('not removing')
+        if(!this.projects.filter(project => project !== exclude).map(project => project.group).includes(`${name}`)) this.groups.splice(this.groups.map(group => group.name).indexOf(`${name}`), 1)
     },
     getColourFromGroup(name) {
-        return this.groups.map(group => group.colour).indexOf(this.groups.map(group => group.name).indexOf(name))
+        return this.groups.map(group => group.colour).indexOf(this.groups.map(group => group.name).indexOf(`${name}`))
     },
     addEmployeeType(type) {
         this.employeeTypes.push(type)
