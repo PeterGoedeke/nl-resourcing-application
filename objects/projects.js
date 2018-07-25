@@ -13,6 +13,13 @@ let projectProto = {
             this.name = this.label.value
             save.projects()
         })
+        this.label.addEventListener('blur', event => {
+            if(!this.label.value) {
+                this.name = 'Default'
+                this.label.value = 'Default'
+                save.projects()
+            }
+        })
         this.verticalDragger.addEventListener('drag', event => {
 
         })
