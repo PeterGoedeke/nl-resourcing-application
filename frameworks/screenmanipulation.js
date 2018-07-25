@@ -7,6 +7,21 @@ const sm = {
         if(state.latestDate > state.earliestDate) for(let i = state.baseDate + 1; i <= state.latestDate; i++) this.appendTimeBlock(i)
         this.appendUntilFit()
     },
+    appendToEdges() {
+        let i = sq.topAxisContainer.firstChild.textContent
+        let j = sq.topAxisContainer.lastChild.textContent
+        while(state.earliestDate <= sq.topAxisContainer.firstChild.textContent) {
+            this.appendTimeBlock(i, true)
+            i --
+            console.log('appending before')
+        }
+        while(state.latestDate > sq.topAxisContainer.lastChild.textContent) {
+            this.appendTimeBlock(j)
+            j ++
+            console.log('appending after')
+        }
+        sq.positioner.style.width = getXLocationFromID(Number(sq.topAxisContainer.lastChild.textContent) + 1) + 'px'
+    },
     appendUntilFit() {
         let timeBlocks = sq.topAxisContainer.childNodes.length
         const contentWidth = sq.contentPane.offsetWidth

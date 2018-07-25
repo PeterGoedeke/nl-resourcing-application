@@ -2,6 +2,7 @@ let draggingInterface = (function() {
     let currentlyDragging = null
     let direction = null
     let timer
+    let firstTickOfDrag = false
     addEventListener('mouseup', (event) => {
         if(currentlyDragging) {
             currentlyDragging.dragging = false
@@ -12,6 +13,10 @@ let draggingInterface = (function() {
 
     addEventListener('mousemove', (event) => {
         if(currentlyDragging) {
+            if(firstTickOfDrag) {
+                sq.positioner.style.width = getXLocationFromID(Number(sq.topAxisContainer.lastChild.textContent) + 1) + 'px'
+                firstTickOfDrag = false
+            }
             currentlyDragging.drag(event, direction)
             sq.positioner.style.width = currentlyDragging.offsetWidth - 175 + sq.getTimeBlockWidth() + 'px'
             /*
@@ -85,6 +90,7 @@ let draggingInterface = (function() {
             currentlyDragging = draggedObject
             currentlyDragging.dragging = true
             direction = directionParam
+            firstTickOfDrag = true
         },
         get currentlyDragging() { return currentlyDragging }
     }
@@ -159,6 +165,7 @@ let horizontalDraggable = {
         else if(direction == 'right' && this.startDate == this.endDate) this.endDate ++
         this.updateDisplay()
         state.calculateDateRange()
+        sm.appendToEdges()
         this.save()
     }
 }
