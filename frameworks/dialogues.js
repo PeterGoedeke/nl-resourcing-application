@@ -56,6 +56,7 @@ function openObjectDialogue(clickedObject, event, type) {
                 dialogueInterface.closeDialogue()
             }
             else if(assignGroupLabel.value) {
+                assignGroupLabel.value = toTitleCase(assignGroupLabel.value)
                 let value = state.groups.map(group => group.name).sort().find(name => name.startsWith(assignGroupLabel.value)) || ''
                 assignGroupAutocomplete.value = value
             }

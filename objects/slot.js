@@ -9,6 +9,7 @@ let slot = {
                 tab.after(this.label, this)
             }
             else if(this.label.value) {
+                this.label.value = toTitleCase(this.label.value)
                 let value = state.getVisibleEmployees().map(employee => employee.name).sort().filter(name => name).find(name => name.startsWith(this.label.value)) || ''
                 this.autocompleteLabel.value = value
             }

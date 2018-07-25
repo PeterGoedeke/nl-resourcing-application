@@ -14,7 +14,7 @@ Known bugs:
 - Lag when you zoom out and can see a lot of elements
 - Update Vertical Display is called heaps when loading
 - Employee displays are out of line with the vertical gridlines
-- Can't rename employees who have bad capitals
+- Won't autocomplete if you have bad capitals
 
 Notes:
 - I changed the joining and marking behaviour
@@ -39,7 +39,7 @@ Possible refactorings:
 - Rewrite reading files with promises
 - Rewrite screen display in a more screen moduled fashion and use css flow better
 - Split saveload into two files
-- Split setup into multiple files
 - Replace let for in loops with const for in loops
 - Replace most mouseup event listeners with HTML5 onclicks
 - Rewrite dialogues with mixins
+- Dialogues.js is in the wrong folder
