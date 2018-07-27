@@ -378,6 +378,9 @@ input {
     left: 175px;
     height: 25px;
     z-index: 2;
+    overflow: hidden;
+    white-space: nowrap;
+    pointer-events: none;
 }
 .totalWorkloadLabel, .totalEmployeesLabel, .surplusLabel {
     position: relative;
