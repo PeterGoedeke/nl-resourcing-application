@@ -60,6 +60,7 @@ let employeeProto = {
         }
         this.display.style.width = sq.positioner.style.width
         this.label.value = this.name || 'Unnamed'
+        sm.populateTotalRows()
     },
     populateEmptyWorkload() {
         let [start, end] = sq.getVisibleTimeBlockRange()
@@ -107,7 +108,7 @@ let employeeProto = {
     }
 }
 
-function createEmployee(employeeType, name = null, joiningDate = null, leavingDate = null) {
+function createEmployee(employeeType, name = null, joiningDate = null, leavingDate = null, daysAWeek = 5) {
     let display = document.createElement('div')
     display.className = 'employee'
 
@@ -123,7 +124,7 @@ function createEmployee(employeeType, name = null, joiningDate = null, leavingDa
     let employee = Object.assign(
         Object.create(employeeProto),
         {display, label,
-        employeeType, name, workload, joiningDate, leavingDate, empty: emptySymbol}
+        employeeType, name, workload, joiningDate, leavingDate, empty: emptySymbol, daysAWeek}
     )
     employee.populateEmptyWorkload()
     state.registerEmployee(employee)

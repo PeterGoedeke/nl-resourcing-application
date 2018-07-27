@@ -3,7 +3,6 @@ To-do list:
 - Add an interiors stream
 - Add total rows for regular and interiors
 - Arrow key navigation
-- Employee displays need to have orange zeros the entire time
 - Add an undo button
 - Make maximum zoom two years
 - Touchscreen
@@ -14,6 +13,7 @@ To-do list:
 - Make things look nice
 
 Known bugs:
+- Scrolling to the right is buggy again
 - Positioner can get too long, meaning that you can scroll too far in either direction
 - Can't scroll by scrolling the sidebar
 - Lag when you zoom out and can see a lot of elements
@@ -27,6 +27,7 @@ Notes:
 - I changed the joining and marking behaviour
 
 Questions for client:
+- Do you need to be able to dynamically change the days a week which an employee can work?
 - Do you need finer resizing?
 - Should projects create an employee to begin with?
 - Should it load in a little bit scrolled along to the current date or something?
