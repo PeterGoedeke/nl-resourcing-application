@@ -84,7 +84,7 @@ const sm = {
             workloadBlock.className = 'employeeWorkloadBlock'
             workloadBlock.style.left = getXLocationFromID(key) + 'px'
             workloadBlock.style.width = 100 * zoom.scale + 'px'
-            workloadBlock.textContent = totalWorkload[key]
+            workloadBlock.textContent = totalWorkload[key] / 5
             sq.totalWorkloadRow.appendChild(workloadBlock)
         }
         console.log(start, end)
