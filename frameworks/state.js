@@ -75,6 +75,14 @@ const state = {
     getVisibleEmployees() {
         return this.employees.filter(employee => employee.employeeType == this.visibleType.type)
     },
+    flattenWorkload() {
+        let totalWorkload = {}
+        this.getVisibleEmployees().forEach(employee => {
+            let flattenedWorkload = employee.flattenWorkload()
+            for(const key in flattenedWorkload) totalWorkload[key] = parseInt(flattenedWorkload[key]) + parseInt(totalWorkload[key]) || flattenedWorkload[key]
+        })
+        return totalWorkload
+    },
     calculateDateRange() {
         let temporary = this.earliestDate
         this.earliestDate = this.latestDate

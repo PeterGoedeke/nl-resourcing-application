@@ -373,6 +373,19 @@ input {
     background-color: ghostwhite;
 }
 
+.employee {
+    width: 100%;
+    height: 25px;
+    top: 35px;
+    position: absolute;
+    overflow: hidden;
+    visibility: hidden;
+}
+.totalWorkloadRow, .totalEmployeesRow, .surplusRow {
+    width: 100%;
+    
+}
+
 .gridLine {
     box-sizing: initial;
     background-color: black;

@@ -48,6 +48,8 @@ const sm = {
         else sq.topAxisContainer.appendChild(timeBlock)
     },
     updateVerticalDisplay() {
+
+        
         state.projects.forEach((project, i) => project.updateVerticalDisplay(i))
         sq.typeLabel.style.height = state.getVisibleEmployees().length * 50 * zoom.scale + 'px'
         sq.leaveLabel.style.height = leave.leaveSlots[state.visibleType.type].length * 50 * zoom.scale + 'px'

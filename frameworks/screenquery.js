@@ -19,6 +19,9 @@ const sq = {
     zoomDisplay: document.querySelector('.zoomDisplay'),
     zoomOutButton: document.querySelector('.zoomOut'),
     employeeContainer: document.querySelector('.employeeContainer'),
+    totalWorkloadRow: document.querySelector('totalWorkloadRow'),
+    totalEmployeesRow: document.querySelector('totalEmployeesRow'),
+    surplusRow: document.querySelector('.surplusRow'),
 
     getTimeBlockWidth() {
         return 100 * zoom.scale
