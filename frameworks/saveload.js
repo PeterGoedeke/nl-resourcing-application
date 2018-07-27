@@ -75,7 +75,7 @@ function load() {
         fs.readFile('./data/employees.json', function(err, data) {
             if(err) throw err
             if(testData(data)) JSON.parse(data).forEach(employeeInformation => createEmployee(
-                employeeInformation.employeeType, employeeInformation.name, employeeInformation.joiningDate, employeeInformation.leavingDate
+                employeeInformation.employeeType, employeeInformation.name, employeeInformation.joiningDate, employeeInformation.leavingDate, employeeInformation.daysAWeek
             ))
             fs.readFile('./data/groups.json', function(err, data) {
                 if(err) throw err
