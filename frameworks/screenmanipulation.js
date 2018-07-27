@@ -48,8 +48,6 @@ const sm = {
         else sq.topAxisContainer.appendChild(timeBlock)
     },
     updateVerticalDisplay() {
-
-        
         state.projects.forEach((project, i) => project.updateVerticalDisplay(i))
         sq.typeLabel.style.height = state.getVisibleEmployees().length * 50 * zoom.scale + 'px'
         sq.leaveLabel.style.height = leave.leaveSlots[state.visibleType.type].length * 50 * zoom.scale + 'px'
@@ -63,10 +61,20 @@ const sm = {
             sq.contentPane.scrollTop -= (display.offsetHeight + 25)
         }
     },
+    syncPositionersWidth() {
+        sq.totalRowPositioners.forEach(positioner => positioner.style.width = sq.positioner.style.width)
+    },
     populateTotalRows() {
         Array.from(sq.totalWorkloadRow.childNodes).filter(childNode => childNode.textContent).forEach(workloadBlock => {
             sq.totalWorkloadRow.removeChild(workloadBlock)
         })
+        Array.from(sq.totalEmployeesRow.childNodes).filter(childNode => childNode.textContent).forEach(workloadBlock => {
+            sq.totalEmployeesRow.removeChild(workloadBlock)
+        })
+        Array.from(sq.surplusRow.childNodes).filter(childNode => childNode.textContent).forEach(workloadBlock => {
+            sq.surplusRow.removeChild(workloadBlock)
+        })
+
         const totalWorkload = state.flattenWorkload()
         let [start, end] = [Infinity, -Infinity]
         for(const key in totalWorkload) {
@@ -78,6 +86,16 @@ const sm = {
             workloadBlock.style.width = 100 * zoom.scale + 'px'
             workloadBlock.textContent = totalWorkload[key]
             sq.totalWorkloadRow.appendChild(workloadBlock)
+        }
+        console.log(start, end)
+        const totalDaysAWeek = state.flattenEmployeeDaysAWeek(start, end)
+        for(let i = start; i <= end; i++) {
+            let workloadBlock = document.createElement('div')
+            workloadBlock.className = 'employeeWorkloadBlock'
+            workloadBlock.style.left = getXLocationFromID(i) + 'px'
+            workloadBlock.style.width = 100 * zoom.scale + 'px'
+            workloadBlock.textContent = totalDaysAWeek[i]
+            sq.totalEmployeesRow.appendChild(workloadBlock)
         }
 
     },
