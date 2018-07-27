@@ -83,6 +83,21 @@ const state = {
         })
         return totalWorkload
     },
+    flattenEmployeeDaysAWeek(start, end) {
+        let totalDaysAWeek = {}
+        this.employees.forEach(employee => {
+            if(employee.joiningDate && employee.leavingDate) {
+                for(let i = employee.joiningDate; i < employee.leavingDate; i++) totalDaysAWeek[i] = totalDaysAWeek[i] + employee.daysAWeek / 5 || employee.daysAWeek / 5
+            } else if(employee.joiningDate) {
+                for(let i = employee.joiningDate; i < end; i++) totalDaysAWeek[i] = totalDaysAWeek[i] + employee.daysAWeek / 5 || employee.daysAWeek / 5
+            } else if(employee.leavingDate) {
+                for(let i = start; i < employee.leavingDate; i++) totalDaysAWeek[i] = totalDaysAWeek[i] + employee.daysAWeek / 5 || employee.daysAWeek / 5
+            } else {
+                for(let i = start; i < end; i++) totalDaysAWeek[i] = totalDaysAWeek[i] + employee.daysAWeek / 5 || employee.daysAWeek / 5
+            }
+        })
+        return totalDaysAWeek
+    },
     calculateDateRange() {
         let temporary = this.earliestDate
         this.earliestDate = this.latestDate
@@ -108,7 +123,12 @@ const state = {
     addEventListener('load', event => {
         load()
     })
-    addEventListener('resize', sm.appendUntilFit)
+    addEventListener('resize', () => {
+        sm.appendUntilFit()
+        sq.totalWorkloadRow.style.width = sq.contentPane.offsetWidth + 'px'
+        sq.totalEmployeesRow.style.width = sq.contentPane.offsetWidth + 'px'
+        sq.surplusRow.style.width = sq.contentPane.offsetWidth + 'px'
+    })
 
     // addEventListener('keypress', event => {
     //     if(event.which == 17) ctrlPressed = true 
@@ -139,6 +159,9 @@ const state = {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop
         sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
         sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
+        sq.totalWorkloadRow.scrollLeft = sq.contentPane.scrollLeft
+        sq.totalEmployeesRow.scrollLeft = sq.contentPane.scrollLeft
+        sm.syncPositionersWidth()
         sm.fixContentPaneHeight()
         //console.log(sq.getVisibleTimeBlockRange()[0] - 1, state.earliestDate)
         //if(sq.topAxisContainer.firstChild.textContent < state.earliestDate && sq.getVisibleTimeBlockRange()[0] - 1 > sq.topAxisContainer.firstChild.textContent && !draggingInterface.currentlyDragging) {
