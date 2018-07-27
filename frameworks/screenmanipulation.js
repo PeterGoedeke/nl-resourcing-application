@@ -29,7 +29,7 @@ const sm = {
         }
     },
     fixContentPaneHeight() {
-        sq.positioner.style.top = sq.getElementTop(sq.createEmployeeButton) + 'px'
+        sq.positioner.style.top = sq.getElementTop(sq.surplusRow) + 'px'
     },
     appendTimeBlock(dateID, firstChild = false, beforeBase = false) {
         let timeBlock = document.createElement('div')
