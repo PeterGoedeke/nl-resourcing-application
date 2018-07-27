@@ -87,8 +87,8 @@ const sm = {
             workloadBlock.textContent = totalWorkload[key] / 5
             sq.totalWorkloadRow.appendChild(workloadBlock)
         }
-        console.log(start, end)
         const totalDaysAWeek = state.flattenEmployeeDaysAWeek(start, end)
+        //combine two loops?
         for(let i = start; i <= end; i++) {
             let workloadBlock = document.createElement('div')
             workloadBlock.className = 'employeeWorkloadBlock'
@@ -96,6 +96,14 @@ const sm = {
             workloadBlock.style.width = 100 * zoom.scale + 'px'
             workloadBlock.textContent = totalDaysAWeek[i]
             sq.totalEmployeesRow.appendChild(workloadBlock)
+        }
+        for(let i = start; i <= end; i++) {
+            let workloadBlock = document.createElement('div')
+            workloadBlock.className = 'employeeWorkloadBlock'
+            workloadBlock.style.left = getXLocationFromID(i) + 'px'
+            workloadBlock.style.width = 100 * zoom.scale + 'px'
+            workloadBlock.textContent = totalWorkload[i] / 5 - totalDaysAWeek[i]
+            sq.surplusRow.appendChild(workloadBlock)
         }
 
     },

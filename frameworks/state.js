@@ -161,6 +161,7 @@ const state = {
         sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
         sq.totalWorkloadRow.scrollLeft = sq.contentPane.scrollLeft
         sq.totalEmployeesRow.scrollLeft = sq.contentPane.scrollLeft
+        sq.surplusRow.scrollLeft = sq.contentPane.scrollLeft
         sm.syncPositionersWidth()
         sm.fixContentPaneHeight()
         //console.log(sq.getVisibleTimeBlockRange()[0] - 1, state.earliestDate)
