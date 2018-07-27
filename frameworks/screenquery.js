@@ -22,6 +22,7 @@ const sq = {
     totalWorkloadRow: document.querySelector('.totalWorkloadRow'),
     totalEmployeesRow: document.querySelector('.totalEmployeesRow'),
     surplusRow: document.querySelector('.surplusRow'),
+    totalRowPositioners: Array.from(document.querySelectorAll('.total')),
 
     getTimeBlockWidth() {
         return 100 * zoom.scale
