@@ -64,6 +64,21 @@ const sm = {
         }
     },
     populateTotalRows() {
+        Array.from(sq.totalWorkloadRow.childNodes).filter(childNode => childNode.textContent).forEach(workloadBlock => {
+            sq.totalWorkloadRow.removeChild(workloadBlock)
+        })
+        const totalWorkload = state.flattenWorkload()
+        let [start, end] = [Infinity, -Infinity]
+        for(const key in totalWorkload) {
+            if(key < start) start = key
+            if(key > end) end = key
+            let workloadBlock = document.createElement('div')
+            workloadBlock.className = 'employeeWorkloadBlock'
+            workloadBlock.style.left = getXLocationFromID(key) + 'px'
+            workloadBlock.style.width = 100 * zoom.scale + 'px'
+            workloadBlock.textContent = totalWorkload[key]
+            sq.totalWorkloadRow.appendChild(workloadBlock)
+        }
 
     },
     updateDisplay() {
