@@ -13,12 +13,10 @@ const sm = {
         while(state.earliestDate <= sq.topAxisContainer.firstChild.textContent) {
             this.appendTimeBlock(i, true)
             i --
-            console.log('appending before')
         }
         while(state.latestDate > sq.topAxisContainer.lastChild.textContent) {
             this.appendTimeBlock(j)
             j ++
-            console.log('appending after')
         }
         sq.positioner.style.width = getXLocationFromID(Number(sq.topAxisContainer.lastChild.textContent) + 1) + 'px'
     },
@@ -62,6 +60,9 @@ const sm = {
         if(sq.contentPane.scrollTop > 0) {
             sq.contentPane.scrollTop -= (display.offsetHeight + 25)
         }
+    },
+    populateTotalRows() {
+
     },
     updateDisplay() {
         sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'

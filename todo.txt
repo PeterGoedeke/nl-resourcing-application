@@ -1,4 +1,5 @@
 To-do list:
+- Employees need to be able to be part time
 - Add an interiors stream
 - Add total rows for regular and interiors
 - Arrow key navigation
@@ -7,6 +8,8 @@ To-do list:
 - Make maximum zoom two years
 - Touchscreen
 - Change numbers to date on the top row
+- Change unsecureproject.png and just use linear-gradient
+- Add checks to make sure the folders exist
 
 Known bugs:
 - Positioner can get too long, meaning that you can scroll too far in either direction
@@ -16,6 +19,7 @@ Known bugs:
 - Employee displays are out of line with the vertical gridlines
 - Won't autocomplete if you have bad capitals
 - There is a bug where groups can stick around
+- Potentially need to update display while dragging to the right
 
 Notes:
 - I changed the joining and marking behaviour

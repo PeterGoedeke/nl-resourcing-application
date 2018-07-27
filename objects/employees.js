@@ -42,6 +42,7 @@ let employeeProto = {
         this.display.style.top = sq.getTotalProjectHeight() + sq.getTotalLeaveHeight() + 80 + 10 * zoom.scale + index * 50 * zoom.scale + 'px'
     },
     updateDisplay() {
+        this.populateEmptyWorkload()
         while(this.display.firstChild) this.display.removeChild(this.display.firstChild)
         let workload = this.flattenWorkload()
         for(key in workload) {
@@ -59,6 +60,12 @@ let employeeProto = {
         }
         this.display.style.width = sq.positioner.style.width
         this.label.value = this.name || 'Unnamed'
+    },
+    populateEmptyWorkload() {
+        let [start, end] = sq.getVisibleTimeBlockRange()
+        if(state.earliestDate < start) start = state.earliestDate
+        if(state.latestDate > end) end = state.latestDate
+        for(let i = start; i < end; i++) this.workload[this.empty][i] = 0
     },
     flattenWorkload() {
         let flattenedWorkload = {}
@@ -110,11 +117,15 @@ function createEmployee(employeeType, name = null, joiningDate = null, leavingDa
     label.className = 'employeeLabel'
 
     let workload = {}
+    let emptySymbol = Symbol('empty workload information')
+    workload[emptySymbol] = {}
+
     let employee = Object.assign(
         Object.create(employeeProto),
         {display, label,
-        employeeType, name, workload, joiningDate, leavingDate}
+        employeeType, name, workload, joiningDate, leavingDate, empty: emptySymbol}
     )
+    employee.populateEmptyWorkload()
     state.registerEmployee(employee)
     employee.initDisplay()
     return employee
