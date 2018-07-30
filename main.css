@@ -93,13 +93,22 @@ input {
     visibility: visible;
     border-left: 0;
     border-right: 0;
+    color: lightgrey;
 }
-.timeBlock:nth-child(even) {
+.timeBlock:nth-child(even)::after {
+    content: attr(value);
+    position: absolute;
+    left: 25px;
+    width: 50px;
+    text-align: center;
+    color: black;
     z-index: 20;
-    text-indent: 45px;
+}
+.timeBock:nth-child(even) {
+    border-left: solid black 1px;
 }
 .timeBlock:nth-child(odd) {
-    color: lightgrey;
+    border-right: solid black 1px;
 }
 .mainWindow {
     top: 0px;
@@ -427,6 +436,7 @@ input {
     position: absolute;
     width: 1px;
     left: -1px;
+    top: 27px;
     height: 10000px;
     pointer-events: none;
 }
