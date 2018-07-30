@@ -108,7 +108,7 @@ input {
     border-left: solid black 1px;
 }
 .timeBlock:nth-child(odd) {
-    border-right: solid black 1px;
+    border-right: solid black 1pxk;
 }
 .mainWindow {
     top: 0px;

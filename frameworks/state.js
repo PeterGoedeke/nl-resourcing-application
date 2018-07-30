@@ -198,12 +198,14 @@ function test() {
     sm.updateDisplay()
 }
 
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 function convertIDToDate(id) {
     let year = 2000
-    if(id / 12 > 0) year += Math.floor(id / 12)
-    let month = Math.floor((id % 12) / 2) + 1
-    let timeOfMonth = id % 2 == 0 ? 0 : 1 //0 = early, 1 = late
-    return (timeOfMonth == 0 ? 'Early ' : 'Late ') + month + "/" + year
+    if(id > 12) year += id % 12
+    return months[id % 12] + ' ' + String(year).substring(2) 
+}
+function convertDateToID(date) {
+    return months.indexOf(date)
 }
 function getXLocationFromID(id) {
     return (id - state.baseDate) * 100 * zoom.scale

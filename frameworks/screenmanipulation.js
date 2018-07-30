@@ -35,6 +35,7 @@ const sm = {
         let timeBlock = document.createElement('div')
         timeBlock.className = 'timeBlock'
         timeBlock.textContent = dateID
+        timeBlock.setAttribute('value', convertIDToDate(dateID))
         timeBlock.style.width = 100 * zoom.scale + 'px'
 
         let gridLine = document.createElement('div')
