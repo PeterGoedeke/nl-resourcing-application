@@ -5,9 +5,7 @@ To-do list:
 - Make maximum zoom two years
 - Touchscreen
 - Change numbers to date on the top row
-- Change unsecureproject.png and just use linear-gradient
 - Add checks to make sure the folders exist
-- Add horizontal lines to the projects
 - Make things look nice
 
 Known bugs:

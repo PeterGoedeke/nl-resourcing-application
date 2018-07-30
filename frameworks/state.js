@@ -128,6 +128,7 @@ const state = {
         sq.totalWorkloadRow.style.width = sq.contentPane.offsetWidth + 'px'
         sq.totalEmployeesRow.style.width = sq.contentPane.offsetWidth + 'px'
         sq.surplusRow.style.width = sq.contentPane.offsetWidth + 'px'
+        Array.from(document.querySelectorAll('.line')).forEach(line => line.style.width = sq.contentPane.offsetWidth + 'px')
     })
 
     // addEventListener('keypress', event => {

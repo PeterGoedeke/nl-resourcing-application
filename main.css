@@ -216,6 +216,15 @@ input {
     visibility: hidden;
     border: 0;
 }
+.line {
+    position: absolute;
+    z-index: 2;
+    left: 175px;
+    border: 0;
+    height: 1px;
+    background-color: black;
+    bottom: 0;
+}
 .projectLabel {
     float: left;
     width: 90%;
@@ -228,6 +237,7 @@ input {
 .projectLabelContainer {
     height: 30px;
     min-height: 30px;
+    position: relative;
 }
 .createEmployeeSlot {
     position: absolute;

@@ -40,6 +40,10 @@ let projectProto = {
             this.employeeSlotLabelContainer.classList.add('unsecuredEmployeeLabelContainer')
             this.display.classList.add('unsecured')
         }
+        let bottomLine = document.createElement('div')
+        bottomLine.className = 'line'
+        this.labelContainer.appendChild(bottomLine)
+
         this.updateDisplay()
         if(this.security && this.group == null) this.move(state.getIndexBeforeFirstGroup(this))
         if(this.group) this.move(state.getIndexBeforeGroup(this, this.group))
