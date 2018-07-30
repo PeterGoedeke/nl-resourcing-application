@@ -40,6 +40,13 @@ const tab = (function() {
         }
         return false
     }
+    function findLastEmployee() {
+        for(let i = state.getVisibleEmployees().length - 1; i >= 0; i--) {
+            state.getVisibleEmployees()[i].label.focus()
+            return true
+        }
+        return false
+    }
 
     function afterProjectLabel(hostObject) {
         if(hostObject.hasOwnProperty('employeeSlots')) {
