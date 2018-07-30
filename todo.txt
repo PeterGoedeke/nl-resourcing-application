@@ -8,30 +8,29 @@ To-do list:
 - Make things look nice
 
 Known bugs:
+- NaN in S / D row
 - You can't have a joining and a leaving date at the same time
+- Marking out leaving and joining dates doesn't work sometimes?
 - Scrolling to the right is buggy again
 - Positioner can get too long, meaning that you can scroll too far in either direction
 - Can't scroll by scrolling the sidebar
 - Lag when you zoom out and can see a lot of elements
 - Update Vertical Display is called heaps when loading
 - Employee displays are out of line with the vertical gridlines
-- Won't autocomplete if you have bad capitals
 - There is a bug where groups can stick around
 - Potentially need to update display while dragging to the right
 
 Notes:
 - I changed the joining and marking behaviour
 
-Questions for client:
-- Do you need to be able to dynamically change the days a week which an employee can work?
+Questions for client 
 - Do you need finer resizing?
 - Should projects create an employee to begin with?
 - Should it load in a little bit scrolled along to the current date or something?
 - Do you need to be able to hide stuff before a certain date manually?
 - Is it a problem that you can enter negative workloads?
 - How do you want join and leave dates to be removed?
-- Do you want me to change marking employee leave and start dates to just where did they open the dialogue?
-- Should the program auto-fix bad capital letters?
+- Do you want me to change marking employee leave and start dates to just where did they open the dialogue? Leave it cool
 
 Optimization ideas:
 - Everything gets called a millions times when loading

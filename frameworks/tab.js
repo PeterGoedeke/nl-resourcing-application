@@ -11,19 +11,26 @@ const tab = (function() {
                         else if(state.getVisibleEmployees().length > 0) state.getVisibleEmployees()[0].label.focus()
                     }
                     else state.projects[indexOfProjectInProjects + 1].employeeSlots[state.visibleType.type][0].label.focus()
+        right(focused, hostObject) {
+            if(hostObject.hasOwnProperty('security')) {
+                if(hostObject.employeeSlots[state.visibleType.type][0]) {
+                    hostObject.employeeSlots[state.visibleType.type][0].label.focus()
                 } else {
-                    hostObject.hostProject.employeeSlots[state.visibleType.type][indexInProject + 1].label.focus()
+                    this.after(focused, hostObject)
                 }
             }
-            else {
-                const indexInLeave = leave.leaveSlots[state.visibleType.type].indexOf(hostObject)
-                const lastIndexInLeave = leave.leaveSlots[state.visibleType.type].length - 1
-                if(indexInLeave == lastIndexInLeave) {
-                    if(state.getVisibleEmployees().length > 0) state.getVisibleEmployees()[0].label.focus()
+            else if(hostObject.hostProject) {
+                if(focused.className = 'employeeSlotLabel') {
+                    hostObject.display.childNodes.firstChild.focus()
                 } else {
-                    leave.leaveSlots[state.visibleType.type][indexInLeave + 1].label.focus()
+                    if(hostObject.display.childNodes.lastChild === focused) {
+                        this.after(focused, hostObject)
+                    } else {
+                        hostObject.display.childNodes[Array.from(hostObject.display.childNodes).indexOf(focused)].focus()
+                    }
                 }
             }
+        },
         }
     }
 })()
