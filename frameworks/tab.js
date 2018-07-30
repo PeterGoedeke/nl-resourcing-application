@@ -33,6 +33,15 @@ const tab = (function() {
         return false
     }
 
+    function afterProjectLabel(hostObject) {
+        if(hostObject.hasOwnProperty('employeeSlots')) {
+            if(state.projects.indexOf(hostObject) == state.projects.length - 1) {
+                if(!findFirstLeaveSlot()) if(!findFirstEmployee()) findFirstProject()
+            }
+            else state.projects[state.projects.indexOf(hostObject) + 1].label.focus()
+        }
+        else if(!findFirstProject()) if(!findFirstLeaveSlot()) findFirstEmployee()
+    }
                     }
                     else state.projects[indexOfProjectInProjects + 1].employeeSlots[state.visibleType.type][0].label.focus()
         right(focused, hostObject) {
