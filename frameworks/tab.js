@@ -1,8 +1,12 @@
 const tab = (function() {
+    function focus(element) {
+        element.focus()
+        setTimeout(() => element.select(), 0)
+    }
     function findFirstProject() {
         for(const project of state.projects) {
             if(project.employeeSlots[state.visibleType.type].length > 0) {
-                project.employeeSlots[state.visibleType.type][0].label.focus()
+                focus(project.employeeSlots[state.visibleType.type][0].label)
                 return true
             }
         }
@@ -11,7 +15,7 @@ const tab = (function() {
     function findLastProject() {
         for(let i = state.projects.length - 1; i >= 0; i--) {
             if(state.projects[i].employeeSlots[state.visibleType.type].length > 0) {
-                state.projects[i].employeeSlots[state.visibleType.type][state.projects[i].employeeSlots[state.visibleType.type.length - 1]].label.focus()
+                focus(state.projects[i].employeeSlots[state.visibleType.type][state.projects[i].employeeSlots[state.visibleType.type.length - 1]].label)
                 return true
             }
         }
@@ -20,14 +24,14 @@ const tab = (function() {
 
     function findFirstLeaveSlot() {
         for(const leaveSlot of leave.leaveSlots[state.visibleType.type]) {
-            leaveSlot.label.focus()
+            focus(leaveSlot.label)
             return true
         }
         return false
     }
     function findLastLeaveSlot() {
         for(let i = leave.leaveSlots[state.visibleType.type].length - 1; i >= 0; i--) {
-            leave.leaveSlots[state.visibleType.type][i].label.focus()
+            focus(leave.leaveSlots[state.visibleType.type][i].label)
             return true
         }
         return false
@@ -35,14 +39,14 @@ const tab = (function() {
 
     function findFirstEmployee() {
         for(const employee of state.getVisibleEmployees()) {
-            employee.label.focus()
+            focus(employee.label)
             return true
         }
         return false
     }
     function findLastEmployee() {
         for(let i = state.getVisibleEmployees().length - 1; i >= 0; i--) {
-            state.getVisibleEmployees()[i].label.focus()
+            focus(state.getVisibleEmployees()[i].label)
             return true
         }
         return false
@@ -53,7 +57,7 @@ const tab = (function() {
             if(state.projects.indexOf(hostObject) == state.projects.length - 1) {
                 if(!findFirstLeaveSlot()) if(!findFirstEmployee()) findFirstProject()
             }
-            else state.projects[state.projects.indexOf(hostObject) + 1].label.focus()
+            else focus(state.projects[state.projects.indexOf(hostObject) + 1].label)
         }
         else if(!findFirstProject()) if(!findFirstLeaveSlot()) findFirstEmployee()
     }
@@ -62,7 +66,7 @@ const tab = (function() {
             if(state.projects.indexOf(hostObject) == 0) {
                 if(!findLastEmployee()) if(!findLastLeaveSlot()) findLastProject()
             }
-            else state.projects[state.projects.indexOf(hostObject) - 1].label.focus()
+            else focus(state.projects[state.projects.indexOf(hostObject) - 1].label)
         }
         else if(!findLastProject()) if(!findLastLeaveSlot()) findLastEmployee()
     }
@@ -76,28 +80,28 @@ const tab = (function() {
                 else {
                     for(let i = state.projects.indexOf(hostObject.hostProject) + 1; i < state.projects.length; i++) {
                         if(state.projects[i].employeeSlots[state.visibleType.type].length > 0) {
-                            state.projects[i].employeeSlots[state.visibleType.type][0].label.focus()
+                            focus(state.projects[i].employeeSlots[state.visibleType.type][0].label)
                             return
                         }
                     }
                     if(!findFirstLeaveSlot()) if(!findFirstEmployee()) findFirstProject()
                 }
             }
-            else hostObject.hostProject.employeeSlots[state.visibleType.type][hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) + 1].label.focus()
+            else focus(hostObject.hostProject.employeeSlots[state.visibleType.type][hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) + 1].label)
         }
     }
     function afterLeaveSlotLabel(hostObject) {
         if(leave.leaveSlots[state.visibleType.type].indexOf(hostObject) == leave.leaveSlots[state.visibleType.type].length - 1) {
             if(!findFirstEmployee()) if(!findFirstProject()) findFirstLeaveSlot()
         }
-        else leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].indexOf(hostObject) + 1].label.focus()
+        else focus(leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].indexOf(hostObject) + 1].label)
     }
     function afterEmployeeLabel(hostObject) {
         if(hostObject.hasOwnProperty('joiningDate')) {
             if(state.getVisibleEmployees().indexOf(hostObject) == state.getVisibleEmployees().length - 1) {
                 if(!findFirstProject()) if(!findFirstLeaveSlot()) findFirstEmployee()
             }
-            else state.getVisibleEmployees()[state.getVisibleEmployees().indexOf(hostObject) + 1].label.focus()
+            else focus(state.getVisibleEmployees()[state.getVisibleEmployees().indexOf(hostObject) + 1].label)
         }
         else if(!findFirstEmployee()) if(!findFirstProject()) findFirstLeaveSlot()
     }
@@ -109,19 +113,19 @@ const tab = (function() {
         right(focused, hostObject) {
             if(hostObject.hasOwnProperty('security')) {
                 if(hostObject.employeeSlots[state.visibleType.type][0]) {
-                    hostObject.employeeSlots[state.visibleType.type][0].label.focus()
+                    focus(hostObject.employeeSlots[state.visibleType.type][0].label)
                 } else {
                     this.after(focused, hostObject)
                 }
             }
             else if(hostObject.hasOwnProperty('hostProject')) {
                 if(focused.className == 'employeeSlotLabel') {
-                    hostObject.display.firstChild.focus()
+                    focus(hostObject.display.firstChild)
                 } else {
                     if(hostObject.display.lastChild === focused) {
                         this.after(focused, hostObject)
                     } else {
-                        hostObject.display.childNodes[Array.from(hostObject.display.childNodes).indexOf(focused) + 1].focus()
+                        focus(hostObject.display.childNodes[Array.from(hostObject.display.childNodes).indexOf(focused) + 1])
                     }
                 }
             }
