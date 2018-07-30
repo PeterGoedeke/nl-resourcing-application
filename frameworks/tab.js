@@ -150,7 +150,15 @@ const tab = (function() {
 
         },
         left(focused, hostObject) {
-            if(hostObject.hasOwnProperty('hostProject')) {
+            if(hostObject.hasOwnProperty('security')) {
+                if(state.projects.indexOf(hostObject) == 0) {
+                    if(!findLastEmployee()) if(!findLastLeaveSlot()) findLastProject()
+                }
+                else {
+                    focus(state.projects[state.projects.indexOf(hostObject) - 1].label)
+                }
+            }
+            else if(hostObject.hasOwnProperty('hostProject')) {
                 if(focused.className == 'employeeSlotLabel') {
                     focus(hostObject.hostProject.label)
                 } else {

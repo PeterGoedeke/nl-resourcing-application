@@ -13,7 +13,7 @@ let projectProto = {
                 tab.right(this.label, this)
             }
             if(event.which == 37 && event.target.selectionStart == 0) {
-                tab.before(this.label, this)
+                tab.left(this.label, this)
             }
         })
 
