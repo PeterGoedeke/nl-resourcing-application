@@ -21,6 +21,9 @@ let employeeSlotProto = {
             if(event.which == 39 && event.target.selectionStart == this.label.value.length) {
                 tab.right(this.label, this)
             }
+            if(event.which == 37 && event.target.selectionStart == 0) {
+                tab.left(this.label, this)
+            }
         })
         bindDialogueListeners.call(this)
     },
@@ -65,8 +68,11 @@ let employeeSlotProto = {
                 }
             })
             workloadBlock.addEventListener('keydown', event => {
-                if(event.which == 39 && event.target.selectionStart) {
+                if(event.which == 39) {
                     tab.right(workloadBlock, this)
+                }
+                if(event.which == 37) {
+                    tab.left(workloadBlock, this)
                 }
             })
             initInput(workloadBlock)
