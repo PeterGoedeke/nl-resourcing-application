@@ -8,7 +8,7 @@ const sq = {
     createLeaveSlotButton: document.querySelector('.createLeaveSlot'),
     leaveLabel: document.querySelector('.leaveLabel'),
     topAxisContainer: document.querySelector('.topAxisContainer'),
-    positioner: document.querySelector('.positioner'),
+    positioner: document.querySelector('.main'),
     createEmployeeButton: document.querySelector('.createEmployee'),
     createProjectButton: document.querySelector('.createProject'),
     topMargin: document.querySelector('.topMargin'),

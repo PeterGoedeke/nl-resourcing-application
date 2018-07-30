@@ -13,6 +13,7 @@ To-do list:
 - Make things look nice
 
 Known bugs:
+- You can't have a joining and a leaving date at the same time
 - Scrolling to the right is buggy again
 - Positioner can get too long, meaning that you can scroll too far in either direction
 - Can't scroll by scrolling the sidebar
@@ -38,6 +39,7 @@ Questions for client:
 - Should the program auto-fix bad capital letters?
 
 Optimization ideas:
+- Everything gets called a millions times when loading
 - When zoomed out remove workload blocks and make them appear on click
 - Only update the vertical display of objects before the one changed (every object can have an index property)
 - Should cache some functions
