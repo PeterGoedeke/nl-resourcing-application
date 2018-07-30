@@ -105,6 +105,15 @@ const tab = (function() {
         }
         else if(!findFirstEmployee()) if(!findFirstProject()) findFirstLeaveSlot()
     }
+    function beforeEmployeeLabel(hostObject) {
+        if(hostObject.hasOwnProperty('joiningDate')) {
+            if(state.getVisibleEmployees().indexOf(hostObject) == 0) {
+                if(!findLastLeaveSlot()) if(!findLastProject()) findLastEmployee()
+            }
+            else focus(state.getVisibleEmployees()[state.getVisibleEmployees().indexOf(hostObject) - 1].label)
+        }
+        else if(!findLastEmployee()) if(!findLastProject()) findLastLeaveSlot()
+    }
 
     return {
         up(focused, hostObject) {
