@@ -78,9 +78,9 @@ const tab = (function() {
             }
             else if(hostObject.hostProject) {
                 if(focused.className = 'employeeSlotLabel') {
-                    hostObject.display.childNodes.firstChild.focus()
+                    hostObject.display.firstChild.focus()
                 } else {
-                    if(hostObject.display.childNodes.lastChild === focused) {
+                    if(hostObject.display.lastChild === focused) {
                         this.after(focused, hostObject)
                     } else {
                         hostObject.display.childNodes[Array.from(hostObject.display.childNodes).indexOf(focused)].focus()

@@ -2,6 +2,7 @@ let slot = {
     initSlot() {
         initInput(this.label)
         this.updateZoom()
+        let endTracker = false
         this.label.addEventListener('keyup', event => {
             if(event.which == 13 && this.autocompleteLabel.value) {
                 this.label.value = this.autocompleteLabel.value
@@ -13,6 +14,12 @@ let slot = {
                 let value = state.getVisibleEmployees().map(employee => employee.name).sort().filter(name => name).find(name => name.startsWith(this.label.value)) || ''
                 this.autocompleteLabel.value = value
             }
+
+            if(event.which == 39 && event.target.selectionStart == this.label.value.length && endTracker) {
+                tab.right(this.label, this)
+            } else endTracker = false
+            if(event.target.selectionStart == this.label.value.length) endTracker = true
+            else endTracker = false
         })
         this.label.addEventListener('change', event => {
             this.assignEmployeeFromLabel()
