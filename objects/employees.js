@@ -103,7 +103,7 @@ let employeeProto = {
     },
     toJSON() {
         return {
-            name: this.name, employeeType: this.employeeType, joiningDate: this.joiningDate, leavingDate: this.leavingDate
+            name: this.name, employeeType: this.employeeType, joiningDate: this.joiningDate, leavingDate: this.leavingDate, daysAWeek: this.daysAWeek
         }
     }
 }
