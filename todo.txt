@@ -5,7 +5,6 @@ To-do list:
 - Make maximum zoom two years
 - Touchscreen
 - Change numbers to date on the top row
-- Add checks to make sure the folders exist
 - Make things look nice
 
 Known bugs:

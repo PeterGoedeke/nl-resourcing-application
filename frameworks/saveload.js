@@ -48,6 +48,9 @@ function testData(data) {
 
 function load() {
     let [loadedProjects, loadedLeave] = [false, false]
+    if(!fs.existsSync('./data')) fs.mkdirSync('./data');
+    if(!fs.existsSync('./errors')) fs.mkdirSync('./errors');
+
     if(!fs.existsSync('./data/employeetypes.json')) fs.writeFileSync('./data/employeetypes.json', '', 'utf8', function(err) {
         if(err) throw err
     })
