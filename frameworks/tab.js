@@ -57,6 +57,16 @@ const tab = (function() {
         }
         else if(!findFirstProject()) if(!findFirstLeaveSlot()) findFirstEmployee()
     }
+    function beforeProjectLabel(hostObject) {
+        if(hostObject.hasOwnProperty('employeeSlots')) {
+            if(state.projects.indexOf(hostObject) == 0) {
+                if(!findLastEmployee()) if(!findLastLeaveSlot()) findLastProject()
+            }
+            else state.projects[state.projects.indexOf(hostObject) - 1].label.focus()
+        }
+        else if(!findLastProject()) if(!findLastLeaveSlot()) findLastEmployee()
+    }
+
     function afterEmployeeSlotLabel(hostObject) {
         if(hostObject.hasOwnProperty('hostProject')) {
             if(hostObject.hostProject.employeeSlots[state.visibleType.type].length - 1 == hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject)) {
@@ -84,7 +94,7 @@ const tab = (function() {
     }
     function afterEmployeeLabel(hostObject) {
         if(hostObject.hasOwnProperty('joiningDate')) {
-            if(state.getVisibleEmployees().indexOf(hostObject) > state.getVisibleEmployees().length - 1) {
+            if(state.getVisibleEmployees().indexOf(hostObject) == state.getVisibleEmployees().length - 1) {
                 if(!findFirstProject()) if(!findFirstLeaveSlot()) findFirstEmployee()
             }
             else state.getVisibleEmployees()[state.getVisibleEmployees().indexOf(hostObject) + 1].label.focus()
@@ -121,6 +131,12 @@ const tab = (function() {
         },
         left(focused, hostObject) {
 
+        },
+        before(focused, hostObject) {
+            if(hostObject.hasOwnProperty('employeeSlots')) beforeProjectLabel(hostObject)
+            else if(hostObject.hasOwnProperty('hostProject')) beforeEmployeeSlotLabel(hostObject)
+            else if(hostObject.hasOwnProperty('joiningDate')) beforeEmployeeLabel(hostObject)
+            else beforeLeaveSlotLabel(hostObject)
         },
         after(focused, hostObject) {
             if(hostObject.hasOwnProperty('employeeSlots')) afterProjectLabel(hostObject)

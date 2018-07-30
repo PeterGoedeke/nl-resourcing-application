@@ -12,6 +12,9 @@ let projectProto = {
             if(event.which == 39 && event.target.selectionStart == this.label.value.length) {
                 tab.right(this.label, this)
             }
+            if(event.which == 37 && event.target.selectionStart == 0) {
+                tab.before(this.label, this)
+            }
         })
 
         bindDialogueListeners.call(this, 'project')
