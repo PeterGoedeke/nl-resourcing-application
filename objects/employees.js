@@ -36,6 +36,11 @@ let employeeProto = {
             }
             save.employees()
         })
+        this.label.addEventListener('keydown', event => {
+            if(event.which == 39 && event.target.selectionStart == this.label.value.length) {
+                tab.after(this.label, this)
+            }
+        })
         bindDialogueListeners.call(this, 'employee')
     },
     updateVerticalDisplay(index) {
