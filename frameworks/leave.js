@@ -55,6 +55,12 @@ let leaveSlotProto = {
         this.labelWrapper.appendChild(this.autocompleteLabel)
         leave.leaveSlotLabelContainer.appendChild(this.labelWrapper)
         this.initDraggable()
+
+        this.label.addEventListener('keydown', event => {
+            if(event.which == 39 && event.target.selectionStart == this.label.value.length) {
+                tab.after(this.label, this)
+            }
+        })
         bindDialogueListeners.call(this)
     },
     updateDisplay() {
