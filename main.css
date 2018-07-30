@@ -208,8 +208,8 @@ input {
     overflow: hidden;
 }
 .unsecured {
-    background: url(unsecureproject.png);
-    opacity: 0.5;
+    background: repeating-linear-gradient(45deg, red, white 5px, red 5px, white 5px);
+    opacity: 0.8;
 }
 .projectContainer {
     top: 30px;

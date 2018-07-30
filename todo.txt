@@ -1,7 +1,5 @@
 To-do list:
-- Employees need to be able to be part time
 - Add an interiors stream
-- Add total rows for regular and interiors
 - Arrow key navigation
 - Add an undo button
 - Make maximum zoom two years
