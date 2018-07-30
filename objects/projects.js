@@ -8,6 +8,17 @@ let projectProto = {
             this.updateDisplay()
             save.projects()
         }
+        let endTracker = false
+        this.label.addEventListener('keyup', event => {
+            console.log(event.target.selectionStart)
+            if(event.which == 39 && event.target.selectionStart == this.label.value.length && endTracker) {
+                tab.right(this.label, this)
+            } else endTracker = false
+            if(event.target.selectionStart == this.label.value.length) endTracker = true
+            else endTracker = false
+
+        })
+
         bindDialogueListeners.call(this, 'project')
         this.label.addEventListener('blur', event => {
             if(!this.label.value) {
