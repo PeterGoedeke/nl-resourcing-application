@@ -134,7 +134,17 @@ const tab = (function() {
 
         },
         left(focused, hostObject) {
-
+            if(hostObject.hasOwnProperty('hostProject')) {
+                if(focused.className == 'employeeSlotLabel') {
+                    focus(hostObject.hostProject.label)
+                } else {
+                    if(hostObject.display.firstChild === focused) {
+                        focus(hostObject.label)
+                    } else {
+                        focus(hostObject.display.childNodes[Array.from(hostObject.display.childNodes).indexOf(focused) - 1])
+                    }
+                }
+            }
         },
         before(focused, hostObject) {
             if(hostObject.hasOwnProperty('employeeSlots')) beforeProjectLabel(hostObject)
