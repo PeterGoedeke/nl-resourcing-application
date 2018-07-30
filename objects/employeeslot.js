@@ -16,6 +16,16 @@ let employeeSlotProto = {
         this.labelWrapper.appendChild(this.autocompleteLabel)
         this.hostProject.employeeSlotLabelContainer.appendChild(this.labelWrapper)
         this.initDraggable()
+
+        let endTracker = false
+        this.label.addEventListener('keyup', event => {
+            if(event.which == 39 && event.target.selectionStart == this.label.value.length && endTracker) {
+                tab.right(this.label, this)
+            } else endTracker = false
+            if(event.target.selectionStart == this.label.value.length) endTracker = true
+            else endTracker = false
+        })
+
         bindDialogueListeners.call(this)
     },
     enterWorkloadInformation(id, value) {
