@@ -42,8 +42,25 @@ const tab = (function() {
         }
         else if(!findFirstProject()) if(!findFirstLeaveSlot()) findFirstEmployee()
     }
+    function afterEmployeeSlotLabel(hostObject) {
+        if(hostObject.hasOwnProperty('hostProject')) {
+            if(hostObject.hostProject.employeeSlots[state.visibleType.type].length - 1 == hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject)) {
+                if(state.projects.indexOf(hostObject.hostProject) == state.projects.length - 1) {
+                    if(!findFirstLeaveSlot()) if(!findFirstEmployee()) findFirstProject()
+                }
+                else {
+                    for(let i = state.projects.indexOf(hostObject.hostProject) + 1; i < state.projects.length; i++) {
+                        if(state.projects[i].employeeSlots[state.visibleType.type].length > 0) {
+                            state.projects[i].employeeSlots[state.visibleType.type][0].label.focus()
+                            return
+                        }
                     }
-                    else state.projects[indexOfProjectInProjects + 1].employeeSlots[state.visibleType.type][0].label.focus()
+                    if(!findFirstLeaveSlot()) if(!findFirstEmployee()) findFirstProject()
+                }
+            }
+            else hostObject.hostProject.employeeSlots[state.visibleType.type][hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) + 1].label.focus()
+        }
+    }
         right(focused, hostObject) {
             if(hostObject.hasOwnProperty('security')) {
                 if(hostObject.employeeSlots[state.visibleType.type][0]) {
