@@ -8,6 +8,16 @@ const tab = (function() {
         }
         return false
     }
+    function findLastProject() {
+        for(let i = state.projects.length - 1; i >= 0; i--) {
+            if(state.projects[i].employeeSlots[state.visibleType.type].length > 0) {
+                state.projects[i].employeeSlots[state.visibleType.type][state.projects[i].employeeSlots[state.visibleType.type.length - 1]].label.focus()
+                return true
+            }
+        }
+        return false
+    }
+
     function findFirstLeaveSlot() {
         for(const leaveSlot of leave.leaveSlots[state.visibleType.type]) {
             leaveSlot.label.focus()
