@@ -11,7 +11,7 @@ let dialogueProto = {
             this.display.style.left = sq.mainWindow.getBoundingClientRect().right - 90 + 'px'
         } else if(event.pageX < sq.mainWindow.getBoundingClientRect().left + 50) {
             this.display.style.left = 10 + 'px'
-        }else {
+        } else {
             this.display.style.left = event.pageX - 40 + 'px'
         }
     }
@@ -126,8 +126,19 @@ function openObjectDialogue(clickedObject, event, type) {
             mark.registerMarking(clickedObject)
             dialogueInterface.closeDialogue()
         })
+
+        let changeDaysAWeekButton = document.createElement('input')
+        changeDaysAWeekButton.className = 'changeDaysAWeekButton'
+        changeDaysAWeekButton.value = clickedObject.daysAWeek
+        initInput(changeDaysAWeekButton)
+        changeDaysAWeekButton.addEventListener('blur', event => {
+            clickedObject.daysAWeek = parseInt(changeDaysAWeekButton.value)
+            sm.populateTotalRows()
+            save.employees()
+        })
         dialogue.display.appendChild(markJoiningDateButton)
         dialogue.display.appendChild(markLeavingDateButton)
+        dialogue.display.appendChild(changeDaysAWeekButton)
     }
 
     dialogue.display.appendChild(deleteHostButton)

@@ -359,6 +359,13 @@ input {
 .markLeavingDateButton {
     right: 0;
 }
+.changeDaysAWeekButton {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 25px;
+    bottom: 35px;
+}
 
 .employeeType {
     width: 50px;
