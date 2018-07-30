@@ -61,6 +61,22 @@ const tab = (function() {
             else hostObject.hostProject.employeeSlots[state.visibleType.type][hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) + 1].label.focus()
         }
     }
+    function afterLeaveSlotLabel(hostObject) {
+        if(leave.leaveSlots[state.visibleType.type].indexOf(hostObject) == leave.leaveSlots[state.visibleType.type].length - 1) {
+            if(!findFirstEmployee()) if(!findFirstProject()) findFirstLeaveSlot()
+        }
+        else leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].indexOf(hostObject) + 1].label.focus()
+    }
+    function afterEmployeeLabel(hostObject) {
+        if(hostObject.hasOwnProperty('joiningDate')) {
+            if(state.getVisibleEmployees().indexOf(hostObject) > state.getVisibleEmployees().length - 1) {
+                if(!findFirstProject()) if(!findFirstLeaveSlot()) findFirstEmployee()
+            }
+            else state.getVisibleEmployees()[state.getVisibleEmployees().indexOf(hostObject) + 1].label.focus()
+        }
+        else if(!findFirstEmployee()) if(!findFirstProject()) findFirstLeaveSlot()
+    }
+
         right(focused, hostObject) {
             if(hostObject.hasOwnProperty('security')) {
                 if(hostObject.employeeSlots[state.visibleType.type][0]) {
