@@ -15,7 +15,7 @@ const tab = (function() {
     function findLastProject() {
         for(let i = state.projects.length - 1; i >= 0; i--) {
             if(state.projects[i].employeeSlots[state.visibleType.type].length > 0) {
-                focus(state.projects[i].employeeSlots[state.visibleType.type][state.projects[i].employeeSlots[state.visibleType.type.length - 1]].label)
+                focus(state.projects[i].employeeSlots[state.visibleType.type][state.projects[i].employeeSlots[state.visibleType.type].length - 1].display.lastChild)
                 return true
             }
         }
@@ -96,6 +96,13 @@ const tab = (function() {
         }
         else focus(leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].indexOf(hostObject) + 1].label)
     }
+    function beforeLeaveSlotLabel(hostObject) {
+        if(leave.leaveSlots[state.visibleType.type].indexOf(hostObject) == 0) {
+            if(!findLastProject()) if(!findLastEmployee()) findLastLeaveSlot()
+        }
+        else focus(leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].indexOf(hostObject) - 1].label)
+    }
+
     function afterEmployeeLabel(hostObject) {
         if(hostObject.hasOwnProperty('joiningDate')) {
             if(state.getVisibleEmployees().indexOf(hostObject) == state.getVisibleEmployees().length - 1) {
