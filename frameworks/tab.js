@@ -18,6 +18,13 @@ const tab = (function() {
         }
         return false
     }
+    function findFirstLeaveSlot() {
+        for(const leaveSlot of leave.leaveSlots[state.visibleType.type]) {
+            leaveSlot.label.focus()
+            return true
+        }
+        return false
+    }
                     }
                     else state.projects[indexOfProjectInProjects + 1].employeeSlots[state.visibleType.type][0].label.focus()
         right(focused, hostObject) {
