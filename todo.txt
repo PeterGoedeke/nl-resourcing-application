@@ -9,6 +9,7 @@ To-do list:
 
 Known bugs:
 - NaN in S / D row
+- S / D subtraction is the wrong way around
 - You can't have a joining and a leaving date at the same time
 - Marking out leaving and joining dates doesn't work sometimes?
 - Scrolling to the right is buggy again

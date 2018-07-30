@@ -8,13 +8,10 @@ let projectProto = {
             this.updateDisplay()
             save.projects()
         }
-        let endTracker = false
-        this.label.addEventListener('keyup', event => {
-            if(event.which == 39 && event.target.selectionStart == this.label.value.length && endTracker) {
+        this.label.addEventListener('keydown', event => {
+            if(event.which == 39 && event.target.selectionStart == this.label.value.length) {
                 tab.right(this.label, this)
-            } else endTracker = false
-            if(event.target.selectionStart == this.label.value.length) endTracker = true
-            else endTracker = false
+            }
         })
 
         bindDialogueListeners.call(this, 'project')
