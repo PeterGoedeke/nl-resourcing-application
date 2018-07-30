@@ -25,6 +25,14 @@ const tab = (function() {
         }
         return false
     }
+    function findLastLeaveSlot() {
+        for(let i = leave.leaveSlots[state.visibleType.type].length - 1; i >= 0; i--) {
+            leave.leaveSlots[state.visibleType.type][i].label.focus()
+            return true
+        }
+        return false
+    }
+
     function findFirstEmployee() {
         for(const employee of state.getVisibleEmployees()) {
             employee.label.focus()
