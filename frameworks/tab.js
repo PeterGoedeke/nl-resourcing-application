@@ -68,6 +68,9 @@ const tab = (function() {
     }
 
     return {
+        up(focused, hostObject) {
+
+        },
         right(focused, hostObject) {
             if(hostObject.hasOwnProperty('security')) {
                 if(hostObject.employeeSlots[state.visibleType.type][0]) {
@@ -76,17 +79,23 @@ const tab = (function() {
                     this.after(focused, hostObject)
                 }
             }
-            else if(hostObject.hostProject) {
-                if(focused.className = 'employeeSlotLabel') {
+            else if(hostObject.hasOwnProperty('hostProject')) {
+                if(focused.className == 'employeeSlotLabel') {
                     hostObject.display.firstChild.focus()
                 } else {
                     if(hostObject.display.lastChild === focused) {
                         this.after(focused, hostObject)
                     } else {
-                        hostObject.display.childNodes[Array.from(hostObject.display.childNodes).indexOf(focused)].focus()
+                        hostObject.display.childNodes[Array.from(hostObject.display.childNodes).indexOf(focused) + 1].focus()
                     }
                 }
             }
+        },
+        below(focused, hostObject) {
+
+        },
+        left(focused, hostObject) {
+
         },
         after(focused, hostObject) {
             if(hostObject.hasOwnProperty('employeeSlots')) afterProjectLabel(hostObject)

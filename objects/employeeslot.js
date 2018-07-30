@@ -68,6 +68,11 @@ let employeeSlotProto = {
                     save.projects()
                 }
             })
+            workloadBlock.addEventListener('keyup', event => {
+                if(event.which == 39 && event.target.selectionStart) {
+                    tab.right(workloadBlock, this)
+                }
+            })
             initInput(workloadBlock)
             this.display.appendChild(workloadBlock)
         }
