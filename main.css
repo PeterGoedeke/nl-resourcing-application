@@ -91,6 +91,15 @@ input {
     position: relative;
     box-sizing: border-box;
     visibility: visible;
+    border-left: 0;
+    border-right: 0;
+}
+.timeBlock:nth-child(even) {
+    z-index: 20;
+    text-indent: 45px;
+}
+.timeBlock:nth-child(odd) {
+    color: lightgrey;
 }
 .mainWindow {
     top: 0px;
