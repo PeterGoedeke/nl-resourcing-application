@@ -50,7 +50,7 @@ let employeeProto = {
             workloadBlock.className = 'employeeWorkloadBlock'
             workloadBlock.style.left = getXLocationFromID(key) + 'px'
             workloadBlock.style.width = 100 * zoom.scale + 'px'
-            const colour = (workload[key] == 4 || workload[key] == 5) ? 'green' : (workload[key] < 4 ? 'yellow' : 'red')
+            const colour = (workload[key] == this.daysAWeek - 1 || workload[key] == this.daysAWeek) ? 'green' : (workload[key] < this.daysAWeek - 1 ? 'yellow' : 'red')
             if(this.joiningDate && key < this.joiningDate || this.leavingDate && key >= this.leavingDate) {
                 workloadBlock.style.background = `repeating-linear-gradient(45deg, ${colour}, white 5px, ${colour} 5px, white 5px)`
             }

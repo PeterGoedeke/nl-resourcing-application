@@ -133,6 +133,7 @@ function openObjectDialogue(clickedObject, event, type) {
         initInput(changeDaysAWeekButton)
         changeDaysAWeekButton.addEventListener('blur', event => {
             clickedObject.daysAWeek = parseInt(changeDaysAWeekButton.value)
+            clickedObject.updateDisplay()
             sm.populateTotalRows()
             save.employees()
         })
