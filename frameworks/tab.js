@@ -25,6 +25,14 @@ const tab = (function() {
         }
         return false
     }
+    function findFirstEmployee() {
+        for(const employee of state.getVisibleEmployees()) {
+            employee.label.focus()
+            return true
+        }
+        return false
+    }
+
                     }
                     else state.projects[indexOfProjectInProjects + 1].employeeSlots[state.visibleType.type][0].label.focus()
         right(focused, hostObject) {
