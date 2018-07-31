@@ -219,6 +219,14 @@ const tab = (function() {
                 else focus(leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].indexOf(hostObject) - 1].label)
             }
         },
+        down(focused, hostObject) {
+            if(hostObject.hasOwnProperty('security')) {
+                if(state.projects.indexOf(hostObject) == state.projects.length - 1) {
+                    findFirstProject()
+                }
+                else focus(state.projects[state.projects.indexOf(hostObject) + 1].label)
+            }
+        },
         right(focused, hostObject) {
             if(hostObject.hasOwnProperty('security')) {
                 if(hostObject.employeeSlots[state.visibleType.type][0]) {
@@ -238,9 +246,6 @@ const tab = (function() {
                     }
                 }
             }
-        },
-        below(focused, hostObject) {
-
         },
         left(focused, hostObject) {
             if(hostObject.hasOwnProperty('security')) {

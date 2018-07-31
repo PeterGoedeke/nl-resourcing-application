@@ -5,9 +5,6 @@ To-do list:
 - Touchscreen
 - Make things look nice
 
-Potential bugs:
-- If you let employee slots resize out of the screen and then tab to the end of one it might break
-
 Unimportant bugs:
 - Date row doesn't work below 2000
 - Positioner can get too long, meaning that you can scroll too far in either direction
