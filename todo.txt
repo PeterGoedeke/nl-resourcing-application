@@ -8,6 +8,7 @@ To-do list:
 - Make things look nice
 
 Known bugs:
+- Date row doesn't work below 2000
 - NaN in S / D row
 - S / D subtraction is the wrong way around
 - You can't have a joining and a leaving date at the same time

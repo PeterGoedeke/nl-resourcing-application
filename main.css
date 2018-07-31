@@ -104,11 +104,8 @@ input {
     color: black;
     z-index: 20;
 }
-.timeBock:nth-child(even) {
+.timeBlock:nth-child(even) {
     border-left: solid black 1px;
-}
-.timeBlock:nth-child(odd) {
-    border-right: solid black 1pxk;
 }
 .mainWindow {
     top: 0px;
