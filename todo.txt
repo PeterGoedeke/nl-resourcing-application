@@ -5,17 +5,16 @@ To-do list:
 - Make maximum zoom two years
 - Touchscreen
 - Make things look nice
+- Add employee type to total type button
 
 Unimportant bugs:
 - Date row doesn't work below 2000
 - Positioner can get too long, meaning that you can scroll too far in either direction
 - Can't scroll by scrolling the sidebar
 - There is a bug where groups can stick around
-- TimeBlocks glitch around when you scroll to the left
 
 Important bugs:
 - Doesn't scroll down far enough
-- Scaling of timeblock text
 - NaN in S / D row
 - S / D subtraction is the wrong way around
 - You can't have a joining and a leaving date at the same time
@@ -29,7 +28,8 @@ Important bugs:
 Notes:
 - I changed the joining and marking behaviour
 
-Questions for client 
+Questions for client:
+- How do you want the months to show when it's smaller?
 - Do you need finer resizing?
 - Should projects create an employee to begin with?
 - Should it load in a little bit scrolled along to the current date or something?

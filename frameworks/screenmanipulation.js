@@ -30,7 +30,7 @@ const sm = {
         }
     },
     fixContentPaneHeight() {
-        sq.positioner.style.top = sq.getElementTop(sq.surplusRow) + 'px'
+        sq.positioner.style.top = sq.getElementTop(sq.surplusLabel) + 'px'
     },
     appendTimeBlock(dateID, firstChild = false, beforeBase = false) {
         timeBlocks ++

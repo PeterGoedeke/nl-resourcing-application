@@ -21,6 +21,7 @@ const sq = {
     employeeContainer: document.querySelector('.employeeContainer'),
     totalWorkloadRow: document.querySelector('.totalWorkloadRow'),
     totalEmployeesRow: document.querySelector('.totalEmployeesRow'),
+    surplusLabel: document.querySelector('.surplusLabel'),
     surplusRow: document.querySelector('.surplusRow'),
     totalRowPositioners: Array.from(document.querySelectorAll('.total')),
 

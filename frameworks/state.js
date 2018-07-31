@@ -224,3 +224,20 @@ function safe(func) {
 function toTitleCase(string) {
     return string.replace(/\b\w+/g, (string) => string.charAt(0).toUpperCase() + string.substr(1).toLowerCase())
 }
+
+setStyleRule = function(selector, rule) {
+    var stylesheet = document.styleSheets[(document.styleSheets.length - 1)];
+
+    for( var i in document.styleSheets ){
+        if( document.styleSheets[i].href && document.styleSheets[i].href.indexOf("myStyle.css") ) {
+            stylesheet = document.styleSheets[i];
+            break;
+        }
+    }
+
+    if( stylesheet.addRule ){
+        stylesheet.addRule(selector, rule);
+    } else if( stylesheet.insertRule ){
+        stylesheet.insertRule(selector + ' { ' + rule + ' }', stylesheet.cssRules.length);
+    }
+}

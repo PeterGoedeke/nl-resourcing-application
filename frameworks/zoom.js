@@ -1,9 +1,13 @@
 const zoom = (function() {
     let scale = 0.5
     function updateZoom() {
+        setStyleRule('.labeledTimeBlock::after', 'left: ' + 50 * zoom.scale + 'px;')
+        setStyleRule('.labeledTimeBlock::after', 'width: ' + 100 * zoom.scale + 'px;')
         sq.contentPane.scrollTop = 0
         sq.contentPane.scrollLeft = 0
-        Array.from(document.querySelectorAll('.timeBlock')).forEach(timeBlock => timeBlock.style.width = 100 * scale + 'px')
+        Array.from(document.querySelectorAll('.timeBlock')).forEach((timeBlock, i) => {
+            timeBlock.style.width = 100 * scale + 'px'
+        })
         Array.from(document.querySelectorAll('.employeeWorkloadBlock')).forEach(workloadBlock => workloadBlock.style.width = 100 * scale + 'px')
         Array.from(document.querySelectorAll('.employeeSlotWorkloadBlock')).forEach(workloadBlock => workloadBlock.style.width = 100 * scale + 'px')
         Array.from(document.querySelectorAll('.employeeSlotWorkloadBlock:first-child')).forEach(workloadBlock => {
