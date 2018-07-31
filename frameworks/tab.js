@@ -245,7 +245,10 @@ const tab = (function() {
                 else focus(state.getVisibleEmployees()[state.getVisibleEmployees().length - 1].label)
             }
             else {
-
+                if(leave.leaveSlots[state.visibleType.type].indexOf(hostObject) == leave.leaveSlots[state.visibleType.type].length - 1) {
+                    if(!findFirstEmployee()) if(!findFirstEmployeeSlot()) findFirstLeaveSlot() 
+                }
+                else focus(leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].indexOf(hostObject) + 1].label)
             }
         },
         right(focused, hostObject) {

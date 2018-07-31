@@ -12,6 +12,7 @@ Unimportant bugs:
 - There is a bug where groups can stick around
 
 Important bugs:
+- Application opens with a dumb view
 - Horizontal lines go in front of to axis container
 - Vertical lines go in front of sidebar
 - Doesn't scroll down far enough
