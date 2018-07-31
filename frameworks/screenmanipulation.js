@@ -1,3 +1,4 @@
+let timeBlocks = 0
 const sm = {
     initTimeFrame() {
         if(state.projects.length > 0 || leave.leaveSlots.length > 0) state.calculateDateRange()
@@ -32,12 +33,13 @@ const sm = {
         sq.positioner.style.top = sq.getElementTop(sq.surplusRow) + 'px'
     },
     appendTimeBlock(dateID, firstChild = false, beforeBase = false) {
+        timeBlocks ++
         let timeBlock = document.createElement('div')
         timeBlock.className = 'timeBlock'
+        if(timeBlocks % 2 == 0) timeBlock.classList.add('labeledTimeBlock')
         timeBlock.textContent = dateID
         timeBlock.setAttribute('value', convertIDToDate(dateID))
         timeBlock.style.width = 100 * zoom.scale + 'px'
-
         let gridLine = document.createElement('div')
         gridLine.className = 'gridLine'
         timeBlock.appendChild(gridLine)

@@ -95,7 +95,7 @@ input {
     border-right: 0;
     color: lightgrey;
 }
-.timeBlock:nth-child(even)::after {
+.labeledTimeBlock::after {
     content: attr(value);
     position: absolute;
     left: 25px;
@@ -104,9 +104,10 @@ input {
     color: black;
     z-index: 20;
 }
-.timeBlock:nth-child(even) {
+.labeledTimeBlock {
     border-left: solid black 1px;
 }
+
 .mainWindow {
     top: 0px;
     bottom: 35px;
