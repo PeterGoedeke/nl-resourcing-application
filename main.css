@@ -240,6 +240,7 @@ input {
     height: 1px;
     background-color: black;
     bottom: 0;
+    width: 10000px;
 }
 .projectLabel {
     float: left;

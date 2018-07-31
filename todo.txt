@@ -15,14 +15,9 @@ Unimportant bugs:
 - There is a bug where groups can stick around
 
 Important bugs:
-- Horizontal lines are gone...?
 - Doesn't scroll down far enough
-- Marking out leaving and joining dates doesn't work sometimes?
 - Scrolling to the right is buggy again
-- Lag when you zoom out and can see a lot of elements
-- Update Vertical Display is called heaps when loading
 - Employee displays are out of line with the vertical gridlines
-- Potentially need to update display while dragging to the right
 
 Notes:
 - I changed the joining and marking behaviour
