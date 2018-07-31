@@ -77,6 +77,9 @@ let employeeSlotProto = {
                 if(event.which == 37) {
                     tab.left(workloadBlock, this)
                 }
+                if(event.which == 38) {
+                    tab.up(workloadBlock, this)
+                }
             })
             initInput(workloadBlock)
             this.display.appendChild(workloadBlock)

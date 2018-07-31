@@ -143,20 +143,45 @@ const tab = (function() {
                 else if(!findLastEmployee()) if(!findLastLeaveSlot()) findLastProjectLabel()
             }
             else if(hostObject.hasOwnProperty('hostProject')) {
-                if(hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) == 0) {
-                    if(state.projects.indexOf(hostObject.hostProject) == 0) {
-                        if(!findLastEmployee()) if(!findLastLeaveSlot()) findLastEmployeeSlot()
+                if(focused === hostObject.label) {
+                    if(hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) == 0) {
+                        if(state.projects.indexOf(hostObject.hostProject) == 0) {
+                            if(!findLastEmployee()) if(!findLastLeaveSlot()) findLastEmployeeSlot()
+                        }
+                        else {
+                            for(let i = state.projects.indexOf(hostObject.hostProject) - 1; i >= 0; i--) {
+                                if(state.projects[i].employeeSlots[state.visibleType.type].length > 0) {
+                                    focus(state.projects[i].employeeSlots[state.visibleType.type][state.projects[i].employeeSlots[state.visibleType.type].length - 1].label)
+                                    return
+                                }
+                            }
+                        }
+                    }
+                    else focus(hostObject.hostProject.employeeSlots[state.visibleType.type][hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) - 1].label)
+                }
+                else {
+                    if(hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) == 0) {
+                        
                     }
                     else {
-                        for(let i = state.projects.indexOf(hostObject.hostProject) - 1; i >= 0; i--) {
-                            if(state.projects[i].employeeSlots[state.visibleType.type].length > 0) {
-                                focus(state.projects[i].employeeSlots[state.visibleType.type][state.projects[i].employeeSlots[state.visibleType.type].length - 1].label)
-                                return
+                        const id = sq.getNearestTimeBlock(focused.getBoundingClientRect().left)
+                        const previousChildNodes = Array.from(hostObject.hostProject.employeeSlots[state.visibleType.type][hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) - 1].display.childNodes)
+                        if(previousChildNodes.some(workloadBlock => sq.getNearestTimeBlock(workloadBlock.getBoundingClientRect().left) == id)) {
+                            focus(previousChildNodes.find(workloadBlock => sq.getNearestTimeBlock(workloadBlock.getBoundingClientRect().left) == id))
+                        }
+                        else {
+                            const previousChildNodesFirstID = sq.getNearestTimeBlock(previousChildNodes[0].getBoundingClientRect().left)
+                            const previousChildNodesLastID = sq.getNearestTimeBlock(previousChildNodes[previousChildNodes.length - 1].getBoundingClientRect().left)
+
+                            if(id > previousChildNodesLastID) {
+                                focus(previousChildNodes[previousChildNodes.length - 1])
+                            }
+                            else if(id < previousChildNodesFirstID) {
+                                focus(previousChildNodes[0])
                             }
                         }
                     }
                 }
-                else focus(hostObject.hostProject.employeeSlots[state.visibleType.type][hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) - 1].label)
             }
             else if(hostObject.hasOwnProperty('joiningDate')) {
                 if(state.getVisibleEmployees().indexOf(hostObject) == 0) {
