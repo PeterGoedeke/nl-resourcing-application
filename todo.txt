@@ -15,6 +15,8 @@ Unimportant bugs:
 - There is a bug where groups can stick around
 
 Important bugs:
+- Horizontal lines go in front of to axis container
+- Vertical lines go in front of sidebar
 - Doesn't scroll down far enough
 - Employee displays are out of line with the vertical gridlines
 
@@ -23,12 +25,10 @@ Notes:
 - Client wanted arrow key navigation
 
 Questions for client:
-- How do you want the months to show when it's smaller?
-- Do you need finer resizing?
-- Should projects create an employee to begin with?
-- Should it load in a little bit scrolled along to the current date or something?
+- How do you want the months to show when it's smaller? Drop the year
+- Should projects create an employee to begin with? Yes
 - Do you need to be able to hide stuff before a certain date manually?
-- Is it a problem that you can enter negative workloads?
+- Is it a problem that you can enter negative workloads? Yes
 - How do you want join and leave dates to be removed?
 - Do you want me to change marking employee leave and start dates to just where did they open the dialogue? Leave it cool
 

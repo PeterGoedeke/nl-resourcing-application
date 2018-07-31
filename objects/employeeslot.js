@@ -66,7 +66,8 @@ let employeeSlotProto = {
                 if(isNaN(workloadBlock.value)) {
                     workloadBlock.value = workloadBlock.value = workload[i]
                 } else {
-                    this.enterWorkloadInformation.call(this, i, workloadBlock.value)
+                    this.enterWorkloadInformation.call(this, i, Math.abs(workloadBlock.value))
+                    workloadBlock.value = workloadBlock.value = workload[i]
                     save.projects()
                 }
             })
