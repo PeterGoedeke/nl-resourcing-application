@@ -12,6 +12,7 @@ Unimportant bugs:
 - There is a bug where groups can stick around
 
 Important bugs:
+- Horizontal lines are gone...?
 - Doesn't scroll down far enough
 - NaN in S / D row
 - S / D subtraction is the wrong way around
