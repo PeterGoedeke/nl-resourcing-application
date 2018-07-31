@@ -108,7 +108,7 @@ const sm = {
             workloadBlock.className = 'employeeWorkloadBlock'
             workloadBlock.style.left = getXLocationFromID(i) + 'px'
             workloadBlock.style.width = 100 * zoom.scale + 'px'
-            workloadBlock.textContent = totalDaysAWeek[i]
+            workloadBlock.textContent = totalDaysAWeek[i] || 0
             sq.totalEmployeesRow.appendChild(workloadBlock)
         }
         for(let i = start; i <= end; i++) {
@@ -116,7 +116,7 @@ const sm = {
             workloadBlock.className = 'employeeWorkloadBlock'
             workloadBlock.style.left = getXLocationFromID(i) + 'px'
             workloadBlock.style.width = 100 * zoom.scale + 'px'
-            workloadBlock.textContent = totalWorkload[i] / 5 - totalDaysAWeek[i]
+            workloadBlock.textContent =  (totalDaysAWeek[i] || 0) - totalWorkload[i] / 5
             sq.surplusRow.appendChild(workloadBlock)
         }
 

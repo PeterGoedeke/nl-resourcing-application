@@ -5,6 +5,9 @@ To-do list:
 - Touchscreen
 - Make things look nice
 
+Potential bugs:
+- If you let employee slots resize out of the screen and then tab to the end of one it might break
+
 Unimportant bugs:
 - Date row doesn't work below 2000
 - Positioner can get too long, meaning that you can scroll too far in either direction
@@ -14,8 +17,6 @@ Unimportant bugs:
 Important bugs:
 - Horizontal lines are gone...?
 - Doesn't scroll down far enough
-- NaN in S / D row
-- S / D subtraction is the wrong way around
 - You can't have a joining and a leaving date at the same time
 - Marking out leaving and joining dates doesn't work sometimes?
 - Scrolling to the right is buggy again
@@ -53,3 +54,4 @@ Possible refactorings:
 - Replace most mouseup event listeners with HTML5 onclicks
 - Rewrite dialogues with mixins
 - Dialogues.js is in the wrong folder
+- Merge all the 'keydown' arrow key navigation event listeners
