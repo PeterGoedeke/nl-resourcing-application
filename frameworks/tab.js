@@ -35,6 +35,15 @@ const tab = (function() {
         }
         return false
     }
+    function findFirstEmployeeSlot() {
+        for(const project of state.projects) {
+            if(project.employeeSlots[state.visibleType.type].length > 0) {
+                focus(project.employeeSlots[state.visibleType.type][0].label)
+                return true
+            }
+        }
+        return false
+    }
 
     function findFirstLeaveSlot() {
         for(const leaveSlot of leave.leaveSlots[state.visibleType.type]) {
@@ -225,6 +234,18 @@ const tab = (function() {
                     findFirstProject()
                 }
                 else focus(state.projects[state.projects.indexOf(hostObject) + 1].label)
+            }
+            else if(hostObject.hasOwnProperty('hostProject')) {
+
+            }
+            else if(hostObject.hasOwnProperty('joiningDate')) {
+                if(state.getVisibleEmployees().indexOf(hostObject) == state.getVisibleEmployees().length - 1) {
+                    if(!findFirstEmployeeSlot()) if(!findFirstLeaveSlot()) findFirstEmployee()
+                }
+                else focus(state.getVisibleEmployees()[state.getVisibleEmployees().length - 1].label)
+            }
+            else {
+
             }
         },
         right(focused, hostObject) {
