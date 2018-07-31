@@ -18,13 +18,14 @@ Important bugs:
 - Horizontal lines go in front of to axis container
 - Vertical lines go in front of sidebar
 - Doesn't scroll down far enough
-- Employee displays are out of line with the vertical gridlines
 
 Notes:
 - I changed the joining and marking behaviour
 - Client wanted arrow key navigation
 
 Questions for client:
+- Autoremove based on the current date?
+
 - How do you want the months to show when it's smaller? Drop the year
 - Should projects create an employee to begin with? Yes
 - Do you need to be able to hide stuff before a certain date manually?

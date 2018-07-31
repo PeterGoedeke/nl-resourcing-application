@@ -241,3 +241,12 @@ setStyleRule = function(selector, rule) {
         stylesheet.insertRule(selector + ' { ' + rule + ' }', stylesheet.cssRules.length);
     }
 }
+
+function currentDateID() {
+    let date = Date.now()
+    date -= Math.floor((2000 - 1970) * 365 * 24 * 60 * 60 * 1000)
+    date /= 365 * 24 * 60 * 60 * 1000
+    date *= 24
+    date = Math.floor(date)
+    return date
+}
