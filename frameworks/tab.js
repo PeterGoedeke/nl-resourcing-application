@@ -143,7 +143,20 @@ const tab = (function() {
                 else if(!findLastEmployee()) if(!findLastLeaveSlot()) findLastProjectLabel()
             }
             else if(hostObject.hasOwnProperty('hostProject')) {
-
+                if(hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) == 0) {
+                    if(state.projects.indexOf(hostObject.hostProject) == 0) {
+                        if(!findLastEmployee()) if(!findLastLeaveSlot()) findLastEmployeeSlot()
+                    }
+                    else {
+                        for(let i = state.projects.indexOf(hostObject.hostProject) - 1; i >= 0; i--) {
+                            if(state.projects[i].employeeSlots[state.visibleType.type].length > 0) {
+                                focus(state.projects[i].employeeSlots[state.visibleType.type][state.projects[i].employeeSlots[state.visibleType.type].length - 1].label)
+                                return
+                            }
+                        }
+                    }
+                }
+                else focus(hostObject.hostProject.employeeSlots[state.visibleType.type][hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) - 1].label)
             }
             else if(hostObject.hasOwnProperty('joiningDate')) {
                 if(state.getVisibleEmployees().indexOf(hostObject) == 0) {

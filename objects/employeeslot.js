@@ -24,6 +24,9 @@ let employeeSlotProto = {
             if(event.which == 37 && event.target.selectionStart == 0) {
                 tab.left(this.label, this)
             }
+            if(event.which == 38) {
+                tab.up(this.label, this)
+            }
         })
         bindDialogueListeners.call(this)
     },
