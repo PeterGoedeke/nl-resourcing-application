@@ -16,7 +16,6 @@ Unimportant bugs:
 
 Important bugs:
 - Doesn't scroll down far enough
-- Scrolling to the right is buggy again
 - Employee displays are out of line with the vertical gridlines
 
 Notes:
