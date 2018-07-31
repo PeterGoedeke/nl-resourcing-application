@@ -16,6 +16,7 @@ const state = {
         leave.showVisibleTypes()
         state.employees.forEach(employee => employee.showVisibleTypes())
         sq.typeLabel.textContent = state.visibleType.type.toUpperCase()
+        sq.totalTypeLabel.textContent = state.visibleType.type.toUpperCase()
         sm.updateVerticalDisplay()
         sm.updateDisplay()
     },

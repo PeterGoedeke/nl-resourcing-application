@@ -23,6 +23,7 @@ const sq = {
     totalEmployeesRow: document.querySelector('.totalEmployeesRow'),
     surplusLabel: document.querySelector('.surplusLabel'),
     surplusRow: document.querySelector('.surplusRow'),
+    totalTypeLabel: document.querySelector('.totalTypeLabel'),
     totalRowPositioners: Array.from(document.querySelectorAll('.total')),
 
     getTimeBlockWidth() {
