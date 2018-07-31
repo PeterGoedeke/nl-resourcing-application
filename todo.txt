@@ -2,10 +2,8 @@ To-do list:
 - Add an interiors stream
 - Arrow key navigation
 - Add an undo button
-- Make maximum zoom two years
 - Touchscreen
 - Make things look nice
-- Add employee type to total type button
 
 Unimportant bugs:
 - Date row doesn't work below 2000
