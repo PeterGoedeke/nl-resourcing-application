@@ -25,6 +25,7 @@ Important bugs:
 
 Notes:
 - I changed the joining and marking behaviour
+- Client wanted arrow key navigation
 
 Questions for client:
 - How do you want the months to show when it's smaller?

@@ -19,6 +19,13 @@ const tab = (function() {
         }
         return false
     }
+    function findLastProjectLabel() {
+        for(let i = state.projects.length - 1; i >= 0; i--) {
+            focus(state.projects[i].label)
+            return true
+        }
+        return false
+    }
 
     function findFirstLeaveSlot() {
         for(const leaveSlot of leave.leaveSlots[state.visibleType.type]) {
@@ -120,7 +127,12 @@ const tab = (function() {
 
     return {
         up(focused, hostObject) {
-
+            if(hostObject.hasOwnProperty('security')) {
+                if(state.projects.indexOf(hostObject) > 0) {
+                    focus(state.projects[state.projects.indexOf(hostObject) - 1].label)
+                }
+                else if(!findLastEmployee()) if(!findLastLeaveSlot()) findLastProjectLabel()
+            }
         },
         right(focused, hostObject) {
             if(hostObject.hasOwnProperty('security')) {
