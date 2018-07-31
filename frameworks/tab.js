@@ -152,7 +152,10 @@ const tab = (function() {
                 else focus(state.getVisibleEmployees()[state.getVisibleEmployees().indexOf(hostObject) - 1].label)
             }
             else {
-
+                if(leave.leaveSlots[state.visibleType.type].indexOf(hostObject) == 0) {
+                    if(!findLastEmployeeSlot()) if(!findLastEmployee()) findLastLeaveSlot()
+                }
+                else focus(leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].indexOf(hostObject) - 1].label)
             }
         },
         right(focused, hostObject) {
