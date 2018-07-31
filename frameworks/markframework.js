@@ -14,11 +14,15 @@ let mark = (function() {
     })
     return {
         registerMarking(markedObject, leaving = true) {
-            markedObject.joiningDate = undefined
-            markedObject.leavingDate = undefined
+            if(leaving) {
+                markedObject.leavingDate = undefined
+                key = 'leavingDate'
+            } else {
+                markedObject.joiningDate = undefined
+                key = 'joiningDate'
+            }
             markedObject.updateDisplay()
             currentlyMarking = markedObject
-            key = leaving ? 'leavingDate' : 'joiningDate'
             document.querySelector('body').style.cursor = 'crosshair'
         }
     }

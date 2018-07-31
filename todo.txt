@@ -17,7 +17,6 @@ Unimportant bugs:
 Important bugs:
 - Horizontal lines are gone...?
 - Doesn't scroll down far enough
-- You can't have a joining and a leaving date at the same time
 - Marking out leaving and joining dates doesn't work sometimes?
 - Scrolling to the right is buggy again
 - Lag when you zoom out and can see a lot of elements
