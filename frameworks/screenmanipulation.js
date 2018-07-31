@@ -1,8 +1,11 @@
-let timeBlocks = 0
+let timeBlocksBeforeBase = 0
+let timeBlocksAfterBase = 0
+let even = false
 const sm = {
     initTimeFrame() {
         if(state.projects.length > 0 || leave.leaveSlots.length > 0) state.calculateDateRange()
         state.baseDate = state.earliestDate - 1
+        if(state.baseDate % 2 == 0) even = true
         this.appendTimeBlock(state.baseDate)
         if(state.earliestDate < state.baseDate) for(let i = state.earliestDate; i < state.baseDate; i++) this.appendTimeBlock(i, false, true)
         if(state.latestDate > state.earliestDate) for(let i = state.baseDate + 1; i <= state.latestDate; i++) this.appendTimeBlock(i)
@@ -33,10 +36,18 @@ const sm = {
         sq.positioner.style.top = sq.getElementTop(sq.surplusLabel) + 'px'
     },
     appendTimeBlock(dateID, firstChild = false, beforeBase = false) {
-        timeBlocks ++
         let timeBlock = document.createElement('div')
         timeBlock.className = 'timeBlock'
-        if(timeBlocks % 2 == 0) timeBlock.classList.add('labeledTimeBlock')
+        if(firstChild || beforeBase) {
+            timeBlocksBeforeBase ++
+            if(timeBlocksBeforeBase % 2 == 0 && even) timeBlock.classList.add('labeledTimeBlock')
+            else if(timeBlocksBeforeBase % 2 == 1 && !even) timeBlock.classList.add('labeledTimeBlock')
+        }
+        else {
+            timeBlocksAfterBase ++
+            if(timeBlocksAfterBase % 2 == 0 && !even) timeBlock.classList.add('labeledTimeBlock')
+            else if(timeBlocksAfterBase % 2 == 1 && even) timeBlock.classList.add('labeledTimeBlock')
+        }
         timeBlock.textContent = dateID
         timeBlock.setAttribute('value', convertIDToDate(dateID))
         timeBlock.style.width = 100 * zoom.scale + 'px'
