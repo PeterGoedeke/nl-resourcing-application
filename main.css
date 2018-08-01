@@ -193,6 +193,7 @@ input {
 .createProject, .createLeaveSlot, .createEmployee {
     height: 20px;
     line-height: 20px;
+    border: 0;
 }
 .leaveLabel, .typeLabel {
     min-height: 50px;
@@ -243,7 +244,6 @@ input {
 .line {
     position: absolute;
     z-index: 1;
-    left: 175px;
     border: 0;
     height: 1px;
     background-color: black;
@@ -254,11 +254,15 @@ input {
     float: left;
     width: 100%;
     height: 100%;
+    border-left: 0;
+    border-top: 0;
+    text-align: center;
 }
 .projectLabelContainer {
     height: 30px;
     min-height: 30px;
     position: relative;
+    border: 0;
 }
 .createEmployeeSlot {
     position: absolute;
@@ -287,7 +291,8 @@ input {
 }
 .employeeLabel, .employeeSlotLabelWrapper {
     height: 25px;
-    width: 86px;
+    width: 100%;
+    border-right: 0;
     box-sizing: border-box;
     visibility: visible;
     display: block;
@@ -296,6 +301,11 @@ input {
     border: 0;
     visibility: hidden;
     position: relative;
+}
+.employeeSlotLabelWrapper > input {
+    border: 0;
+    border-bottom: solid grey 1px;
+    text-align: center;
 }
 .employeeSlotLabel, .autocompleteLabel {
     position: absolute;
