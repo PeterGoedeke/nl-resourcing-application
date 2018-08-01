@@ -210,7 +210,7 @@ input {
     overflow-x: scroll;
 }
 .contentPane::-webkit-scrollbar {
-    width: 0 !important
+    width: 0 !important;
 }
 .contentPane::-webkit-scrollbar-thumb {
     background: lightgrey;
@@ -411,7 +411,7 @@ input {
     position: relative;
     left: 175px;
     height: 25px;
-    z-index: 2;
+    z-index: 1;
     overflow: hidden;
     white-space: nowrap;
     pointer-events: none;
