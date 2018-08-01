@@ -57,7 +57,7 @@ let employeeProto = {
         save.leave()
     },
     updateVerticalDisplay(index) {
-        this.display.style.top = sq.getTotalProjectHeight() + sq.getTotalLeaveHeight() + 80 + 10 * zoom.scale + index * 50 * zoom.scale + 'px'
+        this.display.style.top = Math.ceil(sq.beforeEmployeeSeparator.offsetTop + sq.beforeEmployeeSeparator.offsetHeight - 2 + zoom.scale + index * 50 * zoom.scale) + 'px'
     },
     updateDisplay() {
         this.populateEmptyWorkload()
@@ -97,11 +97,9 @@ let employeeProto = {
         if(this.employeeType == state.visibleType.type) {
             this.display.style.display = 'block'
             this.label.style.display = 'block'
-            console.log('shown')
         } else {
             this.display.style.display = 'none'
             this.label.style.display = 'none'
-            console.log('hidden')
         }
     },
     updateZoom() {

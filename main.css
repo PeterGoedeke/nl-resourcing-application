@@ -364,7 +364,6 @@ input {
     width: 50px;
     height: 100%;
     display: inline-block;
-    vertical-align: top;
     border: 0;
     border-right: solid grey 1px;
 }
@@ -385,11 +384,12 @@ input {
     top: 35px;
     position: absolute;
     overflow: hidden;
-    visibility: hidden;
+    border: 0;
+    text-align: center;
+    line-height: 25px;
 }
 .employeeWorkloadBlock {
     width: 50px;
-    display: inline-block;
     position: absolute;
     visibility: visible;
     height: 100%;
@@ -482,7 +482,7 @@ input {
     line-height: 75px;
 }
 .bottomElement {
-    border: 0;
+    border: solid lightgrey 1px;
 }
 
 .gridLine {

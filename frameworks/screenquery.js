@@ -25,6 +25,7 @@ const sq = {
     surplusRow: document.querySelector('.surplusRow'),
     totalTypeLabel: document.querySelector('.totalTypeLabel'),
     totalRowPositioners: Array.from(document.querySelectorAll('.total')),
+    beforeEmployeeSeparator: document.querySelector('.es'),
 
     getTimeBlockWidth() {
         return 100 * zoom.scale
