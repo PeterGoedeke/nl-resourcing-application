@@ -23,16 +23,7 @@ let employeeProto = {
                 save.projects()
                 save.leave()
             } else if(this.label.value != this.name) {
-                this.name = toTitleCase(this.label.value)
-                this.label.value = this.name
-                state.projects.forEach(project => {
-                    project.employeeSlots[state.visibleType.type].forEach(employeeSlot => {
-                        if(employeeSlot.employee === this) employeeSlot.label.value = this.name
-                    })
-                })
-                leave.leaveSlots[state.visibleType.type].forEach(leaveSlot => { if(leaveSlot.employee === this) leaveSlot.label.value = this.name })
-                save.projects()
-                save.leave()
+                this.rename(this.label.value)
             }
             save.employees()
         })
@@ -51,6 +42,19 @@ let employeeProto = {
             }
         })
         bindDialogueListeners.call(this, 'employee')
+    },
+    rename(newName) {
+        undo.registerEmployeeChange('rename', [this, this.name])
+        this.name = toTitleCase(newName)
+        this.label.value = this.name
+        state.projects.forEach(project => {
+            project.employeeSlots[state.visibleType.type].forEach(employeeSlot => {
+                if(employeeSlot.employee === this) employeeSlot.label.value = this.name
+            })
+        })
+        leave.leaveSlots[state.visibleType.type].forEach(leaveSlot => { if(leaveSlot.employee === this) leaveSlot.label.value = this.name })
+        save.projects()
+        save.leave()
     },
     updateVerticalDisplay(index) {
         this.display.style.top = sq.getTotalProjectHeight() + sq.getTotalLeaveHeight() + 80 + 10 * zoom.scale + index * 50 * zoom.scale + 'px'
