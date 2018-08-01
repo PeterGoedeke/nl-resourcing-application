@@ -11,7 +11,6 @@ Unimportant bugs:
 
 Important bugs:
 - Vertical lines go in front of sidebar
-- Doesn't scroll down far enough
 
 Notes:
 - I changed the joining and marking behaviour
