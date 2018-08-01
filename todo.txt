@@ -6,11 +6,10 @@ To-do list:
 
 Unimportant bugs:
 - Positioner can get too long, meaning that you can scroll too far in either direction
-- Can't scroll by scrolling the sidebar
+- Can't scroll by scrolling the sidebar. Doesn't matter
 - There is a bug where groups can stick around
 
 Important bugs:
-- Horizontal lines go in front of to axis container
 - Vertical lines go in front of sidebar
 - Doesn't scroll down far enough
 

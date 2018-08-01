@@ -33,7 +33,7 @@ const sm = {
         }
     },
     fixContentPaneHeight() {
-        sq.positioner.style.top = sq.getElementTop(sq.surplusLabel) + 'px'
+        sq.positioner.style.top = sq.surplusRow.offsetTop + sq.surplusRow.offsetHeight + 'px'
     },
     appendTimeBlock(dateID, firstChild = false, beforeBase = false) {
         let timeBlock = document.createElement('div')
