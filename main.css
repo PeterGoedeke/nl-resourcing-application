@@ -237,6 +237,9 @@ input {
     border: solid black 1px;
 }
 .projectDisplay {
+    border: 0;
+    border-left: solid grey 1px;
+    border-right: solid grey 1px;
     min-height: 30px;
     top: 30px;
     position: relative;
@@ -288,13 +291,19 @@ input {
 }
 
 .employeeSlot {
+    border-left: solid grey 1px;
+    border-right: solid grey 1px;
+    border-top: 0;
+    border-bottom: solid grey 1px;
     top: 35px;
     height: 25px;
     position: absolute;
     visibility: visible;
     z-index: 1;
     overflow: hidden;
+    background-color: lightskyblue;
 }
+
 .employeeSlotLabelContainer {
     border: 0;
     visibility: hidden;
@@ -356,11 +365,14 @@ input {
     height: 100%;
     display: inline-block;
     vertical-align: top;
+    border: 0;
+    border-right: solid grey 1px;
 }
 
 .employeeSlotWorkloadBlock:first-child {
     width: 30px;
     margin-left: 10px;
+    border-left: solid grey 1px;
 }
 .employeeSlotWorkloadBlock:last-child {
     width: 30px;
@@ -381,6 +393,8 @@ input {
     position: absolute;
     visibility: visible;
     height: 100%;
+    border: 0;
+    border-bottom: solid black 1px;
 }
 
 .dialogue {
@@ -443,6 +457,9 @@ input {
     overflow: hidden;
     white-space: nowrap;
     pointer-events: none;
+    border: 0;
+    line-height: 25px;
+    text-align: center;
 }
 .totalWorkloadLabel, .totalEmployeesLabel, .surplusLabel {
     position: relative;
@@ -463,6 +480,9 @@ input {
     border-left: 0;
     text-align: center;
     line-height: 75px;
+}
+.bottomElement {
+    border: 0;
 }
 
 .gridLine {
