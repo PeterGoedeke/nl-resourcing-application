@@ -70,12 +70,10 @@ input {
     height: 30px;
     width: 100vw;
     z-index: 2;
+    border: 0;
 }
 .bottomMargin {
     bottom: 0px;
-}
-.topMargin {
-    border: 0;
 }
 .topAxisContainer {
     border: 0;
@@ -142,6 +140,10 @@ input {
 
 .marginElement {
     height: 100%;
+    border-bottom: 0;
+    border-top: 0;
+    line-height: 30px;
+    text-align: center;
 }
 .button {
     text-align: center;
@@ -152,12 +154,16 @@ input {
 .addType {
     float: left;
     width: 50px;
+    border-top: 0;
+    border-left: 0;
+    border-bottom: 0;
 }
-.zoomContainer, .openNewWindow {
+.zoomContainer {
     float: right;
 }
 .zoomContainer {
     width: 100px;
+    border: 0;
 }
 .zoomIn, .zoomDisplay, .zoomOut {
     float: left;
@@ -167,9 +173,10 @@ input {
 }
 .zoomDisplay {
     width: 50%;
+    border: 0;
 }
-.openNewWindow {
-    width: 50px;
+.zoomIn {
+    border-right: 0;
 }
 
 .sidebar {
@@ -415,6 +422,9 @@ input {
 .employeeType {
     width: 50px;
     float: left;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 0;
 }
 .employeeTypeInput {
     width: 100%;
