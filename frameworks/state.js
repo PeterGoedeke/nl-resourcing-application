@@ -1,5 +1,5 @@
 const state = {
-    baseDate: 29,
+    baseDate: currentDateID() - 1,
     earliestDate: currentDateID() - 1,
     latestDate: 35,
     projects: [],
