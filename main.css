@@ -225,7 +225,7 @@ input {
 .contentPane {
     position: relative;
     height: 100%;
-    background-color: lightgreen;
+    background-color: lightgrey;
     white-space: nowrap;
     overflow-x: scroll;
 }
@@ -237,9 +237,10 @@ input {
     border: solid black 1px;
 }
 .projectDisplay {
+    background-color: #8e8e8e;
     border: 0;
-    border-left: solid grey 1px;
-    border-right: solid grey 1px;
+    border-left: solid lightskyblue 5px;
+    border-right: solid lightskyblue 5px;
     min-height: 30px;
     top: 30px;
     position: relative;
