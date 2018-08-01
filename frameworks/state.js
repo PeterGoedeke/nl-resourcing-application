@@ -1,7 +1,7 @@
 const state = {
     baseDate: currentDateID() - 1,
     earliestDate: currentDateID() - 1,
-    latestDate: 35,
+    latestDate: currentDateID() + 5,
     projects: [],
     groups: [],
     employees: [],
@@ -129,6 +129,11 @@ const state = {
         sq.totalWorkloadRow.style.width = sq.contentPane.offsetWidth + 'px'
         sq.totalEmployeesRow.style.width = sq.contentPane.offsetWidth + 'px'
         sq.surplusRow.style.width = sq.contentPane.offsetWidth + 'px'
+    })
+    addEventListener('keypress', event => {
+        if(event.which == 26 && document.activeElement === document.body) {
+            undo.undo()
+        }
     })
 
     // addEventListener('keypress', event => {
