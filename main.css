@@ -123,9 +123,10 @@ input {
     position: absolute;
 }
 .separator {
+    border-left: 0;
     width: 100vw;
     height: 5px;
-    background-color: red;
+    background-color: lightskyblue;
     z-index: 2;
     pointer-events: none;
 }
