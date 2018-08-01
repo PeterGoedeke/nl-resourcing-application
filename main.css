@@ -194,8 +194,11 @@ input {
     height: 20px;
     line-height: 20px;
     border: 0;
+    border-right: solid black 1px;
 }
 .leaveLabel, .typeLabel {
+    border-left: 0;
+    border-top: 0;
     min-height: 50px;
     text-align: center;
     padding: 30% 0;
