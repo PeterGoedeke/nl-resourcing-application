@@ -1,12 +1,10 @@
 To-do list:
 - Add an interiors stream
-- Arrow key navigation
 - Add an undo button
 - Touchscreen
 - Make things look nice
 
 Unimportant bugs:
-- Date row doesn't work below 2000
 - Positioner can get too long, meaning that you can scroll too far in either direction
 - Can't scroll by scrolling the sidebar
 - There is a bug where groups can stick around
@@ -23,7 +21,9 @@ Notes:
 
 Questions for client:
 - Autoremove based on the current date?
+- Should I remove the button in the corner?
 
+- Date row doesn't work below 2000 Not important
 - How do you want the months to show when it's smaller? Drop the year
 - Should projects create an employee to begin with? Yes
 - Do you need to be able to hide stuff before a certain date manually?

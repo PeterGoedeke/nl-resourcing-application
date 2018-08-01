@@ -98,11 +98,11 @@ input {
 .labeledTimeBlock::after {
     content: attr(value);
     position: absolute;
-    left: 25px;
-    width: 50px;
+    width: 100px;
     text-align: center;
     color: black;
     z-index: 20;
+    left: 0;
 }
 .labeledTimeBlock {
     border-left: solid black 1px;
