@@ -10,6 +10,7 @@ Unimportant bugs:
 - There is a bug where groups can stick around
 
 Important bugs:
+- Text on smaller zooms
 - Vertical lines go in front of sidebar
 
 Notes:
