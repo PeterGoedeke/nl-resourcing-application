@@ -4,6 +4,7 @@ const tab = (function() {
         setTimeout(() => element.select(), 0)
     }
     function findFirstProject() {
+        console.log("<3 you bby")
         for(const project of state.projects) {
             focus(project.label)
             return true
@@ -231,18 +232,32 @@ const tab = (function() {
         down(focused, hostObject) {
             if(hostObject.hasOwnProperty('security')) {
                 if(state.projects.indexOf(hostObject) == state.projects.length - 1) {
-                    findFirstProject()
+                    findFirstProject();
                 }
-                else focus(state.projects[state.projects.indexOf(hostObject) + 1].label)
+                else focus(state.projects[state.projects.indexOf(hostObject) + 1].label);
             }
             else if(hostObject.hasOwnProperty('hostProject')) {
+                if(focused === hostObject.label) {
+                    if(hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) == hostObject.hostProject.employeeSlots[state.visibleType.type].length - 1) {
+                        for(let i = state.projects.indexOf(hostObject.hostProject) + 1; i < state.projects.length; i++) {
+                            if(state.projects[i].employeeSlots[state.visibleType.type].length > 0) {
+                                focus(state.projects[i].employeeSlots[state.visibleType.type][0].label)
+                                return
+                            }
+                        }
+                        if(!findFirstLeaveSlot()) if(!findFirstEmployee()) findFirstEmployeeSlot()
+                    }
+                    else focus(hostObject.hostProject.employeeSlots[state.visibleType.type][hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) + 1].label)
+                }
+                else {
 
+                }
             }
             else if(hostObject.hasOwnProperty('joiningDate')) {
                 if(state.getVisibleEmployees().indexOf(hostObject) == state.getVisibleEmployees().length - 1) {
-                    if(!findFirstEmployeeSlot()) if(!findFirstLeaveSlot()) findFirstEmployee()
+                    if(!findFirstEmployeeSlot()) if(!findFirstLeaveSlot()) findFirstEmployee();
                 }
-                else focus(state.getVisibleEmployees()[state.getVisibleEmployees().length - 1].label)
+                else focus(state.getVisibleEmployees()[state.getVisibleEmployees().length - 1].label);
             }
             else {
                 if(leave.leaveSlots[state.visibleType.type].indexOf(hostObject) == leave.leaveSlots[state.visibleType.type].length - 1) {
