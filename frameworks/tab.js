@@ -173,9 +173,6 @@ const tab = (function() {
                     const id = sq.getNearestTimeBlock(focused.getBoundingClientRect().left)
                     if(hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) == 0) {
                         for(let i = state.projects.indexOf(hostObject.hostProject) - 1; i >= 0; i--) {
-                            console.log(
-                                state.projects[i].employeeSlots[state.visibleType.type][state.projects[i].employeeSlots[state.visibleType.type].length - 1]
-                            )
                             for(let j = state.projects[i].employeeSlots[state.visibleType.type].length - 1; j >= 0; j--) {
                                 const employeeSlotWorkloadBlocks = Array.from(state.projects[i].employeeSlots[state.visibleType.type][j].display.childNodes)
                                 if(employeeSlotWorkloadBlocks.some(workloadBlock => sq.getNearestTimeBlock(workloadBlock.getBoundingClientRect().left) == id)) {
@@ -250,7 +247,47 @@ const tab = (function() {
                     else focus(hostObject.hostProject.employeeSlots[state.visibleType.type][hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) + 1].label)
                 }
                 else {
+                    const id = sq.getNearestTimeBlock(focused.getBoundingClientRect().left)
+                    if(hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) == hostObject.hostProject.employeeSlots[state.visibleType.type].length - 1) {
+                        for(let i = state.projects.indexOf(hostObject.hostProject) + 1; i < state.projects.length; i++) {
+                            for(let j = 0; j < state.projects[i].employeeSlots[state.visibleType.type].length; j++) {
+                                const employeeSlotWorkloadBlocks = Array.from(state.projects[i].employeeSlots[state.visibleType.type][j].display.childNodes)
+                                if(employeeSlotWorkloadBlocks.some(workloadBlock => sq.getNearestTimeBlock(workloadBlock.getBoundingClientRect().left) == id)) {
+                                    focus(employeeSlotWorkloadBlocks.find(workloadBlock => sq.getNearestTimeBlock(workloadBlock.getBoundingClientRect().left) == id))
+                                    return
+                                }
+                                else {
+                                    const previousChildNodesFirstID = sq.getNearestTimeBlock(employeeSlotWorkloadBlocks[0].getBoundingClientRect().left)
+                                    const previousChildNodesLastID = sq.getNearestTimeBlock(employeeSlotWorkloadBlocks[employeeSlotWorkloadBlocks.length - 1].getBoundingClientRect().left)
 
+                                    if(id > previousChildNodesLastID) {
+                                        focus(employeeSlotWorkloadBlocks[employeeSlotWorkloadBlocks.length - 1])
+                                    }
+                                    else if(id < previousChildNodesFirstID) {
+                                        focus(employeeSlotWorkloadBlocks[0])
+                                    }
+                                    return
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        const afterChildNodes = Array.from(hostObject.hostProject.employeeSlots[state.visibleType.type][hostObject.hostProject.employeeSlots[state.visibleType.type].indexOf(hostObject) + 1].display.childNodes)
+                        if(afterChildNodes.some(workloadBlock => sq.getNearestTimeBlock(workloadBlock.getBoundingClientRect().left) == id)) {
+                            focus(afterChildNodes.find(workloadBlock => sq.getNearestTimeBlock(workloadBlock.getBoundingClientRect().left) == id))
+                        }
+                        else {
+                            const afterChildNodesFirstID = sq.getNearestTimeBlock(afterChildNodes[0].getBoundingClientRect().left)
+                            const afterChildNodesLastID = sq.getNearestTimeBlock(aftersChildNodes[afterChildNodes.length - 1].getBoundingClientRect().left)
+
+                            if(id > afterChildNodesLastID) {
+                                focus(afterChildNodes[afterChildNodes.length - 1])
+                            }
+                            else if(id < afterChildNodesFirstID) {
+                                focus(afterChildNodes[0])
+                            }
+                        }
+                    }
                 }
             }
             else if(hostObject.hasOwnProperty('joiningDate')) {
