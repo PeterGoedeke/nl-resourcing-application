@@ -17,7 +17,11 @@ let leave = (function() {
             this.container.style.top = sq.getElementTop(sq.leaveLabel) + 'px'
             this.leaveSlotLabelContainer.style.top = 25 + state.projects.length * 10 * zoom.scale + 'px'
 
-            this.leaveSlots[state.visibleType.type].forEach((leaveSlot, i) => leaveSlot.display.style.top = sq.getTotalProjectHeight() + 55 + 10 * zoom.scale + i * 50 * zoom.scale + 'px')
+            this.leaveSlots[state.visibleType.type].forEach((leaveSlot, i) => {
+                //this.display.style.top = Math.ceil(sq.beforeEmployeeSeparator.offsetTop + sq.beforeEmployeeSeparator.offsetHeight - 2 + zoom.scale + index * 50 * zoom.scale) + 'px'
+                leaveSlot.display.style.top = Math.ceil(sq.beforeLeaveSeparator.offsetTop + sq.beforeLeaveSeparator.offsetHeight - 1 + i * 50 * zoom.scale) + 'px'
+                //leaveSlot.display.style.top = sq.getTotalProjectHeight() + 55 + 10 * zoom.scale + i * 50 * zoom.scale + 'px'
+            })
         },
         showVisibleTypes() {
             for(let type in leaveSlots) leaveSlots[type].forEach(leaveSlot => {
