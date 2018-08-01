@@ -57,6 +57,7 @@ body {
     background-color: lightgrey;
     user-select: none;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 div, form, input {
     border: solid black 1px;
@@ -73,7 +74,11 @@ input {
 .bottomMargin {
     bottom: 0px;
 }
+.topMargin {
+    border: 0;
+}
 .topAxisContainer {
+    border: 0;
     height: 30px;
     background-color: yellow;
     position: relative;
@@ -86,13 +91,13 @@ input {
 }
 .timeBlock {
     height: 30px;
+    line-height: 30px;
     display: inline-block;
     width: 50px;
     position: relative;
     box-sizing: border-box;
     visibility: visible;
-    border-left: 0;
-    border-right: 0;
+    border: 0;
     color: lightgrey;
 }
 .labeledTimeBlock::after {
@@ -109,6 +114,7 @@ input {
 }
 
 .mainWindow {
+    border: 0;
     top: 0px;
     bottom: 35px;
     width: 100vw;
@@ -173,6 +179,7 @@ input {
     padding-right: 10000px;
     margin-right: -10000px;
     box-sizing: initial;
+    border: 0;
 }
 
 .leftSidebar, .rightSidebar {
@@ -181,6 +188,7 @@ input {
     float: left;
     padding-top: 33px;
     box-sizing: border-box;
+    border: 0;
 }
 .createProject, .createLeaveSlot, .createEmployee {
     height: 20px;
@@ -244,12 +252,8 @@ input {
 }
 .projectLabel {
     float: left;
-    width: 90%;
+    width: 100%;
     height: 100%;
-}
-.projectVerticalDragger {
-    float: left;
-    width: 10%;
 }
 .projectLabelContainer {
     height: 30px;
@@ -435,7 +439,7 @@ input {
     position: absolute;
     width: 1px;
     left: -1px;
-    top: 27px;
+    top: 30px;
     height: 10000px;
     pointer-events: none;
 }

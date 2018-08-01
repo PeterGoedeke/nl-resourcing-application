@@ -27,10 +27,9 @@ const undo = (function() {
                     }))
                 }
                 else if(changeType == 'delete') {
-                    availableUndos.push(() => {
-                        ignore = true
-                        changeDetails
-                    })
+                    availableUndos.push(undoWrapper(() => {
+                        
+                    }))
                 }
                 else if(changeType == 'setJoinDate') {
 

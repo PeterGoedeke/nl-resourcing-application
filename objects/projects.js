@@ -36,12 +36,8 @@ let projectProto = {
                 save.projects()
             }
         })
-        this.verticalDragger.addEventListener('drag', event => {
-
-        })
         this.container.appendChild(this.createEmployeeSlotButton)
         this.container.appendChild(this.display)
-        this.labelContainer.appendChild(this.verticalDragger)
         this.labelContainer.appendChild(this.label)
         sq.contentPane.appendChild(this.container)
         sq.leftSidebar.insertBefore(this.labelContainer, sq.createProjectButton)
@@ -209,8 +205,6 @@ function createProject(name, group = null, security = false, startDate, endDate,
 
     let labelContainer = document.createElement('div')
     labelContainer.className = 'projectLabelContainer'
-    let verticalDragger = document.createElement('div')
-    verticalDragger.className = 'projectVerticalDragger'
 
     let label = document.createElement('input')
     label.type = 'text'
@@ -228,7 +222,7 @@ function createProject(name, group = null, security = false, startDate, endDate,
     let project = Object.assign(
         Object.create(projectProto),
         horizontalDraggable,
-        {container, display, label, labelContainer, verticalDragger, employeeSlotLabelContainer, createEmployeeSlotButton, dragging,
+        {container, display, label, labelContainer, employeeSlotLabelContainer, createEmployeeSlotButton, dragging,
             name, group, security, startDate, endDate}
     )
     
