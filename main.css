@@ -298,6 +298,7 @@ input {
     visibility: visible;
     height: 20px;
     z-index: 1;
+    font-weight: bold;
 }
 .createEmployeeSlot:hover {
     cursor: pointer;
@@ -379,6 +380,10 @@ input {
     display: inline-block;
     border: 0;
     border-right: solid grey 1px;
+    text-align: center;
+    line-height: inherit;
+    font-size: inherit;
+    font-weight: inherit;
 }
 
 .employeeSlotWorkloadBlock:first-child {

@@ -166,6 +166,9 @@ let projectProto = {
         this.labelContainer.style.minHeight = 60 * zoom.scale + 'px'
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.updateZoom())
         this.createEmployeeSlotButton.style.height = 50 * zoom.scale + 'px'
+        this.createEmployeeSlotButton.style.lineHeight = 50 * zoom.scale + 'px'
+
+        this.createEmployeeSlotButton.style.fontSize = 50 * zoom.scale + 'px'
     },
     delete() {
         sm.validateScroll(this.display)

@@ -60,9 +60,5 @@ let slot = {
             this.employee.workload[this.requestWorkloadKey()] = this.requestWorkload()
             this.employee.updateDisplay()
         }
-    },
-    updateZoom() {
-        this.display.style.height = 50 * zoom.scale + 'px'
-        this.labelWrapper.style.height = 50 * zoom.scale + 'px'
     }
 }

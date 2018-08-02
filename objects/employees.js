@@ -68,7 +68,7 @@ let employeeProto = {
             workloadBlock.className = 'employeeWorkloadBlock'
             workloadBlock.style.left = getXLocationFromID(key) - 1 + 'px'
             workloadBlock.style.width = 100 * zoom.scale + 'px'
-            const colour = (workload[key] == this.daysAWeek - 1 || workload[key] == this.daysAWeek) ? 'green' : (workload[key] < this.daysAWeek - 1 ? 'yellow' : 'red')
+            const colour = (workload[key] == this.daysAWeek - 1 || workload[key] == this.daysAWeek) ? '#5eff3e' : (workload[key] < this.daysAWeek - 1 ? '#ffff3e' : '#ff3e3e')
             if(this.joiningDate && key < this.joiningDate || this.leavingDate && key >= this.leavingDate) {
                 workloadBlock.style.background = `repeating-linear-gradient(45deg, ${colour}, white 5px, ${colour} 5px, white 5px)`
             }
@@ -104,7 +104,11 @@ let employeeProto = {
     },
     updateZoom() {
         this.display.style.height = 50 * zoom.scale + 'px'
+        this.display.style.lineHeight = 50 * zoom.scale + 'px'
+        this.display.style.fontSize = 40 * zoom.scale + 'px'
         this.label.style.height = 50 * zoom.scale + 'px'
+        if(zoom.scale <= 0.2) this.display.style.fontWeight = 'bold'
+        else this.display.style.fontWeight = 'initial'
     },
     delete() {
         sm.validateScroll(this.display)

@@ -92,6 +92,15 @@ let employeeSlotProto = {
             this.display.appendChild(workloadBlock)
         }
     },
+    updateZoom() {
+        this.display.style.height = 50 * zoom.scale + 'px'
+        this.labelWrapper.style.height = 50 * zoom.scale + 'px'
+
+        this.display.style.lineHeight = 50 * zoom.scale + 'px'
+        this.display.style.fontSize = 40 * zoom.scale + 'px'
+        if(zoom.scale <= 0.2) this.display.style.fontWeight = 'bold'
+        else this.display.style.fontWeight = 'initial'
+    },
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) - 2 + 20 * zoom.scale + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) - 40 * zoom.scale + 'px'

@@ -204,13 +204,13 @@ function test() {
 }
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
-function convertIDToDate(id, short = false) {
+function convertIDToDate(id) {
     let year = 2000
     id = Math.floor(id / 2)
     if(Math.abs(id) >= 12) year += Math.floor(id / 12)
     if(id < 0) year --
     let value = months[id < 0 ? 12 + id % 12 : id % 12]
-    if(!short) value += ' ' + String(year).substring(2)
+    if(zoom.scale >= 0.3) value += ' ' + String(year).substring(2)
     return value
 }
 function convertDateToID(date) {

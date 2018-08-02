@@ -6,7 +6,7 @@ const zoom = (function() {
         sq.contentPane.scrollLeft = 0
         Array.from(document.querySelectorAll('.timeBlock')).forEach(timeBlock => {
             timeBlock.style.width = 100 * scale + 'px'
-            timeBlock.setAttribute('value', convertIDToDate(timeBlock.textContent, scale < 0.3))
+            timeBlock.setAttribute('value', convertIDToDate(timeBlock.textContent))
         })
         Array.from(document.querySelectorAll('.employeeWorkloadBlock')).forEach(workloadBlock => workloadBlock.style.width = 100 * scale + 'px')
         Array.from(document.querySelectorAll('.employeeSlotWorkloadBlock')).forEach(workloadBlock => workloadBlock.style.width = 100 * scale + 'px')

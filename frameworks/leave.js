@@ -82,6 +82,10 @@ let leaveSlotProto = {
         this.refreshWorkloadInformation()
         this.label.value = this.employee && this.employee.name || 'Empty'
     },
+    updateZoom() {
+        this.display.style.height = 50 * zoom.scale + 'px'
+        this.labelWrapper.style.height = 50 * zoom.scale + 'px'
+    },
     refreshWorkloadInformation() {
         let workload = this.requestWorkload()
         for(let key in workload) if(key >= this.endDate || key < this.startDate) delete workload[key]

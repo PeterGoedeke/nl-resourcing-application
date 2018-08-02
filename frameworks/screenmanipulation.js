@@ -118,7 +118,7 @@ const sm = {
             workloadBlock.style.width = 100 * zoom.scale + 'px'
             const value = (totalDaysAWeek[i] || 0) - totalWorkload[i] / 5
             workloadBlock.textContent = Math.round(value * 10) / 10
-            const colour = (value > 0 ? 'orange' : (value == 0 ? 'green' : 'red'))
+            const colour = (value > 0 ? '#ffff3e' : (value == 0 ? '#5eff3e' : '#ff3e3e'))
             workloadBlock.style.backgroundColor = colour
             sq.surplusRow.appendChild(workloadBlock)
         }
