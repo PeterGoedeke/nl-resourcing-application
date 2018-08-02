@@ -351,27 +351,17 @@ input {
     z-index: 1;
     background: transparent;
 }
-.assignGroupWrapper {
-    height: 25px;
-    width: 90%;
-    border: 0;
-    visibility: hidden;
-    position: absolute;
-    bottom: 0;
-}
 .assignGroupLabel, .assignGroupAutocomplete {
     position: absolute;
     height: 100%;
     width: 100%;
     visibility: visible;
-}
-.colourPicker {
-    position: absolute;
-    height: 25px;
-    width: 10%;
-    visibility: visible;
-    bottom: 0;
-    right: 0;
+    top: 0;
+    left: 0;
+    border: 0;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
 }
 
 .employeeSlotWorkloadBlock {
@@ -421,34 +411,19 @@ input {
     position: absolute;
     z-index: 5;
 }
-.deleteHostButton {
-    margin: 0 auto;
-    width: 30px;
+.dialogueElement {
+    width: 100%;
+    border: 0;
+    text-align: center;
+    padding: 5% 0;
+    border-bottom: solid black 1px;
+    position: relative;
+}
+.fixedElement {
     height: 30px;
 }
-.toggleSecurityButton {
-    margin: 0 auto;
-    width: 30px;
-    height: 30px;
-}
-.markJoiningDateButton, .markLeavingDateButton {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    bottom: 0;
-}
-.markJoiningDateButton {
-    left: 0;
-}
-.markLeavingDateButton {
-    right: 0;
-}
-.changeDaysAWeekButton {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    left: 25px;
-    bottom: 35px;
+.small {
+    font-size: 14px;
 }
 
 .employeeType {
