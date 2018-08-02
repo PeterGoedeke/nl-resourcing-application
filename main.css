@@ -246,6 +246,18 @@ input {
     position: relative;
     visibility: visible;
     overflow: hidden;
+    z-index: 1;
+}
+.stripe {
+    border: 0;
+    left: 0;
+    height: 30px;
+    background-color: red;
+    visibility: visible;
+    position: sticky;
+}
+.projectContainer:nth-child(even) > .stripe {
+    background-color: blue;
 }
 .unsecured {
     background: repeating-linear-gradient(45deg, red, white 5px, red 5px, white 5px);
@@ -258,7 +270,7 @@ input {
 }
 .line {
     position: absolute;
-    z-index: 1;
+    z-index: 3;
     border: 0;
     height: 1px;
     background-color: black;
@@ -292,10 +304,7 @@ input {
 }
 
 .employeeSlot {
-    border-left: solid grey 1px;
-    border-right: solid grey 1px;
-    border-top: 0;
-    border-bottom: solid grey 1px;
+    border: solid grey 1px;
     top: 35px;
     height: 25px;
     position: absolute;
@@ -303,6 +312,9 @@ input {
     z-index: 1;
     overflow: hidden;
     background-color: lightskyblue;
+}
+.employeeSlot:first-child {
+    border-top: 0;
 }
 
 .employeeSlotLabelContainer {

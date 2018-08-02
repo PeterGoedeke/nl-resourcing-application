@@ -43,6 +43,7 @@ let projectProto = {
         sq.leftSidebar.insertBefore(this.labelContainer, sq.createProjectButton)
         sq.rightSidebar.insertBefore(this.employeeSlotLabelContainer, leave.leaveSlotLabelContainer)
         this.employeeSlots[state.visibleType.type].forEach(employeeSlot => employeeSlot.updateDisplay())
+
         this.updateZoom()
         if(this.group) this.display.style.backgroundColor = state.getColourFromGroup(this.group)
         if(!this.security) {
@@ -70,7 +71,7 @@ let projectProto = {
         this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 50 * zoom.scale + 'px'
     },
     updateDisplay() {
-        this.display.style.left = getXLocationFromID(this.startDate) + 'px'
+        this.display.style.left = getXLocationFromID(this.startDate) - 2 + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
         this.updateCreateEmployeeSlotButton()
         this.createEmployeeSlotButton.style.height = 40 * zoom.scale + 'px'

@@ -77,7 +77,7 @@ let leaveSlotProto = {
         bindDialogueListeners.call(this)
     },
     updateDisplay() {
-        this.display.style.left = getXLocationFromID(this.startDate) + 'px'
+        this.display.style.left = getXLocationFromID(this.startDate) - 2 + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
         this.refreshWorkloadInformation()
         this.label.value = this.employee && this.employee.name || 'Empty'

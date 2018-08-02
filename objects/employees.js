@@ -66,7 +66,7 @@ let employeeProto = {
         for(key in workload) {
             let workloadBlock = document.createElement('div')
             workloadBlock.className = 'employeeWorkloadBlock'
-            workloadBlock.style.left = getXLocationFromID(key) + 'px'
+            workloadBlock.style.left = getXLocationFromID(key) - 1 + 'px'
             workloadBlock.style.width = 100 * zoom.scale + 'px'
             const colour = (workload[key] == this.daysAWeek - 1 || workload[key] == this.daysAWeek) ? 'green' : (workload[key] < this.daysAWeek - 1 ? 'yellow' : 'red')
             if(this.joiningDate && key < this.joiningDate || this.leavingDate && key >= this.leavingDate) {
