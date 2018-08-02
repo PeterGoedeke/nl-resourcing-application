@@ -8,9 +8,6 @@ Unimportant bugs:
 - Positioner can get too long, meaning that you can scroll too far in either direction
 - Can't scroll by scrolling the sidebar. Doesn't matter
 - There is a bug where groups can stick around
-
-Important bugs:
-- Text on smaller zooms
 - Vertical lines go in front of sidebar
 
 Notes:

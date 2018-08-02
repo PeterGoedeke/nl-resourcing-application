@@ -74,7 +74,7 @@ let leaveSlotProto = {
                 tab.down(this.label, this)
             }
         })
-        bindDialogueListeners.call(this)
+        bindDialogueListeners.call(this, 'Leave Slot')
     },
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) - 2 + 'px'

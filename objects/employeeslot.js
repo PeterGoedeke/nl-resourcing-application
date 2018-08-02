@@ -31,7 +31,7 @@ let employeeSlotProto = {
                 tab.down(this.label, this)
             }
         })
-        bindDialogueListeners.call(this)
+        bindDialogueListeners.call(this, 'Employee Slot')
     },
     enterWorkloadInformation(id, value) {
         this.requestWorkload()[id] = value
