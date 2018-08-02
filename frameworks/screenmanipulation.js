@@ -34,6 +34,7 @@ const sm = {
     },
     fixContentPaneHeight() {
         sq.positioner.style.top = sq.surplusRow.offsetTop + sq.surplusRow.offsetHeight + 'px'
+        sq.backgroundPositioner.style.top = sq.surplusRow.offsetTop + sq.surplusRow.offsetHeight + 'px'
     },
     appendTimeBlock(dateID, firstChild = false, beforeBase = false) {
         let timeBlock = document.createElement('div')
@@ -69,6 +70,20 @@ const sm = {
         leave.updateVerticalDisplay()
         state.employees.forEach((employee, i) => employee.updateVerticalDisplay(i))
         this.fixContentPaneHeight()
+        this.updateBackground()
+    },
+    updateBackground(remove = false) {
+        let stripes = Array.from(document.querySelectorAll('.stripe'))
+        if(remove) sq.background.removeChild(stripes.pop())
+        for(let i = 0; i < state.projects.length; i++) {
+            if(!stripes[i]) {
+                let stripe = document.createElement('div')
+                stripe.className = 'stripe'
+                sq.background.appendChild(stripe)
+                stripes[i] = stripe
+            }
+            stripes[i].style.height = state.projects[i].display.style.height
+        }
     },
     validateScroll(display) {
         if(sq.contentPane.scrollTop > 0) {

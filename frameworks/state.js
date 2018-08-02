@@ -163,6 +163,7 @@ const state = {
     })
     sq.contentPane.addEventListener('scroll', event => {
         sq.sidebar.scrollTop = sq.contentPane.scrollTop
+        sq.background.scrollTop = sq.contentPane.scrollTop
         sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
         sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
         sq.totalWorkloadRow.scrollLeft = sq.contentPane.scrollLeft

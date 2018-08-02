@@ -116,6 +116,7 @@ input {
     top: 0px;
     bottom: 35px;
     width: 100vw;
+    z-index: -3;
 }
 .row {
     position: absolute;
@@ -188,6 +189,7 @@ input {
     margin-right: -10000px;
     box-sizing: initial;
     border: 0;
+    background: rgba(0, 0, 0, 0);
 }
 
 .leftSidebar, .rightSidebar {
@@ -222,10 +224,27 @@ input {
 .leaveSlotLabelContainer {
     min-height: 50px;
 }
+.background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 31px;
+    background-color: lightgrey;
+    z-index: -1;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 0;
+}
+.stripe {
+    border: 0;
+}
+.stripe:nth-child(even) {
+    background-color: white;
+}
 .contentPane {
     position: relative;
     height: 100%;
-    background-color: lightgrey;
+    background: rgba(0, 0, 0, 0);
     white-space: nowrap;
     overflow-x: scroll;
 }
@@ -247,17 +266,6 @@ input {
     visibility: visible;
     overflow: hidden;
     z-index: 1;
-}
-.stripe {
-    border: 0;
-    left: 0;
-    height: 30px;
-    background-color: red;
-    visibility: visible;
-    position: sticky;
-}
-.projectContainer:nth-child(even) > .stripe {
-    background-color: blue;
 }
 .unsecured {
     background: repeating-linear-gradient(45deg, red, white 5px, red 5px, white 5px);
@@ -489,7 +497,7 @@ input {
     height: 10000px;
     pointer-events: none;
 }
-.positioner {
+.positioner, .backgroundPositioner {
     position: absolute;
     visibility: hidden;
 }

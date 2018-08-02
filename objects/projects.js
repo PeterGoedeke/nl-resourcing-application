@@ -59,6 +59,7 @@ let projectProto = {
         this.updateDisplay()
         if(this.security && this.group == null) this.move(state.getIndexBeforeFirstGroup(this))
         if(this.group) this.move(state.getIndexBeforeGroup(this, this.group))
+        sm.updateBackground()
     },
     updateVerticalDisplay(i) {
         this.employeeSlots[state.visibleType.type].forEach((employeeSlot, i) => employeeSlot.display.style.top = sq.getElementTop(this.display) + i * 50 * zoom.scale + 'px')
@@ -177,7 +178,8 @@ let projectProto = {
         sq.rightSidebar.removeChild(this.employeeSlotLabelContainer)
         state.validateGroup(this.group, this)
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.delete())
-        state.projects.splice(state.projects.indexOf(this), 1)   
+        state.projects.splice(state.projects.indexOf(this), 1)
+        sm.updateBackground(true)
     },
     save() {
         save.projects()

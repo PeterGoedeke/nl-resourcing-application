@@ -28,6 +28,7 @@ const zoom = (function() {
         sm.fixContentPaneHeight()
         sm.appendUntilFit()
         sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
+        sm.updateBackground()
         //Append Until Fit is not good enough for some zoom needs
     }
     function updateDisplay() {

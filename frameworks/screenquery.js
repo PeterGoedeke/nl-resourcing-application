@@ -9,6 +9,7 @@ const sq = {
     leaveLabel: document.querySelector('.leaveLabel'),
     topAxisContainer: document.querySelector('.topAxisContainer'),
     positioner: document.querySelector('.main'),
+    backgroundPositioner: document.querySelector('.backgroundPositioner'),
     createEmployeeButton: document.querySelector('.createEmployee'),
     createProjectButton: document.querySelector('.createProject'),
     topMargin: document.querySelector('.topMargin'),
@@ -27,6 +28,7 @@ const sq = {
     totalRowPositioners: Array.from(document.querySelectorAll('.total')),
     beforeEmployeeSeparator: document.querySelector('.es'),
     beforeLeaveSeparator: document.querySelector('.ls'),
+    background: document.querySelector('.background'),
 
     getTimeBlockWidth() {
         return 100 * zoom.scale
