@@ -417,7 +417,7 @@ input {
     height: 150px;
     width: 80px;
     position: absolute;
-    z-index: 5;
+    z-index: 5000;
 }
 .dialogueElement {
     width: 100%;
@@ -426,6 +426,9 @@ input {
     padding: 5% 0;
     border-bottom: solid black 1px;
     position: relative;
+}
+.dialogueElement:not(input) {
+    cursor: default;
 }
 .fixedElement {
     height: 30px;
