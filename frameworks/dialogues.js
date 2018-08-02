@@ -23,7 +23,8 @@ function openObjectDialogue(clickedObject, event, type) {
     dialogue.display.className = 'dialogue'
 
     let deleteHostButton = document.createElement('div')
-    deleteHostButton.className = 'deleteHostButton'
+    deleteHostButton.className = 'dialogueElement'
+    deleteHostButton.textContent = 'Delete'
     deleteHostButton.addEventListener('mouseup', event => {
         clickedObject.delete()
         dialogueInterface.closeDialogue()
@@ -35,15 +36,21 @@ function openObjectDialogue(clickedObject, event, type) {
         safe(sm.updateVerticalDisplay())
     })
 
+    let dialogueLabel = document.createElement('div')
+    dialogueLabel.className = 'dialogueElement'
+    dialogueLabel.textContent = toTitleCase(type)
+    dialogue.display.appendChild(dialogueLabel)
+
     if(type == 'project') {
         let toggleSecurityButton = document.createElement('div')
-        toggleSecurityButton.className = 'toggleSecurityButton'
+        toggleSecurityButton.className = 'dialogueElement'
+        toggleSecurityButton.textContent = 'Toggle Security'
         toggleSecurityButton.addEventListener('mouseup', event => {
             clickedObject.toggleSecurity()
             dialogueInterface.closeDialogue()
         })
         let assignGroupWrapper = document.createElement('div')
-        assignGroupWrapper.className = 'assignGroupWrapper'
+        assignGroupWrapper.className = 'dialogueElement fixedElement'
         let assignGroupLabel = document.createElement('input')
         assignGroupLabel.className = 'assignGroupLabel'
         assignGroupLabel.type = 'text'
@@ -98,8 +105,9 @@ function openObjectDialogue(clickedObject, event, type) {
         assignGroupAutocomplete.disabled = true
 
         let colourPicker = document.createElement('input')
-        colourPicker.className = 'colourPicker'
+        colourPicker.className = 'dialogueElement'
         colourPicker.type = 'color'
+        colourPicker.value = state.getColourFromGroup(clickedObject.group) || 'lightgrey'
 
         colourPicker.addEventListener('blur', event => {
             if(assignGroupLabel.value && assignGroupLabel.value != 'No Group') state.setGroupColour(assignGroupLabel.value, colourPicker.value)
@@ -114,21 +122,23 @@ function openObjectDialogue(clickedObject, event, type) {
     }
     else if(type == 'employee') {
         let markJoiningDateButton = document.createElement('div')
-        markJoiningDateButton.className = 'markJoiningDateButton'
+        markJoiningDateButton.className = 'dialogueElement small'
+        markJoiningDateButton.textContent = 'Set As Joining'
         markJoiningDateButton.addEventListener('mouseup', event => {
             mark.registerMarking(clickedObject, false)
             dialogueInterface.closeDialogue()
         })
 
         let markLeavingDateButton = document.createElement('div')
-        markLeavingDateButton.className = 'markLeavingDateButton'
+        markLeavingDateButton.className = 'dialogueElement small'
+        markLeavingDateButton.textContent = 'Set As Leaving'
         markLeavingDateButton.addEventListener('mouseup', event => {
             mark.registerMarking(clickedObject)
             dialogueInterface.closeDialogue()
         })
 
         let changeDaysAWeekButton = document.createElement('input')
-        changeDaysAWeekButton.className = 'changeDaysAWeekButton'
+        changeDaysAWeekButton.className = 'dialogueElement'
         changeDaysAWeekButton.value = clickedObject.daysAWeek
         initInput(changeDaysAWeekButton)
         changeDaysAWeekButton.addEventListener('blur', event => {
@@ -141,7 +151,6 @@ function openObjectDialogue(clickedObject, event, type) {
         dialogue.display.appendChild(markLeavingDateButton)
         dialogue.display.appendChild(changeDaysAWeekButton)
     }
-
     dialogue.display.appendChild(deleteHostButton)
     dialogueInterface.registerDialogue(dialogue)
 }
