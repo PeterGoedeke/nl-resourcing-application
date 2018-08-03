@@ -89,7 +89,7 @@ let employeeProto = {
     flattenWorkload() {
         let flattenedWorkload = {}
         Object.getOwnPropertySymbols(this.workload).forEach((symbol) => {
-            for(key in this.workload[symbol]) flattenedWorkload[key] = (parseInt(flattenedWorkload[key]) + parseInt(this.workload[symbol][key])) || this.workload[symbol][key]
+            for(key in this.workload[symbol]) flattenedWorkload[key] = (Number(flattenedWorkload[key]) + Number(this.workload[symbol][key])) || this.workload[symbol][key]
         })
         return flattenedWorkload
     },

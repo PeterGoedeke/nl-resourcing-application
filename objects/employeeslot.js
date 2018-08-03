@@ -40,7 +40,6 @@ let employeeSlotProto = {
         if(this.employee) this.employee.updateDisplay()
     },
     refreshWorkloadInformation(enter = 5) {
-        console.log(enter)
         let workload = this.requestWorkload()
         for(key in workload) if(key >= this.endDate || key < this.startDate) delete workload[key]
         for(let i = this.startDate; i < this.endDate; i++) if(!workload[i]) {
