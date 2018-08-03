@@ -5,6 +5,7 @@ let projectProto = {
         this.createEmployeeSlotButton.onclick = () => {
             this.employeeSlots[state.visibleType.type].push(createEmployeeSlot(this, state.visibleType.type))
             this.employeeSlots[state.visibleType.type][this.employeeSlots[state.visibleType.type].length - 1].updateDisplay()
+            this.employeeSlots[state.visibleType.type][this.employeeSlots[state.visibleType.type].length - 1].label.focus()
             this.updateDisplay()
             sm.updateVerticalDisplay()
             save.projects()

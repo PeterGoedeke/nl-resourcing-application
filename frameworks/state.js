@@ -143,19 +143,22 @@ const state = {
     // })
 
     sq.createProjectButton.addEventListener('mouseup', event => {
-        createProject('Default', null, true)
+        let project = createProject('Default', null, true)
+        project.label.focus()
         sm.updateVerticalDisplay()
         state.calculateDateRange()
         save.projects()
     })
     sq.createEmployeeButton.addEventListener('mouseup', event => {
-        createEmployee(state.visibleType.type)
+        let employee = createEmployee(state.visibleType.type)
+        employee.label.focus()
         sm.updateVerticalDisplay()
         state.calculateDateRange()
         save.employees()
     })
     sq.createLeaveSlotButton.addEventListener('mouseup', event => {
         leave.leaveSlots[state.visibleType.type].push(createLeaveSlot(state.visibleType.type))
+        leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].length - 1].label.focus()
         sm.updateVerticalDisplay()
         leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].length - 1].updateDisplay()
         save.leave()

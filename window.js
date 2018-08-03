@@ -7,8 +7,8 @@ function createWindow () {
   mainWindow.setMenu(null)
   mainWindow.loadFile('index.html')
 
-  // Open the DevTools.
-  //mainWindow.webContents.openDevTools()
+  //Open the DevTools
+  mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', function () {
     // Dereference the window object, usually you would store windows

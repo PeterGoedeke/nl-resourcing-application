@@ -3,6 +3,8 @@ To-do list:
 - Add an interiors stream
 - Add undo
 - Loading screen
+- Down arrow key navigation jumps across employees
+- Down arrow key navigation glitches when it jumps to top or bottom
 
 - Touchscreen
 
