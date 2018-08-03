@@ -136,7 +136,7 @@ const state = {
             undo.undo()
         }
     })
-    addEventListener('mousemove', event => {
+    addEventListener('mousedown', event => {
         if(event.pageX < sq.rightSidebar.offsetWidth + sq.leftSidebar.offsetWidth) mouseOverSidebar = true
         else if(mouseOverSidebar) mouseOverSidebar = false
     })
@@ -172,14 +172,15 @@ const state = {
     sq.contentPane.addEventListener('scroll', event => {
         if(!mouseOverSidebar) {
             sq.sidebar.scrollTop = sq.contentPane.scrollTop
-            sq.background.scrollTop = sq.contentPane.scrollTop
-            sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
-            sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
-            sq.totalWorkloadRow.scrollLeft = sq.contentPane.scrollLeft
-            sq.totalEmployeesRow.scrollLeft = sq.contentPane.scrollLeft
-            sq.surplusRow.scrollLeft = sq.contentPane.scrollLeft
-            sm.syncPositionersWidth()
-            sm.fixContentPaneHeight()
+        sq.background.scrollTop = sq.contentPane.scrollTop
+        sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
+        sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
+        sq.totalWorkloadRow.scrollLeft = sq.contentPane.scrollLeft
+        sq.totalEmployeesRow.scrollLeft = sq.contentPane.scrollLeft
+        sq.surplusRow.scrollLeft = sq.contentPane.scrollLeft
+        sm.syncPositionersWidth()
+        sm.fixContentPaneHeight()
+        console.log('me')
         }
         //console.log(sq.getVisibleTimeBlockRange()[0] - 1, state.earliestDate)
         //if(sq.topAxisContainer.firstChild.textContent < state.earliestDate && sq.getVisibleTimeBlockRange()[0] - 1 > sq.topAxisContainer.firstChild.textContent && !draggingInterface.currentlyDragging) {
@@ -191,15 +192,18 @@ const state = {
         //}
     })
     sq.sidebar.addEventListener('scroll', event => {
-        if(mouseOverSidebar) sq.contentPane.scrollTop = sq.sidebar.scrollTop
-        sq.background.scrollTop = sq.contentPane.scrollTop
-        sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
-        sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
-        sq.totalWorkloadRow.scrollLeft = sq.contentPane.scrollLeft
-        sq.totalEmployeesRow.scrollLeft = sq.contentPane.scrollLeft
-        sq.surplusRow.scrollLeft = sq.contentPane.scrollLeft
-        sm.syncPositionersWidth()
-        sm.fixContentPaneHeight()
+        if(mouseOverSidebar) {
+            sq.contentPane.scrollTop = sq.sidebar.scrollTop
+            sq.background.scrollTop = sq.contentPane.scrollTop
+            sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
+            sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
+            sq.totalWorkloadRow.scrollLeft = sq.contentPane.scrollLeft
+            sq.totalEmployeesRow.scrollLeft = sq.contentPane.scrollLeft
+            sq.surplusRow.scrollLeft = sq.contentPane.scrollLeft
+            sm.syncPositionersWidth()
+            sm.fixContentPaneHeight()
+            console.log('and me')
+        }
     })
     sq.addTypeButton.addEventListener('mouseup', event => {
         let i = ''
