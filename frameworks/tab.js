@@ -161,6 +161,8 @@ const tab = (function() {
                             for(let i = state.projects.indexOf(hostObject.hostProject) - 1; i >= 0; i--) {
                                 if(state.projects[i].employeeSlots[state.visibleType.type].length > 0) {
                                     focus(state.projects[i].employeeSlots[state.visibleType.type][state.projects[i].employeeSlots[state.visibleType.type].length - 1].label)
+                                    sq.contentPane.scrollTop = sq.sidebar.scrollTop
+                                    sq.background.scrollTop = sq.sidebar.scrollTop
                                     return
                                 }
                             }
@@ -176,6 +178,8 @@ const tab = (function() {
                                 const employeeSlotWorkloadBlocks = Array.from(state.projects[i].employeeSlots[state.visibleType.type][j].display.childNodes)
                                 if(employeeSlotWorkloadBlocks.some(workloadBlock => sq.getNearestTimeBlock(workloadBlock.getBoundingClientRect().left) == id)) {
                                     focus(employeeSlotWorkloadBlocks.find(workloadBlock => sq.getNearestTimeBlock(workloadBlock.getBoundingClientRect().left) == id))
+                                    sq.contentPane.scrollTop = sq.sidebar.scrollTop
+                                    sq.background.scrollTop = sq.sidebar.scrollTop
                                     return
                                 }
                                 else {
@@ -188,6 +192,8 @@ const tab = (function() {
                                     else if(id < previousChildNodesFirstID) {
                                         focus(employeeSlotWorkloadBlocks[0])
                                     }
+                                    sq.contentPane.scrollTop = sq.sidebar.scrollTop
+                                    sq.background.scrollTop = sq.sidebar.scrollTop
                                     return
                                 }
                             }
@@ -224,6 +230,8 @@ const tab = (function() {
                 }
                 else focus(leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].indexOf(hostObject) - 1].label)
             }
+            sq.contentPane.scrollTop = sq.sidebar.scrollTop
+            sq.background.scrollTop = sq.sidebar.scrollTop
         },
         down(focused, hostObject) {
             if(hostObject.hasOwnProperty('security')) {
@@ -238,6 +246,8 @@ const tab = (function() {
                         for(let i = state.projects.indexOf(hostObject.hostProject) + 1; i < state.projects.length; i++) {
                             if(state.projects[i].employeeSlots[state.visibleType.type].length > 0) {
                                 focus(state.projects[i].employeeSlots[state.visibleType.type][0].label)
+                                sq.contentPane.scrollTop = sq.sidebar.scrollTop
+                                sq.background.scrollTop = sq.sidebar.scrollTop
                                 return
                             }
                         }
@@ -253,6 +263,8 @@ const tab = (function() {
                                 const employeeSlotWorkloadBlocks = Array.from(state.projects[i].employeeSlots[state.visibleType.type][j].display.childNodes)
                                 if(employeeSlotWorkloadBlocks.some(workloadBlock => sq.getNearestTimeBlock(workloadBlock.getBoundingClientRect().left) == id)) {
                                     focus(employeeSlotWorkloadBlocks.find(workloadBlock => sq.getNearestTimeBlock(workloadBlock.getBoundingClientRect().left) == id))
+                                    sq.contentPane.scrollTop = sq.sidebar.scrollTop
+                                    sq.background.scrollTop = sq.sidebar.scrollTop
                                     return
                                 }
                                 else {
@@ -265,6 +277,8 @@ const tab = (function() {
                                     else if(id < previousChildNodesFirstID) {
                                         focus(employeeSlotWorkloadBlocks[0])
                                     }
+                                    sq.contentPane.scrollTop = sq.sidebar.scrollTop
+                                    sq.background.scrollTop = sq.sidebar.scrollTop
                                     return
                                 }
                             }
@@ -301,6 +315,8 @@ const tab = (function() {
                 }
                 else focus(leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].indexOf(hostObject) + 1].label)
             }
+            sq.contentPane.scrollTop = sq.sidebar.scrollTop
+            sq.background.scrollTop = sq.sidebar.scrollTop
         },
         right(focused, hostObject) {
             if(hostObject.hasOwnProperty('security')) {
