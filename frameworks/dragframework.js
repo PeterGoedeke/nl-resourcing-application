@@ -18,7 +18,7 @@ let draggingInterface = (function() {
                 firstTickOfDrag = false
             }
             currentlyDragging.drag(event, direction)
-            sq.positioner.style.width = currentlyDragging.offsetWidth - 175 + sq.getTimeBlockWidth() + 'px'
+            sq.positioner.style.width = currentlyDragging.offsetWidth - state.sidebarWidth + sq.getTimeBlockWidth() + 'px'
             /*
             timer = timer || setInterval(() => {
                 if(currentlyDragging) {

@@ -8,6 +8,7 @@ To-do list:
 - Employee slots out of line when there are no leave slots
 - Make leave etc collapsable?
 - Employee slots are too small when they're just one date
+- If you scroll the content pane and then move the mouse over the sidebar it hates you
 
 - Touchscreen
 

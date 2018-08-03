@@ -1,4 +1,5 @@
 const state = {
+    sidebarWidth: 175,
     baseDate: currentDateID() - 1,
     earliestDate: currentDateID() - 1,
     latestDate: currentDateID() + 5,
@@ -138,7 +139,6 @@ const state = {
     addEventListener('mousemove', event => {
         if(event.pageX < sq.rightSidebar.offsetWidth + sq.leftSidebar.offsetWidth) mouseOverSidebar = true
         else if(mouseOverSidebar) mouseOverSidebar = false
-        console.log(mouseOverSidebar)
     })
 
     // addEventListener('keypress', event => {

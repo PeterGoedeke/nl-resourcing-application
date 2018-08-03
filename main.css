@@ -197,7 +197,7 @@ input {
 
 .leftSidebar, .rightSidebar {
     height: 100%;
-    width: 50%;
+    width: 87.5px;
     float: left;
     padding-top: 33px;
     box-sizing: border-box;

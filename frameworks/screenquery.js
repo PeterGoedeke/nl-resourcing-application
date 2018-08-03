@@ -22,6 +22,8 @@ const sq = {
     employeeContainer: document.querySelector('.employeeContainer'),
     totalWorkloadRow: document.querySelector('.totalWorkloadRow'),
     totalEmployeesRow: document.querySelector('.totalEmployeesRow'),
+    totalWorkloadLabel: document.querySelector('.totalWorkloadLabel'),
+    totalEmployeesLabel: document.querySelector('.totalEmployeesLabel'),
     surplusLabel: document.querySelector('.surplusLabel'),
     surplusRow: document.querySelector('.surplusRow'),
     totalTypeLabel: document.querySelector('.totalTypeLabel'),
@@ -35,7 +37,7 @@ const sq = {
     },  
     getVisibleTimeBlockRange(border = false) {
         let firstTimeBlockOnScreen = Math.floor(this.contentPane.scrollLeft / this.getTimeBlockWidth()) + state.baseDate
-        let timeBlocksOnScreen = Math.floor((this.mainWindow.offsetWidth - 175) / this.getTimeBlockWidth())
+        let timeBlocksOnScreen = Math.floor((this.mainWindow.offsetWidth - state.sidebarWidth) / this.getTimeBlockWidth())
         let lastTimeBlockOnScreen = firstTimeBlockOnScreen + timeBlocksOnScreen
         
         if(border) {
