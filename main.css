@@ -191,6 +191,9 @@ input {
     border: 0;
     background: rgba(0, 0, 0, 0);
 }
+.resizing * {
+    cursor: e-resize;
+}
 .sidebar::-webkit-scrollbar {
     width: 0 !important;
 }

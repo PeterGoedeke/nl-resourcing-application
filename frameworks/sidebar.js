@@ -42,10 +42,16 @@ const sidebar = (function() {
         }
     })
     addEventListener('mousemove', event => {
+        const notFarPastEdge = event.pageX <= sq.leftSidebar.offsetWidth + sq.leftSidebar.offsetLeft + 2
+        const notFarBeforeEdge = event.pageX >= sq.leftSidebar.offsetWidth + sq.leftSidebar.offsetLeft - 2
         if(currentlyResizing) {
             sq.leftSidebar.style.width = event.pageX + 'px'
             sq.sidebar.style.width = sq.leftSidebar.offsetWidth + sq.rightSidebar.offsetWidth + 'px'
         }
+        if(notFarPastEdge && notFarBeforeEdge) {
+            sq.sidebar.classList.add('resizing')
+        } else sq.sidebar.classList.remove('resizing')
+
     })
     addEventListener('mousedown', event => {
         const notFarPastEdge = event.pageX <= sq.leftSidebar.offsetWidth + sq.leftSidebar.offsetLeft + 2
