@@ -71,7 +71,6 @@ let projectProto = {
         this.display.style.height = this.employeeSlots[state.visibleType.type].length * 50 * zoom.scale + 10 * zoom.scale + 'px'
         this.labelContainer.style.height = this.display.style.height
         this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 50 * zoom.scale + 'px'
-        console.log(arguments.callee.name)
     },
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) - 2 + 'px'
@@ -79,7 +78,6 @@ let projectProto = {
         this.updateCreateEmployeeSlotButton()
         this.createEmployeeSlotButton.style.height = 40 * zoom.scale + 'px'
         this.showVisibleTypes()
-        console.log(arguments.callee.name)
     },
     resizeEmployeeSlots(amount, fromEnd = true) {
         let employees = []
@@ -95,7 +93,6 @@ let projectProto = {
                 employee.updateDisplay()
             }
         })
-        //console.log(arguments.callee.name)
     },
     updateCreateEmployeeSlotButton() {
         const projectRight = parseInt(this.display.style.left) + parseInt(this.display.style.width)
@@ -109,7 +106,6 @@ let projectProto = {
                 this.createEmployeeSlotButton.style.left = projectRight + 15 * zoom.scale + 2.5 + 'px'
             }
         } else this.createEmployeeSlotButton.style.left = projectRight + 15 * zoom.scale + 2.5 + 'px'
-        console.log(arguments.callee.name)
     },
     showVisibleTypes() {
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {
@@ -120,7 +116,6 @@ let projectProto = {
             employeeSlot.display.style.display = 'block'
             employeeSlot.labelWrapper.style.display = 'block'
         })
-        console.log(arguments.callee.name)
     },
     toggleSecurity() {
         state.validateGroup(this.group, this)
@@ -174,7 +169,6 @@ let projectProto = {
         this.createEmployeeSlotButton.style.lineHeight = 50 * zoom.scale + 'px'
 
         this.createEmployeeSlotButton.style.fontSize = 50 * zoom.scale + 'px'
-        console.log(arguments.callee.name)
     },
     delete() {
         sm.validateScroll(this.display)
@@ -184,8 +178,7 @@ let projectProto = {
         state.validateGroup(this.group, this)
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.delete())
         state.projects.splice(state.projects.indexOf(this), 1)
-        sm.updateBackground(true)
-        console.log(arguments.callee.name) 
+        sm.updateBackground(true) 
     },
     save() {
         save.projects()

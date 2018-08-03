@@ -19,24 +19,20 @@ const state = {
         sq.totalTypeLabel.textContent = state.visibleType.type.toUpperCase()
         sm.updateVerticalDisplay()
         sm.updateDisplay()
-        console.log(arguments.callee.name)
     },
     getIndexBeforeFirstGroup(exclude) {
         if(this.projects.filter(project => project !== exclude).map(project => project.group).every(group => group == null)) return this.getIndexBeforeUnsecured(exclude)
         const index = state.projects.filter(project => project !== exclude).findIndex(project => project.group != null)
-        console.log(arguments.callee.name)
         return (index == -1 ? 0 : index)
     },
     getIndexBeforeGroup(exclude, group) {
         if(!this.projects.filter(project => project !== exclude).map(project => project.group).includes(group)) return this.getIndexBeforeUnsecured(exclude)
         const index = this.projects.filter(project => project !== exclude).map(project => project.group).indexOf(group)
-        console.log(arguments.callee.name)
         return (index == -1 ? 0 : index)
     },
     getIndexBeforeUnsecured(exclude) {
         if(!this.projects.filter(project => project !== exclude).map(project => project.security).includes(false)) return state.projects.length
         const index = this.projects.filter(project => project !== exclude).map(project => project.security).indexOf(false)
-        console.log(arguments.callee.name)
         return (index == -1 ? 0 : index)
     },
     validateGroup(name, exclude) {
@@ -46,14 +42,11 @@ const state = {
                 save.groups()
             }
         }
-        console.log(arguments.callee.name)
     },
     getColourFromGroup(name) {
-        console.log(arguments.callee.name)
         return this.groups.map(group => group.colour)[(this.groups.map(group => group.name).indexOf(`${name}`))]
     },
     setGroupColour(name, colour) {
-        console.log(arguments.callee.name)
         let group = this.groups[this.groups.map(group => group.name).indexOf(name)]
         group.colour = colour
         state.projects.forEach(project => {
@@ -62,34 +55,27 @@ const state = {
         save.groups()
     },
     addEmployeeType(type) {
-        console.log(arguments.callee.name)
         this.employeeTypes.push(type)
         this.projects.forEach(project => project.employeeSlots[type.type] = [])
         leave.leaveSlots[type.type] = []
     },
     registerProject(project) {
         this.projects.push(project)
-        console.log(arguments.callee.name)
     },
     registerEmployee(employee) {
         this.employees.push(employee)
-        console.log(arguments.callee.name)
     },
     employeeExists(name) {
-        console.log(arguments.callee.name)
         return this.getVisibleEmployees().filter(employee => employee.name !== null).map(employee => employee.name.toLowerCase()).includes(name.toLowerCase())
     },
     getEmployeeFromName(name, type = this.visibleType.type) {
-        console.log('getemployeefromname', 'arguments.callee.name')
         if(name === null) return null
         return this.employees.filter(employee => employee.employeeType == type).find(employee => employee.name.toLowerCase() == name.toLowerCase())
     },
     getVisibleEmployees() {
-        console.log(arguments.callee.name)
         return this.employees.filter(employee => employee.employeeType == this.visibleType.type)
     },
     flattenWorkload() {
-        console.log(arguments.callee.name)
         let totalWorkload = {}
         this.getVisibleEmployees().forEach(employee => {
             let flattenedWorkload = employee.flattenWorkload()
@@ -110,7 +96,6 @@ const state = {
                 for(let i = start; i <= end; i++) totalDaysAWeek[i] = totalDaysAWeek[i] + employee.daysAWeek / 5 || employee.daysAWeek / 5
             }
         })
-        console.log(arguments.callee.name)
         return totalDaysAWeek
     },
     calculateDateRange() {
@@ -130,7 +115,6 @@ const state = {
             if(leaveSlot.startDate < this.earliestDate) this.earliestDate = leaveSlot.startDate
             if(leaveSlot.endDate > this.latestDate) this.latestDate = leaveSlot.endDate
         })
-        console.log(arguments.callee.name)
     }
 };
 
@@ -144,13 +128,11 @@ const state = {
         sq.totalWorkloadRow.style.width = sq.contentPane.offsetWidth + 'px'
         sq.totalEmployeesRow.style.width = sq.contentPane.offsetWidth + 'px'
         sq.surplusRow.style.width = sq.contentPane.offsetWidth + 'px'
-        console.log(arguments.callee.name)
     })
     addEventListener('keypress', event => {
         if(event.which == 26 && document.activeElement === document.body) {
             undo.undo()
         }
-        console.log(arguments.callee.name)
     })
 
     // addEventListener('keypress', event => {

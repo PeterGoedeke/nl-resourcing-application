@@ -10,7 +10,6 @@ const sm = {
         if(state.earliestDate < state.baseDate) for(let i = state.earliestDate; i < state.baseDate; i++) this.appendTimeBlock(i, false, true)
         if(state.latestDate > state.earliestDate) for(let i = state.baseDate + 1; i <= state.latestDate; i++) this.appendTimeBlock(i)
         this.appendUntilFit()
-        console.log(arguments.callee.name)
     },
     appendToEdges() {
         let i = sq.topAxisContainer.firstChild.textContent
@@ -24,7 +23,6 @@ const sm = {
             j ++
         }
         sq.positioner.style.width = getXLocationFromID(Number(sq.topAxisContainer.lastChild.textContent) + 1) + 'px'
-        console.log(arguments.callee.name)
     },
     appendUntilFit() {
         let timeBlocks = sq.topAxisContainer.childNodes.length
@@ -33,12 +31,10 @@ const sm = {
             sm.appendTimeBlock(Number(sq.topAxisContainer.lastChild.textContent) + 1)
             timeBlocks ++
         }
-        console.log(arguments.callee.name)
     },
     fixContentPaneHeight() {
         sq.positioner.style.top = sq.surplusRow.offsetTop + sq.surplusRow.offsetHeight + 'px'
         sq.backgroundPositioner.style.top = sq.surplusRow.offsetTop + sq.surplusRow.offsetHeight + 'px'
-        console.log(arguments.callee.name)
     },
     appendTimeBlock(dateID, firstChild = false, beforeBase = false) {
         let timeBlock = document.createElement('div')
@@ -65,7 +61,6 @@ const sm = {
             sq.topAxisContainer.insertBefore(timeBlock, baseBlock)
         }
         else sq.topAxisContainer.appendChild(timeBlock)
-        console.log('appendTimeblock' , 'arguments.callee.name')
     },
     updateVerticalDisplay() {
         state.projects.forEach((project, i) => project.updateVerticalDisplay(i))
@@ -76,7 +71,6 @@ const sm = {
         state.employees.forEach((employee, i) => employee.updateVerticalDisplay(i))
         this.fixContentPaneHeight()
         this.updateBackground()
-        console.log(arguments.callee.name)
     },
     updateBackground(remove = false) {
         let stripes = Array.from(document.querySelectorAll('.stripe'))
@@ -90,17 +84,14 @@ const sm = {
             }
             stripes[i].style.height = state.projects[i].display.style.height
         }
-        console.log('updating background arguments.callee.name')
     },
     validateScroll(display) {
         if(sq.contentPane.scrollTop > 0) {
             sq.contentPane.scrollTop -= (display.offsetHeight + 25)
         }
-        console.log(arguments.callee.name)
     },
     syncPositionersWidth() {
         sq.totalRowPositioners.forEach(positioner => positioner.style.width = sq.positioner.style.width)
-        console.log(arguments.callee.name)
     },
     populateTotalRows() {
         Array.from(sq.totalWorkloadRow.childNodes).filter(childNode => childNode.textContent).forEach(workloadBlock => {
@@ -146,7 +137,6 @@ const sm = {
             workloadBlock.style.backgroundColor = colour
             sq.surplusRow.appendChild(workloadBlock)
         }
-        console.log(arguments.callee.name)
     },
     updateDisplay() {
         sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
@@ -156,6 +146,5 @@ const sm = {
         })
         state.employees.forEach(employee => employee.updateDisplay())
         leave.updateDisplay()
-        console.log(arguments.callee.name)
     }
 }

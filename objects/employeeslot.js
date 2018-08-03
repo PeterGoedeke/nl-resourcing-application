@@ -46,7 +46,6 @@ let employeeSlotProto = {
             workload[i] = 5
         }
         this.setEmployeeWorkload()
-        console.log(arguments.callee.name)
     },
     refreshWorkloadDisplay() {
         let workload = this.requestWorkload()
@@ -94,7 +93,6 @@ let employeeSlotProto = {
             initInput(workloadBlock)
             this.display.appendChild(workloadBlock)
         }
-        console.log(arguments.callee.name)
     },
     updateZoom() {
         this.display.style.height = 50 * zoom.scale + 'px'
@@ -104,7 +102,6 @@ let employeeSlotProto = {
         this.display.style.fontSize = 40 * zoom.scale + 'px'
         if(zoom.scale <= 0.2) this.display.style.fontWeight = 'bold'
         else this.display.style.fontWeight = 'initial'
-        console.log(arguments.callee.name)
     },
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) - 2 + 20 * zoom.scale + 'px'
@@ -113,7 +110,6 @@ let employeeSlotProto = {
         this.refreshWorkloadInformation()
         this.refreshWorkloadDisplay()
         this.hostProject.updateCreateEmployeeSlotButton()
-        console.log(arguments.callee.name)
     },
     delete() {
         if(this.hostProject.employeeSlots[state.visibleType.type].length > 1) sm.validateScroll(this.display)
@@ -121,7 +117,6 @@ let employeeSlotProto = {
         this.hostProject.employeeSlotLabelContainer.removeChild(this.labelWrapper)
         this.removeEmployee()
         this.hostProject.employeeSlots[this.employeeType].splice(this.hostProject.employeeSlots[this.employeeType].indexOf(this), 1)
-        console.log(arguments.callee.name)
     },
     save() {
         save.projects()
