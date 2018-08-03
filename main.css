@@ -309,8 +309,9 @@ input {
 .projectLabelContainer:nth-child(odd) > *:not(.line) {
     background-color: lightgrey;
 }
-.employeeSlotLabelContainer:nth-child(odd) > * > * {
+.employeeSlotLabelContainer:nth-child(odd) > * > .autocompleteLabel {
     background-color: lightgrey;
+    color: white;
 }
 .createEmployeeSlot {
     position: absolute;
