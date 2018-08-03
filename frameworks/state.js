@@ -119,6 +119,7 @@ const state = {
 };
 
 (function() {
+    let mouseOverSidebar = false
     //let ctrlPressed = false
     addEventListener('load', event => {
         load()
@@ -133,6 +134,11 @@ const state = {
         if(event.which == 26 && document.activeElement === document.body) {
             undo.undo()
         }
+    })
+    addEventListener('mousemove', event => {
+        if(event.pageX < sq.rightSidebar.offsetWidth + sq.leftSidebar.offsetWidth) mouseOverSidebar = true
+        else if(mouseOverSidebar) mouseOverSidebar = false
+        console.log(mouseOverSidebar)
     })
 
     // addEventListener('keypress', event => {
@@ -164,15 +170,17 @@ const state = {
         save.leave()
     })
     sq.contentPane.addEventListener('scroll', event => {
-        sq.sidebar.scrollTop = sq.contentPane.scrollTop
-        sq.background.scrollTop = sq.contentPane.scrollTop
-        sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
-        sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
-        sq.totalWorkloadRow.scrollLeft = sq.contentPane.scrollLeft
-        sq.totalEmployeesRow.scrollLeft = sq.contentPane.scrollLeft
-        sq.surplusRow.scrollLeft = sq.contentPane.scrollLeft
-        sm.syncPositionersWidth()
-        sm.fixContentPaneHeight()
+        if(!mouseOverSidebar) {
+            sq.sidebar.scrollTop = sq.contentPane.scrollTop
+            sq.background.scrollTop = sq.contentPane.scrollTop
+            sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
+            sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
+            sq.totalWorkloadRow.scrollLeft = sq.contentPane.scrollLeft
+            sq.totalEmployeesRow.scrollLeft = sq.contentPane.scrollLeft
+            sq.surplusRow.scrollLeft = sq.contentPane.scrollLeft
+            sm.syncPositionersWidth()
+            sm.fixContentPaneHeight()
+        }
         //console.log(sq.getVisibleTimeBlockRange()[0] - 1, state.earliestDate)
         //if(sq.topAxisContainer.firstChild.textContent < state.earliestDate && sq.getVisibleTimeBlockRange()[0] - 1 > sq.topAxisContainer.firstChild.textContent && !draggingInterface.currentlyDragging) {
             //console.log('hi')
@@ -181,6 +189,17 @@ const state = {
             // sq.positioner.style.width = getXLocationFromID(state.latestDate) - sq.contentPane.scrollLeft + 'px'
             // sm.updateDisplay()
         //}
+    })
+    sq.sidebar.addEventListener('scroll', event => {
+        if(mouseOverSidebar) sq.contentPane.scrollTop = sq.sidebar.scrollTop
+        sq.background.scrollTop = sq.contentPane.scrollTop
+        sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
+        sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
+        sq.totalWorkloadRow.scrollLeft = sq.contentPane.scrollLeft
+        sq.totalEmployeesRow.scrollLeft = sq.contentPane.scrollLeft
+        sq.surplusRow.scrollLeft = sq.contentPane.scrollLeft
+        sm.syncPositionersWidth()
+        sm.fixContentPaneHeight()
     })
     sq.addTypeButton.addEventListener('mouseup', event => {
         let i = ''

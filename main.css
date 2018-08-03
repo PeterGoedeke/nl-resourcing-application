@@ -184,12 +184,15 @@ input {
     height: 100%;
     width: 175px;
     float: left;
-    overflow: hidden;
+    overflow: scroll;
     padding-right: 10000px;
     margin-right: -10000px;
     box-sizing: initial;
     border: 0;
     background: rgba(0, 0, 0, 0);
+}
+.sidebar::-webkit-scrollbar {
+    width: 0 !important;
 }
 
 .leftSidebar, .rightSidebar {
@@ -498,9 +501,6 @@ input {
     border-left: 0;
     text-align: center;
     line-height: 75px;
-}
-.bottomElement {
-    border: solid lightgrey 1px;
 }
 
 .gridLine {

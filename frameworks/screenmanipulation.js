@@ -33,7 +33,7 @@ const sm = {
         }
     },
     fixContentPaneHeight() {
-        sq.positioner.style.top = sq.surplusRow.offsetTop + sq.surplusRow.offsetHeight + 'px'
+        sq.positioner.style.top = sq.surplusRow.offsetTop + sq.surplusRow.offsetHeight - 4 + 'px'
         sq.backgroundPositioner.style.top = sq.surplusRow.offsetTop + sq.surplusRow.offsetHeight + 'px'
     },
     appendTimeBlock(dateID, firstChild = false, beforeBase = false) {
@@ -66,7 +66,10 @@ const sm = {
         state.projects.forEach((project, i) => project.updateVerticalDisplay(i))
         sq.typeLabel.style.height = state.getVisibleEmployees().length * 50 * zoom.scale + 'px'
         sq.leaveLabel.style.height = leave.leaveSlots[state.visibleType.type].length * 50 * zoom.scale + 'px'
-        sq.employeeContainer.style.top = 50 + state.projects.length * 10 * zoom.scale + 'px'
+        if(leave.leaveSlots[state.visibleType.type].length >= 3) {
+            sq.employeeContainer.style.top = 50 + state.projects.length * 10 * zoom.scale + 'px'
+        }
+        else sq.employeeContainer.style.top = 50 + state.projects.length * 10 * zoom.scale + 'px'
         leave.updateVerticalDisplay()
         state.employees.forEach((employee, i) => employee.updateVerticalDisplay(i))
         this.fixContentPaneHeight()
