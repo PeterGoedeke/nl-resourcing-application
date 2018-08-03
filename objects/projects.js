@@ -159,6 +159,7 @@ let projectProto = {
             sq.leftSidebar.insertBefore(this.labelContainer, sq.createProjectButton)
             sq.rightSidebar.insertBefore(this.employeeSlotLabelContainer, leave.leaveSlotLabelContainer)
         }
+        sm.updateProjectVerticalDisplay()
     },
     updateZoom() {
         this.display.style.minHeight = 60 * zoom.scale + 'px'

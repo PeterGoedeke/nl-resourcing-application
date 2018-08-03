@@ -72,6 +72,10 @@ const sm = {
         this.fixContentPaneHeight()
         this.updateBackground()
     },
+    updateProjectVerticalDisplay() {
+        state.projects.forEach((project, i) => project.updateVerticalDisplay(i))
+        this.updateBackground()
+    },
     updateBackground(remove = false) {
         let stripes = Array.from(document.querySelectorAll('.stripe'))
         if(remove) sq.background.removeChild(stripes.pop())
