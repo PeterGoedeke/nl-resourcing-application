@@ -58,6 +58,7 @@ let employeeProto = {
     },
     updateVerticalDisplay(index) {
         this.display.style.top = Math.ceil(sq.beforeEmployeeSeparator.offsetTop + sq.beforeEmployeeSeparator.offsetHeight - 2 + zoom.scale + index * 50 * zoom.scale) + 'px'
+        console.log(arguments.callee.name)
     },
     updateDisplay() {
         this.populateEmptyWorkload()
@@ -79,18 +80,21 @@ let employeeProto = {
         this.display.style.width = sq.positioner.style.width
         this.label.value = this.name || 'Unnamed'
         sm.populateTotalRows()
+        console.log(arguments.callee.name)
     },
     populateEmptyWorkload() {
         let [start, end] = sq.getVisibleTimeBlockRange()
         if(state.earliestDate < start) start = state.earliestDate
         if(state.latestDate > end) end = state.latestDate
         for(let i = start; i < end; i++) this.workload[this.empty][i] = 0
+        console.log(arguments.callee.name)
     },
     flattenWorkload() {
         let flattenedWorkload = {}
         Object.getOwnPropertySymbols(this.workload).forEach((symbol) => {
             for(key in this.workload[symbol]) flattenedWorkload[key] = (parseInt(flattenedWorkload[key]) + parseInt(this.workload[symbol][key])) || this.workload[symbol][key]
         })
+        console.log(arguments.callee.name)
         return flattenedWorkload
     },
     showVisibleTypes() {
@@ -101,6 +105,7 @@ let employeeProto = {
             this.display.style.display = 'none'
             this.label.style.display = 'none'
         }
+        console.log(arguments.callee.name)
     },
     updateZoom() {
         this.display.style.height = 50 * zoom.scale + 'px'
@@ -109,6 +114,7 @@ let employeeProto = {
         this.label.style.height = 50 * zoom.scale + 'px'
         if(zoom.scale <= 0.2) this.display.style.fontWeight = 'bold'
         else this.display.style.fontWeight = 'initial'
+        console.log(arguments.callee.name)
     },
     delete() {
         sm.validateScroll(this.display)
@@ -120,6 +126,7 @@ let employeeProto = {
                 if(employeeSlot.employee === this) employeeSlot.removeEmployee()
             })
         })
+        console.log(arguments.callee.name)
     },
     toJSON() {
         return {

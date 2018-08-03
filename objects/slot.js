@@ -34,11 +34,14 @@ let slot = {
             this.label.value = this.employee.name
             this.save()
         }
+        console.log(arguments.callee.name)
     },
     requestWorkload() {
+        console.log(arguments.callee.name)
         return this[Object.getOwnPropertySymbols(this)[0]]
     },
     requestWorkloadKey() {
+        console.log(arguments.callee.name)
         return Object.getOwnPropertySymbols(this)[0]
     },
     assignEmployee(employee) {
@@ -46,6 +49,7 @@ let slot = {
         this.employee = employee
         this.setEmployeeWorkload()
         this.employee.updateDisplay()
+        console.log(arguments.callee.name)
     },
     removeEmployee() {
         if(this.employee) {
@@ -54,11 +58,13 @@ let slot = {
             this.employee = null
             this.label.value = 'Empty'
         }
+        console.log(arguments.callee.name)
     },
     setEmployeeWorkload() {
         if(this.employee) {
             this.employee.workload[this.requestWorkloadKey()] = this.requestWorkload()
             this.employee.updateDisplay()
         }
+        console.log(arguments.callee.name)
     }
 }

@@ -4,7 +4,6 @@ const tab = (function() {
         setTimeout(() => element.select(), 0)
     }
     function findFirstProject() {
-        console.log("<3 you bby")
         for(const project of state.projects) {
             focus(project.label)
             return true

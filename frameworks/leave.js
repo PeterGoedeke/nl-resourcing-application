@@ -12,6 +12,7 @@ let leave = (function() {
         leaveSlots,
         updateDisplay() {
             for(let type in leaveSlots) leaveSlots[type].forEach(leaveSlot => leaveSlot.updateDisplay())
+            console.log(arguments.callee.name)
         },
         updateVerticalDisplay() {
             this.container.style.top = sq.getElementTop(sq.leaveLabel) + 'px'
@@ -22,6 +23,7 @@ let leave = (function() {
                 leaveSlot.display.style.top = Math.ceil(sq.beforeLeaveSeparator.offsetTop + sq.beforeLeaveSeparator.offsetHeight - 1 + i * 50 * zoom.scale) + 'px'
                 //leaveSlot.display.style.top = sq.getTotalProjectHeight() + 55 + 10 * zoom.scale + i * 50 * zoom.scale + 'px'
             })
+            console.log(arguments.callee.name)
         },
         showVisibleTypes() {
             for(let type in leaveSlots) leaveSlots[type].forEach(leaveSlot => {
@@ -33,9 +35,11 @@ let leave = (function() {
                     leaveSlot.labelWrapper.style.display = 'none'
                 }
             })
+            console.log(arguments.callee.name)
         },
         updateZoom() {
             for(let type in this.leaveSlots) this.leaveSlots[type].forEach(leaveSlot => leaveSlot.updateZoom())
+            console.log(arguments.callee.name)
         },
         toJSON() {
             let leaveSlotsToSave = {}
@@ -81,10 +85,12 @@ let leaveSlotProto = {
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
         this.refreshWorkloadInformation()
         this.label.value = this.employee && this.employee.name || 'Empty'
+        console.log(arguments.callee.name)
     },
     updateZoom() {
         this.display.style.height = 50 * zoom.scale + 'px'
         this.labelWrapper.style.height = 50 * zoom.scale + 'px'
+        console.log(arguments.callee.name)
     },
     refreshWorkloadInformation() {
         let workload = this.requestWorkload()
@@ -93,6 +99,7 @@ let leaveSlotProto = {
             workload[i] = 5
         }
         this.setEmployeeWorkload()
+        console.log(arguments.callee.name)
     },
     delete() {
         sm.validateScroll(this.display)

@@ -1,6 +1,7 @@
 const zoom = (function() {
     let scale = 0.5
     function updateZoom() {
+        console.log(arguments.callee.name)
         setStyleRule('.labeledTimeBlock::after', 'width: ' + 200 * zoom.scale + 'px;')
         sq.contentPane.scrollTop = 0
         sq.contentPane.scrollLeft = 0

@@ -6,6 +6,7 @@ let projectProto = {
             this.employeeSlots[state.visibleType.type].push(createEmployeeSlot(this, state.visibleType.type))
             this.employeeSlots[state.visibleType.type][this.employeeSlots[state.visibleType.type].length - 1].updateDisplay()
             this.updateDisplay()
+            sm.updateVerticalDisplay()
             save.projects()
         }
         this.label.addEventListener('keydown', event => {
@@ -56,9 +57,9 @@ let projectProto = {
         bottomLine.className = 'line'
         this.labelContainer.appendChild(bottomLine)
 
-        this.updateDisplay()
         if(this.security && this.group == null) this.move(state.getIndexBeforeFirstGroup(this))
         if(this.group) this.move(state.getIndexBeforeGroup(this, this.group))
+        this.updateDisplay()
         sm.updateBackground()
     },
     updateVerticalDisplay(i) {
@@ -70,6 +71,7 @@ let projectProto = {
         this.display.style.height = this.employeeSlots[state.visibleType.type].length * 50 * zoom.scale + 10 * zoom.scale + 'px'
         this.labelContainer.style.height = this.display.style.height
         this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 50 * zoom.scale + 'px'
+        console.log(arguments.callee.name)
     },
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) - 2 + 'px'
@@ -77,7 +79,7 @@ let projectProto = {
         this.updateCreateEmployeeSlotButton()
         this.createEmployeeSlotButton.style.height = 40 * zoom.scale + 'px'
         this.showVisibleTypes()
-        sm.updateVerticalDisplay()
+        console.log(arguments.callee.name)
     },
     resizeEmployeeSlots(amount, fromEnd = true) {
         let employees = []
@@ -93,6 +95,7 @@ let projectProto = {
                 employee.updateDisplay()
             }
         })
+        //console.log(arguments.callee.name)
     },
     updateCreateEmployeeSlotButton() {
         const projectRight = parseInt(this.display.style.left) + parseInt(this.display.style.width)
@@ -106,6 +109,7 @@ let projectProto = {
                 this.createEmployeeSlotButton.style.left = projectRight + 15 * zoom.scale + 2.5 + 'px'
             }
         } else this.createEmployeeSlotButton.style.left = projectRight + 15 * zoom.scale + 2.5 + 'px'
+        console.log(arguments.callee.name)
     },
     showVisibleTypes() {
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {
@@ -116,6 +120,7 @@ let projectProto = {
             employeeSlot.display.style.display = 'block'
             employeeSlot.labelWrapper.style.display = 'block'
         })
+        console.log(arguments.callee.name)
     },
     toggleSecurity() {
         state.validateGroup(this.group, this)
@@ -159,7 +164,6 @@ let projectProto = {
             sq.leftSidebar.insertBefore(this.labelContainer, sq.createProjectButton)
             sq.rightSidebar.insertBefore(this.employeeSlotLabelContainer, leave.leaveSlotLabelContainer)
         }
-        sm.updateVerticalDisplay()
     },
     updateZoom() {
         this.display.style.minHeight = 60 * zoom.scale + 'px'
@@ -170,6 +174,7 @@ let projectProto = {
         this.createEmployeeSlotButton.style.lineHeight = 50 * zoom.scale + 'px'
 
         this.createEmployeeSlotButton.style.fontSize = 50 * zoom.scale + 'px'
+        console.log(arguments.callee.name)
     },
     delete() {
         sm.validateScroll(this.display)
@@ -180,6 +185,7 @@ let projectProto = {
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.delete())
         state.projects.splice(state.projects.indexOf(this), 1)
         sm.updateBackground(true)
+        console.log(arguments.callee.name) 
     },
     save() {
         save.projects()
@@ -234,10 +240,13 @@ function createProject(name, group = null, security = false, startDate, endDate,
     
     let employeeSlots = {}
     state.employeeTypes.map(employeeType => employeeType.type).forEach(type => employeeSlots[type] = [])
-    if(init) for(let type in employeeSlots) employeeSlots[type].push(createEmployeeSlot(project, type))
     project.employeeSlots = employeeSlots
-    
     state.registerProject(project)
     project.initDisplay()
+    if(init) {
+        for(let type in employeeSlots) employeeSlots[type].push(createEmployeeSlot(project, type))
+        project.showVisibleTypes()
+    }
+    
     return project
 }

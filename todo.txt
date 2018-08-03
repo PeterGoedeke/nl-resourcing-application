@@ -1,8 +1,9 @@
 To-do list:
+- Stripes go out of line if you scroll down
+
 - Add an interiors stream
 - Add an undo button
 - Touchscreen
-- Make things look nice
 
 Unimportant bugs:
 - Positioner can get too long, meaning that you can scroll too far in either direction
