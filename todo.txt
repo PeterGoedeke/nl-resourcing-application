@@ -3,13 +3,10 @@ To-do list:
 - Add an interiors stream
 - Add undo
 - Loading screen
-- Down arrow key navigation jumps across employees
-- Down arrow key navigation glitches when it jumps to top or bottom
-- Employee slots out of line when there are no leave slots
+
 - Make leave etc collapsable?
 - Employee slots are too small when they're just one date
 - If you scroll the content pane and then move the mouse over the sidebar it hates you
-- Total rows do not use decimals
 
 - Touchscreen
 
