@@ -33,7 +33,7 @@ let projectProto = {
                 save.projects()
             }
             else {
-                this.name = toTitleCase(this.label.value)
+                this.name = this.label.value
                 this.label.value = this.name
                 save.projects()
             }

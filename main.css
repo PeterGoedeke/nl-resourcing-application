@@ -298,7 +298,7 @@ input {
     height: 100%;
     border-left: 0;
     border-top: 0;
-    text-align: center;
+    padding-left: 5px;
 }
 .projectLabelContainer {
     height: 30px;
