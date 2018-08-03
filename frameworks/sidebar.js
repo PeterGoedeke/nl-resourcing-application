@@ -2,6 +2,25 @@ const sidebar = (function() {
     let currentlyResizing = false
     let timer
 
+    function setSidebarWidth(data) {
+        state.sidebarWidth = data
+        sq.sidebar.style.width = state.sidebarWidth + 'px'
+        sq.totalWorkloadRow.style.left = state.sidebarWidth + 'px'
+        sq.totalEmployeesRow.style.left = state.sidebarWidth + 'px'
+        sq.surplusRow.style.left = state.sidebarWidth + 'px'
+        sq.topAxisContainer.style.left = state.sidebarWidth + 'px'
+
+        sq.leftSidebar.style.width = state.sidebarWidth - 88 + 'px'
+        
+        sq.totalWorkloadLabel.style.left = state.sidebarWidth - 88 + 'px'
+        sq.totalEmployeesLabel.style.left = state.sidebarWidth - 88 + 'px'
+        sq.surplusLabel.style.left = state.sidebarWidth - 88 + 'px'
+
+        sq.totalWorkloadRow.style.width = sq.contentPane.offsetWidth + 'px'
+        sq.totalEmployeesRow.style.width = sq.contentPane.offsetWidth + 'px'
+        sq.surplusRow.style.width = sq.contentPane.offsetWidth + 'px'
+    }
+
     addEventListener('mouseup', event => {
         if(currentlyResizing) {
             currentlyResizing = false
@@ -14,6 +33,12 @@ const sidebar = (function() {
             sq.totalWorkloadLabel.style.left = sq.leftSidebar.offsetWidth + 'px'
             sq.totalEmployeesLabel.style.left = sq.leftSidebar.offsetWidth + 'px'
             sq.surplusLabel.style.left = sq.leftSidebar.offsetWidth + 'px'
+
+            sm.appendUntilFit()
+            sq.totalWorkloadRow.style.width = sq.contentPane.offsetWidth + 'px'
+            sq.totalEmployeesRow.style.width = sq.contentPane.offsetWidth + 'px'
+            sq.surplusRow.style.width = sq.contentPane.offsetWidth + 'px'
+            save.cookies()
         }
     })
     addEventListener('mousemove', event => {
@@ -29,5 +54,7 @@ const sidebar = (function() {
             currentlyResizing = true
         }
     })
-
+    return {
+        setSidebarWidth
+    }
 })()

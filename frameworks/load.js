@@ -29,7 +29,14 @@ function load() {
     if(!fs.existsSync('./data/leave.json')) fs.writeFileSync('./data/leave.json', '', 'utf8', function(err) {
         if(err) throw err
     })
+    if(!fs.existsSync('./data/cookies.json')) fs.writeFileSync('.data/cookies.json', '175', 'utf8', function(err) {
+        if(err) throw err
+    })
 
+    fs.readFile('./data/cookies.json', function(err, data) {
+        if(err) throw err
+        sidebar.setSidebarWidth(data)
+    })
     fs.readFile('./data/employeetypes.json', function(err, data) {
         if(err) throw err
         if(testData(data)) {

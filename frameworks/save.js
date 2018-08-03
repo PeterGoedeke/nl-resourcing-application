@@ -9,6 +9,11 @@ const save = (function() {
             this.groups()
             this.leave()
         },
+        cookies() {
+            fs.writeFile('./data/cookies.json', state.sidebarWidth, 'utf8', function(err) {
+                if(err) throw err
+            })
+        },
         employeeTypes() {
             fs.writeFile('./data/employeetypes.json', JSON.stringify(state.employeeTypes, null, 4), 'utf8', function(err) {
                 if(err) throw err
