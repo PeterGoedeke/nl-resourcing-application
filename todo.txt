@@ -7,6 +7,7 @@ To-do list:
 - Down arrow key navigation glitches when it jumps to top or bottom
 - Employee slots out of line when there are no leave slots
 - Make leave etc collapsable?
+- Employee slots are too small when they're just one date
 
 - Touchscreen
 

@@ -39,11 +39,12 @@ let employeeSlotProto = {
         this.requestWorkload()[id] = value
         if(this.employee) this.employee.updateDisplay()
     },
-    refreshWorkloadInformation() {
+    refreshWorkloadInformation(enter = 5) {
+        console.log(enter)
         let workload = this.requestWorkload()
         for(key in workload) if(key >= this.endDate || key < this.startDate) delete workload[key]
         for(let i = this.startDate; i < this.endDate; i++) if(!workload[i]) {
-            workload[i] = 5
+            workload[i] = enter
         }
         this.setEmployeeWorkload()
     },
@@ -103,11 +104,11 @@ let employeeSlotProto = {
         if(zoom.scale <= 0.2) this.display.style.fontWeight = 'bold'
         else this.display.style.fontWeight = 'initial'
     },
-    updateDisplay() {
+    updateDisplay(enter = 5) {
         this.display.style.left = getXLocationFromID(this.startDate) - 2 + 20 * zoom.scale + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) - 40 * zoom.scale + 'px'
         this.label.value = this.employee && this.employee.name || 'Empty'
-        this.refreshWorkloadInformation()
+        this.refreshWorkloadInformation(enter)
         this.refreshWorkloadDisplay()
         this.hostProject.updateCreateEmployeeSlotButton()
     },

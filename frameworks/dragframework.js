@@ -163,7 +163,10 @@ let horizontalDraggable = {
         this.endDate = sq.getNearestTimeBlock(parseInt(this.display.style.left) + parseInt(this.display.style.width))
         if(direction == 'left' && this.startDate == this.endDate) this.startDate --
         else if(direction == 'right' && this.startDate == this.endDate) this.endDate ++
-        this.updateDisplay()
+        if(this.hostProject) {
+            this.updateDisplay(direction == 'left' ? this.display.firstElementChild.value : this.display.lastElementChild.value)
+        }
+        else this.updateDisplay()
         state.calculateDateRange()
         sm.appendToEdges()
         this.save()

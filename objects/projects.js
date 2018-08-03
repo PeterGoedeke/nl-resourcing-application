@@ -87,11 +87,11 @@ let projectProto = {
             if(fromEnd) {
                 employee.endDate += amount
                 if(employee.endDate <= employee.startDate) employee.endDate = employee.startDate + 1
-                employee.updateDisplay()
+                employee.updateDisplay(employee.display.lastElementChild.value)
             } else {
                 employee.startDate += amount
                 if(employee.startDate >= employee.endDate) employee.startDate = employee.endDate - 1
-                employee.updateDisplay()
+                employee.updateDisplay(employee.display.firstElementChild.value)
             }
         })
     },
