@@ -114,8 +114,8 @@ const sm = {
         const totalWorkload = state.flattenWorkload()
         let [start, end] = [Infinity, -Infinity]
         for(const key in totalWorkload) {
-            if(parseInt(key) < start) start = parseInt(key)
-            if(parseInt(key) > end) end = parseInt(key)
+            if(Number(key) < start) start = Number(key)
+            if(Number(key) > end) end = Number(key)
             let workloadBlock = document.createElement('div')
             workloadBlock.className = 'employeeWorkloadBlock'
             workloadBlock.style.left = getXLocationFromID(key) + 'px'

@@ -80,7 +80,7 @@ const state = {
         let totalWorkload = {}
         this.getVisibleEmployees().forEach(employee => {
             let flattenedWorkload = employee.flattenWorkload()
-            for(const key in flattenedWorkload) totalWorkload[key] = parseInt(flattenedWorkload[key]) + parseInt(totalWorkload[key]) || flattenedWorkload[key]
+            for(const key in flattenedWorkload) totalWorkload[key] = Number(flattenedWorkload[key]) + Number(totalWorkload[key]) || flattenedWorkload[key]
         })
         return totalWorkload
     },
