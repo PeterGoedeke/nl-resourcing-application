@@ -242,7 +242,7 @@ input {
 .stripe {
     border: 0;
 }
-.stripe:nth-child(even) {
+.stripe:nth-child(odd) {
     background-color: white;
 }
 .contentPane {
@@ -260,7 +260,7 @@ input {
     border: solid black 1px;
 }
 .projectDisplay {
-    background-color: #8e8e8e;
+    background-color: rgb(118, 168, 199);
     border: 0;
     border-left: solid lightskyblue 5px;
     border-right: solid lightskyblue 5px;
@@ -270,6 +270,9 @@ input {
     visibility: visible;
     overflow: hidden;
     z-index: 1;
+}
+.projectContainer:nth-child(odd) > .projectDisplay {
+    background-color: rgb(214, 239, 255);
 }
 .unsecured {
     background: repeating-linear-gradient(45deg, red, white 5px, red 5px, white 5px);
@@ -302,6 +305,12 @@ input {
     min-height: 30px;
     position: relative;
     border: 0;
+}
+.projectLabelContainer:nth-child(odd) > *:not(.line) {
+    background-color: lightgrey;
+}
+.employeeSlotLabelContainer:nth-child(odd) > * > * {
+    background-color: lightgrey;
 }
 .createEmployeeSlot {
     position: absolute;
