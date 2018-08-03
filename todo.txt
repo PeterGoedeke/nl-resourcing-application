@@ -1,8 +1,9 @@
 To-do list:
-- Stripes go out of line if you scroll down
-
+- Open at current date
 - Add an interiors stream
-- Add an undo button
+- Add undo
+- Loading screen
+
 - Touchscreen
 
 Unimportant bugs:

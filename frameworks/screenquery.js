@@ -46,19 +46,16 @@ const sq = {
             firstTimeBlockOnScreen --
             lastTimeBlockOnScreen ++
         }
-        console.log('getvisibletimeblockrange', 'arguments.callee.name')
         return [firstTimeBlockOnScreen, lastTimeBlockOnScreen]
     },
     getTotalProjectHeight() {
         let totalProjectHeight = 0
         state.projects.forEach(project => totalProjectHeight += project.display.offsetHeight)
-        console.log(arguments.callee.name)
         return totalProjectHeight
     },
     getTotalLeaveHeight() {
         let totalLeaveHeight = 0
         leave.leaveSlots[state.visibleType.type].forEach(leaveSlot => totalLeaveHeight += leaveSlot.display.offsetHeight)
-        console.log(arguments.callee.name)
         return totalLeaveHeight > 50 ? totalLeaveHeight : 50
     },
     getCursorXLocation(absoluteCursorPosition) {
