@@ -44,7 +44,7 @@ function openObjectDialogue(clickedObject, event, type) {
     if(type == 'project') {
         let toggleSecurityButton = document.createElement('div')
         toggleSecurityButton.className = 'dialogueElement'
-        toggleSecurityButton.textContent = 'Toggle Security'
+        toggleSecurityButton.textContent = clickedObject.security ? 'Secured' : 'Unsecured'
         toggleSecurityButton.addEventListener('mouseup', event => {
             clickedObject.toggleSecurity()
             dialogueInterface.closeDialogue()
