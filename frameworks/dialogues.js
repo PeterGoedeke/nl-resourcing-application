@@ -92,6 +92,7 @@ function openObjectDialogue(clickedObject, event, type) {
                 state.groups.push(createGroup(assignGroupLabel.value, colourPicker.value))
                 clickedObject.setGroup(assignGroupLabel.value)
                 save.groups()
+                sm.updateVerticalDisplay()
             }
             // else {
             //     clickedObject.setGroup(assignGroupLabel.value)

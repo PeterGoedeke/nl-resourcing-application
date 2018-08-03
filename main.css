@@ -368,7 +368,7 @@ input {
     left: 0;
     border: 0;
     height: 30px;
-    text-align: center;
+    padding-left: 5px;
     line-height: 30px;
 }
 
