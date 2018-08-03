@@ -6,7 +6,7 @@ let slot = {
             if(event.which == 13 && this.autocompleteLabel.value) {
                 this.label.value = this.autocompleteLabel.value
                 this.assignEmployeeFromLabel()
-                tab.after(this.label, this)
+                tab.down(this.label, this)
             }
             else if(this.label.value) {
                 this.label.value = toTitleCase(this.label.value)

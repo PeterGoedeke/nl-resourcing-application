@@ -5,6 +5,8 @@ To-do list:
 - Loading screen
 - Down arrow key navigation jumps across employees
 - Down arrow key navigation glitches when it jumps to top or bottom
+- Employee slots out of line when there are no leave slots
+- Make leave etc collapsable?
 
 - Touchscreen
 
