@@ -6,6 +6,7 @@ To-do list:
 
 - Make leave etc collapsable?
 - Employee slots are too small when they're just one date
+- Labels on left sidebar getting bigger mess it up
 
 - Touchscreen
 
