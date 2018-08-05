@@ -9,7 +9,6 @@ const employeeTypeProto = {
         })
         this.display.addEventListener('mouseup', event => {
             state.setVisibleType(this)
-
         })
         this.display.addEventListener('dblclick', event => {
             let displayInput = document.createElement('input')
