@@ -124,12 +124,12 @@ const state = {
     //let ctrlPressed = false
     addEventListener('load', event => {
         load()
-    })
-    addEventListener('resize', () => {
-        sm.appendUntilFit()
-        sq.totalWorkloadRow.style.width = sq.contentPane.offsetWidth + 'px'
-        sq.totalEmployeesRow.style.width = sq.contentPane.offsetWidth + 'px'
-        sq.surplusRow.style.width = sq.contentPane.offsetWidth + 'px'
+        addEventListener('resize', () => {
+            sm.appendUntilFit()
+            sq.totalWorkloadRow.style.width = sq.contentPane.offsetWidth + 'px'
+            sq.totalEmployeesRow.style.width = sq.contentPane.offsetWidth + 'px'
+            sq.surplusRow.style.width = sq.contentPane.offsetWidth + 'px'
+        })
     })
     addEventListener('keypress', event => {
         if(event.which == 26 && document.activeElement === document.body) {

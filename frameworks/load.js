@@ -101,6 +101,7 @@ function initLoad() {
     sq.positioner.style.width = getXLocationFromID(state.latestDate + 1) + 'px'
     sm.updateDisplay()
     sm.updateVerticalDisplay()
+    state.employees.forEach(employee => employee.showVisibleTypes())
     zoom.updateDisplay()
     zoom.initDisplay()
     // let scrollTo = getXLocationFromID(currentDateID())
