@@ -72,7 +72,7 @@ const sm = {
         //else sq.employeeContainer.style.top = 50 + state.projects.length * 10 * zoom.scale + 'px'
         sq.employeeContainer.style.top = 50 + state.projects.length * 10 * zoom.scale + 'px'
         leave.updateVerticalDisplay()
-        state.employees.forEach((employee, i) => employee.updateVerticalDisplay(i))
+        state.getVisibleEmployees().forEach((employee, i) => employee.updateVerticalDisplay(i))
         this.fixContentPaneHeight()
         this.updateBackground()
     },
