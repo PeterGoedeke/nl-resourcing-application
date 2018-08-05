@@ -90,7 +90,7 @@ const sm = {
                 sq.background.appendChild(stripe)
                 stripes[i] = stripe
             }
-            stripes[i].style.height = state.projects[i].display.style.height
+            stripes[i].style.height = state.projects[i].display.offsetHeight + 'px'
         }
     },
     validateScroll(display) {
