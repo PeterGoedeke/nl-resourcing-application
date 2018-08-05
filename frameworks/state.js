@@ -86,7 +86,7 @@ const state = {
     },
     flattenEmployeeDaysAWeek(start, end) {
         let totalDaysAWeek = {}
-        this.employees.forEach(employee => {
+        this.getVisibleEmployees().forEach(employee => {
             if(employee.joiningDate && employee.leavingDate) {
                 for(let i = employee.joiningDate; i < employee.leavingDate; i++) totalDaysAWeek[i] = totalDaysAWeek[i] + employee.daysAWeek / 5 || employee.daysAWeek / 5
             } else if(employee.joiningDate) {
