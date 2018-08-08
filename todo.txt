@@ -1,3 +1,21 @@
+Version two:
+- Printing
+- Moving employees around
+
+Most recent update:
+- Every six months have a double vertical line
+- Laggy when you move from tab to tab
+- Move the employee slot create buttons 
+- Lines don't go all the way down all of the time
+- Decimal values for days a week
+- Things go out of line when there is a lot of information in the program
+- Scrollbar needs to be improved
+- Make leave narrower and get rid of the plus sign
+- Allow changing of green for the total rows - minimum and maximum for green
+- Scrolling with touchscreen isn't working properly
+- Make it grey hash when they're leaving or joining
+- Add a contract row to the total rows which adds up all of the empties (and add the empties to the surplus deficit row and stuff)
+
 To-do list:
 - Open at current date
 - Add an interiors stream
@@ -9,7 +27,7 @@ To-do list:
 - Open at current date
 - Zooming is laggy and it would be good to have a cookie for zoom
 - Create employee slot button should be on the left
-- Part time employees doesn't recognise decimals    
+- Part time employees doesn't recognise decimals
 
 - Touchscreen
 

@@ -70,7 +70,7 @@ let employeeProto = {
             workloadBlock.style.width = 100 * zoom.scale + 'px'
             const colour = (workload[key] == this.daysAWeek - 1 || workload[key] == this.daysAWeek) ? '#5eff3e' : (workload[key] < this.daysAWeek - 1 ? '#ffff3e' : '#ff3e3e')
             if(this.joiningDate && key < this.joiningDate || this.leavingDate && key >= this.leavingDate) {
-                workloadBlock.style.background = `repeating-linear-gradient(45deg, ${colour}, white 5px, ${colour} 5px, white 5px)`
+                workloadBlock.style.background = `repeating-linear-gradient(45deg, grey, darkgrey 5px, grey 5px, darkgrey 5px)`
             }
             else workloadBlock.style.backgroundColor = colour
             workloadBlock.textContent = workload[key]
