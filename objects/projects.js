@@ -38,11 +38,11 @@ let projectProto = {
                 save.projects()
             }
         })
-        this.container.appendChild(this.createEmployeeSlotButton)
         this.container.appendChild(this.display)
         this.labelContainer.appendChild(this.label)
         sq.contentPane.appendChild(this.container)
         sq.leftSidebar.insertBefore(this.labelContainer, sq.createProjectButton)
+        this.employeeSlotLabelContainer.appendChild(this.createEmployeeSlotButton)
         sq.rightSidebar.insertBefore(this.employeeSlotLabelContainer, leave.leaveSlotLabelContainer)
         this.employeeSlots[state.visibleType.type].forEach(employeeSlot => employeeSlot.updateDisplay())
 
@@ -71,12 +71,10 @@ let projectProto = {
         }
         this.display.style.height = this.employeeSlots[state.visibleType.type].length * 50 * zoom.scale + 10 * zoom.scale + 'px'
         this.labelContainer.style.height = this.display.style.height
-        this.createEmployeeSlotButton.style.top = sq.getElementBottom(this.display) - 50 * zoom.scale + 'px'
     },
     updateDisplay() {
         this.display.style.left = getXLocationFromID(this.startDate) - 2 + 'px'
         this.display.style.width = getXLocationFromID(this.endDate) - getXLocationFromID(this.startDate) + 'px'
-        this.updateCreateEmployeeSlotButton()
         this.createEmployeeSlotButton.style.height = 40 * zoom.scale + 'px'
         this.showVisibleTypes()
     },
@@ -94,19 +92,6 @@ let projectProto = {
                 employee.updateDisplay(employee.display.firstElementChild.value)
             }
         })
-    },
-    updateCreateEmployeeSlotButton() {
-        const projectRight = parseInt(this.display.style.left) + parseInt(this.display.style.width)
-        if(this.employeeSlots[state.visibleType.type].length >= 1) {
-            const lastEmployeeSlot = this.employeeSlots[state.visibleType.type][this.employeeSlots[state.visibleType.type].length - 1]
-            const lastEmployeeSlotRight = parseInt(lastEmployeeSlot.display.style.left) + parseInt(lastEmployeeSlot.display.style.width)
-            if(lastEmployeeSlotRight > projectRight) {
-                this.createEmployeeSlotButton.style.left = lastEmployeeSlotRight + 15 * zoom.scale + 2.5 + 'px'
-            }
-            else {
-                this.createEmployeeSlotButton.style.left = projectRight + 15 * zoom.scale + 2.5 + 'px'
-            }
-        } else this.createEmployeeSlotButton.style.left = projectRight + 15 * zoom.scale + 2.5 + 'px'
     },
     showVisibleTypes() {
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => {
@@ -167,10 +152,10 @@ let projectProto = {
         this.labelContainer.style.height = 60 * zoom.scale + 'px'
         this.labelContainer.style.minHeight = 60 * zoom.scale + 'px'
         for(let type in this.employeeSlots) this.employeeSlots[type].forEach(employeeSlot => employeeSlot.updateZoom())
-        this.createEmployeeSlotButton.style.height = 50 * zoom.scale + 'px'
-        this.createEmployeeSlotButton.style.lineHeight = 50 * zoom.scale + 'px'
+        this.createEmployeeSlotButton.style.fontSize = 40 * zoom.scale + 'px'
+        this.createEmployeeSlotButton.style.height = 40 * zoom.scale + 'px'
+        this.createEmployeeSlotButton.style.lineHeight = 40 * zoom.scale + 'px'
 
-        this.createEmployeeSlotButton.style.fontSize = 50 * zoom.scale + 'px'
     },
     delete() {
         sm.validateScroll(this.display)

@@ -109,7 +109,6 @@ let employeeSlotProto = {
         this.label.value = this.employee && this.employee.name || 'Empty'
         this.refreshWorkloadInformation(enter)
         this.refreshWorkloadDisplay()
-        this.hostProject.updateCreateEmployeeSlotButton()
     },
     delete() {
         if(this.hostProject.employeeSlots[state.visibleType.type].length > 1) sm.validateScroll(this.display)

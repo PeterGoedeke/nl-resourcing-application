@@ -320,11 +320,11 @@ input {
 }
 .createEmployeeSlot {
     position: absolute;
-    left: 98.5vw;
-    margin: auto 0;
+    left: 80px;
+    bottom: 0;
     visibility: visible;
     height: 20px;
-    z-index: 1;
+    z-index: 50;
     font-weight: bold;
 }
 .createEmployeeSlot:hover {
