@@ -9,6 +9,7 @@ To-do list:
 - Open at current date
 - Zooming is laggy and it would be good to have a cookie for zoom
 - Create employee slot button should be on the left
+- Part time employees doesn't recognise decimals    
 
 - Touchscreen
 
@@ -21,6 +22,8 @@ Unimportant bugs:
 Notes:
 - I changed the joining and marking behaviour
 - Client wanted arrow key navigation
+- Doesn't want undo anymore!
+- Make the scrollbar look like a scrollbar and be more obvious
 
 Questions for client:
 - Autoremove based on the current date?

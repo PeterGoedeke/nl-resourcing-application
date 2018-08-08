@@ -197,6 +197,9 @@ input {
 .sidebar::-webkit-scrollbar {
     width: 0 !important;
 }
+.sidebar::-webkit-scrollbar-track {
+    
+}
 
 .leftSidebar, .rightSidebar {
     height: 100%;
