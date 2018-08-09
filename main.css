@@ -521,8 +521,8 @@ input {
     background-color: black;
     border: 0;
     position: absolute;
-    width: 1px;
-    left: -1px;
+    width: 0.05em;
+    left: -0.05em;
     top: 30px;
     height: 10000000px;
     pointer-events: none;
