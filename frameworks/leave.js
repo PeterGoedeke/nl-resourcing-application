@@ -17,6 +17,8 @@ let leave = (function() {
         leaveSlots,
         updateDisplay() {
             for(let type in leaveSlots) leaveSlots[type].forEach(leaveSlot => leaveSlot.updateDisplay())
+
+            this.createLeaveSlotButton.style.height = 40 * zoom.scale + 'px'
         },
         updateVerticalDisplay() {
             this.container.style.top = sq.getElementTop(sq.leaveLabel) + 'px'
@@ -43,6 +45,9 @@ let leave = (function() {
         },
         updateZoom() {
             for(let type in this.leaveSlots) this.leaveSlots[type].forEach(leaveSlot => leaveSlot.updateZoom())
+            this.createLeaveSlotButton.style.fontSize = 40 * zoom.scale + 'px'
+            this.createLeaveSlotButton.style.height = 40 * zoom.scale + 'px'
+            this.createLeaveSlotButton.style.lineHeight = 40 * zoom.scale + 'px'
         },
         toJSON() {
             let leaveSlotsToSave = {}

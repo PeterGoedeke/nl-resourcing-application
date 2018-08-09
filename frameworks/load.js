@@ -101,6 +101,7 @@ function initLoad() {
     sq.positioner.style.width = getXLocationFromID(state.latestDate + 1) + 'px'
     sm.updateDisplay()
     leave.showVisibleTypes()
+    leave.updateZoom()
     state.employees.forEach(employee => employee.showVisibleTypes())
     sm.updateVerticalDisplay()
     zoom.updateDisplay()

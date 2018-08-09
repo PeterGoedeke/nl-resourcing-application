@@ -2,6 +2,13 @@ Version two:
 - Printing
 - Moving employees around
 
+- Allow changing of green for the total rows - minimum and maximum for green
+- Scrollbar needs to be improved
+- Scrolling with touchscreen isn't working properly
+- Add a contract row to the total rows which adds up all of the empties (and add the empties to the surplus deficit row and stuff)
+- Leave slots need to assign work based on the total days a week of the employee - not 5 when they're part time
+- Total rows need to account for empty
+
 Most recent update:
 - Every six months have a double vertical line (single lines are sometimes too thick)
 - Laggy when you move from tab to tab
@@ -9,13 +16,8 @@ Most recent update:
 - Lines don't go all the way down all of the time
 - Decimal values for days a week
 - Things go out of line when there is a lot of information in the program
-- Scrollbar needs to be improved
 - Make leave narrower and get rid of the plus sign
-- Allow changing of green for the total rows - minimum and maximum for green
-- Scrolling with touchscreen isn't working properly
 - Make it grey hash when they're leaving or joining
-- Add a contract row to the total rows which adds up all of the empties (and add the empties to the surplus deficit row and stuff)
-- Leave slots need to assign work based on the total days a week of the employee - not 5 when they're part time
 
 To-do list:
 - Open at current date
