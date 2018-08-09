@@ -509,11 +509,11 @@ input {
 .totalTypeLabel {
     position: relative;
     height: 100px;
-    top: -150px;
+    top: -200px;
     border-top: 0;
     border-left: 0;
     text-align: center;
-    line-height: 75px;
+    line-height: 100px;
 }
 
 .gridLine {
