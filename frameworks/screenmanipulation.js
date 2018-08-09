@@ -102,6 +102,9 @@ const sm = {
         sq.totalRowPositioners.forEach(positioner => positioner.style.width = sq.positioner.style.width)
     },
     populateTotalRows() {
+        Array.from(sq.emptyRow.childNodes).filter(childNode => childNode.textContent).forEach(workloadBlock => {
+            sq.emptyRow.removeChild(workloadBlock)
+        })
         Array.from(sq.totalWorkloadRow.childNodes).filter(childNode => childNode.textContent).forEach(workloadBlock => {
             sq.totalWorkloadRow.removeChild(workloadBlock)
         })
@@ -111,7 +114,6 @@ const sm = {
         Array.from(sq.surplusRow.childNodes).filter(childNode => childNode.textContent).forEach(workloadBlock => {
             sq.surplusRow.removeChild(workloadBlock)
         })
-
         const totalWorkload = state.flattenWorkload()
         let [start, end] = [Infinity, -Infinity]
         for(const key in totalWorkload) {
@@ -123,6 +125,15 @@ const sm = {
             workloadBlock.style.width = 100 * zoom.scale + 'px'
             workloadBlock.textContent = totalWorkload[key] / 5
             sq.totalWorkloadRow.appendChild(workloadBlock)
+        }
+        const summedEmpty = state.sumEmpty()
+        for(let i = start; i <= end; i++) {
+            let workloadBlock = document.createElement('div')
+            workloadBlock.className = 'employeeWorkloadBlock'
+            workloadBlock.style.left = getXLocationFromID(i) + 'px'
+            workloadBlock.style.width = 100 * zoom.scale + 'px'
+            workloadBlock.textContent = summedEmpty[i] / 5 || 0
+            sq.emptyRow.appendChild(workloadBlock)
         }
         const totalDaysAWeek = state.flattenEmployeeDaysAWeek(start, end)
         //combine two loops?
