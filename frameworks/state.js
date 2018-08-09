@@ -76,6 +76,16 @@ const state = {
     getVisibleEmployees() {
         return this.employees.filter(employee => employee.employeeType == this.visibleType.type)
     },
+    sumEmpty() {
+        let summedEmpty = {}
+        this.projects.map(project => project.employeeSlots[state.visibleType.type]).forEach(employeeSlots => {
+            employeeSlots.filter(employeeSlot => employeeSlot.employee == null).forEach(employeeSlot => {
+                const workload = employeeSlot.requestWorkload()
+                for(const key in workload) summedEmpty[key] = Number(summedEmpty[key]) + Number(workload[key]) || workload[key]
+            })
+        })
+        return summedEmpty
+    },
     flattenWorkload() {
         let totalWorkload = {}
         this.getVisibleEmployees().forEach(employee => {
