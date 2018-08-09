@@ -517,8 +517,12 @@ input {
     width: 1px;
     left: -1px;
     top: 30px;
-    height: 10000px;
+    height: 10000000px;
     pointer-events: none;
+}
+.timeBlock:nth-child(12n) > .gridLine {
+    width: 2px;
+    left: -2px;
 }
 .positioner, .backgroundPositioner {
     position: absolute;
