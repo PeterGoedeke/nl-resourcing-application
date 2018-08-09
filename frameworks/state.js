@@ -92,6 +92,8 @@ const state = {
             let flattenedWorkload = employee.flattenWorkload()
             for(const key in flattenedWorkload) totalWorkload[key] = Number(flattenedWorkload[key]) + Number(totalWorkload[key]) || flattenedWorkload[key]
         })
+        const summedEmpty = this.sumEmpty()
+        for(const key in summedEmpty) totalWorkload[key] = Number(summedEmpty[key]) + Number(totalWorkload[key]) || summedEmpty[key]
         return totalWorkload
     },
     flattenEmployeeDaysAWeek(start, end) {
