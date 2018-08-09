@@ -5,7 +5,6 @@ const sq = {
     leftSidebar: document.querySelector('.leftSidebar'),
     rightSidebar: document.querySelector('.rightSidebar'),
     typeLabel: document.querySelector('.typeLabel'),
-    createLeaveSlotButton: document.querySelector('.createLeaveSlot'),
     leaveLabel: document.querySelector('.leaveLabel'),
     topAxisContainer: document.querySelector('.topAxisContainer'),
     positioner: document.querySelector('.main'),

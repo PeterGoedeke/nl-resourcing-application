@@ -6,9 +6,14 @@ let leave = (function() {
     leaveSlotLabelContainer.className = 'leaveSlotLabelContainer'
     sq.rightSidebar.insertBefore(leaveSlotLabelContainer, sq.employeeContainer)
 
+    let createLeaveSlotButton = document.createElement('div')
+    createLeaveSlotButton.className = 'createLeaveSlot button'
+    createLeaveSlotButton.textContent = '+'
+    leaveSlotLabelContainer.appendChild(createLeaveSlotButton)
+
     let leaveSlots = {}
     return {
-        container, leaveSlotLabelContainer,
+        container, leaveSlotLabelContainer, createLeaveSlotButton,
         leaveSlots,
         updateDisplay() {
             for(let type in leaveSlots) leaveSlots[type].forEach(leaveSlot => leaveSlot.updateDisplay())
@@ -19,7 +24,9 @@ let leave = (function() {
 
             this.leaveSlots[state.visibleType.type].forEach((leaveSlot, i) => {
                 //this.display.style.top = Math.ceil(sq.beforeEmployeeSeparator.offsetTop + sq.beforeEmployeeSeparator.offsetHeight - 2 + zoom.scale + index * 50 * zoom.scale) + 'px'
-                leaveSlot.display.style.top = Math.ceil(sq.beforeLeaveSeparator.offsetTop + sq.beforeLeaveSeparator.offsetHeight - 1 + i * 50 * zoom.scale) + 'px'
+                if(zoom.scale == 0.5) {
+                    leaveSlot.display.style.top = Math.ceil(sq.beforeLeaveSeparator.offsetTop + sq.beforeLeaveSeparator.offsetHeight - 2 + i * 50 * zoom.scale) + 'px'
+                } else leaveSlot.display.style.top = Math.ceil(sq.beforeLeaveSeparator.offsetTop + sq.beforeLeaveSeparator.offsetHeight - 1 + i * 50 * zoom.scale) + 'px'
                 //leaveSlot.display.style.top = sq.getTotalProjectHeight() + 55 + 10 * zoom.scale + i * 50 * zoom.scale + 'px'
             })
         },
@@ -58,6 +65,7 @@ let leaveSlotProto = {
         this.labelWrapper.appendChild(this.label)
         this.labelWrapper.appendChild(this.autocompleteLabel)
         leave.leaveSlotLabelContainer.appendChild(this.labelWrapper)
+
         this.initDraggable()
 
         this.label.addEventListener('keydown', event => {

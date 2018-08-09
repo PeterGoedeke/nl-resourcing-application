@@ -169,7 +169,7 @@ const state = {
         state.calculateDateRange()
         save.employees()
     })
-    sq.createLeaveSlotButton.addEventListener('mouseup', event => {
+    leave.createLeaveSlotButton.addEventListener('mouseup', event => {
         leave.leaveSlots[state.visibleType.type].push(createLeaveSlot(state.visibleType.type))
         leave.leaveSlots[state.visibleType.type][leave.leaveSlots[state.visibleType.type].length - 1].label.focus()
         sm.updateVerticalDisplay()
