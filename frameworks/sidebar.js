@@ -5,6 +5,7 @@ const sidebar = (function() {
     function setSidebarWidth(data) {
         state.sidebarWidth = data
         sq.sidebar.style.width = state.sidebarWidth + 'px'
+        sq.emptyRow.style.left = state.sidebarWidth + 'px'
         sq.totalWorkloadRow.style.left = state.sidebarWidth + 'px'
         sq.totalEmployeesRow.style.left = state.sidebarWidth + 'px'
         sq.surplusRow.style.left = state.sidebarWidth + 'px'
@@ -16,6 +17,7 @@ const sidebar = (function() {
         sq.totalEmployeesLabel.style.left = state.sidebarWidth - 88 + 'px'
         sq.surplusLabel.style.left = state.sidebarWidth - 88 + 'px'
 
+        sq.emptyRow.style.width = sq.contentPane.offsetWidth + 'px'
         sq.totalWorkloadRow.style.width = sq.contentPane.offsetWidth + 'px'
         sq.totalEmployeesRow.style.width = sq.contentPane.offsetWidth + 'px'
         sq.surplusRow.style.width = sq.contentPane.offsetWidth + 'px'
@@ -25,6 +27,7 @@ const sidebar = (function() {
         if(currentlyResizing) {
             currentlyResizing = false
             state.sidebarWidth = sq.leftSidebar.offsetWidth + sq.rightSidebar.offsetWidth
+            sq.emptyRow.style.left = state.sidebarWidth + 'px'
             sq.totalWorkloadRow.style.left = state.sidebarWidth + 'px'
             sq.totalEmployeesRow.style.left = state.sidebarWidth + 'px'
             sq.surplusRow.style.left = state.sidebarWidth + 'px'
@@ -35,7 +38,7 @@ const sidebar = (function() {
             sq.surplusLabel.style.left = sq.leftSidebar.offsetWidth + 'px'
 
             sm.appendUntilFit()
-            sq.totalWorkloadRow.style.width = sq.contentPane.offsetWidth + 'px'
+            sq.emptyRow.style.width = sq.contentPane.offsetWidth + 'px'
             sq.totalEmployeesRow.style.width = sq.contentPane.offsetWidth + 'px'
             sq.surplusRow.style.width = sq.contentPane.offsetWidth + 'px'
             save.cookies()

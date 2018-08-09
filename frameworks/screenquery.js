@@ -19,6 +19,7 @@ const sq = {
     zoomDisplay: document.querySelector('.zoomDisplay'),
     zoomOutButton: document.querySelector('.zoomOut'),
     employeeContainer: document.querySelector('.employeeContainer'),
+    emptyRow: document.querySelector('.emptyRow'),
     totalWorkloadRow: document.querySelector('.totalWorkloadRow'),
     totalEmployeesRow: document.querySelector('.totalEmployeesRow'),
     totalWorkloadLabel: document.querySelector('.totalWorkloadLabel'),

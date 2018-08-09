@@ -136,6 +136,7 @@ const state = {
         load()
         addEventListener('resize', () => {
             sm.appendUntilFit()
+            sq.emptyRow.style.width = sq.contentPane.offsetWidth + 'px'
             sq.totalWorkloadRow.style.width = sq.contentPane.offsetWidth + 'px'
             sq.totalEmployeesRow.style.width = sq.contentPane.offsetWidth + 'px'
             sq.surplusRow.style.width = sq.contentPane.offsetWidth + 'px'
@@ -192,6 +193,7 @@ const state = {
             sq.background.scrollTop = sq.contentPane.scrollTop
             sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
             sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
+            sq.emptyRow.scrollLeft = sq.contentPane.scrollLeft
             sq.totalWorkloadRow.scrollLeft = sq.contentPane.scrollLeft
             sq.totalEmployeesRow.scrollLeft = sq.contentPane.scrollLeft
             sq.surplusRow.scrollLeft = sq.contentPane.scrollLeft
@@ -213,6 +215,7 @@ const state = {
             sq.background.scrollTop = sq.contentPane.scrollTop
             sq.topAxisContainer.scrollLeft = sq.contentPane.scrollLeft
             sq.topAxisContainer.style.width = sq.contentPane.offsetWidth + 'px'
+            sq.emptyRow.scrollLeft = sq.contentPane.scrollLeft
             sq.totalWorkloadRow.scrollLeft = sq.contentPane.scrollLeft
             sq.totalEmployeesRow.scrollLeft = sq.contentPane.scrollLeft
             sq.surplusRow.scrollLeft = sq.contentPane.scrollLeft
