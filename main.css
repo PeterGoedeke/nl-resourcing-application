@@ -264,13 +264,7 @@ input {
     white-space: nowrap;
     overflow-x: scroll;
 }
-.contentPane::-webkit-scrollbar {
-    width: 0 !important;
-}
-.contentPane::-webkit-scrollbar-thumb {
-    background: lightgrey;
-    border: solid black 1px;
-}
+
 .projectDisplay {
     background-color: rgb(118, 168, 199);
     border: 0;

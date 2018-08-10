@@ -33,7 +33,7 @@ const sm = {
         }
     },
     fixContentPaneHeight() {
-        sq.positioner.style.top = sq.surplusRow.offsetTop + sq.surplusRow.offsetHeight - 4 + 'px'
+        sq.positioner.style.top = sq.surplusRow.offsetTop + sq.surplusRow.offsetHeight - 8 + 'px'
         sq.backgroundPositioner.style.top = sq.surplusRow.offsetTop + sq.surplusRow.offsetHeight + 'px'
     },
     appendTimeBlock(dateID, firstChild = false, beforeBase = false) {
