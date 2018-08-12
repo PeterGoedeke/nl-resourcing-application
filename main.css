@@ -69,7 +69,7 @@ input {
 .margin {
     height: 30px;
     width: 100vw;
-    z-index: 50;
+    z-index: 50000;
     border: 0;
 }
 .bottomMargin {
@@ -126,7 +126,7 @@ input {
     width: 100vw;
     height: 5px;
     background-color: lightskyblue;
-    z-index: 2;
+    z-index: 40000;
     pointer-events: none;
 }
 .top {
