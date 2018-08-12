@@ -76,6 +76,17 @@ const sm = {
         this.fixContentPaneHeight()
         this.updateBackground()
     },
+    resizeHorizontalLines() {
+        let gridLines = Array.from(document.querySelectorAll('.line')).concat(Array.from(document.querySelectorAll('.mid')))
+        let totalRows = Array.from(document.querySelectorAll('.surplusRow, .emptyRow, .totalWorkloadRow, .totalEmployeesRow'))
+        gridLines.forEach(gridLine => gridLine.style.width = Number(state.sidebarWidth) + Number(sq.contentPane.offsetWidth) - 17 + 'px')
+        totalRows.forEach(totalRow => totalRow.style.width = Number(sq.contentPane.offsetWidth) - 17 + 'px')
+        console.log(gridLines)
+    },
+    resizeVerticalLines() {
+        let gridLines = Array.from(document.querySelectorAll('.gridLine'))
+        gridLines.forEach(gridLine => gridLine.style.height = Number(sq.contentPane.offsetHeight) - 49 + 'px')
+    },
     updateProjectVerticalDisplay() {
         state.projects.forEach((project, i) => project.updateVerticalDisplay(i))
         this.updateBackground()

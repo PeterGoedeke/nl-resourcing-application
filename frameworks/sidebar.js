@@ -21,6 +21,8 @@ const sidebar = (function() {
         sq.totalWorkloadRow.style.width = sq.contentPane.offsetWidth + 'px'
         sq.totalEmployeesRow.style.width = sq.contentPane.offsetWidth + 'px'
         sq.surplusRow.style.width = sq.contentPane.offsetWidth + 'px'
+
+        sm.resizeHorizontalLines()
     }
 
     addEventListener('mouseup', event => {
@@ -42,6 +44,7 @@ const sidebar = (function() {
             sq.totalEmployeesRow.style.width = sq.contentPane.offsetWidth + 'px'
             sq.surplusRow.style.width = sq.contentPane.offsetWidth + 'px'
             save.cookies()
+            sm.resizeHorizontalLines()
         }
     })
     addEventListener('mousemove', event => {
