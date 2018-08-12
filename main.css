@@ -262,7 +262,7 @@ input {
     height: 100%;
     background: rgba(0, 0, 0, 0);
     white-space: nowrap;
-    overflow-x: scroll;
+    overflow: scroll;
 }
 
 .projectDisplay {

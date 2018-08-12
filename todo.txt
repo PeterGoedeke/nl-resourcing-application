@@ -3,9 +3,9 @@ Version two:
 - Moving employees around
 
 - Allow changing of green for the total rows - minimum and maximum for green
-- Scrollbar needs to be improved
 - Scrolling with touchscreen isn't working properly
 - Leave slots need to assign work based on the total days a week of the employee - not 5 when they're part time
+- Add employee slot buttons go in front of the top axis container
 
 Most recent update:
 - Every six months have a double vertical line (single lines are sometimes too thick)
