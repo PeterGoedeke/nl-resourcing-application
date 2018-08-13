@@ -107,6 +107,13 @@ let leaveSlotProto = {
         }
         this.setEmployeeWorkload()
     },
+    requestWorkload() {
+        let workload = this[Object.getOwnPropertySymbols(this)[0]]
+        if(this.employee) {
+            for(const key in workload) workload[key] = this.employee.daysAWeek
+        }
+        return workload
+    },
     delete() {
         sm.validateScroll(this.display)
         sq.contentPane.removeChild(this.display)
@@ -123,7 +130,7 @@ function createLeaveSlot(employeeType, employee = null, startDate, endDate) {
     if(!startDate && !endDate) [startDate, endDate] = sq.getVisibleTimeBlockRange(true)
     let workloadInformation = Symbol('workload information')
     let workload = Object.create(null)
-    for(let i = startDate; i < endDate; i++) workload[i] = 5
+    for(let i = startDate; i < endDate; i++) workload[i] = employee && employee.daysAWeek || 5
 
     let display = document.createElement('div')
     display.className = 'employeeSlot'

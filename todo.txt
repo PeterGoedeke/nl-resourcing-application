@@ -2,10 +2,9 @@ Version two:
 - Printing
 - Moving employees around
 
-- Allow changing of green for the total rows - minimum and maximum for green
 - Scrolling with touchscreen isn't working properly
 - Leave slots need to assign work based on the total days a week of the employee - not 5 when they're part time
-- Resizing the sidebar is totally broken now
+- Deleting an employee doesn't remove them from leave slots
 
 Most recent update:
 - Every six months have a double vertical line (single lines are sometimes too thick)

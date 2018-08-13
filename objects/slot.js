@@ -35,9 +35,6 @@ let slot = {
             this.save()
         }
     },
-    requestWorkload() {
-        return this[Object.getOwnPropertySymbols(this)[0]]
-    },
     requestWorkloadKey() {
         return Object.getOwnPropertySymbols(this)[0]
     },

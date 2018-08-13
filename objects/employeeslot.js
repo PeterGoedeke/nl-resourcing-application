@@ -110,6 +110,9 @@ let employeeSlotProto = {
         this.refreshWorkloadInformation(enter)
         this.refreshWorkloadDisplay()
     },
+    requestWorkload() {
+        return this[Object.getOwnPropertySymbols(this)[0]]
+    },
     delete() {
         if(this.hostProject.employeeSlots[state.visibleType.type].length > 1) sm.validateScroll(this.display)
         this.hostProject.container.removeChild(this.display)
