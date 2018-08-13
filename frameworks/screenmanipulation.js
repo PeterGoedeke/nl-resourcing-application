@@ -138,6 +138,7 @@ const sm = {
             sq.totalWorkloadRow.appendChild(workloadBlock)
         }
         const summedEmpty = state.sumEmpty()
+        const totalDaysAWeek = state.flattenEmployeeDaysAWeek(start, end)
         for(let i = start; i <= end; i++) {
             let workloadBlock = document.createElement('div')
             workloadBlock.className = 'employeeWorkloadBlock'
@@ -145,27 +146,27 @@ const sm = {
             workloadBlock.style.width = 100 * zoom.scale + 'px'
             workloadBlock.textContent = summedEmpty[i] / 5 || 0
             sq.emptyRow.appendChild(workloadBlock)
-        }
-        const totalDaysAWeek = state.flattenEmployeeDaysAWeek(start, end)
-        //combine two loops?
-        for(let i = start; i <= end; i++) {
-            let workloadBlock = document.createElement('div')
-            workloadBlock.className = 'employeeWorkloadBlock'
-            workloadBlock.style.left = getXLocationFromID(i) + 'px'
-            workloadBlock.style.width = 100 * zoom.scale + 'px'
-            workloadBlock.textContent = totalDaysAWeek[i] || 0
-            sq.totalEmployeesRow.appendChild(workloadBlock)
-        }
-        for(let i = start; i <= end; i++) {
-            let workloadBlock = document.createElement('div')
-            workloadBlock.className = 'employeeWorkloadBlock'
-            workloadBlock.style.left = getXLocationFromID(i) + 'px'
-            workloadBlock.style.width = 100 * zoom.scale + 'px'
+
+            let workloadBlock2 = document.createElement('div')
+            workloadBlock2.className = 'employeeWorkloadBlock'
+            workloadBlock2.style.left = getXLocationFromID(i) + 'px'
+            workloadBlock2.style.width = 100 * zoom.scale + 'px'
+            workloadBlock2.textContent = totalDaysAWeek[i] || 0
+            sq.totalEmployeesRow.appendChild(workloadBlock2)
+
+            let workloadBlock3 = document.createElement('div')
+            workloadBlock3.className = 'employeeWorkloadBlock'
+            workloadBlock3.style.left = getXLocationFromID(i) + 'px'
+            workloadBlock3.style.width = 100 * zoom.scale + 'px'
             const value = (totalDaysAWeek[i] || 0) - totalWorkload[i] / 5
-            workloadBlock.textContent = Math.round(value * 10) / 10
-            const colour = (value > 0 ? '#ffff3e' : (value == 0 ? '#5eff3e' : '#ff3e3e'))
-            workloadBlock.style.backgroundColor = colour
-            sq.surplusRow.appendChild(workloadBlock)
+            workloadBlock3.textContent = Math.round(value * 10) / 10
+            console.log(totalDaysAWeek[i], totalWorkload[i], state.visibleType.minimum)
+            const aboveMinimumAcceptable = ((totalWorkload[i] / 5) / totalDaysAWeek[i]) >= (1 - state.visibleType.minimum)  
+            const belowMaximumAcceptable = ((totalWorkload[i] / 5) / totalDaysAWeek[i]) <= state.visibleType.maximum
+            console.log(aboveMinimumAcceptable, belowMaximumAcceptable)
+            const colour = (!aboveMinimumAcceptable ? '#ffff3e' : (!belowMaximumAcceptable ? '#ff3e3e' : '#5eff3e'))
+            workloadBlock3.style.backgroundColor = colour
+            sq.surplusRow.appendChild(workloadBlock3)
         }
     },
     updateDisplay() {

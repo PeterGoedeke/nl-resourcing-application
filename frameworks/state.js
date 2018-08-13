@@ -176,6 +176,7 @@ const state = {
         sm.updateVerticalDisplay()
         state.calculateDateRange()
         save.projects()
+        sm.populateTotalRows()
     })
     sq.createEmployeeButton.addEventListener('mouseup', event => {
         let employee = createEmployee(state.visibleType.type)

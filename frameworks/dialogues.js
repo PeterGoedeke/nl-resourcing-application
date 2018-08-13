@@ -34,6 +34,7 @@ function openObjectDialogue(clickedObject, event, type) {
         else if(type == 'employeeType') save.employeeTypes()
         else save.all()
         safe(sm.updateVerticalDisplay())
+        sm.populateTotalRows()
     })
 
     let dialogueLabel = document.createElement('div')

@@ -8,6 +8,7 @@ let projectProto = {
             this.employeeSlots[state.visibleType.type][this.employeeSlots[state.visibleType.type].length - 1].label.focus()
             this.updateDisplay()
             sm.updateVerticalDisplay()
+            sm.populateTotalRows()
             save.projects()
         }
         this.label.addEventListener('keydown', event => {
