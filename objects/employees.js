@@ -120,6 +120,9 @@ let employeeProto = {
                 if(employeeSlot.employee === this) employeeSlot.removeEmployee()
             })
         })
+        leave.leaveSlots[state.visibleType.type].forEach(leaveSlot => {
+            if(leaveSlot.employee === this) leaveSlot.removeEmployee()
+        })
     },
     toJSON() {
         return {

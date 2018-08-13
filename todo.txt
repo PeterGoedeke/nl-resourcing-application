@@ -3,7 +3,6 @@ Version two:
 - Moving employees around
 
 - Scrolling with touchscreen isn't working properly
-- Leave slots need to assign work based on the total days a week of the employee - not 5 when they're part time
 - Deleting an employee doesn't remove them from leave slots
 
 Most recent update:
