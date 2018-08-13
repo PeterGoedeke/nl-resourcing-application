@@ -4,7 +4,7 @@ const employeeTypeProto = {
         
         this.display.addEventListener('mouseup', event => {
             if(event.which == 3) {
-                openObjectDialogue(this, event)
+                openObjectDialogue(this, event, 'type')
             }
         })
         this.display.addEventListener('mouseup', event => {
@@ -49,6 +49,7 @@ const employeeTypeProto = {
             initInput(displayInput)
             displayInput.focus()
         })
+        //bindDialogueListeners.call(this, 'type')
     },
     delete() {
         if(state.employeeTypes.length > 1) {

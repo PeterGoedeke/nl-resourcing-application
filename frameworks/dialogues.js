@@ -152,6 +152,34 @@ function openObjectDialogue(clickedObject, event, type) {
         dialogue.display.appendChild(markLeavingDateButton)
         dialogue.display.appendChild(changeDaysAWeekButton)
     }
+    else if(type == 'type') {
+        let minimumField = document.createElement('input')
+        minimumField.className = 'dialogueElement'
+        minimumField.value = clickedObject.minimum * 100 + '%'
+        minimumField.addEventListener('blur', event => {
+            if(parseFloat(minimumField.value)) {
+                clickedObject.minimum = parseFloat(minimumField.value / 100)
+                sm.populateTotalRows()
+                save.employeeTypes()
+            }
+            else minimumField.value = clickedObject.minimum * 100 + '%'
+        })
+        let maximumField = document.createElement('input')
+        maximumField.value = clickedObject.maximum * 100 + '%'
+        maximumField.className = 'dialogueElement'
+        maximumField.addEventListener('blur', event => {
+            if(parseFloat(maximumField.value)) {
+                clickedObject.maximum = parseFloat(maximumField.value / 100)
+                sm.populateTotalRows()
+                save.employeeTypes()
+            }
+            else maximumField.value = clickedObject.maximum * 100 + '%'
+        })
+        initInput(minimumField)
+        initInput(maximumField)
+        dialogue.display.appendChild(minimumField)
+        dialogue.display.appendChild(maximumField)
+    }
     dialogue.display.appendChild(deleteHostButton)
     dialogueInterface.registerDialogue(dialogue)
 }
