@@ -5,7 +5,7 @@ Version two:
 - Allow changing of green for the total rows - minimum and maximum for green
 - Scrolling with touchscreen isn't working properly
 - Leave slots need to assign work based on the total days a week of the employee - not 5 when they're part time
-- Add employee slot buttons go in front of the top axis container
+- Resizing the sidebar is totally broken now
 
 Most recent update:
 - Every six months have a double vertical line (single lines are sometimes too thick)

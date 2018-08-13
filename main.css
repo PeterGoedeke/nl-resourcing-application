@@ -209,6 +209,9 @@ input {
     box-sizing: border-box;
     border: 0;
 }
+.rightSidebar {
+    width: 86px;
+}
 .createProject, .createEmployee {
     height: 20px;
     line-height: 20px;

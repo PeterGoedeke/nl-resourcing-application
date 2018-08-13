@@ -24,6 +24,7 @@ const sq = {
     totalEmployeesRow: document.querySelector('.totalEmployeesRow'),
     totalWorkloadLabel: document.querySelector('.totalWorkloadLabel'),
     totalEmployeesLabel: document.querySelector('.totalEmployeesLabel'),
+    emptyLabel: document.querySelector('.emptyLabel'),
     surplusLabel: document.querySelector('.surplusLabel'),
     surplusRow: document.querySelector('.surplusRow'),
     totalTypeLabel: document.querySelector('.totalTypeLabel'),

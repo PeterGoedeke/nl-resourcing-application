@@ -13,6 +13,7 @@ const sidebar = (function() {
 
         sq.leftSidebar.style.width = state.sidebarWidth - 88 + 'px'
         
+        sq.emptyLabel.style.left = state.sidebarWidth - 88 + 'px'
         sq.totalWorkloadLabel.style.left = state.sidebarWidth - 88 + 'px'
         sq.totalEmployeesLabel.style.left = state.sidebarWidth - 88 + 'px'
         sq.surplusLabel.style.left = state.sidebarWidth - 88 + 'px'
@@ -35,6 +36,7 @@ const sidebar = (function() {
             sq.surplusRow.style.left = state.sidebarWidth + 'px'
             sq.topAxisContainer.style.left = state.sidebarWidth + 'px'
             
+            sq.emptyLabel.style.left = sq.leftSidebar.offsetWidth + 'px'
             sq.totalWorkloadLabel.style.left = sq.leftSidebar.offsetWidth + 'px'
             sq.totalEmployeesLabel.style.left = sq.leftSidebar.offsetWidth + 'px'
             sq.surplusLabel.style.left = sq.leftSidebar.offsetWidth + 'px'
