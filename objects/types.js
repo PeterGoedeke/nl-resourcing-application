@@ -64,11 +64,11 @@ const employeeTypeProto = {
         }
     },
     toJSON() {
-        return {type: this.type}
+        return {type: this.type, minimum: this.minimum, maximum: this.maximum}
     }
 }
 
-function createEmployeeType(type) {
+function createEmployeeType(type, minimum = 0.85, maximum = 0.9) {
     let display = document.createElement('div')
     display.className = 'employeeType marginElement'
     display.textContent = type
@@ -76,7 +76,7 @@ function createEmployeeType(type) {
     let employeeType = Object.assign(
         Object.create(employeeTypeProto),
         {display,
-        type}
+        type, minimum, maximum}
     )
     employeeType.initDisplay()
     state.addEmployeeType(employeeType)

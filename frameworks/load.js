@@ -40,7 +40,7 @@ function load() {
     fs.readFile('./data/employeetypes.json', function(err, data) {
         if(err) throw err
         if(testData(data)) {
-            JSON.parse(data).forEach(employeeType => createEmployeeType(employeeType.type))
+            JSON.parse(data).forEach(employeeType => createEmployeeType(employeeType.type, employeeType.minimum, employeeType.maximum))
             if(state.employeeTypes.length == 0) createEmployeeType('NA')
         }
         else createEmployeeType('NA')
