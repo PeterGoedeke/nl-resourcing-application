@@ -22,7 +22,7 @@ const sm = {
             this.appendTimeBlock(j)
             j ++
         }
-        sq.positioner.style.width = getXLocationFromID(Number(sq.topAxisContainer.lastChild.textContent) + 1) + 'px'
+        sq.positioner.style.width = getXLocationFromID(Number(sq.topAxisContainer.lastChild.textContent) + 1) - 16 + 'px'
     },
     appendUntilFit() {
         let timeBlocks = sq.topAxisContainer.childNodes.length
@@ -81,7 +81,6 @@ const sm = {
         let totalRows = Array.from(document.querySelectorAll('.surplusRow, .emptyRow, .totalWorkloadRow, .totalEmployeesRow'))
         gridLines.forEach(gridLine => gridLine.style.width = Number(state.sidebarWidth) + Number(sq.contentPane.offsetWidth) - 17 + 'px')
         totalRows.forEach(totalRow => totalRow.style.width = Number(sq.contentPane.offsetWidth) - 17 + 'px')
-        console.log(gridLines)
     },
     resizeVerticalLines() {
         let gridLines = Array.from(document.querySelectorAll('.gridLine'))
@@ -160,17 +159,15 @@ const sm = {
             workloadBlock3.style.width = 100 * zoom.scale + 'px'
             const value = (totalDaysAWeek[i] || 0) - totalWorkload[i] / 5
             workloadBlock3.textContent = Math.round(value * 10) / 10
-            console.log(totalDaysAWeek[i], totalWorkload[i], state.visibleType.minimum)
             const aboveMinimumAcceptable = ((totalWorkload[i] / 5) / totalDaysAWeek[i]) >= (1 - state.visibleType.minimum)  
             const belowMaximumAcceptable = ((totalWorkload[i] / 5) / totalDaysAWeek[i]) <= state.visibleType.maximum
-            console.log(aboveMinimumAcceptable, belowMaximumAcceptable)
             const colour = (!aboveMinimumAcceptable ? '#ffff3e' : (!belowMaximumAcceptable ? '#ff3e3e' : '#5eff3e'))
             workloadBlock3.style.backgroundColor = colour
             sq.surplusRow.appendChild(workloadBlock3)
         }
     },
     updateDisplay() {
-        sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
+        sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length - 16 + 'px'
         state.projects.forEach(project => {
             project.updateDisplay()
             for(let type in project.employeeSlots) project.employeeSlots[type].forEach(employeeSlot => employeeSlot.updateDisplay())

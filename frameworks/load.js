@@ -98,7 +98,7 @@ function load() {
 
 function initLoad() {
     sm.initTimeFrame()
-    sq.positioner.style.width = getXLocationFromID(state.latestDate + 1) + 'px'
+    sq.positioner.style.width = getXLocationFromID(state.latestDate + 1) - 16 + 'px'
     sm.updateDisplay()
     leave.showVisibleTypes()
     leave.updateZoom()

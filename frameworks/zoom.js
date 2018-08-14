@@ -21,13 +21,13 @@ const zoom = (function() {
         state.projects.forEach(project => project.updateZoom())
         state.employees.forEach(employee => employee.updateZoom())
         leave.updateZoom()
-        sq.positioner.style.width = getXLocationFromID(state.latestDate + 1) + 'px'
+        sq.positioner.style.width = getXLocationFromID(state.latestDate + 1) - 16 + 'px'
         sm.updateDisplay()
         sm.updateVerticalDisplay()
         updateDisplay()
         sm.fixContentPaneHeight()
         sm.appendUntilFit()
-        sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
+        sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length - 16 + 'px'
         sm.updateBackground()
         //Append Until Fit is not good enough for some zoom needs
     }

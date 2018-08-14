@@ -3,7 +3,9 @@ Version two:
 - Moving employees around
 
 - Scrolling with touchscreen isn't working properly
-- Deleting an employee doesn't remove them from leave slots
+- Scrolling too far to the right breaks the horizontal display of the application
+- Unsecured and grouping simultaneously, with unsecured taking precedence
+- Ask about the surplus / deficit row and how its including empty rows and all of that
 
 Most recent update:
 - Every six months have a double vertical line (single lines are sometimes too thick)
@@ -14,6 +16,9 @@ Most recent update:
 - Things go out of line when there is a lot of information in the program
 - Make leave narrower and get rid of the plus sign
 - Make it grey hash when they're leaving or joining
+- Need to be able to change the maximum and the minimum
+- Add scrollbars to the application
+- Add an empty row
 
 To-do list:
 - Open at current date

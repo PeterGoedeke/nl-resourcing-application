@@ -14,11 +14,11 @@ let draggingInterface = (function() {
     addEventListener('mousemove', (event) => {
         if(currentlyDragging) {
             if(firstTickOfDrag) {
-                sq.positioner.style.width = getXLocationFromID(Number(sq.topAxisContainer.lastChild.textContent) + 1) + 'px'
+                sq.positioner.style.width = getXLocationFromID(Number(sq.topAxisContainer.lastChild.textContent) + 1) - 16 + 'px'
                 firstTickOfDrag = false
             }
             currentlyDragging.drag(event, direction)
-            sq.positioner.style.width = currentlyDragging.offsetWidth - state.sidebarWidth + sq.getTimeBlockWidth() + 'px'
+            sq.positioner.style.width = currentlyDragging.offsetWidth - state.sidebarWidth + sq.getTimeBlockWidth() - 16 + 'px'
             /*
             timer = timer || setInterval(() => {
                 if(currentlyDragging) {
@@ -40,7 +40,7 @@ let draggingInterface = (function() {
                             sq.contentPane.scrollLeft -= 6
                             if(sq.getVisibleTimeBlockRange()[0] == parseInt(sq.topAxisContainer.firstChild.textContent)) {
                                 sm.appendTimeBlock(parseInt(sq.topAxisContainer.firstChild.textContent) - 1, true)
-                                sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
+                                sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length - 16 + 'px'
                                 state.baseDate --
                                 state.projects.forEach(project => {
                                     project.updateDisplay()
@@ -65,7 +65,7 @@ let draggingInterface = (function() {
                             sq.contentPane.scrollLeft += 6
                             if(sq.getVisibleTimeBlockRange()[1] >= parseInt(sq.topAxisContainer.lastChild.textContent)) {
                                 sm.appendTimeBlock(parseInt(sq.topAxisContainer.lastChild.textContent) + 1)
-                                sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length + 'px'
+                                sq.positioner.style.width = sq.getTimeBlockWidth() * sq.topAxisContainer.childNodes.length - 16 + 'px'
                             }
                             sm.appendUntilFit()
                         }

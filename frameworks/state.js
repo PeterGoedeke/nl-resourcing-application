@@ -245,13 +245,6 @@ const state = {
     })
 })()
 
-function test() {
-    state.baseDate = sq.getVisibleTimeBlockRange()[0] - 2
-    sq.positioner.style.left = sq.contentPane.scrollLeft + 'px'
-    sq.positioner.style.width = getXLocationFromID(state.latestDate) - sq.contentPane.scrollLeft + 'px'
-    sm.updateDisplay()
-}
-
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
 function convertIDToDate(id) {
     let year = 2000
