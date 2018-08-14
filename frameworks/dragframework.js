@@ -8,6 +8,7 @@ let draggingInterface = (function() {
             currentlyDragging.dragging = false
             currentlyDragging.stopDrag(direction)
             currentlyDragging = null
+            sm.updateDisplay()
         }
     })
 
