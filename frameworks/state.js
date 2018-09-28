@@ -21,14 +21,16 @@ const state = {
         sm.updateVerticalDisplay()
         sm.updateDisplay()
     },
-    getIndexBeforeFirstGroup(exclude) {
-        if(this.projects.filter(project => project !== exclude).map(project => project.group).every(group => group == null)) return this.getIndexBeforeUnsecured(exclude)
-        const index = state.projects.filter(project => project !== exclude).findIndex(project => project.group != null)
+    getIndexBeforeFirstGroup(exclude, secured = true) {
+        const projects = this.projects.filter(project => project !== exclude).filter(project => project.security == secured)
+        if(projects.map(project => project.group).every(group => group == null)) return this.getIndexBeforeUnsecured(exclude)
+        const index = projects.findIndex(project => project.group != null)
         return (index == -1 ? 0 : index)
     },
-    getIndexBeforeGroup(exclude, group) {
-        if(!this.projects.filter(project => project !== exclude).map(project => project.group).includes(group)) return this.getIndexBeforeUnsecured(exclude)
-        const index = this.projects.filter(project => project !== exclude).map(project => project.group).indexOf(group)
+    getIndexBeforeGroup(exclude, group, secured = true) {
+        const projects = this.projects.filter(project => project !== exclude).filter(project => project.security == secured)
+        if(!projects.map(project => project.group).includes(group)) return this.getIndexBeforeUnsecured(exclude)
+        const index = projects.map(project => project.group).indexOf(group)
         return (index == -1 ? 0 : index)
     },
     getIndexBeforeUnsecured(exclude) {

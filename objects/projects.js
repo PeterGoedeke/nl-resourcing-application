@@ -105,11 +105,15 @@ let projectProto = {
         })
     },
     toggleSecurity() {
-        state.validateGroup(this.group, this)
-        this.group = null
-        this.move(this.security ? state.getIndexBeforeUnsecured(this) : state.getIndexBeforeFirstGroup(this))
-        this.toggleSecurityClasses()
         this.security = !this.security
+        if(this.group) {
+            this.move(state.getIndexBeforeGroup(this.group, this.security))
+        } else if(this.security) {
+            this.move(state.getIndexBeforeUnsecured(this, this.security))
+        } else {
+            this.move(state.getIndexBeforeFirstGroup(this, this.security))
+        }
+        this.toggleSecurityClasses()
         save.projects()
     },
     toggleSecurityClasses() {
@@ -119,15 +123,13 @@ let projectProto = {
         this.display.classList.toggle('unsecured')
     },
     setGroup(group) {
-        if(!this.security) this.toggleSecurityClasses()
-        this.security = true
-        this.move(state.getIndexBeforeGroup(this, group))
+        this.move(state.getIndexBeforeGroup(this, group, this.security))
         this.group = group
         this.display.style.backgroundColor = state.getColourFromGroup(group)
         save.projects()
     },
     removeGroup() {
-        this.display.style.backgroundColor = 'lightgrey'
+        this.display.style.backgroundColor = ''
         state.validateGroup(this.group, this)
         this.group = null
         this.move(state.getIndexBeforeFirstGroup(this))
@@ -156,7 +158,6 @@ let projectProto = {
         this.createEmployeeSlotButton.style.fontSize = 40 * zoom.scale + 'px'
         this.createEmployeeSlotButton.style.height = 40 * zoom.scale + 'px'
         this.createEmployeeSlotButton.style.lineHeight = 40 * zoom.scale + 'px'
-
     },
     delete() {
         sm.validateScroll(this.display)

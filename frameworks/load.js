@@ -106,6 +106,8 @@ function initLoad() {
     sm.updateVerticalDisplay()
     zoom.updateDisplay()
     zoom.initDisplay()
+    sm.resizeHorizontalLines()
+    sm.resizeVerticalLines()
     // let scrollTo = getXLocationFromID(currentDateID())
     // if(scrollTo > sq.contentPane.scrollWidth - sq.contentPane.offsetWidth) scrollTo = sq.contentPane.scrollWidth - sq.contentPane.offsetWidth
     // while(sq.contentPane.scrollLeft < scrollTo) sq.contentPane.scrollLeft = scrollTo

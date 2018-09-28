@@ -3,7 +3,6 @@ Version two:
 - Moving employees around
 
 - Scrolling with touchscreen isn't working properly
-- Scrolling too far to the right breaks the horizontal display of the application
 - Unsecured and grouping simultaneously, with unsecured taking precedence
 - Ask about the surplus / deficit row and how its including empty rows and all of that
 
