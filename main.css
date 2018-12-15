@@ -63,26 +63,22 @@ CSS starts here---------------------------------------------------------------
 .element {
     width: 100vw;
     height: 1000px;
-
+    /* display: flex;
+    flex-direction: column; */
 }
 .child {
+    /* flex-grow: 1; */
     height: 10px;
-    border: solid black 1px;
     background-color: green;
     position: relative;
     padding: 0 2%;
-}
-.child:nth-child(odd) {
-    background-color: lightgreen;
+    display: flex;
+    align-items: stretch;
 }
 .childBlock {
-    width: 5vw;
-    height: 100%;
-    display: inline-block;
-    border-right: solid black 1px;
     background-color: orange;
-    box-sizing: border-box;
-}
-.childBlock:nth-child(odd) {
-    background-color: yellow;
+    flex-grow: 1;
+    /* width: 5vw;
+    height: 100%;
+    display: inline-block; */
 }
