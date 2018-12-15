@@ -3,30 +3,31 @@ let elements = []
 let allElements = []
 let count = 0
 const frag = document.createDocumentFragment()
-function addElement() {
+
+const protoElement = (function() {
     let element = document.createElement('div')
     element.className = 'element'
     for(let i = 0; i < 100; i++) {
         let child = document.createElement('div')
         child.className = 'child'
-        const width = Math.floor(Math.random() * 20) * 5
+        //const width = Math.floor(Math.random() * 20) * 5
+        const width = 85
         child.style.width = width + '%'
         child.style.left = (100 - width) / 2 + '%'
         for(let j = 0; j < width / 5; j ++) {
             let childBlock = document.createElement('div')
             childBlock.className = 'childBlock'
             child.appendChild(childBlock)
-            allElements.push(childBlock)
-            count ++
         }
         element.appendChild(child)
-        allElements.push(child)
-        count ++
     }
+    return element
+})()
+function addElement() {
+    const element = protoElement.cloneNode(true)
     elements.push(element)
-    allElements.push(element)
+    Array.from(element.getElementsByTagName('*')).forEach(child => allElements.push(child))
     frag.appendChild(element)
-    count ++
 }
 for(let i = 0; i < 100; i++) addElement()
 frame.appendChild(frag)
