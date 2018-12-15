@@ -1,5 +1,8 @@
+const frame = document.querySelector('.frame')
 let elements = []
+let allElements = []
 let count = 0
+const frag = document.createDocumentFragment()
 function addElement() {
     let element = document.createElement('div')
     element.className = 'element'
@@ -13,28 +16,31 @@ function addElement() {
             let childBlock = document.createElement('div')
             childBlock.className = 'childBlock'
             child.appendChild(childBlock)
+            allElements.push(childBlock)
             count ++
         }
         element.appendChild(child)
+        allElements.push(child)
         count ++
     }
     elements.push(element)
-    document.querySelector('.frame').appendChild(element)
+    allElements.push(element)
+    frag.appendChild(element)
     count ++
 }
 for(let i = 0; i < 100; i++) addElement()
+frame.appendChild(frag)
 
-const frame = document.querySelector('.frame')
-setTimeout(() => {
-    document.querySelector('.frame').innerHTML = ''
-    console.log('removed')
-    console.log('added')
-}, 4000)
 function test() {
+    elements[0].style.backgroundColor = random.color()
+    const fragment = document.createDocumentFragment()
     elements.forEach(element => {
-        element.style.backgroundColor = random.color()
-        frame.appendChild(element)
+        fragment.appendChild(element)
     })
+    frame.appendChild(fragment)
+    // elements.forEach(element => {
+    //     frame.appendChild(element)
+    // })
 }
 function test2() {
     frame.innerHTML = ''
@@ -45,7 +51,7 @@ function test3() {
 }
 
 function test4() {
-    elements.forEach(element => element.style.backgroundColor = random.color())
+    allElements[random.number(0, allElements.length - 1)].style.backgroundColor = random.color()
 }
 
 const random = {
