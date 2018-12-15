@@ -521,7 +521,7 @@ input {
     width: 0.05em;
     left: -0.05em;
     top: 30px;
-    height: 10000000px;
+    height: 100vh;
     pointer-events: none;
 }
 .timeBlock:nth-child(12n) > .gridLine {
