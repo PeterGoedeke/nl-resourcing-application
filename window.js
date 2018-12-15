@@ -3,9 +3,9 @@ const {app, BrowserWindow} = require('electron')
 let mainWindow
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1366, height: 768, icon: './old-application/favicon.png'})
+  mainWindow = new BrowserWindow({width: 1366, height: 768/*, icon: './old-application/favicon.png'*/})
   mainWindow.setMenu(null)
-  mainWindow.loadFile('./old-application/index.html')
+  mainWindow.loadFile('./index.html')
 
   //Open the DevTools
   mainWindow.webContents.openDevTools()
