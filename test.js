@@ -31,9 +31,9 @@ function addElement() {
 for(let i = 0; i < 100; i++) addElement()
 frame.appendChild(frag)
 
+const fragment = document.createDocumentFragment()
 function test() {
-    elements[0].style.backgroundColor = random.color()
-    const fragment = document.createDocumentFragment()
+    // elements[0].style.backgroundColor = random.color()
     elements.forEach(element => {
         fragment.appendChild(element)
     })
@@ -41,6 +41,23 @@ function test() {
     // elements.forEach(element => {
     //     frame.appendChild(element)
     // })
+
+    // let stringElements = []
+    // for(let i = 0; i < 100; i++) {
+    //     let elementString = `<div class="element">`
+    //     for(let j = 0; j < 100; j++) {
+    //         let childString = `<div class="child" `
+    //         const width = Math.floor(Math.random() * 20) * 5
+    //         childString += `style="width:${width}%; left:${(100 - width) / 2}%">`
+    //         for(let k = 0; k < width / 5; k ++) childString += `<div class="childBlock"></div>`
+    //         childString += `</div>`
+    //         elementString += childString
+    //     }
+    //     elementString += `</div>`
+    //     stringElements.push(elementString)
+    // }
+    // return stringElements.join('')
+    // frame.innerHTML = stringElements.join('')
 }
 function test2() {
     frame.innerHTML = ''
