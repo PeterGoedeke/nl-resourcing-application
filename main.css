@@ -49,6 +49,17 @@ CSS starts here---------------------------------------------------------------
 ------------------------------------------------------------------------------
 */
 
+.block {
+    width: 40%;
+    height: 30px;
+    background-color: red;
+    border: solid black 1px;
+    position: relative;
+    left: 50px;
+}
+.block:nth-child(2) {
+    left: 500px;
+}
 .element {
     width: 100vw;
     height: 1000px;
