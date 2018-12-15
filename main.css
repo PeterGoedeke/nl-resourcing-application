@@ -70,6 +70,7 @@ CSS starts here---------------------------------------------------------------
     border: solid black 1px;
     background-color: green;
     position: relative;
+    padding: 0 2%;
 }
 .child:nth-child(odd) {
     background-color: lightgreen;

@@ -62,3 +62,29 @@ const random = {
         return Math.random() > 0.5
     }
 }
+
+function add() {
+    allElements.forEach(element => element.addEventListener('click', event => console.log(element.className)))
+}
+
+// let initialLeft
+// let initialWidth
+// addEventListener('dragstart', event => {
+
+//     console.log(event.target.getBoundingClientRect().right)
+// })
+// addEventListener('drag', event => {
+
+// })
+
+// let draggingInterval
+// addEventListener('mousedown', event => {
+//     if(event.target.className.split(' ').includes('child')) {
+//         draggingInterval = setInterval(() => {
+//             event.target
+//         }, 10)
+//     }
+// })
+// addEventListener('mouseup', event => {
+//     clearInterval(draggingInterval)
+// })
