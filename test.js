@@ -25,12 +25,13 @@ const protoElement = (function() {
 })()
 function addElement() {
     const element = protoElement.cloneNode(true)
-    elements.push(element)
-    Array.from(element.getElementsByTagName('*')).forEach(child => allElements.push(child))
+    // elements.push(element)
+    // Array.from(element.getElementsByTagName('*')).forEach(child => allElements.push(child))
     frag.appendChild(element)
 }
 for(let i = 0; i < 100; i++) addElement()
 frame.appendChild(frag)
+// Array.from(frame.getElementsByTagName('*')).forEach(child => allElements.push(child))
 
 const fragment = document.createDocumentFragment()
 function test() {
@@ -43,21 +44,7 @@ function test() {
     //     frame.appendChild(element)
     // })
 
-    // let stringElements = []
-    // for(let i = 0; i < 100; i++) {
-    //     let elementString = `<div class="element">`
-    //     for(let j = 0; j < 100; j++) {
-    //         let childString = `<div class="child" `
-    //         const width = Math.floor(Math.random() * 20) * 5
-    //         childString += `style="width:${width}%; left:${(100 - width) / 2}%">`
-    //         for(let k = 0; k < width / 5; k ++) childString += `<div class="childBlock"></div>`
-    //         childString += `</div>`
-    //         elementString += childString
-    //     }
-    //     elementString += `</div>`
-    //     stringElements.push(elementString)
-    // }
-    // return stringElements.join('')
+    
     // frame.innerHTML = stringElements.join('')
 }
 function test2() {
@@ -66,6 +53,24 @@ function test2() {
 function test3() {
     test2()
     test()
+}
+
+function testString() {
+    let stringElements = []
+    for(let i = 0; i < 100; i++) {
+        let elementString = `<div class="element">`
+        for(let j = 0; j < 100; j++) {
+            let childString = `<div class="child" `
+            const width = 85
+            childString += `style="width:${width}%; left:${(100 - width) / 2}%">`
+            for(let k = 0; k < width / 5; k ++) childString += `<div class="childBlock"></div>`
+            childString += `</div>`
+            elementString += childString
+        }
+        elementString += `</div>`
+        stringElements.push(elementString)
+    }
+    return stringElements.join('')
 }
 
 function test4() {
