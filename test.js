@@ -117,3 +117,46 @@ function add() {
 // addEventListener('mouseup', event => {
 //     clearInterval(draggingInterval)
 // })
+
+
+
+function appendGridBox(x, y) {
+    let element = document.createElement('div')
+    element.className = 'gridBox'
+    element.style.gridArea = `${x} / ${y}`
+    frame.appendChild(element)
+}
+for(let i = 0; i < 20; i++) for(let j = 0; j < 20; j++) appendGridBox(i + 1, j + 1)
+
+function addGridRow() {
+    frame.style.setProperty('--rows', Number(getComputedStyle(frame).getPropertyValue('--rows')) + 1)
+    for(let i = 0; i < 20; i++) {
+        //appendGridBox(i + 1, getComputedStyle(frame).getPropertyValue('--rows'))
+        appendGridBox(getComputedStyle(frame).getPropertyValue('--rows'), i + 1)
+    }
+}
+
+const protoGridBox = (function() {
+    let element = document.createElement('div')
+    element.className = 'gridBox'
+    return element
+})()
+
+function addGridRows(rows) {
+    const fragment = document.createDocumentFragment()
+    const initialRows = Number(getComputedStyle(frame).getPropertyValue('--rows'))
+    frame.style.setProperty('--rows', initialRows + rows)
+    for(let i = 0; i < rows * 20; i++) {
+        let element = protoGridBox.cloneNode()
+        //element.style.gridArea = `${i + 1} / ${Math.floor((i + 1) / 20) + initialRows}`
+        element.style.gridArea = `${Math.floor(i / 20) + initialRows + 1} / ${(i % 20) + 1}`
+        fragment.appendChild(element)
+    }
+    frame.appendChild(fragment)
+}
+
+function testExpand() {
+    setTimeout(() => {
+        for(let i = 0; i < 100; i++) addGridRow()
+    }, 1000)
+}
