@@ -52,7 +52,7 @@ CSS starts here---------------------------------------------------------------
     --color: pink;
     --rows: 20;
 }
-
+/* 
 .frame {
     background-color: var(--color);
     display: grid;
@@ -62,7 +62,7 @@ CSS starts here---------------------------------------------------------------
 }
 .gridBox {
     background-color: blue;
-}
+} */
 
 
 

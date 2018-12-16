@@ -25,7 +25,7 @@ const protoElement = (function() {
 })()
 function addElement() {
     const element = protoElement.cloneNode(true)
-    // elements.push(element)
+    elements.push(element)
     // Array.from(element.getElementsByTagName('*')).forEach(child => allElements.push(child))
     frag.appendChild(element)
 }
@@ -159,4 +159,9 @@ function testExpand() {
     setTimeout(() => {
         for(let i = 0; i < 100; i++) addGridRow()
     }, 1000)
+}
+
+function changeLocation() {
+    frame.removeChild(elements[5])
+    frame.insertBefore(elements[5], elements[0])
 }
