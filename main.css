@@ -65,7 +65,9 @@ CSS starts here---------------------------------------------------------------
 } */
 
 
-
+body {
+    overflow-x: scroll;
+}
 
 
 
@@ -79,7 +81,7 @@ CSS starts here---------------------------------------------------------------
 
 
 .element {
-    width: 100vw;
+    width: 150vw;
     height: 1000px;
     /* display: flex;
     flex-direction: column; */
@@ -101,6 +103,8 @@ CSS starts here---------------------------------------------------------------
 .activeInput {
     width: 5vw;
     flex-basis: 5vw;
+    display: flex;
+    justify-content: stretch;
 }
 .input {
     width: 5vw;
@@ -108,11 +112,21 @@ CSS starts here---------------------------------------------------------------
     font-size: 10px;
 }
 
-/* .nav {
+.nav {
     width: 100vw;
     height: 25px;
+    background-color: green;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    float: left;
 }
 .sidebar {
     height: calc(100vh - 25px);
     width: 50px;
-} */
+    background-color: green;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    float: left;
+}

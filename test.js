@@ -56,7 +56,7 @@ function addElement() {
     frag.appendChild(element)
 }
 for(let i = 0; i < 100; i++) addElement()
-frame.appendChild(frag)
+document.body.appendChild(frag)
 // Array.from(frame.getElementsByTagName('*')).forEach(child => allElements.push(child))
 
 const fragment = document.createDocumentFragment()
@@ -146,13 +146,13 @@ function add() {
 
 
 
-function appendGridBox(x, y) {
-    let element = document.createElement('div')
-    element.className = 'gridBox'
-    element.style.gridArea = `${x} / ${y}`
-    frame.appendChild(element)
-}
-for(let i = 0; i < 20; i++) for(let j = 0; j < 20; j++) appendGridBox(i + 1, j + 1)
+// function appendGridBox(x, y) {
+//     let element = document.createElement('div')
+//     element.className = 'gridBox'
+//     element.style.gridArea = `${x} / ${y}`
+//     frame.appendChild(element)
+// }
+// for(let i = 0; i < 20; i++) for(let j = 0; j < 20; j++) appendGridBox(i + 1, j + 1)
 
 function addGridRow() {
     frame.style.setProperty('--rows', Number(getComputedStyle(frame).getPropertyValue('--rows')) + 1)
