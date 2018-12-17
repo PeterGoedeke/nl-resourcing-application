@@ -85,28 +85,34 @@ CSS starts here---------------------------------------------------------------
     flex-direction: column; */
 }
 .child {
-    /* flex-grow: 1; */
     height: 10px;
     background-color: pink;
     position: relative;
     padding: 0 2%;
     display: flex;
-    align-items: stretch;
-    /* border-bottom: solid black 1px; */
 }
 .childBlock {
     background-color: orange;
-    flex-grow: 1;
-    /* width: 5vw;
     height: 100%;
-    display: inline-block; */
+    flex-grow: 1;
+    text-align: center;
+    font-size: 10px;
+}
+.activeInput {
+    width: 5vw;
+    flex-basis: 5vw;
+}
+.input {
+    width: 5vw;
+    box-sizing: border-box;
+    font-size: 10px;
 }
 
-.nav {
+/* .nav {
     width: 100vw;
     height: 25px;
 }
 .sidebar {
     height: calc(100vh - 25px);
     width: 50px;
-}
+} */

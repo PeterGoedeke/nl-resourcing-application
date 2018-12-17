@@ -4,28 +4,54 @@ let allElements = []
 let count = 0
 const frag = document.createDocumentFragment()
 
+const protoChildBlock = (function() {
+    let element = document.createElement('div')
+    element.className = 'childBlock'
+    element.innerHTML = '5.0'
+    return element
+})()
+const protoChild = (function() {
+    let element = document.createElement('div')
+    element.className = 'child'
+    element.style.width = '85%'
+    element.style.left = '7.5%'
+    for(let j = 0; j < 85 / 5; j ++) element.appendChild(protoChildBlock.cloneNode(true))
+    return element
+})()
 const protoElement = (function() {
     let element = document.createElement('div')
     element.className = 'element'
-    for(let i = 0; i < 100; i++) {
-        let child = document.createElement('div')
-        child.className = 'child'
-        //const width = Math.floor(Math.random() * 20) * 5
-        const width = 85
-        child.style.width = width + '%'
-        child.style.left = (100 - width) / 2 + '%'
-        for(let j = 0; j < width / 5; j ++) {
-            let childBlock = document.createElement('div')
-            childBlock.className = 'childBlock'
-            child.appendChild(childBlock)
-        }
-        element.appendChild(child)
-    }
+    for(let i = 0; i < 100; i++) element.appendChild(protoChild.cloneNode(true))
     return element
 })()
+
+const elementObjectProto = {
+    init() {
+        this.element.addEventListener('mousedown', event => {
+            if(event.target.className.split(' ').includes('childBlock')) {
+                event.target.classList.add('activeInput')
+                let input = document.createElement('input')
+                input.className = 'input'
+                input.value = event.target.innerHTML
+                event.target.innerHTML = ''
+                event.target.appendChild(input)
+                input.addEventListener('blur', e => {
+                    event.target.innerHTML = input.value
+                    event.target.classList.remove('activeInput')
+                })
+                setTimeout(() => input.focus(), 0)
+            }
+        })
+    }
+}
+
 function addElement() {
     const element = protoElement.cloneNode(true)
-    elements.push(element)
+
+    let object = Object.create(elementObjectProto)
+    object.element = element
+    object.init()
+    elements.push(object)
     // Array.from(element.getElementsByTagName('*')).forEach(child => allElements.push(child))
     frag.appendChild(element)
 }
