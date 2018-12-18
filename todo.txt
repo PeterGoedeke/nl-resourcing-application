@@ -1,0 +1,10 @@
+
+Projects:
+- There need to be projects.
+- As an element structure, they must have a container element which spans the entire width of the application
+- Inside the container element should be the body of the project
+- Inside the body should be each of the employee slots
+- Inside the employee slots should be the workload blocks
+- In the sidebar there needs to be a left (project) and right (employee slot container) label.
+
+- The project needs

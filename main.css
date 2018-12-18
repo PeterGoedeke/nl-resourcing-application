@@ -118,10 +118,9 @@ body {
     background-color: green;
     position: sticky;
     top: 0;
-    z-index: 1;
-    float: left;
+    z-index: 2;
 }
-.sidebar {
+/* .sidebar {
     height: calc(100vh - 25px);
     width: 50px;
     background-color: green;
@@ -129,4 +128,23 @@ body {
     left: 0;
     z-index: 1;
     float: left;
+} */
+
+.leftLabel, .rightLabel {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    float: left;
+    width: 50px;
+    background-color: green;
+    height: 100%;
+}
+.rightLabel {
+    background-color: lightgreen;
+    left: 50px;
+}
+.project {
+    height: 100%;
+    float: left;
+    background-color: grey;
 }

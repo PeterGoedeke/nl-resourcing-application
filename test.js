@@ -13,15 +13,24 @@ const protoChildBlock = (function() {
 const protoChild = (function() {
     let element = document.createElement('div')
     element.className = 'child'
-    element.style.width = '85%'
-    element.style.left = '7.5%'
+    element.style.width = '85vw'
+    element.style.left = '7.5vw'
     for(let j = 0; j < 85 / 5; j ++) element.appendChild(protoChildBlock.cloneNode(true))
     return element
 })()
 const protoElement = (function() {
     let element = document.createElement('div')
     element.className = 'element'
-    for(let i = 0; i < 100; i++) element.appendChild(protoChild.cloneNode(true))
+    let leftLabel = document.createElement('div')
+    leftLabel.className = 'leftLabel'
+    element.appendChild(leftLabel)
+    let rightLabel = document.createElement('div')
+    rightLabel.className = 'rightLabel'
+    element.appendChild(rightLabel)
+    let project = document.createElement('div')
+    project.className = 'project'
+    for(let i = 0; i < 100; i++) project.appendChild(protoChild.cloneNode(true))
+    element.appendChild(project)
     return element
 })()
 
@@ -55,7 +64,7 @@ function addElement() {
     // Array.from(element.getElementsByTagName('*')).forEach(child => allElements.push(child))
     frag.appendChild(element)
 }
-for(let i = 0; i < 100; i++) addElement()
+for(let i = 0; i < 10; i++) addElement()
 document.body.appendChild(frag)
 // Array.from(frame.getElementsByTagName('*')).forEach(child => allElements.push(child))
 
