@@ -5,6 +5,153 @@ Projects:
 - Inside the container element should be the body of the project
 - Inside the body should be each of the employee slots
 - Inside the employee slots should be the workload blocks
-- In the sidebar there needs to be a left (project) and right (employee slot container) label.
+- Workload blocks must transform into inputs on click
+- In the container there needs to be a left (project) and right (employee slot container) label.
+- Project and employee slot labels must transform into inputs on click
 
-- The project needs
+- The body of the project should be resizable horizontally
+- The employee slots of the project should be resizable horizontally
+- The container of the project should be draggable vertically to reorder elements
+
+Project Behaviour:
+- Projects need to store their start and end date
+- Projects need to store their names
+- Projects need to store their employee slots
+- Projects need to store their security
+- Projects need to store whether they are interiors or regular
+- Projects need to store their colour
+- [?] Projects need to have a reference to their container element
+- [?] Projects need to have an id which indicates their order on the display
+
+- Projects need an event listener which changes the size of the element and edits the start and end date of the project
+- Projects need an event listener which changes the name of the project
+- Projects need an event listener which creates a new employee slot and stores it on the project
+- Projects need an event listener which reorders the project vertically in the list
+- Projects need an event listener which opens a right click context menu, which allows:
+    - Projects to be deleted
+    - Projects to be marked as secure or unsecure (which should move them into another area)
+    - Project colour to be changed
+
+Employee slot behaviour:
+- Employee slots need to store their dates and values in an object
+- Employee slots need to store the name of the employee assigned to them
+- [?] Employee slots need to have a reference to their container element
+
+- Employee slots need an event listener which changes the employee in the employee slot
+- Employee slots need an event listener which changes the size of the element and edits the workload values of the employee slot
+- Employee slots workload blocks need an event listener which changes the value of the workload at that point
+- Employee slots need an event listener which opens up a right click context menu, which allows:
+    - Employee slots to be deleted
+
+Employees:
+- Employees should have a container element which spans the entire width of the application
+- Inside the container element should be workload blocks
+- Inside the container element should be right labels
+- Right labels should transform into inputs on click
+- Employees need to store their joining date, leaving date, and days-a-week
+- Employees need to keep a reference to the jobs to which they are assigned
+
+- Employees need an event listener which renames the employee
+- Employees need an event listener which opens a right click context menu, which allows:
+    - Leaving and joining dates to be set
+    - Days-a-week to be set
+    - Employees to be deleted
+
+Sheets:
+- Sheets 
+
+Distribution is a question
+
+
+project:
+{
+    generateElements() {
+        this.container = containerProtoElement.cloneNode(true) // gets the container, the body, the labels, and the create buttons
+        this.body = this.container.querySelector('.body')
+        this.slots.forEach(slot => {
+            slot.generateElements()
+            if(slot.type == visibleType) this.body.appendChild(slot.element)
+        })
+        return container
+    },
+    batchLoad(activeSheet) {
+        // create elements by cloning nodes and add them to a document fragment + add event listeners to elements
+    },
+    startDate, endDate, security, interiors, color, index,
+    slots: [],
+    eventListeners {
+        body (dragging) {
+            // get the new start and end dates of 'this'
+            // find the difference, and edit the employee slots based on that
+            // set the start and end date of 'this' to the new values
+        },
+        leftLabel (naming) {
+            // changes the name of the project
+        },
+        button (adding employee slots) {
+            // creates an employee slot and adds it to the employee slots of the project
+        },
+        container (dragging vertically) {
+            // remove the container from the display and re-add it wherever the mouse was dropped
+            // change the index of the project
+        },
+        body (context menu) {
+            // open the menu and allow options to be changed
+        }
+    }
+}
+
+employeeslot:
+{
+    batchLoad() {
+        // todo
+    },
+    workload {
+        // "date": "workload"
+    },
+    employee,
+    eventListeners {
+        rightLabel (changing employee) {
+            // changes employee, removes old employee's workload, and notifies new employee of workload
+        },
+        body (horizontally resizing) {
+            // find earliest / latest value, update workload with that value until new earliest / latest point
+            // append new workload blocks
+        },
+        workloadBlock (editing) {
+            // change value of workload at date index (generated by for loop, so will do this directly)
+        },
+        body (context menu) {
+            // delete employee slot
+        }
+    }
+}
+
+sheets:
+{
+    name,
+    setActive() {
+        // remove all projects in one go with document.body.innerHTML = '<div class="nav"></div>' etc
+        // batch all projects to document fragment with new active sheet information
+    }
+}
+
+zoom:
+{
+    changeZoom() {
+        // make an array of all slot elements and change their width and height values
+    }
+}
+
+Batch loading:
+{
+    load() {
+        const fragment = document.createDocumentFragment()
+        projects.forEach(project => fragment.appendChild(project.generateElements()))
+        fragment.appendChild(separatorProto.cloneNode())
+        // repeat for unsecured, for interiors, for interiors unsecured, for leave, and for employees
+        document.body.appendChild(fragment)
+    }
+}
+
+does the interiors section need to be hideable?

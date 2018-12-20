@@ -20,7 +20,7 @@ const protoChild = (function() {
 })()
 const protoElement = (function() {
     let element = document.createElement('div')
-    element.className = 'element'
+    element.className = 'element clearfix'
     let leftLabel = document.createElement('div')
     leftLabel.className = 'leftLabel'
     element.appendChild(leftLabel)
@@ -88,6 +88,22 @@ function test2() {
 function test3() {
     test2()
     test()
+}
+
+const protoChild2 = (function() {
+    let element = document.createElement('div')
+    element.className = 'child'
+    element.style.width = '50vw'
+    element.style.left = '7.5vw'
+    for(let j = 0; j < 100 / 5; j ++) element.appendChild(protoChildBlock.cloneNode(true))
+    return element
+})()
+
+function swap() {
+    elements.forEach(element => {
+        element.element.innerHTML = ''
+        for(let i = 0; i < 100; i++) element.element.appendChild(protoChild2.cloneNode(true))
+    })
 }
 
 function testString() {
