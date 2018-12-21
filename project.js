@@ -3,13 +3,19 @@ const projectProto = {
         this.container = projectContainer.cloneNode(true)
         this.body = this.container.querySelector('.projectBody')
         // console.time(3)
-        this.slots.forEach(slot => this.body.appendChild(slot.batchLoad()))
+        // this.slots.forEach(slot => this.body.appendChild(slot.batchLoad()))
+        this.slots.forEach(slot => slot.batchLoad())
+        this.visibleSlots.forEach(slot => this.body.appendChild(slot.body))
         // console.timeEnd(3)
         return this.container
     },
     get visibleSlots() {
         return this.slots.filter(slot => slot.type == main.visibleType)
     }
+}
+
+const main = {
+    visibleType: 1
 }
 
 const employeeSlotProto = {
@@ -29,7 +35,7 @@ const employeeSlotProto = {
             // console.timeEnd('append child')
         }
         // console.timeEnd(1)
-        return this.body
+        // return this.body
     }
 }
 
@@ -84,6 +90,7 @@ for(let i = 0; i < 200; i++) {
         18: 5,
         19: 5,
     }
+    slotsBase[i].type = i > 50 ? 1 : 2
 }
 function load() {
     const fragment = document.createDocumentFragment()
