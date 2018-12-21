@@ -52,53 +52,47 @@ CSS starts here---------------------------------------------------------------
     --color: pink;
     --rows: 20;
 }
-/* 
-.frame {
-    background-color: var(--color);
-    display: grid;
-    grid-template-rows: repeat(var(--rows), 20px);
-    grid-template-columns: repeat(20, 20px);
-    grid-gap: 5px;
-}
-.gridBox {
-    background-color: blue;
-} */
-
 
 body {
     overflow-x: scroll;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-.element {
-    width: 150vw;
-    /* display: flex;
-    flex-direction: column; */
+.projectContainer {
+    width: 300vw;
 }
-.child {
+.projectBody {
+    display: inline-block;
+    background-color: grey;
+}
+.slotBody {
     height: 10px;
     background-color: pink;
     position: relative;
     padding: 0 2%;
     display: flex;
 }
-.childBlock {
+.slotCell {
     background-color: orange;
-    height: 100%;
     flex-grow: 1;
     text-align: center;
     font-size: 10px;
+    /* height: 100%; */
 }
+.projectLabel, .projectSlotLabelContainer {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    display: inline-block;
+    width: 50px;
+    background-color: green;
+    height: 100%;
+}
+.projectSlotLabelContainer {
+    background-color: lightgreen;
+    left: 50px;
+}
+
+
 .activeInput {
     width: 5vw;
     flex-basis: 5vw;
@@ -118,34 +112,6 @@ body {
     position: sticky;
     top: 0;
     z-index: 2;
-}
-/* .sidebar {
-    height: calc(100vh - 25px);
-    width: 50px;
-    background-color: green;
-    position: sticky;
-    left: 0;
-    z-index: 1;
-    float: left;
-} */
-
-.leftLabel, .rightLabel {
-    /* position: sticky;
-    left: 0; */
-    z-index: 1;
-    display: inline-block;
-    width: 50px;
-    background-color: green;
-    height: 100%;
-}
-.rightLabel {
-    background-color: lightgreen;
-    left: 50px;
-}
-.project {
-    height: 100%;
-    display: inline-block;
-    background-color: grey;
 }
 
 .clearfix::after {

@@ -15,6 +15,7 @@ const projectProto = {
 const employeeSlotProto = {
     batchLoad() {
         this.body = slotBody.cloneNode()
+        this.body.style.width = Object.keys(this.workload).length * 5 + 'vw'
         // console.time(1)
         for(const key in this.workload) {
             // console.time('clone cell')
@@ -95,8 +96,8 @@ function load() {
         fragment.appendChild(projects[i].batchLoad())
     }
     console.timeEnd('test')
-    let element = document.createElement('div')
-    element.appendChild(fragment)
-    console.log(element.getElementsByTagName('*').length)
-
+    // let element = document.createElement('div')
+    // element.appendChild(fragment)
+    // console.log(element.getElementsByTagName('*').length)
+    document.body.appendChild(fragment)
 }
