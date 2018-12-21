@@ -2,10 +2,14 @@ const projectProto = {
     batchLoad() {
         this.container = projectContainer.cloneNode(true)
         this.body = this.container.querySelector('.projectBody')
+        this.slotLabelContainer = this.container.querySelector('.projectSlotLabelContainer')
         // console.time(3)
         // this.slots.forEach(slot => this.body.appendChild(slot.batchLoad()))
         this.slots.forEach(slot => slot.batchLoad())
-        this.visibleSlots.forEach(slot => this.body.appendChild(slot.body))
+        this.visibleSlots.forEach(slot => {
+            this.body.appendChild(slot.body)
+            this.slotLabelContainer.appendChild(slot.label)
+        })
         // console.timeEnd(3)
         return this.container
     },
@@ -22,6 +26,7 @@ const employeeSlotProto = {
     batchLoad() {
         this.body = slotBody.cloneNode()
         this.body.style.width = Object.keys(this.workload).length * 5 + 'vw'
+        this.label = slotLabel.cloneNode()
         // console.time(1)
         for(const key in this.workload) {
             // console.time('clone cell')

@@ -59,10 +59,12 @@ body {
 
 .projectContainer {
     width: 300vw;
+    height: 1490px;
 }
 .projectBody {
     display: inline-block;
     background-color: grey;
+    vertical-align: top;
 }
 .slotBody {
     height: 10px;
@@ -70,6 +72,10 @@ body {
     position: relative;
     padding: 0 2%;
     display: flex;
+}
+.slotLabel {
+    height: 10px;
+    background-color: pink;
 }
 .slotCell {
     background-color: orange;

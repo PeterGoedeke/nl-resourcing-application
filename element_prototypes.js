@@ -21,6 +21,11 @@ const slotBody = (function() {
     slotBody.className = 'slotBody'
     return slotBody
 })()
+const slotLabel = (function() {
+    let slotLabel = document.createElement('div')
+    slotLabel.className = 'slotLabel'
+    return slotLabel
+})()
 const slotCell = (function() {
     let slotCell = document.createElement('div')
     slotCell.className = 'slotCell'
