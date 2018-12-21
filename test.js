@@ -216,3 +216,39 @@ function changeLocation() {
     frame.removeChild(elements[5])
     frame.insertBefore(elements[5], elements[0])
 }
+
+const protoTest = (function() {
+    let element = document.createElement('div')
+    element.className = 'test'
+    return element
+})()
+function see() {
+    setTimeout(() => {
+        let element = document.createElement('div')
+        let string = ''
+        const test = protoTest.outerHTML
+        for(let i = 0; i < 1000000; i++) string += test
+        element.innerHTML = string
+        console.log(element)
+    }, 1000)
+}
+function see2() {
+    setTimeout(() => {
+        const fragment = document.createDocumentFragment()
+        console.time('test')
+        for(let i = 0; i < 1000000; i++) fragment.appendChild(protoTest.cloneNode())
+        console.timeEnd('test')
+        //console.log(fragment)
+    }, 1000)
+}
+function see3() {
+    setTimeout(() => {
+        let element = document.createElement('div')
+        for(let i = 0; i < 1000000; i++) {
+            let test = document.createElement('div')
+            test.className = 'test'
+            element.appendChild(test)
+        }
+        console.log(element)
+    }, 1000)
+}
