@@ -109,7 +109,7 @@ employeeslot:
     workload {
         // "date": "workload"
     },
-    employee,
+    employee, workload.length [?],
     eventListeners {
         rightLabel (changing employee) {
             // changes employee, removes old employee's workload, and notifies new employee of workload
