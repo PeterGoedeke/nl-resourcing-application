@@ -32,3 +32,9 @@ const slotCell = (function() {
     slotCell.innerHTML = '5.0'
     return slotCell
 })()
+
+const headerCell = (function() {
+    let headerCell = document.createElement('div')
+    headerCell.className = 'headerCell'
+    return headerCell
+})
