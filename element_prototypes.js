@@ -37,4 +37,4 @@ const headerCell = (function() {
     let headerCell = document.createElement('div')
     headerCell.className = 'headerCell'
     return headerCell
-})
+})()

@@ -1,3 +1,4 @@
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const columns = (function() {
     const currentID = (function() {
         const currentDate = new Date()
@@ -8,11 +9,17 @@ const columns = (function() {
     })()
     const baseID = currentID - 2
 
+    for(let i = 0; i < 50; i += 2) {
+        let element = headerCell.cloneNode()
+        element.textContent = convertIDToDate(baseID + i)
+        document.querySelector('.header').appendChild(element)
+        document.querySelector('.header').style.width = 50 * 25 + 'px'
+    }
+
     return {
         
     }
 })()
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 function convertIDToDate(id) {
     console.log(id)
     let year = 1970

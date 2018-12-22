@@ -37,7 +37,7 @@ const main = {
 const employeeSlotProto = {
     batchLoad() {
         this.body = slotBody.cloneNode()
-        this.body.style.width = Object.keys(this.workload).length * 5 + 'vw'
+        this.body.style.width = Object.keys(this.workload).length * 25 + 'px'
         this.label = slotLabel.cloneNode()
         // console.time(1)
         for(const key in this.workload) {

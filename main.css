@@ -48,11 +48,6 @@ table {
 CSS starts here---------------------------------------------------------------
 ------------------------------------------------------------------------------
 */
-:root {
-    --color: pink;
-    --rows: 20;
-}
-
 body {
     overflow-x: scroll;
 }
@@ -68,7 +63,7 @@ body {
 }
 .slotBody {
     height: 10px;
-    background-color: pink;
+    background-color: grey;
     position: relative;
     padding: 0 2%;
     display: flex;
@@ -111,17 +106,29 @@ body {
     font-size: 10px;
 }
 
-.nav {
+.header {
     width: 100vw;
     height: 25px;
     background-color: green;
     position: sticky;
     top: 0;
     z-index: 2;
+    display: flex;
+    padding-left: 100px;
+}
+.headerCell {
+    width: 50px;
+    text-align: center;
+    font-size: 10px;
 }
 
 .clearfix::after {
     content: "";
     clear: both;
     display: table;
+}
+
+.headerCell, .slotCell {
+    border-right: solid black 1px;
+    box-sizing: border-box;
 }
