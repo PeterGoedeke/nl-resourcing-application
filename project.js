@@ -39,7 +39,6 @@ const projectProto = {
         })
     },
     setSpan(start, end) {
-        console.log(start, this.start)
         if(this.start != start) {
             this.slots.forEach(slot => slot.alterSpan(start - this.start, 0))
             this.body.style.left = columns.getLeftFromID(start)

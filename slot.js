@@ -2,31 +2,62 @@ const slotProto = {
     initDisplay() {
         this.body = slotBody.cloneNode()
         this.body.style.left = columns.getLeftFromID(this.start - (this.host.start - columns.baseID))
-        this.body.style.width = Object.keys(this.workload).length * columns.columnWidth + 'px'
+        this.setWidth()
         this.label = slotLabel.cloneNode()
+        this.cells = {}
         for(const key in this.workload) {
-            let cell = slotCell.cloneNode()
-            cell.textContent = this.workload[key]
+            const cell = createCell(this.workload[key])
             this.body.appendChild(cell)
+            this.cells[key] = cell
         }
     },
     initData() {
 
     },
+    setWidth() {
+        this.body.style.width = Object.keys(this.workload).length * columns.columnWidth + 'px'
+    },
     alterSpan(dStart, dEnd) {
-        console.log(dStart, dEnd)
+        let workloadKeys = Object.keys(this.workload).sort()
         if(dStart > 0) {
-
+            for(let i = 0; i < dStart; i++) {
+                this.body.removeChild(this.cells[workloadKeys[i]])
+                delete this.workload[workloadKeys[i]]
+                delete this.cells[workloadKeys[i]]
+            }
         }
         else if(dStart < 0) {
-
+            const fragment = document.createDocumentFragment()
+            const snapshotStart = this.start
+            const workloadOfCell = this.workload[workloadKeys[0]]
+            for(let i = this.start + dStart; i < snapshotStart; i++) {
+                const cell = createCell(workloadOfCell)
+                this.cells[i] = cell
+                this.workload[i] = workloadOfCell
+                fragment.appendChild(cell)
+            }
+            this.body.insertBefore(fragment, this.body.firstChild)
         }
         if(dEnd > 0) {
-
+            const fragment = document.createDocumentFragment()
+            const snapshotEnd = this.end
+            const workloadOfCell = this.workload[workloadKeys[workloadKeys.length - 1]]
+            for(let i = this.end + 1; i <= snapshotEnd + dEnd; i++) {
+                const cell = createCell(workloadOfCell)
+                this.cells[i] = cell
+                this.workload[i] = workloadOfCell
+                fragment.appendChild(cell)
+            }
+            this.body.appendChild(fragment)
         }
         else if(dEnd < 0) {
-
+            for(let i = workloadKeys.length - 1; i >= workloadKeys.length + dEnd; i--) {
+                this.body.removeChild(this.cells[workloadKeys[i]])
+                delete this.workload[workloadKeys[i]]
+                delete this.cells[workloadKeys[i]]
+            }
         }
+        this.setWidth()
     },
     get start() {
         return Math.min(...Object.keys(this.workload))
@@ -34,6 +65,11 @@ const slotProto = {
     get end() {
         return Math.max(...Object.keys(this.workload))
     }
+}
+function createCell(text) {
+    let cell = slotCell.cloneNode()
+    cell.textContent = text
+    return cell
 }
 
 function createSlot(details, host) {
