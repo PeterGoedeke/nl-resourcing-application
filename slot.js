@@ -21,3 +21,14 @@ const slotProto = {
     }
 }
 
+function createSlot(details, host) {
+    if(!host) throw "No host provided"
+    let slot = Object.create(slotProto)
+    slot.host = host
+    if(details) Object.assign(slot, details)
+    else {
+        slot.workload = {}
+        for(let i = host.start; i <= host.end; i++) slot.workload[i] = '5'
+    }
+    return slot
+}

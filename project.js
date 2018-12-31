@@ -12,6 +12,9 @@ const projectProto = {
         })
         return this.container
     },
+    init() {
+        projects.list.push(this)
+    },
     showVisible() {
         this.body.innerHTML = ''
         this.slotLabelContainer.innerHTML = ''
@@ -37,26 +40,44 @@ const projectProto = {
     }
 }
 
+function createProject(details) {
+    let project = Object.create(projectProto)
+    if(details) Object.assign(project, details)
+    else {
+        project.start = columns.leftmostVisibleColumn + 2
+        project.end = columns.rightmostVisibleColumn - 2
+        
+        project.slots = []
+        projects.types.forEach(type => {
+            project.slots.push(createSlot(null, project))
+            project.slots[project.slots.length - 1].initDisplay()
+            project.slots[project.slots.length - 1].type = type
+        })
+    }
+    return project
+}
+
 const projects = {
-    visibleType: 1,
+    types: ['qa', 'pm', 'sm'],
+    visibleType: 'qa',
     list: [],
     showVisible() {
         list.forEach(project => project.showVisible())
     }
 }
 
-function slotsBase(host) {
-    let slotsBase = []
-    for(let i = 0; i < 200; i++) {
-        slotsBase.push(Object.create(slotProto))
-        slotsBase[slotsBase.length - 1].workload = {
-            1173: 4
-        }
-        slotsBase[i].host = host
-        slotsBase[i].type = i > 50 ? 1 : 2
-    }
-    return slotsBase
-}
+const projectAreaSeparator = document.querySelector('.projectAreaSeparator')
+const newProjectButton = document.querySelector('.newProject')
+newProjectButton.addEventListener('mousedown', event => {
+    const newProject = createProject()
+    const container = newProject.batchLoad()
+    newProject.showVisible()
+    newProject.init()
+    document.body.insertBefore(container, projectAreaSeparator)
+})
+
+
+/*
 function load() {
     const fragment = document.createDocumentFragment()
     for(let i = 0; i < 10; i++) {
@@ -72,3 +93,4 @@ function load() {
     document.body.appendChild(fragment)
 }
 load()
+*/
