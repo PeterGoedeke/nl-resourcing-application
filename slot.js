@@ -13,6 +13,21 @@ const slotProto = {
     initData() {
 
     },
+    alterSpan(dStart, dEnd) {
+        console.log(dStart, dEnd)
+        if(dStart > 0) {
+
+        }
+        else if(dStart < 0) {
+
+        }
+        if(dEnd > 0) {
+
+        }
+        else if(dEnd < 0) {
+
+        }
+    },
     get start() {
         return Math.min(...Object.keys(this.workload))
     },

@@ -3,6 +3,14 @@ const projectContainer = (function() {
     container.className = 'projectContainer'
     let body = document.createElement('div')
     body.className = 'projectBody'
+
+    let bodyStartHandle = document.createElement('div')
+    bodyStartHandle.className = 'start'
+    let bodyEndHandle = document.createElement('div')
+    bodyEndHandle.className = 'end'
+    body.appendChild(bodyStartHandle)
+    body.appendChild(bodyEndHandle)
+    
     let createSlotButton = document.createElement('div')
     createSlotButton.className = 'projectCreateSlotButton'
     let projectLabel = document.createElement('div')

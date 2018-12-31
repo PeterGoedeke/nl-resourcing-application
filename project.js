@@ -2,6 +2,18 @@ const projectProto = {
     batchLoad() {
         this.container = projectContainer.cloneNode(true)
         this.body = this.container.querySelector('.projectBody')
+        this.label = this.container.querySelector('.projectLabel')
+        this.startHandle = this.container.querySelector('.start')
+        this.endHandle = this.container.querySelector('.end')
+        addDragging(this.startHandle, () => columns.getLeftFromID(this.start), id => {
+            this.setSpan(id, this.end)
+            this.startHandle.style.left = '0px'
+        })
+        addDragging(this.endHandle, () => columns.getLeftFromID(this.start), id => {
+            this.setSpan(this.start, id)
+            this.endHandle.style.right = '0px'
+            this.endHandle.style.left = 'initial'
+        })
         this.slotLabelContainer = this.container.querySelector('.projectSlotLabelContainer')
         this.body.style.left = columns.getLeftFromID(this.start)
         this.body.style.width = columns.getWidthFromID(this.start, this.end)
@@ -10,6 +22,7 @@ const projectProto = {
             this.body.appendChild(slot.body)
             this.slotLabelContainer.appendChild(slot.label)
         })
+        this.label.textContent = this.name
         return this.container
     },
     init() {
@@ -18,12 +31,15 @@ const projectProto = {
     showVisible() {
         this.body.innerHTML = ''
         this.slotLabelContainer.innerHTML = ''
+        this.body.appendChild(this.startHandle)
+        this.body.appendChild(this.endHandle)
         this.visibleSlots.forEach(slot => {
             this.body.appendChild(slot.body)
             this.slotLabelContainer.appendChild(slot.label)
         })
     },
     setSpan(start, end) {
+        console.log(start, this.start)
         if(this.start != start) {
             this.slots.forEach(slot => slot.alterSpan(start - this.start, 0))
             this.body.style.left = columns.getLeftFromID(start)
@@ -46,6 +62,7 @@ function createProject(details) {
     else {
         project.start = columns.leftmostVisibleColumn + 2
         project.end = columns.rightmostVisibleColumn - 2
+        project.name = 'Unnamed'
         
         project.slots = []
         projects.types.forEach(type => {

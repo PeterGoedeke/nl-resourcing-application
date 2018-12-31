@@ -85,6 +85,8 @@ body {
     z-index: 1;
     width: 50px;
     background-color: green;
+    line-height: 10px;
+    font-size: 10px;
 }
 .projectSlotLabelContainer {
     background-color: lightgreen;
@@ -142,4 +144,21 @@ body {
     position: sticky;
     left: 5px;
     background-color: orange;
+}
+
+.start, .end {
+    position: absolute;
+    height: 100%;
+    width: 5px;
+    background-color: purple;
+    z-index: 1;
+}
+.start:hover, .end:hover {
+    cursor: pointer;
+}
+.start {
+    left: 0;
+}
+.end {
+    right: 0;
 }
