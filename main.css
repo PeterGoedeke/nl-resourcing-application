@@ -92,6 +92,14 @@ body {
     background-color: lightgreen;
     left: 50px;
 }
+.projectCreateSlotButton {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 5px;
+    height: 10px;
+    background-color: red;
+}
 
 
 .activeInput {

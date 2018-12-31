@@ -17,11 +17,11 @@ const projectContainer = (function() {
     projectLabel.className = 'projectLabel'
     let projectSlotLabelContainer = document.createElement('div')
     projectSlotLabelContainer.className = 'projectSlotLabelContainer'
+    projectSlotLabelContainer.appendChild(createSlotButton)
     
     container.appendChild(projectLabel)
     container.appendChild(projectSlotLabelContainer)
     container.appendChild(body)
-    container.appendChild(createSlotButton)
     return container
 })()
 const slotBody = (function() {
@@ -34,7 +34,7 @@ const slotBody = (function() {
     slotEndHandle.className = 'end'
     slotBody.appendChild(slotStartHandle)
     slotBody.appendChild(slotEndHandle)
-    
+
     return slotBody
 })()
 const slotLabel = (function() {

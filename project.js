@@ -3,8 +3,10 @@ const projectProto = {
         this.container = projectContainer.cloneNode(true)
         this.body = this.container.querySelector('.projectBody')
         this.label = this.container.querySelector('.projectLabel')
+        this.createSlotButton = this.container.querySelector('.projectCreateSlotButton')
         this.startHandle = this.container.querySelector('.start')
         this.endHandle = this.container.querySelector('.end')
+
         addDragging(this.startHandle, () => columns.getLeftFromID(this.start), id => {
             this.setSpan(id, this.end)
             this.startHandle.style.left = '-5px'
@@ -14,6 +16,8 @@ const projectProto = {
             this.endHandle.style.right = '-5px'
             this.endHandle.style.left = 'initial'
         })
+        this.createSlotButton.addEventListener('click', event => this.createNewSlot())
+
         this.slotLabelContainer = this.container.querySelector('.projectSlotLabelContainer')
         this.body.style.left = columns.getLeftFromID(this.start)
         this.body.style.width = columns.getWidthFromID(this.start, this.end)
@@ -35,6 +39,7 @@ const projectProto = {
         this.startHandle.style.left = '-5px'
         this.body.appendChild(this.endHandle)
         this.endHandle.style.right = '-5px'
+        this.slotLabelContainer.appendChild(this.createSlotButton)
         this.visibleSlots.forEach(slot => {
             this.body.appendChild(slot.body)
             this.slotLabelContainer.appendChild(slot.label)
@@ -51,6 +56,14 @@ const projectProto = {
             this.end = end
         }
         this.body.style.width = columns.getWidthFromID(start, end)
+    },
+    createNewSlot() {
+        let newSlot = createSlot(null, this)
+        this.slots.push(newSlot)
+        newSlot.initDisplay()
+        newSlot.type = projects.visibleType
+        this.body.appendChild(newSlot.body)
+        this.slotLabelContainer.appendChild(newSlot.label)
     },
     get visibleSlots() {
         return this.slots.filter(slot => slot.type == projects.visibleType)
