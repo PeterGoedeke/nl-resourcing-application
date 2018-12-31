@@ -103,13 +103,11 @@ body {
 
 
 .activeInput {
-    width: 5vw;
-    flex-basis: 5vw;
-    display: flex;
-    justify-content: stretch;
+    flex-grow: 0;
 }
-.input {
-    width: 5vw;
+.activeInput > input {
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
     font-size: 10px;
 }

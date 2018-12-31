@@ -14,6 +14,22 @@ const slotProto = {
             this.endHandle.style.left = 'initial'
         })
 
+        this.body.addEventListener('click', event => {
+            if(this.getCellsAsArray().includes(event.target)) {
+                event.target.style.width = columns.columnWidth + 'px'
+                inputify(event.target, newWorkload => {
+                    let id
+                    for(const key in this.cells) if(this.cells[key] == event.target) {
+                        id = key
+                        break
+                    }
+                    this.workload[id] = Number(newWorkload)
+                    event.target.innerHTML = parseFloat(Math.round(newWorkload * 10) / 10).toFixed(1);
+                    event.target.style.width = 'initial'
+                })
+            }
+        })
+
         this.body.style.left = columns.getLeftFromID(this.start - (this.host.start - columns.baseID))
         this.setWidth()
         this.label = slotLabel.cloneNode()
@@ -23,6 +39,11 @@ const slotProto = {
             this.body.appendChild(cell)
             this.cells[key] = cell
         }
+    },
+    getCellsAsArray() {
+        let arr = []
+        for(const key in this.cells) arr.push(this.cells[key])
+        return arr
     },
     initData() {
 
@@ -80,9 +101,9 @@ const slotProto = {
         return Math.max(...Object.keys(this.workload))
     }
 }
-function createCell(text) {
+function createCell(workload) {
     let cell = slotCell.cloneNode()
-    cell.textContent = text
+    cell.textContent = parseFloat(Math.round(workload * 10) / 10).toFixed(1);
     return cell
 }
 
@@ -93,7 +114,7 @@ function createSlot(details, host) {
     if(details) Object.assign(slot, details)
     else {
         slot.workload = {}
-        for(let i = host.start; i < host.end; i++) slot.workload[i] = '5'
+        for(let i = host.start; i < host.end; i++) slot.workload[i] = 5
     }
     return slot
 }
