@@ -28,7 +28,7 @@ function createSlot(details, host) {
     if(details) Object.assign(slot, details)
     else {
         slot.workload = {}
-        for(let i = host.start; i <= host.end; i++) slot.workload[i] = '5'
+        for(let i = host.start; i < host.end; i++) slot.workload[i] = '5'
     }
     return slot
 }
