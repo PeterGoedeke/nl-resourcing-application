@@ -24,6 +24,19 @@ const projectProto = {
                 this.label.style.height = 'initial'
             })
         })
+        this.body.addEventListener('click', event => {
+            contextMenus.open(0, [
+                () => {
+                    console.log(this.name, 'item1')
+                },
+                () => {
+                    console.log('item2')
+                },
+                () => {
+                    console.log('item3')
+                }
+            ])
+        })
         this.createSlotButton.addEventListener('click', event => this.createNewSlot())
 
         this.slotLabelContainer = this.container.querySelector('.projectSlotLabelContainer')
