@@ -31,8 +31,20 @@ const columns = (function() {
         return (end - start) * columns.columnWidth + 'px'
     }
 
+    const sidebarWidth = 100
     return {
         baseID, columnWidth,
-        convertIDToDate, getLeftFromID, getWidthFromID
+        convertIDToDate, getLeftFromID, getWidthFromID,
+        get visibleColumns() {
+            let columns = []
+            for(let i = 0; i <= this.rightmostVisibleColumn - this.leftmostVisibleColumn; i++) columns[i] = i + this.leftmostVisibleColumn
+            return columns
+        },
+        get leftmostVisibleColumn() {
+            return baseID + Math.floor(window.pageXOffset / columnWidth)
+        },
+        get rightmostVisibleColumn() {
+            return baseID + Math.floor((window.pageXOffset + window.innerWidth - sidebarWidth) / columnWidth)
+        }
     }
 })()
