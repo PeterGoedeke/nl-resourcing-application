@@ -60,12 +60,12 @@ body {
 .projectBody {
     background-color: grey;
     vertical-align: top;
+    position: relative;
 }
 .slotBody {
     height: 10px;
     background-color: grey;
     position: relative;
-    padding: 0 2%;
     display: flex;
 }
 .slotLabel {

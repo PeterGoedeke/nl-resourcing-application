@@ -1,5 +1,6 @@
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const columns = (function() {
+    const columnWidth = 25
     const currentID = (function() {
         const currentDate = new Date()
         const currentYear = currentDate.getFullYear()
@@ -17,7 +18,7 @@ const columns = (function() {
     }
 
     return {
-        
+        baseID, columnWidth
     }
 })()
 function convertIDToDate(id) {
@@ -27,6 +28,12 @@ function convertIDToDate(id) {
     if(id >= 12) year += Math.floor(id / 12)
     let value = months[id % 12]
     return year + ' ' + value
+}
+function getLeftFromID(id) {
+    return (id - columns.baseID) * columns.columnWidth + 'px'
+}
+function getWidthFromID(start, end) {
+    return (end - start) * columns.columnWidth + 'px'
 }
 
 function temp(year, month, day) {
