@@ -88,6 +88,10 @@ body {
     line-height: 10px;
     font-size: 10px;
 }
+.projectLabel {
+    display: flex;
+    align-items: center;
+}
 .projectSlotLabelContainer {
     background-color: lightgreen;
     left: 50px;

@@ -1,6 +1,7 @@
 const columns = (function() {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const columnWidth = 25
+    const rowHeight = 10
     const currentID = (function() {
         const currentDate = new Date()
         const currentYear = currentDate.getFullYear()
@@ -33,7 +34,7 @@ const columns = (function() {
 
     const sidebarWidth = 100
     return {
-        baseID, columnWidth, sidebarWidth,
+        baseID, columnWidth, rowHeight, sidebarWidth,
         convertIDToDate, getLeftFromID, getWidthFromID,
         get visibleColumns() {
             let columns = []

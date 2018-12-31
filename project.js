@@ -16,6 +16,14 @@ const projectProto = {
             this.endHandle.style.right = '-5px'
             this.endHandle.style.left = 'initial'
         })
+        this.label.addEventListener('click', event => {
+            this.label.style.height = columns.rowHeight * this.visibleSlots.length + 'px'
+            inputify(this.label, newLabel => {
+                this.label.innerHTML = newLabel
+                this.name = newLabel
+                this.label.style.height = 'initial'
+            })
+        })
         this.createSlotButton.addEventListener('click', event => this.createNewSlot())
 
         this.slotLabelContainer = this.container.querySelector('.projectSlotLabelContainer')
