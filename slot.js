@@ -1,6 +1,19 @@
 const slotProto = {
     initDisplay() {
-        this.body = slotBody.cloneNode()
+        this.body = slotBody.cloneNode(true)
+        this.startHandle = this.body.querySelector('.start')
+        this.endHandle = this.body.querySelector('.end')
+
+        addDragging(this.startHandle, () => columns.getLeftFromID(this.start), id => {
+            this.alterSpan(id - this.start, 0)
+            this.startHandle.style.left = '0px'
+        })
+        addDragging(this.endHandle, () => columns.getLeftFromID(this.start), id => {
+            this.alterSpan(0, id - this.end)
+            this.endHandle.style.right = '0px'
+            this.endHandle.style.left = 'initial'
+        })
+
         this.body.style.left = columns.getLeftFromID(this.start - (this.host.start - columns.baseID))
         this.setWidth()
         this.label = slotLabel.cloneNode()
@@ -17,7 +30,7 @@ const slotProto = {
     setWidth() {
         this.body.style.width = Object.keys(this.workload).length * columns.columnWidth + 'px'
     },
-    alterSpan(dStart, dEnd) {
+    alterSpan(dStart, dEnd, hostStart = this.host.start) {
         let workloadKeys = Object.keys(this.workload).sort()
         if(dStart > 0) {
             for(let i = 0; i < dStart; i++) {
@@ -57,6 +70,7 @@ const slotProto = {
                 delete this.cells[workloadKeys[i]]
             }
         }
+        this.body.style.left = columns.getLeftFromID(this.start - (hostStart - columns.baseID))
         this.setWidth()
     },
     get start() {

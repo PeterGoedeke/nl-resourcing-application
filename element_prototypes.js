@@ -27,6 +27,14 @@ const projectContainer = (function() {
 const slotBody = (function() {
     let slotBody = document.createElement('div')
     slotBody.className = 'slotBody'
+
+    let slotStartHandle = document.createElement('div')
+    slotStartHandle.className = 'start'
+    let slotEndHandle = document.createElement('div')
+    slotEndHandle.className = 'end'
+    slotBody.appendChild(slotStartHandle)
+    slotBody.appendChild(slotEndHandle)
+    
     return slotBody
 })()
 const slotLabel = (function() {

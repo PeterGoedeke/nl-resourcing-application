@@ -157,8 +157,8 @@ body {
     cursor: pointer;
 }
 .start {
-    left: -5px;
+    left: 0px;
 }
 .end {
-    right: -5px;
+    right: 0px;
 }

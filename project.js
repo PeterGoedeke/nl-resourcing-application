@@ -32,7 +32,9 @@ const projectProto = {
         this.body.innerHTML = ''
         this.slotLabelContainer.innerHTML = ''
         this.body.appendChild(this.startHandle)
+        this.startHandle.style.left = '-5px'
         this.body.appendChild(this.endHandle)
+        this.endHandle.style.right = '-5px'
         this.visibleSlots.forEach(slot => {
             this.body.appendChild(slot.body)
             this.slotLabelContainer.appendChild(slot.label)
@@ -40,7 +42,7 @@ const projectProto = {
     },
     setSpan(start, end) {
         if(this.start != start) {
-            this.slots.forEach(slot => slot.alterSpan(start - this.start, 0))
+            this.slots.forEach(slot => slot.alterSpan(start - this.start, 0, start))
             this.body.style.left = columns.getLeftFromID(start)
             this.start = start
         }
