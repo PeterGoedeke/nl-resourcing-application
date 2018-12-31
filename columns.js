@@ -33,7 +33,7 @@ const columns = (function() {
 
     const sidebarWidth = 100
     return {
-        baseID, columnWidth,
+        baseID, columnWidth, sidebarWidth,
         convertIDToDate, getLeftFromID, getWidthFromID,
         get visibleColumns() {
             let columns = []
