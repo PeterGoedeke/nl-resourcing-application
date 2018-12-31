@@ -7,11 +7,11 @@ const projectProto = {
         this.endHandle = this.container.querySelector('.end')
         addDragging(this.startHandle, () => columns.getLeftFromID(this.start), id => {
             this.setSpan(id, this.end)
-            this.startHandle.style.left = '0px'
+            this.startHandle.style.left = '-5px'
         })
         addDragging(this.endHandle, () => columns.getLeftFromID(this.start), id => {
             this.setSpan(this.start, id)
-            this.endHandle.style.right = '0px'
+            this.endHandle.style.right = '-5px'
             this.endHandle.style.left = 'initial'
         })
         this.slotLabelContainer = this.container.querySelector('.projectSlotLabelContainer')
