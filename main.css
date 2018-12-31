@@ -54,10 +54,10 @@ body {
 
 .projectContainer {
     width: 300vw;
-    height: 1490px;
+    display: flex;
+    align-items: stretch;
 }
 .projectBody {
-    display: inline-block;
     background-color: grey;
     vertical-align: top;
 }
@@ -83,10 +83,8 @@ body {
     position: sticky;
     left: 0;
     z-index: 1;
-    display: inline-block;
     width: 50px;
     background-color: green;
-    height: 100%;
 }
 .projectSlotLabelContainer {
     background-color: lightgreen;

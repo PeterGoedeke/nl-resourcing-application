@@ -114,13 +114,13 @@ function slotsBase() {
 }
 function load() {
     const fragment = document.createDocumentFragment()
-    for(let i = 0; i < 10; i++) {
+    for(let i = 0; i < 2; i++) {
         projects.push(Object.create(projectProto))
         projects[projects.length - 1].slots = slotsBase()
         projects[i].id = i
     }
     console.time('test')
-    for(let i = 0; i < 10; i++) {
+    for(let i = 0; i < 2; i++) {
         fragment.appendChild(projects[i].batchLoad())
     }
     console.timeEnd('test')

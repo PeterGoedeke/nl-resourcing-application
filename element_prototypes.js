@@ -32,6 +32,13 @@ const slotCell = (function() {
     slotCell.innerHTML = '5.0'
     return slotCell
 })()
+const slotStartDrag = (function() {
+    let slotStartDrag = document.createElement('div')
+    
+})()
+const slotEndDrag = (function() {
+
+})()
 
 const headerCell = (function() {
     let headerCell = document.createElement('div')
