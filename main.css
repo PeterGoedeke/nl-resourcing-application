@@ -130,3 +130,16 @@ body {
     border-right: solid black 1px;
     box-sizing: border-box;
 }
+
+
+.projectAreaSeparator {
+    height: 25px;
+    background-color: blue;
+}
+.newProject {
+    width: 20px;
+    height: 20px;
+    position: sticky;
+    left: 5px;
+    background-color: orange;
+}
