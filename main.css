@@ -172,3 +172,29 @@ body {
 .end {
     right: 0px;
 }
+
+.contextPane {
+    width: 100px;
+    height: 150px;
+    position: absolute;
+}
+.partialWidth, .fullWidth, .wrapper {
+    float: left;
+    height: 30px;
+}
+.wrapper {
+    display: flex;
+    align-items: center;
+    width: 20%;
+}
+.contextPane img {
+    width: 100%;
+}
+.partialWidth {
+    width: 80%;
+    background-color: blue;
+}
+.fullWidth {
+    width: 100%;
+    background-color: green;
+}

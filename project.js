@@ -24,18 +24,22 @@ const projectProto = {
                 this.label.style.height = 'initial'
             })
         })
-        this.body.addEventListener('click', event => {
-            contextMenus.open(0, [
-                () => {
-                    console.log(this.name, 'item1')
-                },
-                () => {
-                    console.log('item2')
-                },
-                () => {
-                    console.log('item3')
-                }
-            ])
+        this.body.addEventListener('mousedown', event => {
+            if(event.which == 3) {
+                contextMenus.open(0, [
+                    () => {
+                        let image = document.querySelector('img')
+                        image.src = `./assets/${this.secured ? 'un' : ''}lock.png`
+                        this.secured = !this.secured
+                    },
+                    () => {
+                        console.log('item2')
+                    },
+                    () => {
+                        console.log('item3')
+                    }
+                ], event)
+            }
         })
         this.createSlotButton.addEventListener('click', event => this.createNewSlot())
 
@@ -98,6 +102,7 @@ function createProject(details) {
         project.start = columns.leftmostVisibleColumn + 2
         project.end = columns.rightmostVisibleColumn - 2
         project.name = 'Unnamed'
+        project.secured = true
         
         project.slots = []
         projects.types.forEach(type => {
