@@ -34,6 +34,25 @@ const employeeProto = {
     delete() {
 
     },
+    assignSlot(workload) {
+        const preChange = JSON.parse(JSON.stringify(this.totalWorkload))
+        this.workload.push(workload)
+        refreshCells(preChange)
+    },
+    removeSlot(workload) {
+        const preChange = JSON.parse(JSON.stringify(this.totalWorkload))
+        this.workload.splice(this.workload.indexOf(workload), 1)
+        refreshCells(preChange)
+    },
+    refreshCells(preChange) {
+        const postChange = this.totalWorkload
+        for(const key in postChange) {
+            if(Number(postChange[key]) != Number(preChange)) {
+                this.cells[key].textContent = postChange[key]
+                // change colour
+            }
+        }
+    },
     get totalWorkload() {
         let totalWorkload = {}
         this.workload.forEach(workload => {
