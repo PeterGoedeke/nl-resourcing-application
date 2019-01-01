@@ -65,3 +65,17 @@ const columnLine = (function() {
     columnLine.className = 'columnLine'
     return columnLine
 })()
+
+const employeeContainer = (function() {
+    let container = document.createElement('div')
+    container.className = 'employeeContainer'
+    let body = document.createElement('div')
+    body.className = 'employeeBody'
+
+    let label = document.createElement('div')
+    label.className = 'employeeLabel'
+
+    container.appendChild(label)
+    container.appendChild(body)
+    return container
+})()

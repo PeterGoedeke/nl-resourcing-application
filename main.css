@@ -201,3 +201,18 @@ body {
     width: 100%;
     background-color: green;
 }
+
+.employeeContainer {
+    display: flex;
+    align-items: stretch;
+}
+.employeeLabel {
+    display: flex;
+    align-items: center;
+}
+.employeeBody {
+    height: 10px;
+    background-color: grey;
+    position: relative;
+    display: flex;
+}
