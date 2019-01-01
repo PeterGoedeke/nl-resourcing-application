@@ -36,9 +36,12 @@ const projectProto = {
                         console.log('item2')
                     },
                     () => {
-                        console.log('item3')
+                        this.delete()
+                        contextMenus.close()
                     }
-                ], event)
+                ], event, pane => {
+                    pane.querySelector('img').src = `./assets/${this.secured ? '' : 'un'}lock.png`
+                })
             }
         })
         this.createSlotButton.addEventListener('click', event => this.createNewSlot())
@@ -89,6 +92,10 @@ const projectProto = {
         newSlot.type = projects.visibleType
         this.body.appendChild(newSlot.body)
         this.slotLabelContainer.appendChild(newSlot.label)
+    },
+    delete() {
+        projects.list.splice(projects.list.indexOf(this), 1)
+        document.body.removeChild(this.container)
     },
     get visibleSlots() {
         return this.slots.filter(slot => slot.type == projects.visibleType)

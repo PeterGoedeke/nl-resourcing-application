@@ -3,10 +3,10 @@ const contextMenus = (function() {
     contextPane.className = 'contextPane'
 
     const contextMenus = [
-        createContextMenu([['./assets/lock.png', 'Toggle Security'], 'item2', 'item3'])
+        createContextMenu([['./assets/lock.png', 'Toggle Security'], 'item2', 'Delete'])
     ]
 
-    function openContextMenu(index, cbs, event) {
+    function openContextMenu(index, cbs, event, beforeOpen) {
         const menu = contextMenus[index].cloneNode(true)
         const links = Array.from(menu.querySelectorAll('.partialWidth, .fullWidth'))
         links.forEach((link, i) => {
@@ -16,8 +16,22 @@ const contextMenus = (function() {
 
         contextPane.style.left = event.pageX + 'px'
         contextPane.style.top = event.pageY + 'px'
+        if(beforeOpen) beforeOpen(contextPane)
         document.body.appendChild(contextPane)
+
+        setTimeout(() => addEventListener('mousedown', removeContextPane), 0)
     }
+    function removeContextPane(event) {
+        if(!(event.target == contextPane || contextPane.contains(event.target))) {
+            closeContextMenu()
+        }
+    }
+    function closeContextMenu() {
+        removeEventListener('mousedown', removeContextPane)
+        document.body.removeChild(contextPane)
+        contextPane.innerHTML = ''
+    }
+
     function createContextMenu(details) {
         const fragment = document.createDocumentFragment()
         details.forEach((item, i) => {
@@ -41,6 +55,6 @@ const contextMenus = (function() {
         return fragment
     }
     return {
-        open: openContextMenu
+        open: openContextMenu, close: closeContextMenu
     }
 })()
