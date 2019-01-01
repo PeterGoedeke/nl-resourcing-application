@@ -67,7 +67,19 @@ const employeeProto = {
 }
 
 const employees = {
-    list: []
+    list: [],
+    get safeList() {
+        return this.list.filter(employee => employee.name)
+    },
+    get visibleList() {
+        return this.safeList.filter(employee => employee.type == projects.visibleType)
+    },
+    get visibleNames() {
+        return this.visibleList.map(employee => employee.name)
+    },
+    getEmployee(name) {
+        return this.visibleList.find(employee => employee.name == name)
+    }
 }
 
 function createEmployee(details) {
@@ -77,6 +89,7 @@ function createEmployee(details) {
         employee.name = undefined
         employee.workload = []
         employee.cells = {}
+        employee.type = projects.visibleType
     }
     return employee
 }
