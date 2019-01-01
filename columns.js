@@ -14,6 +14,7 @@ const columns = (function() {
     for(let i = 0; i < 50; i += 2) {
         let element = headerCell.cloneNode()
         element.textContent = convertIDToDate(baseID + i)
+        element.appendChild(columnLine.cloneNode())
         document.querySelector('.header').appendChild(element)
         document.querySelector('.header').style.width = 50 * 25 + 'px'
     }

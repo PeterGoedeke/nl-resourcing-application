@@ -139,20 +139,25 @@ body {
 }
 
 .headerCell, .slotCell {
-    border-right: solid black 1px;
     box-sizing: border-box;
+}
+.columnLine {
+    background-color: black;
+    width: 1px;
+    height: 100vh;
+    position: absolute;
+    top: 0;
 }
 
 
-.projectAreaSeparator {
-    height: 25px;
+.separator {
+    width: 300vw;
+    height: 10px;
     background-color: blue;
 }
 .newProject {
     width: 20px;
     height: 20px;
-    position: sticky;
-    left: 5px;
     background-color: orange;
 }
 

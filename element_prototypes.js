@@ -61,3 +61,8 @@ const headerCell = (function() {
     headerCell.className = 'headerCell'
     return headerCell
 })()
+const columnLine = (function() {
+    let columnLine = document.createElement('div')
+    columnLine.className = 'columnLine'
+    return columnLine
+})()
