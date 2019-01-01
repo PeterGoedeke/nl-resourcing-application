@@ -10,14 +10,17 @@ const columns = (function() {
         return (currentYear - 1970) * 24 + currentMonth * 2 + (currentDay > 15 ? 1 : 0)
     })()
     const baseID = currentID - 2
+    const endID = currentID + 36 * 2
+    let applicationWidth = (endID - baseID) * columnWidth
 
-    for(let i = 0; i < 50; i += 2) {
+    for(let i = baseID; i < endID; i += 2) {
         let element = headerCell.cloneNode()
-        element.textContent = convertIDToDate(baseID + i)
+        element.textContent = convertIDToDate(i)
         element.appendChild(columnLine.cloneNode())
         document.querySelector('.header').appendChild(element)
-        document.querySelector('.header').style.width = 50 * 25 + 'px'
+        document.querySelector('.header').style.width = applicationWidth + 'px'
     }
+
 
     function convertIDToDate(id) {
         let year = 1970
@@ -35,7 +38,7 @@ const columns = (function() {
 
     const sidebarWidth = 100
     return {
-        baseID, columnWidth, rowHeight, sidebarWidth,
+        baseID, columnWidth, rowHeight, sidebarWidth, applicationWidth,
         convertIDToDate, getLeftFromID, getWidthFromID,
         get visibleColumns() {
             let columns = []
@@ -49,4 +52,9 @@ const columns = (function() {
             return baseID + Math.floor((window.pageXOffset + window.innerWidth - sidebarWidth) / columnWidth)
         }
     }
+})()
+
+;(function() {
+    const separators = Array.from(document.querySelectorAll('.separator'))
+    separators.forEach(separator => separator.style.width = columns.applicationWidth + columns.sidebarWidth + 'px')
 })()

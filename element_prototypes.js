@@ -45,7 +45,6 @@ const slotLabel = (function() {
 const slotCell = (function() {
     let slotCell = document.createElement('div')
     slotCell.className = 'slotCell'
-    slotCell.innerHTML = '5.0'
     return slotCell
 })()
 const slotStartDrag = (function() {

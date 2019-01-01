@@ -53,7 +53,6 @@ body {
 }
 
 .projectContainer {
-    width: 300vw;
     display: flex;
     align-items: stretch;
 }
@@ -130,6 +129,7 @@ body {
     width: 50px;
     text-align: center;
     font-size: 10px;
+    flex-shrink: 0;
 }
 
 .clearfix::after {
@@ -149,15 +149,13 @@ body {
     top: 0;
 }
 
-
 .separator {
-    width: 300vw;
     height: 10px;
     background-color: blue;
 }
-.newProject {
+.newProject, .newEmployee {
     width: 20px;
-    height: 20px;
+    height: 100%;
     background-color: orange;
 }
 

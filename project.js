@@ -6,6 +6,7 @@ const projectProto = {
         this.createSlotButton = this.container.querySelector('.projectCreateSlotButton')
         this.startHandle = this.container.querySelector('.start')
         this.endHandle = this.container.querySelector('.end')
+        this.container.style.width = columns.applicationWidth + columns.sidebarWidth + 'px'
 
         addDragging(this.startHandle, () => columns.getLeftFromID(this.start), id => {
             this.setSpan(id, this.end)
