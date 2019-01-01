@@ -108,11 +108,20 @@ body {
 .activeInput {
     flex-grow: 0;
 }
-.activeInput > input {
+.activeInput > input, .autocompleteInput > input {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
     font-size: 10px;
+}
+.autocompleteInput {
+    position: relative;
+}
+.autocompleteInput > input {
+    position: absolute;
+}
+input {
+    border: none;
 }
 
 .header {
