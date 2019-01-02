@@ -19,6 +19,48 @@ const employeeProto = {
                 this.label.style.height = 'initial'
             })
         })
+        this.body.addEventListener('contextmenu', event => {
+            contextMenus.open(2, [
+                () => {
+                    for(const key in this.cells) {
+                        if(this.cells[key] === event.target) {
+                            this.joining = key
+                            this.refreshCells()
+                        }
+                    }
+                },
+                () => {
+                    for(const key in this.cells) {
+                        if(this.cells[key] === event.target) {
+                            this.leaving = key
+                            this.refreshCells()
+                        }
+                    }
+                },
+                () => {
+                    this.toggleInteriors()
+                },
+                () => {
+                    // fulltime
+                },
+                () => {
+                    this.delete()
+                    contextMenus.close()
+                }], event, pane => {
+                    let input = document.createElement('input')
+                    input.style.cursor = 'pointer'
+                    input.value = this.fullTime
+                    input.addEventListener('blur', event => {
+                        if(Number(input.value)) {
+                            this.fullTime = input.value
+                            this.refreshCells()
+                        }
+                    })
+                    input.addEventListener('focus', event => input.select())
+                    pane.querySelector('.e3').appendChild(input)
+                    pane.querySelector('.e3').style.cursor = 'initial'
+                })
+        })
 
         const snapshotTotalWorkload = this.totalWorkload
         for(const key in snapshotTotalWorkload) {
@@ -39,8 +81,18 @@ const employeeProto = {
     showVisible() {
 
     },
+    toggleInteriors() {
+        if(this.interiors) {
+            this.interiors = false
+            insertAfter(this.container, employeeAreaSeparator)
+        } else {
+            this.interiors = true
+            insertAfter(this.container, interiorsEmployeeAreaSeparator)
+        }
+    },
     delete() {
-
+        employees.list.splice(employees.list.indexOf(this), 1)
+        document.body.removeChild(this.container)
     },
     assignSlot(slot) {
         const preChange = JSON.parse(JSON.stringify(this.totalWorkload))
@@ -98,6 +150,7 @@ function createEmployee(details) {
         employee.slots = []
         employee.cells = {}
         employee.type = projects.visibleType
+        employee.fullTime = 5
     }
     return employee
 }
