@@ -96,6 +96,13 @@ const slotProto = {
     alterSpan(dStart, dEnd, hostStart = this.host.start) {
         let workloadKeys = Object.keys(this.workload).sort()
         const employeePreChange = this.collectEmployeePreChange()
+
+        if(this.start + dStart >= this.end) {
+            dStart = this.end - this.start
+        }
+        else if(this.end + dEnd <= this.start) {
+            dEnd = this.start - this.end
+        }
         if(dStart > 0) {
             for(let i = 0; i < dStart; i++) {
                 this.body.removeChild(this.cells[workloadKeys[i]])
