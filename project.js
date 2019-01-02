@@ -73,14 +73,13 @@ const projectProto = {
         this.label.textContent = this.name || 'Unnamed'
         return this.container
     },
-    init() {
-        projects.list.push(this)
-    },
     toggleInteriors() {
         if(this.interiors) {
             this.interiors = false
             insertAfter(this.container, projectAreaSeparator)
+            projects.list.move(projects.list.indexOf(this), 0)
         } else {
+            projects.list.move(projects.list.indexOf(this), projects.list.findIndex(project => project.interiors == true))
             this.interiors = true
             insertAfter(this.container, interiorsProjectAreaSeparator)
         }
@@ -182,7 +181,7 @@ newProjectButton.addEventListener('mousedown', event => {
     const newProject = createProject()
     const container = newProject.batchLoad()
     newProject.showVisible()
-    newProject.init()
+    projects.list.unshift(newProject)
     insertAfter(container, projectAreaSeparator)
 })
 
@@ -193,7 +192,9 @@ newInteriorsProjectButton.addEventListener('mousedown', event => {
     const container = newProject.batchLoad()
     newProject.interiors = true
     newProject.showVisible()
-    newProject.init()
+    const index = projects.list.findIndex(project => project.interiors == true)
+    if(index == -1) projects.list.push(newProject)
+    else projects.list.splice(index, 0, newProject)
     insertAfter(container, interiorsProjectAreaSeparator)
 })
 
