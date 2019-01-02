@@ -3,7 +3,8 @@ const contextMenus = (function() {
     contextPane.className = 'contextPane'
 
     const contextMenus = [
-        createContextMenu([['./assets/lock.png', 'Toggle Security'], 'Toggle Interiors', 'Set Colour:', 'Move up', 'Move down', 'Delete'])
+        createContextMenu([['./assets/lock.png', 'Toggle Security'], 'Toggle Interiors', 'Set Colour:', 'Move up', 'Move down', 'Delete']),
+        createContextMenu(['Delete'])
     ]
     let active = false
     function openContextMenu(index, cbs, event, beforeOpen) {

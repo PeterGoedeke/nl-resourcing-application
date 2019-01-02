@@ -32,6 +32,13 @@ const slotProto = {
                 })
             }
         })
+        this.body.addEventListener('contextmenu', event => {
+            contextMenus.open(1, [
+                () => {
+                    this.delete()
+                    contextMenus.close()
+                }], event)
+        })
         
         this.label.addEventListener('click', event => {
             inputifyAutocomplete(this.label, attemptedAssignment => {
@@ -74,11 +81,13 @@ const slotProto = {
     refreshLabel() {
         this.label.textContent = this.employee && this.employee.name || 'Empty'
     },
-    initData() {
-
-    },
     setWidth() {
         this.body.style.width = Object.keys(this.workload).length * columns.columnWidth + 'px'
+    },
+    delete() {
+        this.host.slots.splice(this.host.slots.indexOf(this), 1)
+        this.host.body.removeChild(this.body)
+        this.label.parentElement.removeChild(this.label)
     },
     alterSpan(dStart, dEnd, hostStart = this.host.start) {
         let workloadKeys = Object.keys(this.workload).sort()
