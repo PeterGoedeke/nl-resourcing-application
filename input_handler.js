@@ -42,7 +42,7 @@ function inputifyAutocomplete(element, cb, database) {
     function callCb() {
         element.classList.remove('autocompleteInput')
         input.removeEventListener('keypress', callCbEnter)
-        cb(input.value)
+        cb(hintInput.value)
     }
     function callCbEnter() {
         if(event.which == 13) {

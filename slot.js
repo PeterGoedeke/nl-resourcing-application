@@ -3,6 +3,7 @@ const slotProto = {
         this.body = slotBody.cloneNode(true)
         this.startHandle = this.body.querySelector('.start')
         this.endHandle = this.body.querySelector('.end')
+        this.label = slotLabel.cloneNode()
 
         addDragging(this.startHandle, () => columns.getLeftFromID(this.start), id => {
             this.alterSpan(id - this.start, 0)
@@ -29,10 +30,21 @@ const slotProto = {
                 })
             }
         })
+        
+        this.label.addEventListener('click', event => {
+            inputifyAutocomplete(this.label, attemptedAssignment => {
+                if(attemptedAssignment) {
+                    this.assignEmployee(attemptedAssignment)
+                } else {
+                    this.removeEmployee()
+                }
+                this.label.innerHTML = attemptedAssignment
+            }, employees.visibleNames)
+
+        })
 
         this.body.style.left = columns.getLeftFromID(this.start - (this.host.start - columns.baseID))
         this.setWidth()
-        this.label = slotLabel.cloneNode()
         this.cells = {}
         for(const key in this.workload) {
             const cell = createCell(this.workload[key])
@@ -44,6 +56,16 @@ const slotProto = {
         let arr = []
         for(const key in this.cells) arr.push(this.cells[key])
         return arr
+    },
+    assignEmployee(name) {
+        console.log(name)
+        if(this.employee) employees.getEmployee(this.employee).removeSlot(this.workload)
+        employees.getEmployee(name).assignSlot(this.workload)
+        this.employee = name
+    },
+    removeEmployee() {
+        if(this.employee) employees.getEmployee(this.employee).removeSlot(this.workload)
+        this.employee = undefined
     },
     initData() {
 
