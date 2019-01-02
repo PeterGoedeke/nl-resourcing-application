@@ -5,21 +5,24 @@ const contextMenus = (function() {
     const contextMenus = [
         createContextMenu([['./assets/lock.png', 'Toggle Security'], 'item2', 'Delete'])
     ]
-
+    let active = false
     function openContextMenu(index, cbs, event, beforeOpen) {
-        const menu = contextMenus[index].cloneNode(true)
-        const links = Array.from(menu.querySelectorAll('.partialWidth, .fullWidth'))
-        links.forEach((link, i) => {
-            link.addEventListener('click', cbs[i])
-        })
-        contextPane.appendChild(menu)
-
-        contextPane.style.left = event.pageX + 'px'
-        contextPane.style.top = event.pageY + 'px'
-        if(beforeOpen) beforeOpen(contextPane)
-        document.body.appendChild(contextPane)
-
-        setTimeout(() => addEventListener('mousedown', removeContextPane), 0)
+        if(!active) {
+            active = true
+            const menu = contextMenus[index].cloneNode(true)
+            const links = Array.from(menu.querySelectorAll('.partialWidth, .fullWidth'))
+            links.forEach((link, i) => {
+                link.addEventListener('click', cbs[i])
+            })
+            contextPane.appendChild(menu)
+    
+            contextPane.style.left = event.pageX + 'px'
+            contextPane.style.top = event.pageY + 'px'
+            if(beforeOpen) beforeOpen(contextPane)
+            document.body.appendChild(contextPane)
+    
+            setTimeout(() => addEventListener('mousedown', removeContextPane), 0)
+        }
     }
     function removeContextPane(event) {
         if(!(event.target == contextPane || contextPane.contains(event.target))) {
@@ -30,6 +33,7 @@ const contextMenus = (function() {
         removeEventListener('mousedown', removeContextPane)
         document.body.removeChild(contextPane)
         contextPane.innerHTML = ''
+        active = false
     }
 
     function createContextMenu(details) {
@@ -58,3 +62,7 @@ const contextMenus = (function() {
         open: openContextMenu, close: closeContextMenu
     }
 })()
+
+document.addEventListener('contextmenu', event => {
+    event.preventDefault()
+})

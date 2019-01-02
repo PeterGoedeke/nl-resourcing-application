@@ -69,7 +69,7 @@ function sanitiseForDisplay(number) {
 function insertAfter(newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling)
 }
-document.addEventListener('contextmenu', event => event.preventDefault())
+
 Array.prototype.move = function(from, to) {
     this.splice(to, 0, this.splice(from, 1)[0]);
 };
