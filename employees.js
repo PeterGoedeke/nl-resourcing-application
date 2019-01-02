@@ -25,7 +25,7 @@ const employeeProto = {
                     for(const key in this.cells) {
                         if(this.cells[key] === event.target) {
                             this.joining = key
-                            this.refreshCells()
+                            this.colorCells(columns.baseID, columns.endID - 1)
                         }
                     }
                 },
@@ -33,7 +33,7 @@ const employeeProto = {
                     for(const key in this.cells) {
                         if(this.cells[key] === event.target) {
                             this.leaving = key
-                            this.refreshCells()
+                            this.colorCells(columns.baseID, columns.endID - 1)
                         }
                     }
                 },
@@ -53,12 +53,12 @@ const employeeProto = {
                     input.addEventListener('blur', event => {
                         if(Number(input.value)) {
                             this.fullTime = input.value
-                            this.refreshCells()
+                            this.colorCells(columns.baseID, columns.endID - 1)
                         }
                     })
                     input.addEventListener('focus', event => input.select())
-                    pane.querySelector('.e3').appendChild(input)
-                    pane.querySelector('.e3').style.cursor = 'initial'
+                    pane.querySelector('.e4').appendChild(input)
+                    pane.querySelector('.e4').style.cursor = 'initial'
                 })
         })
 
@@ -107,11 +107,29 @@ const employeeProto = {
     refreshCells(preChange) {
         const postChange = this.totalWorkload
         for(const key in postChange) {
-            if(Number(postChange[key]) != Number(preChange)) {
+            if(Number(postChange[key]) != Number(preChange[key])) {
                 this.cells[key].textContent = sanitiseForDisplay(postChange[key])
-                // change colour
+                this.colorCell(this.cells[key], key)
+                console.log('changed')
             }
         }
+    },
+    colorCells(start, end) {
+        for(let i = start; i <= end; i++) {
+            this.colorCell(this.cells[i], i)
+        }
+    },
+    colorCell(cell, ID) {
+        const color = (() => {
+            let color
+            if(this.totalWorkload[ID] == 0) color = 'grey'
+            else if(this.totalWorkload[ID] > this.fullTime) color = 'red'
+            else if(this.totalWorkload[ID] < this.fullTime) color = 'orange'
+            else color = 'green'
+            return color
+        })()
+        if(!(this.joining && ID <= this.joining || this.leaving && ID >= this.leaving)) cell.style.background = color
+        else cell.style.background = `repeating-linear-gradient(-45deg, ${color}, white 5px, ${color} 5px, white 5px)`
     },
     get totalWorkload() {
         let totalWorkload = {}

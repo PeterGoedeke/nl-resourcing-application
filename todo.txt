@@ -5,7 +5,6 @@ You can drag projects under the sidebar
 Projects need to move around the projects array when they're shifted from interiors to non and vice versa
 
 Button which sorts employees alphabetically
-Context menu for employees
 Dynamic sidebar width
 Zooming
 Extra sheets
