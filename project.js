@@ -7,7 +7,6 @@ const projectProto = {
         this.startHandle = this.container.querySelector('.start')
         this.endHandle = this.container.querySelector('.end')
         this.container.style.width = columns.applicationWidth + columns.sidebarWidth + 'px'
-        this.container.style.backgroundColor = this.color
 
         addDragging(this.startHandle, () => columns.getLeftFromID(this.start), id => {
             this.setSpan(id, this.end)
@@ -71,6 +70,7 @@ const projectProto = {
             this.slotLabelContainer.appendChild(slot.label)
         })
         this.label.textContent = this.name || 'Unnamed'
+        this.setColor(this.color)
         return this.container
     },
     toggleInteriors() {
@@ -110,6 +110,8 @@ const projectProto = {
         })
     },
     setColor(color) {
+        this.slotLabelContainer.style.background = color
+        this.label.style.background = color
         if(this.secured) this.container.style.background = color
         else this.container.style.background = `repeating-linear-gradient(-45deg, ${color}, white 5px, ${color} 5px, white 5px)`
         this.color = color
