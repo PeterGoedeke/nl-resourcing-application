@@ -103,6 +103,8 @@ const slotProto = {
         else if(this.end + dEnd <= this.start) {
             dEnd = this.start - this.end
         }
+        if(this.start + dStart <= columns.baseID) dStart = columns.baseID - this.start + 1
+
         if(dStart > 0) {
             for(let i = 0; i < dStart; i++) {
                 this.body.removeChild(this.cells[workloadKeys[i]])
