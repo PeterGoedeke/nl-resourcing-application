@@ -4,7 +4,7 @@ const slotProto = {
         this.startHandle = this.body.querySelector('.start')
         this.endHandle = this.body.querySelector('.end')
         this.label = slotLabel.cloneNode()
-        this.label.textContent = this.employee && this.employee.name || 'Empty'
+        this.refreshLabel()
 
         addDragging(this.startHandle, () => columns.getLeftFromID(this.start), id => {
             this.alterSpan(id - this.start, 0)
@@ -60,16 +60,19 @@ const slotProto = {
         return arr
     },
     assignEmployee(name) {
-        if(this.employee) this.employee.removeSlot(this.workload)
+        if(this.employee) this.employee.removeSlot(this)
         this.employee = employees.getEmployee(name)
-        this.employee.assignSlot(this.workload)
+        this.employee.assignSlot(this)
     },
     removeEmployee() {
-        if(this.employee) this.employee.removeSlot(this.workload)
+        if(this.employee) this.employee.removeSlot(this)
         this.employee = undefined
     },
     notifyEmployee() {
         if(this.employee) this.employee.refreshCells()
+    },
+    refreshLabel() {
+        this.label.textContent = this.employee && this.employee.name || 'Empty'
     },
     initData() {
 

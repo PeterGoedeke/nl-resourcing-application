@@ -9,9 +9,10 @@ const employeeProto = {
         this.label.addEventListener('click', event => {
             this.label.style.height = columns.rowHeight + 'px'
             inputify(this.label, newName => {
-                if(!employees.visibleNames.includes(newName)) {
+                if(!employees.visibleNames.includes(newName) && newName) {
                     this.label.innerHTML = newName
                     this.name = newName
+                    this.notifySlots()
                 } else {
                     this.label.innerHTML = this.name || 'Unnamed'
                 }
@@ -32,20 +33,23 @@ const employeeProto = {
     init() {
         employees.list.push(this)
     },
+    notifySlots() {
+        this.slots.forEach(slot => slot.refreshLabel())
+    },
     showVisible() {
 
     },
     delete() {
 
     },
-    assignSlot(workload) {
+    assignSlot(slot) {
         const preChange = JSON.parse(JSON.stringify(this.totalWorkload))
-        this.workload.push(workload)
+        this.slots.push(slot)
         this.refreshCells(preChange)
     },
-    removeSlot(workload) {
+    removeSlot(slot) {
         const preChange = JSON.parse(JSON.stringify(this.totalWorkload))
-        this.workload.splice(this.workload.indexOf(workload), 1)
+        this.slots.splice(this.slots.indexOf(slot), 1)
         this.refreshCells(preChange)
     },
     refreshCells(preChange) {
@@ -59,7 +63,7 @@ const employeeProto = {
     },
     get totalWorkload() {
         let totalWorkload = {}
-        this.workload.forEach(workload => {
+        this.slots.map(slot => slot.workload).forEach(workload => {
             for(const key in workload) totalWorkload[key] = totalWorkload[key] + Number(workload[key]) || Number(workload[key])
         })
         for(let i = columns.baseID; i < columns.endID; i++) {
@@ -91,7 +95,7 @@ function createEmployee(details) {
     if(details) Object.assign(employee, details)
     else {
         employee.name = undefined
-        employee.workload = []
+        employee.slots = []
         employee.cells = {}
         employee.type = projects.visibleType
     }
