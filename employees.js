@@ -38,6 +38,11 @@ const employeeProto = {
                     }
                 },
                 () => {
+                    this.joining = undefined
+                    this.leaving = undefined
+                    this.colorCells(columns.baseID, columns.endID - 1)
+                },
+                () => {
                     this.toggleInteriors()
                 },
                 () => {
