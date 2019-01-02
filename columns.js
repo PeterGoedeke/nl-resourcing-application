@@ -58,3 +58,10 @@ const columns = (function() {
     const separators = Array.from(document.querySelectorAll('.separator'))
     separators.forEach(separator => separator.style.width = columns.applicationWidth + columns.sidebarWidth + 'px')
 })()
+
+function sanitiseForDisplay(number) {
+    number = Number(number)
+    number = parseFloat(Math.round(number * 10) / 10).toFixed(1)
+    if(String(number).length > 3) number = String(number).slice(0, - (String(number).length - 3))
+    return number
+}

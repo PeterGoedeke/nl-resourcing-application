@@ -24,7 +24,7 @@ const slotProto = {
                         break
                     }
                     this.workload[id] = Number(newWorkload)
-                    event.target.innerHTML = parseFloat(Math.round(newWorkload * 10) / 10).toFixed(1);
+                    event.target.innerHTML = sanitiseForDisplay(newWorkload)
                     event.target.style.width = 'initial'
                 })
             }
@@ -103,7 +103,7 @@ const slotProto = {
 }
 function createCell(workload) {
     let cell = slotCell.cloneNode()
-    cell.textContent = parseFloat(Math.round(workload * 10) / 10).toFixed(1);
+    cell.textContent = sanitiseForDisplay(workload)
     return cell
 }
 

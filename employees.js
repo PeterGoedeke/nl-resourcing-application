@@ -17,7 +17,7 @@ const employeeProto = {
 
         const snapshotTotalWorkload = this.totalWorkload
         for(const key in snapshotTotalWorkload) {
-            const cell = createCell(snapshotTotalWorkload[key])
+            const cell = createCell(sanitiseForDisplay(snapshotTotalWorkload[key]))
             this.body.appendChild(cell)
             this.cells[key] = cell
         }
@@ -48,7 +48,7 @@ const employeeProto = {
         const postChange = this.totalWorkload
         for(const key in postChange) {
             if(Number(postChange[key]) != Number(preChange)) {
-                this.cells[key].textContent = postChange[key]
+                this.cells[key].textContent = sanitiseForDisplay(postChange[key])
                 // change colour
             }
         }
