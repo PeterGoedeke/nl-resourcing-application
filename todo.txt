@@ -1,6 +1,4 @@
 Header and employees can have their loading improved since we know how many cells they have
-Shouldn't be able to have employees with duplicate names
-Should be able to remove employees from slots
 If an employee changes their name, slots should be updated
 
 

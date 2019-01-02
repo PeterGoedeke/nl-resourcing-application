@@ -4,6 +4,7 @@ const slotProto = {
         this.startHandle = this.body.querySelector('.start')
         this.endHandle = this.body.querySelector('.end')
         this.label = slotLabel.cloneNode()
+        this.label.textContent = this.employee && this.employee.name || 'Empty'
 
         addDragging(this.startHandle, () => columns.getLeftFromID(this.start), id => {
             this.alterSpan(id - this.start, 0)
@@ -27,6 +28,7 @@ const slotProto = {
                     this.workload[id] = Number(newWorkload)
                     event.target.innerHTML = sanitiseForDisplay(newWorkload)
                     event.target.style.width = 'initial'
+                    this.notifyEmployee()
                 })
             }
         })
@@ -58,14 +60,16 @@ const slotProto = {
         return arr
     },
     assignEmployee(name) {
-        console.log(name)
-        if(this.employee) employees.getEmployee(this.employee).removeSlot(this.workload)
-        employees.getEmployee(name).assignSlot(this.workload)
-        this.employee = name
+        if(this.employee) this.employee.removeSlot(this.workload)
+        this.employee = employees.getEmployee(name)
+        this.employee.assignSlot(this.workload)
     },
     removeEmployee() {
-        if(this.employee) employees.getEmployee(this.employee).removeSlot(this.workload)
+        if(this.employee) this.employee.removeSlot(this.workload)
         this.employee = undefined
+    },
+    notifyEmployee() {
+        if(this.employee) this.employee.refreshCells()
     },
     initData() {
 
@@ -115,6 +119,7 @@ const slotProto = {
         }
         this.body.style.left = columns.getLeftFromID(this.start - (hostStart - columns.baseID))
         this.setWidth()
+        this.notifyEmployee()
     },
     get start() {
         return Math.min(...Object.keys(this.workload))
