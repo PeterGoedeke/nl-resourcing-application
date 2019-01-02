@@ -25,25 +25,23 @@ const projectProto = {
                 this.label.style.height = 'initial'
             })
         })
-        this.body.addEventListener('mousedown', event => {
-            if(event.which == 3) {
-                contextMenus.open(0, [
-                    () => {
-                        let image = document.querySelector('img')
-                        image.src = `./assets/${this.secured ? 'un' : ''}lock.png`
-                        this.secured = !this.secured
-                    },
-                    () => {
-                        console.log('item2')
-                    },
-                    () => {
-                        this.delete()
-                        contextMenus.close()
-                    }
-                ], event, pane => {
-                    pane.querySelector('img').src = `./assets/${this.secured ? '' : 'un'}lock.png`
-                })
-            }
+        this.body.addEventListener('contextmenu', event => {
+            contextMenus.open(0, [
+                () => {
+                    let image = document.querySelector('img')
+                    image.src = `./assets/${this.secured ? 'un' : ''}lock.png`
+                    this.secured = !this.secured
+                },
+                () => {
+                    console.log('item2')
+                },
+                () => {
+                    this.delete()
+                    contextMenus.close()
+                }
+            ], event, pane => {
+                pane.querySelector('img').src = `./assets/${this.secured ? '' : 'un'}lock.png`
+            })
         })
         this.createSlotButton.addEventListener('click', event => this.createNewSlot())
 

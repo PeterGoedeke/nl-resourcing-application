@@ -69,3 +69,4 @@ function sanitiseForDisplay(number) {
 function insertAfter(newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling)
 }
+document.addEventListener('contextmenu', event => event.preventDefault())

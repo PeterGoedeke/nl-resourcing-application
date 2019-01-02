@@ -198,6 +198,8 @@ p {
     width: 100px;
     height: 150px;
     position: absolute;
+    background-color: grey;
+    z-index: 5;
 }
 .partialWidth, .fullWidth, .wrapper {
     float: left;
