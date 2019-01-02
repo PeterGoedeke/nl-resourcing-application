@@ -47,7 +47,7 @@ const slotProto = {
                 } else {
                     this.removeEmployee()
                 }
-                this.label.innerHTML = attemptedAssignment
+                this.label.innerHTML = attemptedAssignment || 'Empty'
             }, employees.visibleNames)
 
         })
