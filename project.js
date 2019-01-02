@@ -116,6 +116,8 @@ const projectProto = {
         this.color = color
     },
     setSpan(start, end) {
+        if(start >= this.end) start = this.end - 1
+        if(end <= this.start) end = this.start + 1
         if(this.start != start) {
             this.slots.forEach(slot => slot.alterSpan(start - this.start, 0, start))
             this.body.style.left = columns.getLeftFromID(start)
@@ -125,7 +127,7 @@ const projectProto = {
             this.slots.forEach(slot => slot.alterSpan(0, end - this.end))
             this.end = end
         }
-        this.body.style.width = columns.getWidthFromID(start, end)
+        this.body.style.width = columns.getWidthFromID(this.start, this.end)
     },
     createNewSlot() {
         let newSlot = createSlot(null, this)
