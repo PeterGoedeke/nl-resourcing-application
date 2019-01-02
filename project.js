@@ -7,6 +7,7 @@ const projectProto = {
         this.startHandle = this.container.querySelector('.start')
         this.endHandle = this.container.querySelector('.end')
         this.container.style.width = columns.applicationWidth + columns.sidebarWidth + 'px'
+        this.container.style.backgroundColor = this.color
 
         addDragging(this.startHandle, () => columns.getLeftFromID(this.start), id => {
             this.setSpan(id, this.end)
@@ -121,6 +122,7 @@ function createProject(details) {
         project.end = columns.rightmostVisibleColumn - 2
         project.name = 'Unnamed'
         project.secured = true
+        project.color = random.color()
         
         project.slots = []
         projects.types.forEach(type => {
