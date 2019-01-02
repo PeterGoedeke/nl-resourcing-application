@@ -26,7 +26,7 @@ const projectProto = {
                 this.label.style.height = 'initial'
             })
         })
-        this.body.addEventListener('contextmenu', event => {
+        this.container.addEventListener('contextmenu', event => {
             contextMenus.open(0, [
                 () => {
                     let image = document.querySelector('img')
