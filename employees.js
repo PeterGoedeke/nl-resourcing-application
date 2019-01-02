@@ -8,9 +8,13 @@ const employeeProto = {
 
         this.label.addEventListener('click', event => {
             this.label.style.height = columns.rowHeight + 'px'
-            inputify(this.label, newLabel => {
-                this.label.innerHTML = newLabel
-                this.name = newLabel
+            inputify(this.label, newName => {
+                if(!employees.visibleNames.includes(newName)) {
+                    this.label.innerHTML = newName
+                    this.name = newName
+                } else {
+                    this.label.innerHTML = this.name || 'Unnamed'
+                }
                 this.label.style.height = 'initial'
             })
         })
@@ -37,12 +41,12 @@ const employeeProto = {
     assignSlot(workload) {
         const preChange = JSON.parse(JSON.stringify(this.totalWorkload))
         this.workload.push(workload)
-        refreshCells(preChange)
+        this.refreshCells(preChange)
     },
     removeSlot(workload) {
         const preChange = JSON.parse(JSON.stringify(this.totalWorkload))
         this.workload.splice(this.workload.indexOf(workload), 1)
-        refreshCells(preChange)
+        this.refreshCells(preChange)
     },
     refreshCells(preChange) {
         const postChange = this.totalWorkload
