@@ -162,10 +162,19 @@ input {
     height: 10px;
     background-color: blue;
 }
-.newProject, .newEmployee {
+p {
+    line-height: 10px;
+    font-size: 10px;
+    position: sticky;
+    left: 25px;
+    float: left;
+}
+.newProject, .newEmployee, .newInteriorsProject, .newInteriorsEmployee {
     width: 20px;
     height: 100%;
     background-color: orange;
+    position: sticky;
+    left: 0;
 }
 
 .start, .end {

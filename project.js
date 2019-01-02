@@ -141,6 +141,17 @@ newProjectButton.addEventListener('mousedown', event => {
     document.body.insertBefore(container, projectAreaSeparator)
 })
 
+const interiorsProjectAreaSeparator = document.querySelector('.interiorsProjectAreaSeparator')
+const newInteriorsProjectButton = document.querySelector('.newInteriorsProject')
+newInteriorsProjectButton.addEventListener('mousedown', event => {
+    const newProject = createProject()
+    const container = newProject.batchLoad()
+    newProject.interiors = true
+    newProject.showVisible()
+    newProject.init()
+    document.body.insertBefore(container, interiorsProjectAreaSeparator)
+})
+
 
 /*
 function load() {

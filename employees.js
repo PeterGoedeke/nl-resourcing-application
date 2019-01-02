@@ -111,3 +111,14 @@ newEmployeeButton.addEventListener('click', event => {
     newEmployee.init()
     document.body.insertBefore(container, employeeAreaSeparator)
 })
+
+const interiorsEmployeeAreaSeparator = document.querySelector('.interiorsEmployeeAreaSeparator')
+const newInteriorsEmployeeButton = document.querySelector('.newInteriorsEmployee')
+newInteriorsEmployeeButton.addEventListener('click', event => {
+    const newEmployee = createEmployee()
+    const container = newEmployee.batchLoad()
+    newEmployee.interiors = true
+    newEmployee.showVisible()
+    newEmployee.init()
+    document.body.insertBefore(container, interiorsEmployeeAreaSeparator)
+})
