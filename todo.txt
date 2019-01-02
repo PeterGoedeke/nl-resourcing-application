@@ -1,8 +1,6 @@
 Employees can have their loading improved since we know how many cells they have - debateable, as they need a reference
-Inputs go big if you click them a bunch
 Projects need to move around the projects array when they're shifted from interiors to non and vice versa
 
-Button which sorts employees alphabetically
 Dynamic sidebar width
 Extra sheets
 Total rows at the bottom

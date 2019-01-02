@@ -20,6 +20,7 @@ function inputify(element, cb) {
 
     input.addEventListener('blur', callCb)
     input.addEventListener('keypress', callCbEnter)
+    input.addEventListener('click', event => event.stopImmediatePropagation())
 
     setTimeout(() => {
         input.focus()
@@ -64,6 +65,7 @@ function inputifyAutocomplete(element, cb, database) {
 
     input.addEventListener('blur', callCb)
     input.addEventListener('keyup', callCbEnter)
+    input.addEventListener('click', event => event.stopImmediatePropagation())
 
     setTimeout(() => {
         input.focus()
