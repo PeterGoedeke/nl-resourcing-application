@@ -3,7 +3,7 @@ const contextMenus = (function() {
     contextPane.className = 'contextPane'
 
     const contextMenus = [
-        createContextMenu([['./assets/lock.png', 'Toggle Security'], 'item2', 'Delete'])
+        createContextMenu([['./assets/lock.png', 'Toggle Security'], 'Toggle Interiors', 'Set Colour:', 'Move up', 'Move down', 'Delete'])
     ]
     let active = false
     function openContextMenu(index, cbs, event, beforeOpen) {
@@ -44,14 +44,14 @@ const contextMenus = (function() {
                 let image = document.createElement('img')
                 let wrapper = document.createElement('div')
                 wrapper.className = 'wrapper'
-                text.className = 'partialWidth'
+                text.className = 'partialWidth e' + i
                 image.src = item[0]
                 text.textContent = item[1]
                 wrapper.appendChild(image)
                 fragment.appendChild(wrapper)
             }
             else {
-                text.className = 'fullWidth'
+                text.className = 'fullWidth e' + i
                 text.textContent = item
             }
             fragment.appendChild(text)

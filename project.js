@@ -32,9 +32,19 @@ const projectProto = {
                     let image = document.querySelector('img')
                     image.src = `./assets/${this.secured ? 'un' : ''}lock.png`
                     this.secured = !this.secured
+                    this.setColor(this.color)
                 },
                 () => {
-                    console.log('item2')
+                    this.toggleInteriors()
+                },
+                () => {
+                    //this.setColor()
+                },
+                () => {
+                    this.moveUp()
+                },
+                () => {
+                    this.moveDown()
                 },
                 () => {
                     this.delete()
@@ -42,6 +52,12 @@ const projectProto = {
                 }
             ], event, pane => {
                 pane.querySelector('img').src = `./assets/${this.secured ? '' : 'un'}lock.png`
+                let input = document.createElement('input')
+                input.type = 'color'
+                input.style.cursor = 'pointer'
+                input.addEventListener('change', event => this.setColor(input.value))
+                pane.querySelector('.e2').appendChild(input)
+                pane.querySelector('.e2').style.cursor = 'initial'
             })
         })
         this.createSlotButton.addEventListener('click', event => this.createNewSlot())
@@ -59,6 +75,15 @@ const projectProto = {
     },
     init() {
         projects.list.push(this)
+    },
+    toggleInteriors() {
+        if(this.interiors) {
+            this.interiors = false
+            insertAfter(this.container, projectAreaSeparator)
+        } else {
+            this.interiors = true
+            insertAfter(this.container, interiorsProjectAreaSeparator)
+        }
     },
     moveUp() {
         if(this.container.previousSibling.className == 'projectContainer') {
@@ -84,6 +109,11 @@ const projectProto = {
             this.body.appendChild(slot.body)
             this.slotLabelContainer.appendChild(slot.label)
         })
+    },
+    setColor(color) {
+        if(this.secured) this.container.style.background = color
+        else this.container.style.background = `repeating-linear-gradient(-45deg, ${color}, white 5px, ${color} 5px, white 5px)`
+        this.color = color
     },
     setSpan(start, end) {
         if(this.start != start) {

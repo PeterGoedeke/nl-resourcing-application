@@ -228,6 +228,14 @@ p {
     width: 100%;
     padding-left: 12%;
 }
+.fullWidth > input {
+    box-sizing: border-box;
+    height: 100%;
+    position: relative;
+    left: 5px;
+    width: 40px;
+    
+}
 
 .employeeContainer {
     display: flex;
