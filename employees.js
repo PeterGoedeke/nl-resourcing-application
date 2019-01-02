@@ -151,11 +151,22 @@ const employeeProto = {
 
 const employees = {
     list: [],
+    sortByName() {
+        this.list.sort((a, b) => {
+            if(!a.name) return -1
+            if(!b.name) return 1
+            if((a.name.toLowerCase()) < (b.name.toLowerCase())) return -1
+            return 1
+        })
+        this.visibleList.slice().reverse().forEach(employee => {
+            insertAfter(employee.container, employeeAreaSeparator)
+        })
+    },
     get safeList() {
         return this.list.filter(employee => employee.name)
     },
     get visibleList() {
-        return this.safeList.filter(employee => employee.type == projects.visibleType)
+        return this.list.filter(employee => employee.type == projects.visibleType)
     },
     get visibleNames() {
         return this.visibleList.map(employee => employee.name)
@@ -197,4 +208,9 @@ newInteriorsEmployeeButton.addEventListener('click', event => {
     newEmployee.showVisible()
     newEmployee.init()
     insertAfter(container, interiorsEmployeeAreaSeparator)
+})
+
+const sortButton = document.querySelector('.sort')
+sortButton.addEventListener('click', event => {
+    employees.sortByName()
 })

@@ -163,15 +163,25 @@ p {
     line-height: 10px;
     font-size: 10px;
     position: sticky;
-    left: 25px;
+    left: 18px;
     float: left;
 }
-.newProject, .newEmployee, .newInteriorsProject, .newInteriorsEmployee {
-    width: 20px;
+.newProject, .newEmployee, .newInteriorsProject, .newInteriorsEmployee, .sort {
+    width: 15px;
     height: 100%;
     background-color: orange;
     position: sticky;
     left: 0;
+}
+.newEmployee {
+    float: left;
+}
+.sort {
+    left: 15px;
+    float: left;
+}
+.employeeAreaSeparator > p {
+    left: 33px;
 }
 
 .start, .end {

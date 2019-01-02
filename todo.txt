@@ -1,4 +1,4 @@
-Header and employees can have their loading improved since we know how many cells they have
+Employees can have their loading improved since we know how many cells they have - debateable, as they need a reference
 It's possible to resize employee slots to be too small - probably project bodies too
 Inputs go big if you click them a bunch
 You can drag projects under the sidebar
@@ -6,7 +6,6 @@ Projects need to move around the projects array when they're shifted from interi
 
 Button which sorts employees alphabetically
 Dynamic sidebar width
-Zooming
 Extra sheets
 Total rows at the bottom
 Printing
