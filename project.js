@@ -59,6 +59,18 @@ const projectProto = {
     init() {
         projects.list.push(this)
     },
+    moveUp() {
+        if(this.container.previousSibling.className == 'projectContainer') {
+            this.container.parentNode.insertBefore(this.container, this.container.previousSibling)
+            projects.list.move(projects.list.indexOf(this), projects.list.indexOf(this) - 1)
+        }
+    },
+    moveDown() {
+        if(this.container.nextSibling.className == 'projectContainer') {
+            insertAfter(this.container, this.container.nextSibling)
+            projects.list.move(projects.list.indexOf(this), projects.list.indexOf(this) + 1)
+        }
+    },
     showVisible() {
         this.body.innerHTML = ''
         this.slotLabelContainer.innerHTML = ''
