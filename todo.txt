@@ -8,10 +8,9 @@ Dynamic sidebar width
 Zooming
 Extra sheets
 Total rows at the bottom
-Interiors section for projects and employees
 Printing
 Select project colour
-
+Swapping between interiors
 
 Projects:
 - There need to be projects.

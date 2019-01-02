@@ -65,3 +65,7 @@ function sanitiseForDisplay(number) {
     if(String(number).length > 3) number = String(number).slice(0, - (String(number).length - 3))
     return number
 }
+
+function insertAfter(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling)
+}

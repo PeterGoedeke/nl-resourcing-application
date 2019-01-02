@@ -109,7 +109,7 @@ newEmployeeButton.addEventListener('click', event => {
     const container = newEmployee.batchLoad()
     newEmployee.showVisible()
     newEmployee.init()
-    document.body.insertBefore(container, employeeAreaSeparator)
+    insertAfter(container, employeeAreaSeparator)
 })
 
 const interiorsEmployeeAreaSeparator = document.querySelector('.interiorsEmployeeAreaSeparator')
@@ -120,5 +120,5 @@ newInteriorsEmployeeButton.addEventListener('click', event => {
     newEmployee.interiors = true
     newEmployee.showVisible()
     newEmployee.init()
-    document.body.insertBefore(container, interiorsEmployeeAreaSeparator)
+    insertAfter(container, interiorsEmployeeAreaSeparator)
 })

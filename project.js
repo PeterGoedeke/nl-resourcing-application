@@ -138,7 +138,7 @@ newProjectButton.addEventListener('mousedown', event => {
     const container = newProject.batchLoad()
     newProject.showVisible()
     newProject.init()
-    document.body.insertBefore(container, projectAreaSeparator)
+    insertAfter(container, projectAreaSeparator)
 })
 
 const interiorsProjectAreaSeparator = document.querySelector('.interiorsProjectAreaSeparator')
@@ -149,7 +149,7 @@ newInteriorsProjectButton.addEventListener('mousedown', event => {
     newProject.interiors = true
     newProject.showVisible()
     newProject.init()
-    document.body.insertBefore(container, interiorsProjectAreaSeparator)
+    insertAfter(container, interiorsProjectAreaSeparator)
 })
 
 
