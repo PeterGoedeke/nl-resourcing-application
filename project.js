@@ -136,6 +136,7 @@ const projectProto = {
         this.slots.push(newSlot)
         newSlot.initDisplay()
         newSlot.type = projects.visibleType
+        rows.register(newSlot, rows.empty)
         this.body.appendChild(newSlot.body)
         this.slotLabelContainer.appendChild(newSlot.label)
     },
@@ -164,6 +165,7 @@ function createProject(details) {
             project.slots.push(createSlot(null, project))
             project.slots[project.slots.length - 1].initDisplay()
             project.slots[project.slots.length - 1].type = type
+            rows.register(project.slots[project.slots.length - 1], rows.empty)
         })
     }
     return project

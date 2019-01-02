@@ -111,6 +111,7 @@ body {
     height: 100%;
     box-sizing: border-box;
     font-size: 10px;
+    /* text-align: center; */
 }
 .autocompleteInput {
     position: relative;
@@ -192,6 +193,7 @@ p {
     font-size: 6px;
     line-height: 10px;
     font-weight: bold;
+    border-left: 0;
 }
 .employeeAreaSeparator > p {
     left: 33px;
@@ -275,6 +277,22 @@ p {
     background-color: grey;
     position: relative;
     display: flex;
+}
+
+.row {
+    height: 10px;
+    background-color: red;
+    display: flex;
+}
+.row > p {
+    flex-basis: 100px;
+    left: 0;
+    box-sizing: border-box;
+    padding-left: 5px;
+    background-color: white;
+    z-index: 3;
+    border-right: solid black 1px;
+    box-shadow: 0 0 1px 0px inset;
 }
 
 * {

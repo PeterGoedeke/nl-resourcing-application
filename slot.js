@@ -19,7 +19,7 @@ const slotProto = {
         this.body.addEventListener('click', event => {
             if(this.getCellsAsArray().includes(event.target)) {
                 event.target.style.width = columns.columnWidth + 'px'
-                const preChange = this.collectEmployeePreChange()
+                const preChange = this.collectEmployeePreChange() || rows.collectPreChange(rows.empty)
                 inputify(event.target, newWorkload => {
                     let id
                     for(const key in this.cells) if(this.cells[key] == event.target) {
@@ -69,15 +69,19 @@ const slotProto = {
     },
     assignEmployee(name) {
         if(this.employee) this.employee.removeSlot(this)
+        else rows.remove(this, rows.empty)
         this.employee = employees.getEmployee(name)
         this.employee.assignSlot(this)
     },
     removeEmployee() {
         if(this.employee) this.employee.removeSlot(this)
         this.employee = undefined
+        this.label.textContent = 'Empty'
+        rows.register(this, rows.empty)
     },
     notifyEmployee(preChange) {
         if(this.employee) this.employee.refreshCells(preChange)
+        else rows.refreshCells(preChange, rows.empty)
     },
     collectEmployeePreChange() {
         if(this.employee) return JSON.parse(JSON.stringify(this.employee.totalWorkload))
@@ -102,6 +106,7 @@ const slotProto = {
     },
     alterSpan(dStart, dEnd, hostStart = this.host.start) {
         let workloadKeys = Object.keys(this.workload).sort()
+        const employeePreChange = this.collectEmployeePreChange() || rows.collectPreChange(rows.empty)
 
         if(this.start + dStart >= this.end) {
             dStart = this.end - this.start
@@ -151,7 +156,7 @@ const slotProto = {
         }
         this.body.style.left = columns.getLeftFromID(this.start - (hostStart - columns.baseID))
         this.setWidth()
-        if(this.employee) this.notifyEmployee(employeePreChange)
+        this.notifyEmployee(employeePreChange)
     },
     get start() {
         return Math.min(...Object.keys(this.workload))
