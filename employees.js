@@ -98,6 +98,7 @@ const employeeProto = {
     delete() {
         employees.list.splice(employees.list.indexOf(this), 1)
         document.body.removeChild(this.container)
+        this.slots.forEach(slot => slot.removeEmployee())
     },
     assignSlot(slot) {
         const preChange = JSON.parse(JSON.stringify(this.totalWorkload))
