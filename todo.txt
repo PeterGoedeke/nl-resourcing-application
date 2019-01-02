@@ -1,4 +1,4 @@
-Employees can have their loading improved since we know how many cells they have - debateable, as they need a reference
+Employees can have their loading improved since we know how many cells they have
 
 Dynamic sidebar width
 Extra sheets
@@ -6,6 +6,7 @@ Total rows at the bottom
 Printing
 Delete stuff as time goes on
 Leave
+Tab and automatic selection
 
 Projects:
 - There need to be projects.

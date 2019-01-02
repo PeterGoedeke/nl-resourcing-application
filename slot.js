@@ -92,10 +92,16 @@ const slotProto = {
         this.host.slots.splice(this.host.slots.indexOf(this), 1)
         this.host.body.removeChild(this.body)
         this.label.parentElement.removeChild(this.label)
+        this.decouple()
+    },
+    decouple() {
+        if(!this.employee) rows.remove(this, rows.empty)
+        else {
+            this.employee.removeSlot(this)
+        }
     },
     alterSpan(dStart, dEnd, hostStart = this.host.start) {
         let workloadKeys = Object.keys(this.workload).sort()
-        const employeePreChange = this.collectEmployeePreChange()
 
         if(this.start + dStart >= this.end) {
             dStart = this.end - this.start

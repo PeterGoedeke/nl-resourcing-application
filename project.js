@@ -142,6 +142,7 @@ const projectProto = {
     delete() {
         projects.list.splice(projects.list.indexOf(this), 1)
         document.body.removeChild(this.container)
+        this.slots.forEach(slot => slot.decouple())
     },
     get visibleSlots() {
         return this.slots.filter(slot => slot.type == projects.visibleType)
