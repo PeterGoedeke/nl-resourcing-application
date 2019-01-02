@@ -1,6 +1,7 @@
 const columns = (function() {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const columnWidth = 25
+    const sidebarWidth = 100
     const rowHeight = 10
     const currentID = (function() {
         const currentDate = new Date()
@@ -13,14 +14,18 @@ const columns = (function() {
     const endID = currentID + 36 * 2
     let applicationWidth = (endID - baseID) * columnWidth
 
+    const header = document.querySelector('.header')
+    const fragment = document.createDocumentFragment()
     for(let i = baseID; i < endID; i += 2) {
         let element = headerCell.cloneNode()
         element.textContent = convertIDToDate(i)
-        element.appendChild(columnLine.cloneNode())
-        document.querySelector('.header').appendChild(element)
-        document.querySelector('.header').style.width = applicationWidth + 'px'
+        header.appendChild(element)
+        header.style.width = applicationWidth + 'px'
+        let line = columnLine.cloneNode()
+        line.style.left = (i - baseID) * columnWidth + sidebarWidth + 'px'
+        fragment.appendChild(line)
     }
-
+    document.body.appendChild(fragment)
 
     function convertIDToDate(id) {
         let year = 1970
@@ -36,7 +41,6 @@ const columns = (function() {
         return (end - start) * columns.columnWidth + 'px'
     }
 
-    const sidebarWidth = 100
     return {
         baseID, endID, columnWidth, rowHeight, sidebarWidth, applicationWidth,
         convertIDToDate, getLeftFromID, getWidthFromID,
