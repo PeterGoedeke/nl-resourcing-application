@@ -125,7 +125,8 @@ input {
 .header {
     width: 100vw;
     height: 25px;
-    background-color: green;
+    background-color: white;
+    box-shadow: 0 0 1px 0px inset;
     position: sticky;
     top: 0;
     z-index: 4;
@@ -160,23 +161,27 @@ input {
 
 .separator {
     height: 10px;
-    background-color: lightblue;
+    background-color: white;
     position: relative;
     z-index: 3;
+    box-shadow: 0 0 1px 0px inset;
+    display: flex;
 }
 p {
-    line-height: 10px;
     font-size: 10px;
     position: sticky;
     left: 18px;
-    float: left;
 }
 .newProject, .newEmployee, .newInteriorsProject, .newInteriorsEmployee, .sort {
     width: 15px;
-    height: 100%;
-    background-color: orange;
+    border: solid black;
+    border-width: 0px 1px;
+    box-sizing: border-box;
     position: sticky;
     left: 0;
+    text-align: center;
+    font-size: 10px;
+    cursor: pointer;
 }
 .newEmployee {
     float: left;
@@ -184,6 +189,9 @@ p {
 .sort {
     left: 15px;
     float: left;
+    font-size: 6px;
+    line-height: 10px;
+    font-weight: bold;
 }
 .employeeAreaSeparator > p {
     left: 33px;
@@ -258,6 +266,9 @@ p {
 }
 .employeeLabel {
     width: 100px;
+    background-color: lightgrey;
+    border-right: 1px solid black;
+    box-sizing: border-box;
 }
 .employeeBody {
     height: 10px;
