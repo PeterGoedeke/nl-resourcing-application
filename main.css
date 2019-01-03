@@ -294,6 +294,9 @@ p {
     border-right: solid black 1px;
     box-shadow: 0 0 1px 0px inset;
 }
+.summationRow > .slotCell {
+    flex-basis: 25px;
+}
 
 * {
     -webkit-touch-callout: none; /* iOS Safari */

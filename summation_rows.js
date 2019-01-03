@@ -15,6 +15,7 @@ const rows = (function() {
     const emptyCells = getRowCells('.emptyRow')
     const workloadCells = getRowCells('.workloadRow')
     const employeeCells = getRowCells('.employeesRow')
+    const summationCells = getRowCells('.summationRow')
 
     return {
         get empty() {
@@ -39,15 +40,17 @@ const rows = (function() {
                     employeeCapability[i] = employeeCapability[i] + Number(employee.fullTime) || Number(employee.fullTime)
                 }
             })
-            for(let i = columns.baseID; i < columns.endID; i++) {
-                if(employeeCapability[i]) continue
-                employeeCapability[i] = 0
-            }
             return [employeeCapability]
         },
         get summation() {
-            let summation = []
-            
+            let summation = {}
+            const workload = this.totalWorkload(this.workload)
+            const employees = this.employees[0]
+
+            for(const key in workload) {
+                summation[key] = (workload[key] || 0) - (employees[key] || 0)
+            }
+            return summation
         },
         totalWorkload(list) {
             let totalWorkload = {}
@@ -63,16 +66,16 @@ const rows = (function() {
         refreshCellsSlots() {
             this.refreshCells(emptyCells, this.totalWorkload(this.empty))
             this.refreshCells(workloadCells, this.totalWorkload(this.workload))
-            // refreshCells()
+            this.refreshCells(summationCells, this.summation)
         },
         refreshCellsEmployees() {
             this.refreshCells(employeeCells, this.totalWorkload(this.employees))
+            this.refreshCells(summationCells, this.summation)
         },
         refreshCells(cells, list) {
             for(const key in list) {
                 cells[key - columns.baseID].textContent = sanitiseForDisplay(list[key])
             }
-            console.log('PUT IT IN ME')
-        },
+        }
     }
 })()
