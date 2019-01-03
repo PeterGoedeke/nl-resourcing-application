@@ -72,6 +72,12 @@ const rows = (function() {
             this.refreshCells(employeeCells, this.totalWorkload(this.employees))
             this.refreshCells(summationCells, this.summation)
         },
+        refreshCellsAll() {
+            this.refreshCells(emptyCells, this.totalWorkload(this.empty))
+            this.refreshCells(workloadCells, this.totalWorkload(this.workload))
+            this.refreshCells(employeeCells, this.totalWorkload(this.employees))
+            this.refreshCells(summationCells, this.summation)
+        },
         refreshCells(cells, list) {
             for(const key in list) {
                 cells[key - columns.baseID].textContent = sanitiseForDisplay(list[key])

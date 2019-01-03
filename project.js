@@ -177,7 +177,7 @@ const projects = {
     visibleType: 'qa',
     list: [],
     showVisible() {
-        list.forEach(project => project.showVisible())
+        this.list.forEach(project => project.showVisible())
     }
 }
 

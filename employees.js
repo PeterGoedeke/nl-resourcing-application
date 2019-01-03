@@ -88,7 +88,15 @@ const employeeProto = {
         this.slots.forEach(slot => slot.refreshLabel())
     },
     showVisible() {
+        if(this.type == projects.visibleType) {
+            if(this.interiors) insertAfter(this.container, interiorsEmployeeAreaSeparator)
+            else insertAfter(this.container, employeeAreaSeparator)
+        }
+        else try {
+            document.body.removeChild(this.container)
+        } catch (err) {
 
+        }
     },
     toggleInteriors() {
         if(this.interiors) {
@@ -156,6 +164,9 @@ const employeeProto = {
 
 const employees = {
     list: [],
+    showVisible() {
+        this.list.forEach(employee => employee.showVisible())
+    },
     sortByName() {
         this.list.sort((a, b) => {
             if(!a.name) return -1
@@ -199,7 +210,6 @@ const newEmployeeButton = document.querySelector('.newEmployee')
 newEmployeeButton.addEventListener('click', event => {
     const newEmployee = createEmployee()
     const container = newEmployee.batchLoad()
-    newEmployee.showVisible()
     newEmployee.init()
     rows.refreshCellsEmployees()
     insertAfter(container, employeeAreaSeparator)
@@ -211,7 +221,6 @@ newInteriorsEmployeeButton.addEventListener('click', event => {
     const newEmployee = createEmployee()
     const container = newEmployee.batchLoad()
     newEmployee.interiors = true
-    newEmployee.showVisible()
     newEmployee.init()
     rows.refreshCellsEmployees()
     insertAfter(container, interiorsEmployeeAreaSeparator)
