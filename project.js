@@ -138,7 +138,7 @@ const projectProto = {
         let newSlot = createSlot(null, this)
         this.slots.push(newSlot)
         newSlot.initDisplay()
-        newSlot.type = projects.visibleType
+        newSlot.type = sheets.visible
         this.body.appendChild(newSlot.body)
         this.slotLabelContainer.appendChild(newSlot.label)
     },
@@ -148,7 +148,7 @@ const projectProto = {
         this.slots.forEach(slot => slot.decouple())
     },
     get visibleSlots() {
-        return this.slots.filter(slot => slot.type == projects.visibleType)
+        return this.slots.filter(slot => slot.type == sheets.visible)
     }
 }
 
@@ -163,7 +163,7 @@ function createProject(details) {
         project.color = random.color()
         
         project.slots = []
-        projects.types.forEach(type => {
+        sheets.types.forEach(type => {
             project.slots.push(createSlot(null, project))
             project.slots[project.slots.length - 1].initDisplay()
             project.slots[project.slots.length - 1].type = type
@@ -173,7 +173,6 @@ function createProject(details) {
 }
 
 const projects = {
-    types: ['qa', 'pm', 'sm'],
     visibleType: 'qa',
     list: [],
     showVisible() {

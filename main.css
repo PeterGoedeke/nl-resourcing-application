@@ -297,6 +297,20 @@ p {
 .summationRow > .slotCell {
     flex-basis: 25px;
 }
+.sheetTabsContainer {
+    position: fixed;
+    height: 10px;
+    background-color: red;
+    bottom: 0;
+    z-index: 3;
+}
+.typeCell {
+    width: 25px;
+    height: 100%;
+    background-color: red;
+    font-size: 10px;
+    float: left;
+}
 
 * {
     -webkit-touch-callout: none; /* iOS Safari */

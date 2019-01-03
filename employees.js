@@ -88,7 +88,7 @@ const employeeProto = {
         this.slots.forEach(slot => slot.refreshLabel())
     },
     showVisible() {
-        if(this.type == projects.visibleType) {
+        if(this.type == sheets.visible) {
             if(this.interiors) insertAfter(this.container, interiorsEmployeeAreaSeparator)
             else insertAfter(this.container, employeeAreaSeparator)
         }
@@ -182,7 +182,7 @@ const employees = {
         return this.list.filter(employee => employee.name)
     },
     get visibleList() {
-        return this.list.filter(employee => employee.type == projects.visibleType)
+        return this.list.filter(employee => employee.type == sheets.visible)
     },
     get visibleNames() {
         return this.visibleList.map(employee => employee.name).filter(name => name)
@@ -199,7 +199,7 @@ function createEmployee(details) {
         employee.name = undefined
         employee.slots = []
         employee.cells = {}
-        employee.type = projects.visibleType
+        employee.type = sheets.visible
         employee.fullTime = 5
     }
     return employee

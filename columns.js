@@ -88,10 +88,3 @@ const random = {
         return color
     }
 }
-
-function swap(type) {
-    projects.visibleType = type
-    projects.showVisible()
-    employees.showVisible()
-    rows.refreshCellsAll()
-}
