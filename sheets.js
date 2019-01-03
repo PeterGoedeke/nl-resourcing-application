@@ -23,8 +23,13 @@ const sheets = (function() {
         const cell = typeCell.cloneNode()
         cell.addEventListener('click', event => {
             setVisible(type)
+            Array.from(document.querySelectorAll('.typeCell')).forEach(cell => {
+                cell.classList.remove('activeSheet')
+            })
+            cell.classList.add('activeSheet')
         })
         cell.textContent = type.toUpperCase()
+        if(type == visible) cell.classList.add('activeSheet')
         container.insertBefore(cell, container.firstChild)
     }
 

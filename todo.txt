@@ -2,11 +2,8 @@ Employees can have their loading improved since we know how many cells they have
 Summation row takes employees _even when they're not working_
 
 Dynamic sidebar width
-Extra sheets
-Total rows at the bottom
 Printing
 Delete stuff as time goes on
-Leave
 Tab and automatic selection
 
 Projects:

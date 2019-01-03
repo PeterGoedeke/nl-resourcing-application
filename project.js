@@ -204,22 +204,3 @@ newInteriorsProjectButton.addEventListener('mousedown', event => {
     rows.refreshCellsSlots()
     insertAfter(container, interiorsProjectAreaSeparator)
 })
-
-
-/*
-function load() {
-    const fragment = document.createDocumentFragment()
-    for(let i = 0; i < 10; i++) {
-        projects.list.push(Object.create(projectProto))
-        projects.list[i].slots = slotsBase(projects.list[i])
-        projects.list[i].id = i
-        projects.list[i].start = Math.floor(Math.random() * 20) + columns.baseID
-        projects.list[i].end = Math.floor(Math.random() * 20) + columns.baseID + projects.list[i].start
-    }
-    for(let i = 0; i < 10; i++) {
-        fragment.appendChild(projects.list[i].batchLoad())
-    }
-    document.body.appendChild(fragment)
-}
-load()
-*/
