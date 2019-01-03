@@ -26,6 +26,7 @@ const employeeProto = {
                         if(this.cells[key] === event.target) {
                             this.joining = key
                             this.colorCells(columns.baseID, columns.endID - 1)
+                            rows.refreshCellsEmployees()
                         }
                     }
                 },
@@ -34,6 +35,7 @@ const employeeProto = {
                         if(this.cells[key] === event.target) {
                             this.leaving = key
                             this.colorCells(columns.baseID, columns.endID - 1)
+                            rows.refreshCellsEmployees()
                         }
                     }
                 },
@@ -41,6 +43,7 @@ const employeeProto = {
                     this.joining = undefined
                     this.leaving = undefined
                     this.colorCells(columns.baseID, columns.endID - 1)
+                    rows.refreshCellsEmployees()
                 },
                 () => {
                     this.toggleInteriors()
@@ -57,8 +60,9 @@ const employeeProto = {
                     input.value = this.fullTime
                     input.addEventListener('blur', event => {
                         if(Number(input.value)) {
-                            this.fullTime = input.value
+                            this.fullTime = Number(input.value)
                             this.colorCells(columns.baseID, columns.endID - 1)
+                            rows.refreshCellsEmployees()
                         }
                     })
                     input.addEventListener('focus', event => input.select())
@@ -99,6 +103,7 @@ const employeeProto = {
         employees.list.splice(employees.list.indexOf(this), 1)
         document.body.removeChild(this.container)
         this.slots.forEach(slot => slot.removeEmployee())
+        rows.refreshCellsEmployees()
     },
     assignSlot(slot) {
         const preChange = JSON.parse(JSON.stringify(this.totalWorkload))
@@ -197,6 +202,7 @@ newEmployeeButton.addEventListener('click', event => {
     const container = newEmployee.batchLoad()
     newEmployee.showVisible()
     newEmployee.init()
+    rows.refreshCellsEmployees()
     insertAfter(container, employeeAreaSeparator)
 })
 
@@ -208,6 +214,7 @@ newInteriorsEmployeeButton.addEventListener('click', event => {
     newEmployee.interiors = true
     newEmployee.showVisible()
     newEmployee.init()
+    rows.refreshCellsEmployees()
     insertAfter(container, interiorsEmployeeAreaSeparator)
 })
 

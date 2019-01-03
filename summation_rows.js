@@ -6,15 +6,15 @@ const summationRowContents = (function() {
 
 
 const rows = (function() {
-    const emptyRow = document.querySelector('.emptyRow')
-    emptyRow.style.width = columns.applicationWidth + columns.sidebarWidth + 'px'
-    emptyRow.appendChild(summationRowContents.cloneNode(true))
-    const emptyCells = Array.from(emptyRow.querySelectorAll('.slotCell'))
-
-    const workloadRow = document.querySelector('.workloadRow')
-    workloadRow.style.width = columns.applicationWidth + columns.sidebarWidth + 'px'
-    workloadRow.appendChild(summationRowContents.cloneNode(true))
-    const workloadCells = Array.from(workloadRow.querySelectorAll('.slotCell'))
+    function getRowCells(query) {
+        const row = document.querySelector(query)
+        row.style.width = columns.applicationWidth + columns.sidebarWidth + 'px'
+        row.appendChild(summationRowContents.cloneNode(true))
+        return Array.from(row.querySelectorAll('.slotCell'))
+    }
+    const emptyCells = getRowCells('.emptyRow')
+    const workloadCells = getRowCells('.workloadRow')
+    const employeeCells = getRowCells('.employeesRow')
 
     return {
         get empty() {
@@ -30,6 +30,20 @@ const rows = (function() {
                 totalWorkload.push(workload)
             }))
             return totalWorkload
+        },
+        get employees() {
+            let employeeCapability = {}
+            employees.visibleList.forEach(employee => {
+                for(let i = columns.baseID; i < columns.endID; i++) {
+                    if(employee.joining && i <= employee.joining || employee.leaving && i >= employee.leaving) continue
+                    employeeCapability[i] = employeeCapability[i] + Number(employee.fullTime) || Number(employee.fullTime)
+                }
+            })
+            for(let i = columns.baseID; i < columns.endID; i++) {
+                if(employeeCapability[i]) continue
+                employeeCapability[i] = 0
+            }
+            return [employeeCapability]
         },
         get summation() {
             let summation = []
@@ -50,6 +64,9 @@ const rows = (function() {
             this.refreshCells(emptyCells, this.totalWorkload(this.empty))
             this.refreshCells(workloadCells, this.totalWorkload(this.workload))
             // refreshCells()
+        },
+        refreshCellsEmployees() {
+            this.refreshCells(employeeCells, this.totalWorkload(this.employees))
         },
         refreshCells(cells, list) {
             for(const key in list) {
