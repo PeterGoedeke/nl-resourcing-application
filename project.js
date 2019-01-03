@@ -116,7 +116,7 @@ const projectProto = {
         this.slotLabelContainer.style.background = color
         this.label.style.background = color
         if(this.secured) this.container.style.background = color
-        else this.container.style.background = `repeating-linear-gradient(-45deg, ${color}, white 5px, ${color} 5px, white 5px)`
+        else this.container.style.background = `repeating-linear-gradient(-45deg, ${color}, ${shadeColor(color, 0.5)} 5px, ${color} 5px, ${shadeColor(color, 0.5)} 5px)`
         this.color = color
     },
     setSpan(start, end) {

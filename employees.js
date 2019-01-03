@@ -140,14 +140,14 @@ const employeeProto = {
     colorCell(cell, ID) {
         const color = (() => {
             let color
-            if(this.totalWorkload[ID] == 0) color = 'grey'
-            else if(this.totalWorkload[ID] > this.fullTime) color = 'red'
-            else if(this.totalWorkload[ID] < this.fullTime) color = 'orange'
-            else color = 'green'
+            if(this.totalWorkload[ID] == 0) color = '#808080'
+            else if(this.totalWorkload[ID] > this.fullTime) color = '#ff0000'
+            else if(this.totalWorkload[ID] < this.fullTime) color = '#ffa500'
+            else color = '#008000'
             return color
         })()
         if(!(this.joining && ID <= this.joining || this.leaving && ID >= this.leaving)) cell.style.background = color
-        else cell.style.background = `repeating-linear-gradient(-45deg, ${color}, white 5px, ${color} 5px, white 5px)`
+        else cell.style.background = `repeating-linear-gradient(-45deg, ${color}, ${shadeColor(color, 0.5)} 5px, ${color} 5px, ${shadeColor(color, 0.5)} 5px)`
     },
     get totalWorkload() {
         let totalWorkload = {}
