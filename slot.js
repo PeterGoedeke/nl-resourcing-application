@@ -81,7 +81,7 @@ const slotProto = {
     },
     notifyEmployee(preChange) {
         if(this.employee) this.employee.refreshCells(preChange)
-        else rows.refreshCellsSlots()
+        rows.refreshCellsSlots()
     },
     collectEmployeePreChange() {
         if(this.employee) return JSON.parse(JSON.stringify(this.employee.totalWorkload))

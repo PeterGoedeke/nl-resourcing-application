@@ -11,6 +11,11 @@ const rows = (function() {
     emptyRow.appendChild(summationRowContents.cloneNode(true))
     const emptyCells = Array.from(emptyRow.querySelectorAll('.slotCell'))
 
+    const workloadRow = document.querySelector('.workloadRow')
+    workloadRow.style.width = columns.applicationWidth + columns.sidebarWidth + 'px'
+    workloadRow.appendChild(summationRowContents.cloneNode(true))
+    const workloadCells = Array.from(workloadRow.querySelectorAll('.slotCell'))
+
     return {
         get empty() {
             let empty = []
@@ -22,7 +27,7 @@ const rows = (function() {
         get workload() {
             let totalWorkload = []
             projects.list.forEach(project => project.visibleSlots.map(slot => slot.workload).forEach(workload => {
-                workload.push(workload)
+                totalWorkload.push(workload)
             }))
             return totalWorkload
         },
@@ -42,13 +47,13 @@ const rows = (function() {
             return totalWorkload
         },
         refreshCellsSlots() {
-            this.refreshCells(this.totalWorkload(this.empty))
-            // refreshCells(this.workload)
+            this.refreshCells(emptyCells, this.totalWorkload(this.empty))
+            this.refreshCells(workloadCells, this.totalWorkload(this.workload))
             // refreshCells()
         },
-        refreshCells(list) {
+        refreshCells(cells, list) {
             for(const key in list) {
-                emptyCells[key - columns.baseID].textContent = sanitiseForDisplay(list[key])
+                cells[key - columns.baseID].textContent = sanitiseForDisplay(list[key])
             }
             console.log('PUT IT IN ME')
         },
