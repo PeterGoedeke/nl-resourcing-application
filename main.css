@@ -281,7 +281,8 @@ p {
 
 .row {
     height: 10px;
-    background-color: red;
+    background-color: white;
+    box-shadow: 0 0 1px 0px inset;
     display: flex;
 }
 .row > p {
@@ -300,16 +301,18 @@ p {
 .sheetTabsContainer {
     position: fixed;
     height: 10px;
-    background-color: red;
+    background-color: white;
     bottom: 0;
     z-index: 3;
 }
-.typeCell {
+.typeCell, .addSheet {
     width: 25px;
     height: 100%;
-    background-color: red;
     font-size: 10px;
     float: left;
+    text-align: center;
+    box-shadow: 0 0 1px 0px inset;
+    cursor: pointer;
 }
 
 * {

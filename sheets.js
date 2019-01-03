@@ -1,6 +1,6 @@
 const sheets = (function() {
-    let types = ['qa', 'pm', 'sm']
-    let visible = 'qa'
+    let types = ['sm', 'pm', 'qs']
+    let visible = 'qs'
     
     const typeCell = (function() {
         let typeCell = document.createElement('div')
@@ -25,8 +25,21 @@ const sheets = (function() {
             setVisible(type)
         })
         cell.textContent = type.toUpperCase()
-        container.appendChild(cell)
+        container.insertBefore(cell, container.firstChild)
     }
+
+    const addSheet = document.querySelector('.addSheet')
+    addSheet.addEventListener('click', event => {
+        inputify(addSheet, value => {
+            const newType = value.toLowerCase().trim()
+            if(!types.includes(newType) && newType) {
+                createType(newType)
+                types.push(newType)
+            }
+            addSheet.innerHTML = '+'
+        }, false)
+    })
+
     return {
         set: setVisible,
         get visible() { return visible },

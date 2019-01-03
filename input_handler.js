@@ -1,6 +1,6 @@
-function inputify(element, cb) {
+function inputify(element, cb, setText = true) {
     let input = document.createElement('input')
-    input.value = element.textContent
+    if(setText) input.value = element.textContent
     element.textContent = ''
     element.classList.add('activeInput')
     element.appendChild(input)
