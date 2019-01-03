@@ -1,5 +1,4 @@
 Employees can have their loading improved since we know how many cells they have
-Alphabetical sort moves employees out of interiors
 Summation row takes employees _even when they're not working_
 Can't see numbers over unsecured and stuff like that
 

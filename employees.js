@@ -174,8 +174,13 @@ const employees = {
             if((a.name.toLowerCase()) < (b.name.toLowerCase())) return -1
             return 1
         })
+        this.list = this.list.filter(employee => !employee.interiors).concat(this.list.filter(employee => employee.interiors))
         this.visibleList.slice().reverse().forEach(employee => {
-            insertAfter(employee.container, employeeAreaSeparator)
+            if(employee.interiors) {
+                insertAfter(employee.container, interiorsEmployeeAreaSeparator)
+            } else {
+                insertAfter(employee.container, employeeAreaSeparator)
+            }
         })
     },
     get safeList() {
