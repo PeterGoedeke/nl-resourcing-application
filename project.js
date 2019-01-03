@@ -59,7 +59,10 @@ const projectProto = {
                 pane.querySelector('.e2').style.cursor = 'initial'
             })
         })
-        this.createSlotButton.addEventListener('click', event => this.createNewSlot())
+        this.createSlotButton.addEventListener('click', event => {
+            this.createNewSlot()
+            rows.refreshCellsSlots()
+        })
 
         this.slotLabelContainer = this.container.querySelector('.projectSlotLabelContainer')
         this.body.style.left = columns.getLeftFromID(this.start)
@@ -136,7 +139,6 @@ const projectProto = {
         this.slots.push(newSlot)
         newSlot.initDisplay()
         newSlot.type = projects.visibleType
-        rows.register(newSlot, rows.empty)
         this.body.appendChild(newSlot.body)
         this.slotLabelContainer.appendChild(newSlot.label)
     },
@@ -165,7 +167,6 @@ function createProject(details) {
             project.slots.push(createSlot(null, project))
             project.slots[project.slots.length - 1].initDisplay()
             project.slots[project.slots.length - 1].type = type
-            rows.register(project.slots[project.slots.length - 1], rows.empty)
         })
     }
     return project
@@ -187,6 +188,7 @@ newProjectButton.addEventListener('mousedown', event => {
     const container = newProject.batchLoad()
     newProject.showVisible()
     projects.list.unshift(newProject)
+    rows.refreshCellsSlots()
     insertAfter(container, projectAreaSeparator)
 })
 
@@ -200,6 +202,7 @@ newInteriorsProjectButton.addEventListener('mousedown', event => {
     const index = projects.list.findIndex(project => project.interiors == true)
     if(index == -1) projects.list.push(newProject)
     else projects.list.splice(index, 0, newProject)
+    rows.refreshCellsSlots()
     insertAfter(container, interiorsProjectAreaSeparator)
 })
 
