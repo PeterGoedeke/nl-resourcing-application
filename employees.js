@@ -121,7 +121,6 @@ const employeeProto = {
             if(Number(postChange[key]) != Number(preChange[key])) {
                 this.cells[key].textContent = sanitiseForDisplay(postChange[key])
                 this.colorCell(this.cells[key], key)
-                console.log('changed')
             }
         }
     },
@@ -175,7 +174,7 @@ const employees = {
         return this.list.filter(employee => employee.type == projects.visibleType)
     },
     get visibleNames() {
-        return this.visibleList.map(employee => employee.name)
+        return this.visibleList.map(employee => employee.name).filter(name => name)
     },
     getEmployee(name) {
         return this.visibleList.find(employee => employee.name == name)
