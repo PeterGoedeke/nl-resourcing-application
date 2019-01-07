@@ -149,6 +149,24 @@ const projectProto = {
     },
     get visibleSlots() {
         return this.slots.filter(slot => slot.type == sheets.visible)
+    },
+    toJSON() {
+        const slots = this.slots.map(slot => {
+            return {
+                employeeName : slot.employee.name,
+                type: slot.type,
+                workload: slot.workload
+            }
+        })
+        return {
+            color: this.color,
+            interiors: this.interiors,
+            start: this.start,
+            end: this.end,
+            name: this.name,
+            secured: this.secured,
+            slots: slots
+        }
     }
 }
 

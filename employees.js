@@ -194,6 +194,14 @@ const employees = {
     },
     getEmployee(name) {
         return this.visibleList.find(employee => employee.name == name)
+    },
+    toJSON() {
+        return {
+            fullTime: this.fullTime,
+            interiors: this.interiors,
+            name: this.name,
+            type: this.type
+        }
     }
 }
 
