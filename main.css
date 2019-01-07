@@ -50,6 +50,7 @@ CSS starts here---------------------------------------------------------------
 */
 body {
     overflow-x: scroll;
+    position: relative;
 }
 
 .projectContainer {
@@ -154,7 +155,7 @@ input {
 .columnLine {
     background-color: black;
     width: 1px;
-    height: 100vh;
+    height: 100%;
     position: absolute;
     top: 0;
     z-index: 1;
