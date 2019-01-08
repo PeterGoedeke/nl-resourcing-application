@@ -1,6 +1,6 @@
 const sheets = (function() {
-    let types = ['sm', 'pm', 'qs']
-    let visible = 'qs'
+    let types = []
+    let visible
     
     const typeCell = (function() {
         let typeCell = document.createElement('div')
@@ -19,8 +19,9 @@ const sheets = (function() {
         createType(type)
     })
 
-    function createType(type) {
+    function createType(type, active = false) {
         const cell = typeCell.cloneNode()
+        if(active) cell.classList.add('activeSheet')
         cell.addEventListener('click', event => {
             setVisible(type)
             Array.from(document.querySelectorAll('.typeCell')).forEach(cell => {
@@ -40,6 +41,7 @@ const sheets = (function() {
             if(!types.includes(newType) && newType) {
                 createType(newType)
                 types.push(newType)
+                setVisible(newType)
             }
             addSheet.innerHTML = '+'
         }, false)
@@ -48,7 +50,8 @@ const sheets = (function() {
     return {
         set: setVisible,
         get visible() { return visible },
-        types
+        set visible(value) { visible = value },
+        types, create: createType
     }
 })()
 

@@ -81,9 +81,6 @@ const employeeProto = {
         this.label.textContent = this.name || 'Unnamed'
         return this.container
     },
-    init() {
-        employees.list.push(this)
-    },
     notifySlots() {
         this.slots.forEach(slot => slot.refreshLabel())
     },
@@ -200,6 +197,8 @@ const employees = {
     get visibleNames() {
         return this.visibleList.map(employee => employee.name).filter(name => name)
     },
+    getEmployee(name, list = this.visibleList) {
+        return list.find(employee => employee.name == name)
     }
 }
 
@@ -208,11 +207,12 @@ function createEmployee(details) {
     if(details) Object.assign(employee, details)
     else {
         employee.name = undefined
-        employee.slots = []
-        employee.cells = {}
         employee.type = sheets.visible
         employee.fullTime = 5
     }
+    employee.slots = []
+    employee.cells = {}
+    employees.list.push(employee)
     return employee
 }
 
@@ -221,7 +221,6 @@ const newEmployeeButton = document.querySelector('.newEmployee')
 newEmployeeButton.addEventListener('click', event => {
     const newEmployee = createEmployee()
     const container = newEmployee.batchLoad()
-    newEmployee.init()
     rows.refreshCellsEmployees()
     insertAfter(container, employeeAreaSeparator)
 })
@@ -232,7 +231,6 @@ newInteriorsEmployeeButton.addEventListener('click', event => {
     const newEmployee = createEmployee()
     const container = newEmployee.batchLoad()
     newEmployee.interiors = true
-    newEmployee.init()
     rows.refreshCellsEmployees()
     insertAfter(container, interiorsEmployeeAreaSeparator)
 })

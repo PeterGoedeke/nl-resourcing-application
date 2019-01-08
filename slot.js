@@ -67,9 +67,9 @@ const slotProto = {
         for(const key in this.cells) arr.push(this.cells[key])
         return arr
     },
-    assignEmployee(name) {
+    assignEmployee(name, list = employees.visibleList) {
         if(this.employee) this.employee.removeSlot(this)
-        this.employee = employees.getEmployee(name)
+        this.employee = employees.getEmployee(name, list)
         this.employee.assignSlot(this)
         rows.refreshCellsSlots()
     },
@@ -173,7 +173,12 @@ function createSlot(details, host) {
     if(!host) throw "No host provided"
     let slot = Object.create(slotProto)
     slot.host = host
-    if(details) Object.assign(slot, details)
+    if(details) {
+        Object.assign(slot, details)
+        if(details.employeeName) {
+            slot.assignEmployee(details.employeeName, employees.list.filter(employee => employee.type == slot.type))
+        }
+    }
     else {
         slot.workload = {}
         for(let i = host.start; i < host.end; i++) slot.workload[i] = 5

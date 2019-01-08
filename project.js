@@ -67,7 +67,9 @@ const projectProto = {
         this.slotLabelContainer = this.container.querySelector('.projectSlotLabelContainer')
         this.body.style.left = columns.getLeftFromID(this.start)
         this.body.style.width = columns.getWidthFromID(this.start, this.end)
-        this.slots.forEach(slot => slot.initDisplay())
+        this.slots.forEach(slot => {
+            slot.initDisplay()
+        })
         this.visibleSlots.forEach(slot => {
             this.body.appendChild(slot.body)
             this.slotLabelContainer.appendChild(slot.label)
@@ -75,6 +77,15 @@ const projectProto = {
         this.label.textContent = this.name || 'Unnamed'
         this.setColor(this.color)
         return this.container
+    },
+    init() {
+        if(this.interiors) {
+            const index = projects.list.findIndex(project => project.interiors == true)
+            if(index == -1) projects.list.push(this)
+            else projects.list.splice(index, 0, this)
+        } else {
+            projects.list.unshift(this)
+        }
     },
     toggleInteriors() {
         if(this.interiors) {
@@ -153,7 +164,7 @@ const projectProto = {
     toJSON() {
         const slots = this.slots.map(slot => {
             return {
-                employeeName : slot.employee.name,
+                employeeName: slot.employee && slot.employee.name || null,
                 type: slot.type,
                 workload: slot.workload
             }
@@ -172,7 +183,11 @@ const projectProto = {
 
 function createProject(details) {
     let project = Object.create(projectProto)
-    if(details) Object.assign(project, details)
+    project.slots = []
+    if(details) {
+        Object.assign(project, details)
+        project.slots = project.slots.map(slot => createSlot(slot, project))
+    }
     else {
         project.start = columns.leftmostVisibleColumn + 2
         project.end = columns.rightmostVisibleColumn - 2
@@ -180,10 +195,8 @@ function createProject(details) {
         project.secured = true
         project.color = random.color()
         
-        project.slots = []
         sheets.types.forEach(type => {
             project.slots.push(createSlot(null, project))
-            project.slots[project.slots.length - 1].initDisplay()
             project.slots[project.slots.length - 1].type = type
         })
     }
@@ -204,7 +217,7 @@ newProjectButton.addEventListener('mousedown', event => {
     const newProject = createProject()
     const container = newProject.batchLoad()
     newProject.showVisible()
-    projects.list.unshift(newProject)
+    newProject.init()
     rows.refreshCellsSlots()
     insertAfter(container, projectAreaSeparator)
 })
@@ -216,9 +229,7 @@ newInteriorsProjectButton.addEventListener('mousedown', event => {
     const container = newProject.batchLoad()
     newProject.interiors = true
     newProject.showVisible()
-    const index = projects.list.findIndex(project => project.interiors == true)
-    if(index == -1) projects.list.push(newProject)
-    else projects.list.splice(index, 0, newProject)
+    newProject.init()
     rows.refreshCellsSlots()
     insertAfter(container, interiorsProjectAreaSeparator)
 })
