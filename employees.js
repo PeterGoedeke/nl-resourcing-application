@@ -159,6 +159,14 @@ const employeeProto = {
             totalWorkload[i] = 0
         }
         return totalWorkload
+    },
+    toJSON() {
+        return {
+            fullTime: this.fullTime,
+            interiors: this.interiors,
+            name: this.name,
+            type: this.type
+        }
     }
 }
 
@@ -192,16 +200,6 @@ const employees = {
     get visibleNames() {
         return this.visibleList.map(employee => employee.name).filter(name => name)
     },
-    getEmployee(name) {
-        return this.visibleList.find(employee => employee.name == name)
-    },
-    toJSON() {
-        return {
-            fullTime: this.fullTime,
-            interiors: this.interiors,
-            name: this.name,
-            type: this.type
-        }
     }
 }
 
