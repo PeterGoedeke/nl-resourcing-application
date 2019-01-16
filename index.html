@@ -8,88 +8,45 @@
     <link href="main.css" rel="stylesheet">
 </head>
 <body>
-    <div class="mainWindow row">
-        <div class="topMargin margin row">
-            <div class="topAxisContainer"></div>
-        </div>
-        <div class="separator row top"></div>
-        <div class="sidebar">
-            <div class="leftSidebar">
-                
-                <div class="createProject button">+</div>
-                <div class="separator mid ls"></div>
-                <div class="leaveLabel">Leave</div>
-                <div class="separator mid es"></div>
-                <div class="typeLabel"></div>
-                <div class="createEmployee button">+</div>
-                <div class="separator mid"></div>
-
-                <div class="emptyRow">
-                    <div class="positioner total"></div>
-                </div>
-                <div class="totalWorkloadRow">
-                    <div class="positioner total"></div>
-                </div>
-                <div class="totalEmployeesRow">
-                    <div class="positioner total"></div>
-                </div>
-                <div class="surplusRow">
-                    <div class="positioner total"></div>
-                </div>
-                <div class="emptyLabel">Empty</div>
-                <div class="totalWorkloadLabel">Workload</div>
-                <div class="totalEmployeesLabel">Employees</div>
-                <div class="surplusLabel">S / D</div>
-                <div class="totalTypeLabel"></div>
-            </div>
-            <div class="rightSidebar">
-                <div class="employeeContainer"></div>
-            </div>
-        </div>
-        
-        <div class="background">
-            <div class="backgroundPositioner"></div>
-        </div>
-        <div class="contentPane">
-            <div class="positioner main"></div>
-        </div>
+    <div class="header"></div>
+    <div class="projectAreaSeparator separator">
+        <div class="newProject button">+</div>
+        <p>Projects</p>
     </div>
-   
-    <div class="separator row bottom"></div>
-    
-    <div class="margin row bottomMargin">
-
-        <div class="addType button marginElement">+</div>
-        <div class="zoomContainer marginElement">
-            <div class="zoomOut button marginElement">-</div>
-            <div class="zoomDisplay marginElement"></div>
-            <div class="zoomIn button marginElement">+</div>
-        </div>
+    <div class="interiorsProjectAreaSeparator separator">
+        <div class="newInteriorsProject button">+</div>
+        <p>Interiors Projects</p>
     </div>
-
+    <div class="employeeAreaSeparator separator">
+        <div class="newEmployee button">+</div>
+        <div class="sort button">ABC</div>
+        <p>Employees</p>
+    </div>
+    <div class="interiorsEmployeeAreaSeparator separator">
+        <div class="newInteriorsEmployee button">+</div>
+        <p>Interiors Employees</p>
+    </div>
+    <div class="emptyRow row"><p>Empty Row</p></div>
+    <div class="workloadRow row"><p>Workload Row</p></div>
+    <div class="employeesRow row"><p>Employees Row</p></div>
+    <div class="summationRow row"><p>Summation Row</p></div>
+    <div class="sheetTabsContainer">
+        <div class="addSheet">+</div>
+    </div>
     <footer>
-        <script src="./frameworks/errors.js"></script>
-        <script src="./objects/types.js"></script>
-        <script src="./frameworks/screenquery.js"></script>
-        <script src="./frameworks/screenmanipulation.js"></script>
-        <script src="./frameworks/leave.js"></script>
-        <script src="./frameworks/state.js"></script>
-        <script src="./objects/employeeslot.js"></script>
-        <script src="./frameworks/dragframework.js"></script>
-        <script src="./frameworks/dialogueframework.js"></script>
-        <script src="./frameworks/markframework.js"></script>
-        <script src="./objects/projects.js"></script>
-        <script src="./objects/groups.js"></script>
-        <script src="./objects/employees.js"></script>
-        <script src="./frameworks/dialogues.js"></script>
-        <script src="./objects/slot.js"></script>
-        <script src="./frameworks/save.js"></script>
-        <script src="./frameworks/load.js"></script>
-        <script src="./frameworks/undo.js"></script>
-        <script src="./frameworks/zoom.js"></script>
-        <script src="./frameworks/tab.js"></script>
-        <script src="./frameworks/sidebar.js"></script>
+        <script src="./test.js"></script>
+        <script src="./element_prototypes.js"></script>
+        <script src="./columns.js"></script>
+        <script src="./slot.js"></script>
+        <script src="./project.js"></script>
+        <script src="./employees.js"></script>
+        <script src="./drag_handler.js"></script>
+        <script src="./input_handler.js"></script>
+        <script src="./context_menu_handler.js"></script>
+        <script src="./summation_rows.js"></script>
+        <script src="./sheets.js"></script>
+        <script src="./load.js"></script>
+        <script src="./save.js"></script>
     </footer>
 </body>
-
 </html>

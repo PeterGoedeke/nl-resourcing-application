@@ -5,10 +5,10 @@ function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 1366, height: 768, icon: './favicon.png'})
   mainWindow.setMenu(null)
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('./index.html')
 
   //Open the DevTools
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', function () {
     // Dereference the window object, usually you would store windows
