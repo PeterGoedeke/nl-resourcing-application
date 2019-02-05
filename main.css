@@ -317,6 +317,11 @@ p {
     background-color: lightblue;
 }
 
+.invalid {
+    transition: background-color 0.2s ease-in-out;
+    background-color: rgb(255, 158, 158);
+}
+
 * {
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */

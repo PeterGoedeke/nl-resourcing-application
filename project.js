@@ -54,7 +54,10 @@ const projectProto = {
                 let input = document.createElement('input')
                 input.type = 'color'
                 input.style.cursor = 'pointer'
-                input.addEventListener('change', event => this.setColor(input.value))
+                input.addEventListener('change', event => {
+                    this.setColor(input.value)
+                    save.projects()
+                })
                 pane.querySelector('.e2').appendChild(input)
                 pane.querySelector('.e2').style.cursor = 'initial'
             })
@@ -97,18 +100,21 @@ const projectProto = {
             this.interiors = true
             insertAfter(this.container, interiorsProjectAreaSeparator)
         }
+        save.projects()
     },
     moveUp() {
         if(this.container.previousSibling.className == 'projectContainer') {
             this.container.parentNode.insertBefore(this.container, this.container.previousSibling)
             projects.list.move(projects.list.indexOf(this), projects.list.indexOf(this) - 1)
         }
+        save.projects()
     },
     moveDown() {
         if(this.container.nextSibling.className == 'projectContainer') {
             insertAfter(this.container, this.container.nextSibling)
             projects.list.move(projects.list.indexOf(this), projects.list.indexOf(this) + 1)
         }
+        save.projects()
     },
     showVisible() {
         this.body.innerHTML = ''
@@ -144,6 +150,8 @@ const projectProto = {
             this.end = end
         }
         this.body.style.width = columns.getWidthFromID(this.start, this.end)
+        save.projects()
+        //clash
     },
     createNewSlot() {
         let newSlot = createSlot(null, this)
@@ -152,14 +160,21 @@ const projectProto = {
         newSlot.type = sheets.visible
         this.body.appendChild(newSlot.body)
         this.slotLabelContainer.appendChild(newSlot.label)
+        save.projects()
+        //clash
     },
     delete() {
         projects.list.splice(projects.list.indexOf(this), 1)
         document.body.removeChild(this.container)
         this.slots.forEach(slot => slot.decouple())
+        save.projects()
+        //clash
     },
     get visibleSlots() {
-        return this.slots.filter(slot => slot.type == sheets.visible)
+        return this.slotsByType(sheets.visible)
+    },
+    slotsByType(type) {
+        return this.slots.filter(slot => slot.type == type)
     },
     toJSON() {
         const slots = this.slots.map(slot => {
@@ -187,6 +202,13 @@ function createProject(details) {
     if(details) {
         Object.assign(project, details)
         project.slots = project.slots.map(slot => createSlot(slot, project))
+
+        if(project.start < columns.leftmostVisibleColumn) project.start = columns.leftmostVisibleColumn
+        project.slots.forEach(slot => {
+            if(slot.start < columns.leftmostVisibleColumn) {
+                for(const key in slot.workload) if(key < columns.leftmostVisibleColumn) delete key
+            }
+        })
     }
     else {
         project.start = columns.leftmostVisibleColumn + 2
@@ -214,22 +236,34 @@ const projects = {
 const projectAreaSeparator = document.querySelector('.projectAreaSeparator')
 const newProjectButton = document.querySelector('.newProject')
 newProjectButton.addEventListener('mousedown', event => {
-    const newProject = createProject()
-    const container = newProject.batchLoad()
-    newProject.showVisible()
-    newProject.init()
-    rows.refreshCellsSlots()
-    insertAfter(container, projectAreaSeparator)
+    if(sheets.types.length > 0) {
+        const newProject = createProject()
+        const container = newProject.batchLoad()
+        newProject.showVisible()
+        newProject.init()
+        rows.refreshCellsSlots()
+        insertAfter(container, projectAreaSeparator)
+        save.projects()
+    } else {
+        newProjectButton.classList.add('invalid')
+        setTimeout(() => newProjectButton.classList.remove('invalid'), 200)
+    }
 })
 
 const interiorsProjectAreaSeparator = document.querySelector('.interiorsProjectAreaSeparator')
 const newInteriorsProjectButton = document.querySelector('.newInteriorsProject')
 newInteriorsProjectButton.addEventListener('mousedown', event => {
-    const newProject = createProject()
-    const container = newProject.batchLoad()
-    newProject.interiors = true
-    newProject.showVisible()
-    newProject.init()
-    rows.refreshCellsSlots()
-    insertAfter(container, interiorsProjectAreaSeparator)
+    if(sheets.types.length > 0) {
+        const newProject = createProject()
+        const container = newProject.batchLoad()
+        newProject.interiors = true
+        newProject.showVisible()
+        newProject.init()
+        rows.refreshCellsSlots()
+        insertAfter(container, interiorsProjectAreaSeparator)
+        save.projects()
+    } else {
+        newInteriorsProjectButton.classList.add('invalid')
+        setTimeout(() => newInteriorsProjectButton.classList.remove('invalid'), 200)
+    }
 })

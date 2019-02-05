@@ -5,18 +5,19 @@ const save = {
         this.sheets()
     },
     projects() {
-        fs.writeFile('./data/projects.json', JSON.stringify(projects.list, null, 4), 'utf8', function(err) {
-            if(err) throw err
-        })
+        makeSaveRequest(JSON.stringify({data: projects.list, type: 'projects'}))
     },
     employees() {
-        fs.writeFile('./data/employees.json', JSON.stringify(employees.list, null, 4), 'utf8', function(err) {
-            if(err) throw err
-        })
+        makeSaveRequest(JSON.stringify({data: employees.list, type: 'employees'}))
     },
     sheets() {
-        fs.writeFile('./data/sheets.json', JSON.stringify(sheets.types, null, 4), 'utf8', function(err) {
-            if(err) throw err
-        })
+        makeSaveRequest(JSON.stringify({data: sheets.types, type: 'sheets'}))
     }
+}
+
+function makeSaveRequest(data) {
+    const http = new XMLHttpRequest()
+    http.open('POST', window.location.href)
+    http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+    http.send(data)
 }

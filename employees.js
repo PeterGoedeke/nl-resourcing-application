@@ -29,6 +29,7 @@ const employeeProto = {
                             rows.refreshCellsEmployees()
                         }
                     }
+                    save.employees()
                 },
                 () => {
                     for(const key in this.cells) {
@@ -38,12 +39,14 @@ const employeeProto = {
                             rows.refreshCellsEmployees()
                         }
                     }
+                    save.employees()
                 },
                 () => {
                     this.joining = undefined
                     this.leaving = undefined
                     this.colorCells(columns.baseID, columns.endID - 1)
                     rows.refreshCellsEmployees()
+                    save.employees()
                 },
                 () => {
                     this.toggleInteriors()
@@ -63,6 +66,7 @@ const employeeProto = {
                             this.fullTime = Number(input.value)
                             this.colorCells(columns.baseID, columns.endID - 1)
                             rows.refreshCellsEmployees()
+                            save.employees()
                         }
                     })
                     input.addEventListener('focus', event => input.select())
@@ -103,22 +107,27 @@ const employeeProto = {
             this.interiors = true
             insertAfter(this.container, interiorsEmployeeAreaSeparator)
         }
+        save.employees()
     },
     delete() {
         employees.list.splice(employees.list.indexOf(this), 1)
         document.body.removeChild(this.container)
         this.slots.forEach(slot => slot.removeEmployee())
         rows.refreshCellsEmployees()
+        save.employees()
+        //clash
     },
     assignSlot(slot) {
         const preChange = JSON.parse(JSON.stringify(this.totalWorkload))
         this.slots.push(slot)
         this.refreshCells(preChange)
+        save.employees()
     },
     removeSlot(slot) {
         const preChange = JSON.parse(JSON.stringify(this.totalWorkload))
         this.slots.splice(this.slots.indexOf(slot), 1)
         this.refreshCells(preChange)
+        save.employees()
     },
     refreshCells(preChange) {
         const postChange = this.totalWorkload
@@ -187,6 +196,7 @@ const employees = {
                 insertAfter(employee.container, employeeAreaSeparator)
             }
         })
+        save.employees()
     },
     get safeList() {
         return this.list.filter(employee => employee.name)
@@ -196,6 +206,9 @@ const employees = {
     },
     get visibleNames() {
         return this.visibleList.map(employee => employee.name).filter(name => name)
+    },
+    byType(type) {
+        return this.list.filter(employee => employee.type == type)
     },
     getEmployee(name, list = this.visibleList) {
         return list.find(employee => employee.name == name)
@@ -219,20 +232,32 @@ function createEmployee(details) {
 const employeeAreaSeparator = document.querySelector('.employeeAreaSeparator')
 const newEmployeeButton = document.querySelector('.newEmployee')
 newEmployeeButton.addEventListener('click', event => {
-    const newEmployee = createEmployee()
-    const container = newEmployee.batchLoad()
-    rows.refreshCellsEmployees()
-    insertAfter(container, employeeAreaSeparator)
+    if(sheets.types.length > 0) {
+        const newEmployee = createEmployee()
+        const container = newEmployee.batchLoad()
+        rows.refreshCellsEmployees()
+        insertAfter(container, employeeAreaSeparator)
+        save.employees()
+    } else {
+        newEmployeeButton.classList.add('invalid')
+        setTimeout(() => newEmployeeButton.classList.remove('invalid'), 200)
+    }
 })
 
 const interiorsEmployeeAreaSeparator = document.querySelector('.interiorsEmployeeAreaSeparator')
 const newInteriorsEmployeeButton = document.querySelector('.newInteriorsEmployee')
 newInteriorsEmployeeButton.addEventListener('click', event => {
-    const newEmployee = createEmployee()
-    const container = newEmployee.batchLoad()
-    newEmployee.interiors = true
-    rows.refreshCellsEmployees()
-    insertAfter(container, interiorsEmployeeAreaSeparator)
+    if(sheets.types.length > 0) {
+        const newEmployee = createEmployee()
+        const container = newEmployee.batchLoad()
+        newEmployee.interiors = true
+        rows.refreshCellsEmployees()
+        insertAfter(container, interiorsEmployeeAreaSeparator)
+        save.employees()
+    } else {
+        newInteriorsEmployeeButton.classList.add('invalid')
+        setTimeout(() => newInteriorsEmployeeButton.classList.remove('invalid'), 200)
+    }
 })
 
 const sortButton = document.querySelector('.sort')
