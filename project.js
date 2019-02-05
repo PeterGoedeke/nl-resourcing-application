@@ -23,6 +23,7 @@ const projectProto = {
                 this.label.innerHTML = newLabel || 'Unnamed'
                 this.name = newLabel
                 this.label.style.height = 'initial'
+                save.projects()
             })
         })
         this.container.addEventListener('contextmenu', event => {
@@ -65,6 +66,7 @@ const projectProto = {
         this.createSlotButton.addEventListener('click', event => {
             this.createNewSlot()
             rows.refreshCellsSlots()
+            save.projects()
         })
 
         this.slotLabelContainer = this.container.querySelector('.projectSlotLabelContainer')
@@ -160,8 +162,6 @@ const projectProto = {
         newSlot.type = sheets.visible
         this.body.appendChild(newSlot.body)
         this.slotLabelContainer.appendChild(newSlot.label)
-        save.projects()
-        //clash
     },
     delete() {
         projects.list.splice(projects.list.indexOf(this), 1)

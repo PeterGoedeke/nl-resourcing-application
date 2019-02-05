@@ -2,7 +2,7 @@
 - Accounts
 - Different saves
 - Renaming sheets
-- 
+- Order of projects can flip
 
 Employees can have their loading improved since we know how many cells they have
 Summation row takes employees _even when they're not working_

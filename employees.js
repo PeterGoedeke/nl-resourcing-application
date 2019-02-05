@@ -13,6 +13,8 @@ const employeeProto = {
                     this.label.innerHTML = newName
                     this.name = newName
                     this.notifySlots()
+                    save.employees()
+                    save.projects()
                 } else {
                     this.label.innerHTML = this.name || 'Unnamed'
                 }
@@ -121,7 +123,6 @@ const employeeProto = {
         const preChange = JSON.parse(JSON.stringify(this.totalWorkload))
         this.slots.push(slot)
         this.refreshCells(preChange)
-        save.employees()
     },
     removeSlot(slot) {
         const preChange = JSON.parse(JSON.stringify(this.totalWorkload))
