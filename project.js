@@ -229,24 +229,34 @@ const projects = {
 const projectAreaSeparator = document.querySelector('.projectAreaSeparator')
 const newProjectButton = document.querySelector('.newProject')
 newProjectButton.addEventListener('mousedown', event => {
-    const newProject = createProject()
-    const container = newProject.batchLoad()
-    newProject.showVisible()
-    newProject.init()
-    rows.refreshCellsSlots()
-    insertAfter(container, projectAreaSeparator)
-    save.projects()
+    if(sheets.types.length > 0) {
+        const newProject = createProject()
+        const container = newProject.batchLoad()
+        newProject.showVisible()
+        newProject.init()
+        rows.refreshCellsSlots()
+        insertAfter(container, projectAreaSeparator)
+        save.projects()
+    } else {
+        newProjectButton.classList.add('invalid')
+        setTimeout(() => newProjectButton.classList.remove('invalid'), 200)
+    }
 })
 
 const interiorsProjectAreaSeparator = document.querySelector('.interiorsProjectAreaSeparator')
 const newInteriorsProjectButton = document.querySelector('.newInteriorsProject')
 newInteriorsProjectButton.addEventListener('mousedown', event => {
-    const newProject = createProject()
-    const container = newProject.batchLoad()
-    newProject.interiors = true
-    newProject.showVisible()
-    newProject.init()
-    rows.refreshCellsSlots()
-    insertAfter(container, interiorsProjectAreaSeparator)
-    save.projects()
+    if(sheets.types.length > 0) {
+        const newProject = createProject()
+        const container = newProject.batchLoad()
+        newProject.interiors = true
+        newProject.showVisible()
+        newProject.init()
+        rows.refreshCellsSlots()
+        insertAfter(container, interiorsProjectAreaSeparator)
+        save.projects()
+    } else {
+        newInteriorsProjectButton.classList.add('invalid')
+        setTimeout(() => newInteriorsProjectButton.classList.remove('invalid'), 200)
+    }
 })

@@ -232,22 +232,32 @@ function createEmployee(details) {
 const employeeAreaSeparator = document.querySelector('.employeeAreaSeparator')
 const newEmployeeButton = document.querySelector('.newEmployee')
 newEmployeeButton.addEventListener('click', event => {
-    const newEmployee = createEmployee()
-    const container = newEmployee.batchLoad()
-    rows.refreshCellsEmployees()
-    insertAfter(container, employeeAreaSeparator)
-    save.employees()
+    if(sheets.types.length > 0) {
+        const newEmployee = createEmployee()
+        const container = newEmployee.batchLoad()
+        rows.refreshCellsEmployees()
+        insertAfter(container, employeeAreaSeparator)
+        save.employees()
+    } else {
+        newEmployeeButton.classList.add('invalid')
+        setTimeout(() => newEmployeeButton.classList.remove('invalid'), 200)
+    }
 })
 
 const interiorsEmployeeAreaSeparator = document.querySelector('.interiorsEmployeeAreaSeparator')
 const newInteriorsEmployeeButton = document.querySelector('.newInteriorsEmployee')
 newInteriorsEmployeeButton.addEventListener('click', event => {
-    const newEmployee = createEmployee()
-    const container = newEmployee.batchLoad()
-    newEmployee.interiors = true
-    rows.refreshCellsEmployees()
-    insertAfter(container, interiorsEmployeeAreaSeparator)
-    save.employees()
+    if(sheets.types.length > 0) {
+        const newEmployee = createEmployee()
+        const container = newEmployee.batchLoad()
+        newEmployee.interiors = true
+        rows.refreshCellsEmployees()
+        insertAfter(container, interiorsEmployeeAreaSeparator)
+        save.employees()
+    } else {
+        newInteriorsEmployeeButton.classList.add('invalid')
+        setTimeout(() => newInteriorsEmployeeButton.classList.remove('invalid'), 200)
+    }
 })
 
 const sortButton = document.querySelector('.sort')
