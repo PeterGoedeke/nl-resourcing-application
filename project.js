@@ -54,7 +54,10 @@ const projectProto = {
                 let input = document.createElement('input')
                 input.type = 'color'
                 input.style.cursor = 'pointer'
-                input.addEventListener('change', event => this.setColor(input.value))
+                input.addEventListener('change', event => {
+                    this.setColor(input.value)
+                    save.projects()
+                })
                 pane.querySelector('.e2').appendChild(input)
                 pane.querySelector('.e2').style.cursor = 'initial'
             })
@@ -97,18 +100,21 @@ const projectProto = {
             this.interiors = true
             insertAfter(this.container, interiorsProjectAreaSeparator)
         }
+        save.projects()
     },
     moveUp() {
         if(this.container.previousSibling.className == 'projectContainer') {
             this.container.parentNode.insertBefore(this.container, this.container.previousSibling)
             projects.list.move(projects.list.indexOf(this), projects.list.indexOf(this) - 1)
         }
+        save.projects()
     },
     moveDown() {
         if(this.container.nextSibling.className == 'projectContainer') {
             insertAfter(this.container, this.container.nextSibling)
             projects.list.move(projects.list.indexOf(this), projects.list.indexOf(this) + 1)
         }
+        save.projects()
     },
     showVisible() {
         this.body.innerHTML = ''
@@ -144,6 +150,8 @@ const projectProto = {
             this.end = end
         }
         this.body.style.width = columns.getWidthFromID(this.start, this.end)
+        save.projects()
+        //clash
     },
     createNewSlot() {
         let newSlot = createSlot(null, this)
@@ -152,11 +160,15 @@ const projectProto = {
         newSlot.type = sheets.visible
         this.body.appendChild(newSlot.body)
         this.slotLabelContainer.appendChild(newSlot.label)
+        save.projects()
+        //clash
     },
     delete() {
         projects.list.splice(projects.list.indexOf(this), 1)
         document.body.removeChild(this.container)
         this.slots.forEach(slot => slot.decouple())
+        save.projects()
+        //clash
     },
     get visibleSlots() {
         return this.slotsByType(sheets.visible)
@@ -223,6 +235,7 @@ newProjectButton.addEventListener('mousedown', event => {
     newProject.init()
     rows.refreshCellsSlots()
     insertAfter(container, projectAreaSeparator)
+    save.projects()
 })
 
 const interiorsProjectAreaSeparator = document.querySelector('.interiorsProjectAreaSeparator')
@@ -235,4 +248,5 @@ newInteriorsProjectButton.addEventListener('mousedown', event => {
     newProject.init()
     rows.refreshCellsSlots()
     insertAfter(container, interiorsProjectAreaSeparator)
+    save.projects()
 })

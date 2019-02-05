@@ -49,6 +49,7 @@ http.createServer(function(req, res) {
             const data = JSON.parse(body)
             save(data.type, data.data)
         })
+        res.end()
     }
 }).listen(3000)
 
