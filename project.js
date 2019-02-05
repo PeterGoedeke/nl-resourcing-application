@@ -79,6 +79,9 @@ const projectProto = {
             this.body.appendChild(slot.body)
             this.slotLabelContainer.appendChild(slot.label)
         })
+        this.startHandle.style.left = '-5px'
+        this.endHandle.style.right = '-5px'
+
         this.label.textContent = this.name || 'Unnamed'
         this.setColor(this.color)
         return this.container
