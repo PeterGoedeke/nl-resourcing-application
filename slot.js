@@ -9,11 +9,13 @@ const slotProto = {
         addDragging(this.startHandle, () => columns.getLeftFromID(this.start), id => {
             this.alterSpan(id - this.start, 0)
             this.startHandle.style.left = '0px'
+            save.projects()
         })
         addDragging(this.endHandle, () => columns.getLeftFromID(this.start), id => {
             this.alterSpan(0, id - this.end)
             this.endHandle.style.right = '0px'
             this.endHandle.style.left = 'initial'
+            save.projects()
         })
 
         this.body.addEventListener('click', event => {
@@ -30,6 +32,7 @@ const slotProto = {
                     event.target.innerHTML = sanitiseForDisplay(newWorkload)
                     event.target.style.width = 'initial'
                     this.notifyEmployee(preChange)
+                    save.projects()
                 })
             }
         })
@@ -38,6 +41,7 @@ const slotProto = {
                 () => {
                     this.delete()
                     contextMenus.close()
+                    save.projects()
                 }], event)
         })
         
@@ -49,6 +53,8 @@ const slotProto = {
                     this.removeEmployee()
                 }
                 this.label.innerHTML = attemptedAssignment || 'Empty'
+                save.projects()
+                save.employees()
             }, employees.visibleNames)
 
         })
@@ -78,6 +84,7 @@ const slotProto = {
         this.employee = undefined
         this.label.textContent = 'Empty'
         rows.refreshCellsSlots()
+        save.projects()
     },
     notifyEmployee(preChange) {
         if(this.employee) this.employee.refreshCells(preChange)
