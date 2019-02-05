@@ -18,8 +18,13 @@ const contextMenus = (function() {
             })
             contextPane.appendChild(menu)
     
-            contextPane.style.left = event.pageX + 'px'
-            contextPane.style.top = event.pageY + 'px'
+            if(event.pageX + 125 < window.innerWidth + window.pageXOffset) {
+                contextPane.style.left = event.pageX + 'px'
+            } else contextPane.style.left = event.pageX - 125 + 'px'
+            if(event.pageY + 150 < window.innerHeight + window.pageYOffset) {
+                contextPane.style.top = event.pageY + 'px'
+            } else contextPane.style.top = event.pageY - 150 + 'px'
+            
             if(beforeOpen) beforeOpen(contextPane)
             document.body.appendChild(contextPane)
     
