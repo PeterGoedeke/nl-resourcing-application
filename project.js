@@ -202,6 +202,13 @@ function createProject(details) {
     if(details) {
         Object.assign(project, details)
         project.slots = project.slots.map(slot => createSlot(slot, project))
+
+        if(project.start < columns.leftmostVisibleColumn) project.start = columns.leftmostVisibleColumn
+        project.slots.forEach(slot => {
+            if(slot.start < columns.leftmostVisibleColumn) {
+                for(const key in slot.workload) if(key < columns.leftmostVisibleColumn) delete key
+            }
+        })
     }
     else {
         project.start = columns.leftmostVisibleColumn + 2
