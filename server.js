@@ -24,12 +24,13 @@ http.createServer(function(req, res) {
         }
         else if(req.url.match(/main$/)) {
             checkFiles().then(function(value) {
-                if(checkFiles().every)
-                console.log('hmm')
-                loadFiles().then(function(value) {
-                    res.writeHead(200, {'Content-Type': 'text/js'})
-                    res.end(JSON.stringify(value))
-                }, function(err) { throw err })
+                if(value.every(isTrue => isTrue)) {
+                    loadFiles().then(function(value) {
+                        res.writeHead(200, {'Content-Type': 'text/js'})
+                        res.end(JSON.stringify(value))
+                    }, function(err) { throw err })
+                }
+                else createFiles()
             }, createFiles)
         }
         else {
@@ -62,15 +63,15 @@ function loadFiles() {
     return Promise.all([
         new Promise((resolve, reject) => fs.readFile('./data/sheets.json', 'utf8', (err, data) => {
             if(err) reject(err)
-            resolve(JSON.parse(data))
+            resolve(data ? JSON.parse(data) : '')
         })),
         new Promise((resolve, reject) => fs.readFile('./data/projects.json', 'utf8', (err, data) => {
             if(err) reject(err)
-            resolve(JSON.parse(data))
+            resolve(data ? JSON.parse(data) : '')
         })),
         new Promise((resolve, reject) => fs.readFile('./data/employees.json', 'utf8', (err, data) => {
             if(err) reject(err)
-            resolve(JSON.parse(data))
+            resolve(data ? JSON.parse(data) : '')
         }))
     ])
 }
@@ -85,8 +86,6 @@ function createFiles() {
     fs.writeFile('./data/sheets.json', '', 'utf8', function(err) {
         if(err) throw err
     })
-
-    console.log('did it ya boy')
 }
 
 function save(type, data) {
