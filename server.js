@@ -37,8 +37,20 @@ http.createServer(function(req, res) {
                 res.writeHead(200, {'Content-Type': 'text/html'})
                 res.end(data)
             })
+        }
+    }
+    else if(req.method == 'POST') {
+        let body = ''
+        req.on('data', function(chunk) {
+            body += chunk
+        })
+        req.on('end', function() {
+            const data = JSON.parse(body)
+            save(data.type, data.data)
+        })
     }
 }).listen(3000)
+
 function checkFiles() {
     return Promise.all([
         new Promise(resolve => fs.exists('./data/projects.json', exists => resolve(exists))),
@@ -75,4 +87,10 @@ function createFiles() {
     })
 
     console.log('did it ya boy')
+}
+
+function save(type, data) {
+    fs.writeFile(`./data/${type}.json`, JSON.stringify(data, null, 4), 'utf8', function(err) {
+        if(err) throw err
+    })
 }
