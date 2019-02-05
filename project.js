@@ -159,7 +159,10 @@ const projectProto = {
         this.slots.forEach(slot => slot.decouple())
     },
     get visibleSlots() {
-        return this.slots.filter(slot => slot.type == sheets.visible)
+        return this.slotsByType(sheets.visible)
+    },
+    slotsByType(type) {
+        return this.slots.filter(slot => slot.type == type)
     },
     toJSON() {
         const slots = this.slots.map(slot => {

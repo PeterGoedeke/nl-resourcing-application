@@ -5,7 +5,8 @@ const contextMenus = (function() {
     const contextMenus = [
         createContextMenu([['./assets/lock.png', 'Toggle Security'], 'Toggle Interiors', 'Set Colour:', 'Move up', 'Move down', 'Delete']),
         createContextMenu(['Delete']),
-        createContextMenu(['Set Joining Date', 'Set Leaving Date', 'Clear Join & Leave', 'Toggle Interiors', 'Full-time:', 'Delete'])
+        createContextMenu(['Set Joining Date', 'Set Leaving Date', 'Clear Join & Leave', 'Toggle Interiors', 'Full-time:', 'Delete']),
+        createContextMenu(['Delete'])
     ]
     let active = false
     function openContextMenu(index, cbs, event, beforeOpen) {

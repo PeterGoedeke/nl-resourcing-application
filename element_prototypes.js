@@ -79,3 +79,9 @@ const employeeContainer = (function() {
     container.appendChild(body)
     return container
 })()
+
+const typeCell = (function() {
+    let typeCell = document.createElement('div')
+    typeCell.className = 'typeCell'
+    return typeCell
+})()

@@ -197,6 +197,9 @@ const employees = {
     get visibleNames() {
         return this.visibleList.map(employee => employee.name).filter(name => name)
     },
+    byType(type) {
+        return this.list.filter(employee => employee.type == type)
+    },
     getEmployee(name, list = this.visibleList) {
         return list.find(employee => employee.name == name)
     }

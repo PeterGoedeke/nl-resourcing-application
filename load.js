@@ -20,13 +20,12 @@ function makeFileRequest() {
 
 async function load() {
     const res = await makeFileRequest()
-    console.log(res)
     if(res.status == 200) {
         const data = JSON.parse(res.data)
         const sheetsData = data[0]
         if(sheetsData) {
-            sheetsData.forEach((type, i) => sheets.create(type, i == 0 ? true : false))
-            sheets.visible = sheetsData[0]
+            sheetsData.forEach((type) => sheets.add(type))
+            sheets.set(sheets.types[0])
         
             const employeeData = data[2]
             if(employeeData) {
