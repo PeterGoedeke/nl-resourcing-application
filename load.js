@@ -41,7 +41,7 @@ async function load() {
             if(projectData) {
                 projectData.forEach(project => {
                     const newProject = createProject(project)
-                    newProject.init()
+                    projects.list.push(newProject)
             
                     const container = newProject.batchLoad()
                     if(newProject.interiors) interiorsProjectFragment.appendChild(container)
