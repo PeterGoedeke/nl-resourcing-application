@@ -144,7 +144,7 @@ const projectProto = {
     setSpan(start, end) {
         if(start >= this.end) start = this.end - 1
         if(end <= this.start) end = this.start + 1
-        if(start <= columns.baseID) start = columns.baseID + 1
+        if(start <= columns.baseID  && this.start != start) start = columns.baseID + 1
         if(this.start != start) {
             this.slots.forEach(slot => slot.alterSpan(start - this.start, 0, start))
             this.body.style.left = columns.getLeftFromID(start)
@@ -206,12 +206,12 @@ function createProject(details) {
         Object.assign(project, details)
         project.slots = project.slots.map(slot => createSlot(slot, project))
 
-        if(project.start < columns.leftmostVisibleColumn) project.start = columns.leftmostVisibleColumn
-        project.slots.forEach(slot => {
-            if(slot.start < columns.leftmostVisibleColumn) {
-                for(const key in slot.workload) if(key < columns.leftmostVisibleColumn) delete key
-            }
-        })
+        // if(project.start < columns.leftmostVisibleColumn) project.start = columns.leftmostVisibleColumn
+        // project.slots.forEach(slot => {
+        //     if(slot.start < columns.leftmostVisibleColumn) {
+        //         for(const key in slot.workload) if(key < columns.leftmostVisibleColumn) delete key
+        //     }
+        // })
     }
     else {
         project.start = columns.leftmostVisibleColumn + 2
