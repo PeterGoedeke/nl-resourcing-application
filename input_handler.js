@@ -35,6 +35,7 @@ function inputifyAutocomplete(element, cb, database) {
     let hintInput = document.createElement('input')
     element.classList.add('autocompleteInput')
     input.value = element.textContent
+    hintInput.value = element.textContent
     hintInput.disabled = true
     element.textContent = ''
     element.appendChild(hintInput)
