@@ -7,7 +7,6 @@
     "fs": "0.0.1-security"
   },
   "devDependencies": {
-    "electron": "^2.0.2",
     "electron-packager": "^12.1.0"
   },
   "electronPackagerConfig": {
@@ -16,8 +15,7 @@
     "asar": true
   },
   "scripts": {
-    "start": "electron .",
-    "package-win": "electron-packager . nl-resourcing-application --overwrite --platform=win32 --arch=x64 --icon=icon.ico --prune=true --out=release-builds --version-string.CompanyName=Naylor Love --version-string.FileDescription=Resourcing Application --version-string.ProductName='Resourcing Application' ."
+    "start": "node server.js ."
   },
   "keywords": [],
   "author": "",
