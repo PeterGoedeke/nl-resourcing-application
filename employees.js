@@ -172,7 +172,9 @@ const employeeProto = {
             fullTime: this.fullTime,
             interiors: this.interiors,
             name: this.name,
-            type: this.type
+            type: this.type,
+            joining: this.joining,
+            leaving: this.leaving
         }
     }
 }
