@@ -46,7 +46,6 @@ const sheets = (function() {
     let visible
 
     function setVisible(name) {
-        console.log(':)')
         visible = name
         projects.showVisible()
         employees.showVisible()

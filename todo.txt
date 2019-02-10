@@ -1,8 +1,12 @@
+Employee names wrapping
+When you set the span of a project it moves to be in view which is problematic
+Order of employees may be able to change
+Bottom row needs colouring
+
 - People working on it at the same time
 - Accounts
 - Different saves
 - Renaming sheets
-- Order of projects can flip
 
 Employees can have their loading improved since we know how many cells they have
 Summation row takes employees _even when they're not working_

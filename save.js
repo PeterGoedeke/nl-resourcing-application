@@ -6,9 +6,13 @@ const save = {
     },
     projects() {
         makeSaveRequest(JSON.stringify({data: projects.list, type: 'projects'}))
+        console.log('saved')
+        console.trace()
     },
     employees() {
         makeSaveRequest(JSON.stringify({data: employees.list, type: 'employees'}))
+        console.log('saved')
+        console.trace()
     },
     sheets() {
         makeSaveRequest(JSON.stringify({data: sheets.types, type: 'sheets'}))
