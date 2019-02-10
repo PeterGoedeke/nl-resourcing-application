@@ -69,6 +69,9 @@ body {
 }
 .slotLabel {
     height: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .slotCell {
     flex-grow: 1;
