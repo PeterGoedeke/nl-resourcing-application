@@ -133,7 +133,7 @@ const employeeProto = {
     refreshCells(preChange) {
         const postChange = this.totalWorkload
         for(const key in postChange) {
-            if(Number(postChange[key]) != Number(preChange[key])) {
+            if(this.cells[key] && Number(postChange[key]) != Number(preChange[key])) {
                 this.cells[key].textContent = sanitiseForDisplay(postChange[key])
                 this.colorCell(this.cells[key], key)
             }
