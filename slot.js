@@ -47,7 +47,7 @@ const slotProto = {
         
         this.label.addEventListener('click', event => {
             inputifyAutocomplete(this.label, attemptedAssignment => {
-                if(attemptedAssignment) {
+                if(attemptedAssignment && attemptedAssignment != 'Empty') {
                     this.assignEmployee(attemptedAssignment)
                 } else {
                     this.removeEmployee()
