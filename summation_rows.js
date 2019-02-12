@@ -80,7 +80,7 @@ const rows = (function() {
         },
         refreshCells(cells, list) {
             for(const key in list) {
-                if(cells[key - columns.baseID]) cells[key - columns.baseID].textContent = sanitiseForDisplay(list[key])
+                if(cells[key - columns.baseID]) cells[key - columns.baseID].textContent = sanitiseForDisplay(list[key] / 5)
             }
         }
     }
