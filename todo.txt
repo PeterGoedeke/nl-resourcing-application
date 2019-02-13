@@ -1,3 +1,7 @@
+Lines betqween employees don't show properly
+Visual bugs - line between projects, little black line at bottom of project label
+
+
 Employee names wrapping
 When you set the span of a project it moves to be in view which is problematic
 Order of employees may be able to change

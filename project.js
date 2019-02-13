@@ -28,15 +28,7 @@ const projectProto = {
             this.endHandle.style.right = '-5px'
             this.endHandle.style.left = 'initial'
         })
-        this.label.addEventListener('click', event => {
-            this.label.style.height = columns.rowHeight * this.visibleSlots.length + 'px'
-            inputify(this.label, newLabel => {
-                this.label.innerHTML = `<p>${newLabel || 'Unnamed'}</p>`
-                this.name = newLabel
-                this.label.style.height = 'initial'
-                save.projects()
-            })
-        })
+        this.label.addEventListener('click', this.labelEdit.bind(this))
         this.container.addEventListener('contextmenu', event => {
             contextMenus.open(0, [
                 () => {
@@ -96,6 +88,15 @@ const projectProto = {
         this.label.innerHTML = `<p>${this.name || 'Unnamed'}</p>`
         this.setColor(this.color)
         return this.container
+    },
+    labelEdit() {
+        this.label.style.height = columns.rowHeight * this.visibleSlots.length + 'px'
+        inputify(this.label, newLabel => {
+            this.label.innerHTML = `<p>${newLabel || 'Unnamed'}</p>`
+            this.name = newLabel
+            this.label.style.height = 'initial'
+            save.projects()
+        })
     },
     init() {
         if(this.interiors) {
@@ -255,35 +256,26 @@ const projects = {
 
 const projectAreaSeparator = document.querySelector('.projectAreaSeparator')
 const newProjectButton = document.querySelector('.newProject')
-newProjectButton.addEventListener('mousedown', event => {
-    if(sheets.types.length > 0) {
-        const newProject = createProject()
-        const container = newProject.batchLoad()
-        newProject.showVisible()
-        newProject.init()
-        rows.refreshCellsSlots()
-        insertAfter(container, projectAreaSeparator)
-        save.projects()
-    } else {
-        newProjectButton.classList.add('invalid')
-        setTimeout(() => newProjectButton.classList.remove('invalid'), 200)
-    }
-})
+newProjectButton.addEventListener('mousedown', event => addProject())
 
 const interiorsProjectAreaSeparator = document.querySelector('.interiorsProjectAreaSeparator')
 const newInteriorsProjectButton = document.querySelector('.newInteriorsProject')
-newInteriorsProjectButton.addEventListener('mousedown', event => {
+newInteriorsProjectButton.addEventListener('mousedown', event => addProject(true))
+
+function addProject(interiors = false) {
     if(sheets.types.length > 0) {
         const newProject = createProject()
         const container = newProject.batchLoad()
-        newProject.interiors = true
         newProject.showVisible()
         newProject.init()
         rows.refreshCellsSlots()
-        insertAfter(container, interiorsProjectAreaSeparator)
+        if(interiors) newProject.interiors = true
+        insertAfter(container, interiors ? interiorsProjectAreaSeparator : projectAreaSeparator)
         save.projects()
+        newProject.labelEdit()
     } else {
-        newInteriorsProjectButton.classList.add('invalid')
-        setTimeout(() => newInteriorsProjectButton.classList.remove('invalid'), 200)
+        const element = (interiors ? newInteriorsProjectButton : newProjectButton)
+        element.classList.add('invalid')
+        setTimeout(() => element.classList.remove('invalid'), 200)
     }
-})
+}
