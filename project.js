@@ -3,6 +3,7 @@ const projectProto = {
         this.container = projectContainer.cloneNode(true)
         this.body = this.container.querySelector('.projectBody')
         this.label = this.container.querySelector('.projectLabel')
+        this.slotLabelContainer = this.container.querySelector('.projectSlotLabelContainer')
         this.createSlotButton = this.container.querySelector('.projectCreateSlotButton')
         this.startHandle = this.container.querySelector('.start')
         this.endHandle = this.container.querySelector('.end')
@@ -135,8 +136,16 @@ const projectProto = {
         })
     },
     setColor(color) {
-        if(this.secured) this.container.style.background = color
-        else this.container.style.background = `repeating-linear-gradient(-45deg, ${color}, ${shadeColor(color, 0.5)} 5px, ${color} 5px, ${shadeColor(color, 0.5)} 5px)`
+        if(this.secured) {
+            this.container.style.background = color
+            this.label.style.background = color
+            this.slotLabelContainer.style.background = color
+        }
+        else {
+            this.container.style.background = `repeating-linear-gradient(-45deg, ${color}, ${shadeColor(color, 0.5)} 5px, ${color} 5px, ${shadeColor(color, 0.5)} 5px)`
+            this.label.style.background = `repeating-linear-gradient(-45deg, ${color}, ${shadeColor(color, 0.5)} 5px, ${color} 5px, ${shadeColor(color, 0.5)} 5px)`
+            this.slotLabelContainer.style.background = `repeating-linear-gradient(-45deg, ${color}, ${shadeColor(color, 0.5)} 5px, ${color} 5px, ${shadeColor(color, 0.5)} 5px)`
+        }
         this.color = color
     },
     setSpan(start, end) {

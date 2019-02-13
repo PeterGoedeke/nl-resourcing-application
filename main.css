@@ -108,7 +108,7 @@ body {
     top: 0;
     width: 5px;
     height: 10px;
-    background-color: white;
+    background-color: lightgrey;
     box-sizing: border-box;
     border: solid black;
     border-width: 1px 0;
