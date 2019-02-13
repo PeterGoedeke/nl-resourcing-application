@@ -71,8 +71,6 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-.slotLabel {
     height: 10px;
 }
 .projectLabel > p {
@@ -271,7 +269,6 @@ input {
     position: relative;
     left: 5px;
     width: 40px;
-    
 }
 
 .employeeContainer {
@@ -282,12 +279,17 @@ input {
     width: 100px;
     background-color: lightgrey;
     box-sizing: border-box;
+    box-shadow: 0 2px 2px -2px inset;
+}
+.separator + .employeeContainer > div {
+    box-shadow: none;
 }
 .employeeBody {
     height: 10px;
     background-color: #ffa500;
     position: relative;
     display: flex;
+    box-shadow: 0 2px 2px -2px inset;
 }
 
 .row {
