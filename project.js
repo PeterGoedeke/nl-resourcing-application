@@ -20,7 +20,7 @@ const projectProto = {
         this.label.addEventListener('click', event => {
             this.label.style.height = columns.rowHeight * this.visibleSlots.length + 'px'
             inputify(this.label, newLabel => {
-                this.label.innerHTML = newLabel || 'Unnamed'
+                this.label.innerHTML = `<p>${newLabel || 'Unnamed'}</p>`
                 this.name = newLabel
                 this.label.style.height = 'initial'
                 save.projects()
@@ -82,7 +82,7 @@ const projectProto = {
         this.startHandle.style.left = '-5px'
         this.endHandle.style.right = '-5px'
 
-        this.label.textContent = this.name || 'Unnamed'
+        this.label.innerHTML = `<p>${this.name || 'Unnamed'}</p>`
         this.setColor(this.color)
         return this.container
     },

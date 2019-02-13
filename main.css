@@ -68,10 +68,18 @@ body {
     background-color: rgba(255, 255, 255, 0.4);
 }
 .slotLabel {
-    height: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.slotLabel {
+    height: 10px;
+}
+.projectLabel > p {
+    overflow: hidden;
+    min-width: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .slotCell {
     flex-grow: 1;
@@ -172,7 +180,7 @@ input {
     box-shadow: 0 0 1px 0px inset;
     display: flex;
 }
-p {
+.row > p, .separator > p {
     font-size: 10px;
     position: sticky;
     left: 18px;
