@@ -23,11 +23,8 @@ function addDragging(element, getParentLeft, cb) {
 
 function addResizing(element, getDistanceToLeft, cb) {
     element.onmousedown = event => {
-        document.body.style.cursor = 'e-resize'
         if(event.which == 1) {
-            document.body.style.cursor = 'e-resize'
             function move(event) {
-                document.body.style.cursor = 'e-resize'
                 element.style.width = event.pageX - parseInt(getDistanceToLeft()) + 'px'
             }
             function end(event) {
