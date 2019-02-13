@@ -21,61 +21,8 @@ const employeeProto = {
                 this.label.style.height = 'initial'
             })
         })
-        this.body.addEventListener('contextmenu', event => {
-            contextMenus.open(2, [
-                () => {
-                    for(const key in this.cells) {
-                        if(this.cells[key] === event.target) {
-                            this.joining = key
-                            this.colorCells(columns.baseID, columns.endID - 1)
-                            rows.refreshCellsEmployees()
-                        }
-                    }
-                    save.employees()
-                },
-                () => {
-                    for(const key in this.cells) {
-                        if(this.cells[key] === event.target) {
-                            this.leaving = key
-                            this.colorCells(columns.baseID, columns.endID - 1)
-                            rows.refreshCellsEmployees()
-                        }
-                    }
-                    save.employees()
-                },
-                () => {
-                    this.joining = undefined
-                    this.leaving = undefined
-                    this.colorCells(columns.baseID, columns.endID - 1)
-                    rows.refreshCellsEmployees()
-                    save.employees()
-                },
-                () => {
-                    this.toggleInteriors()
-                },
-                () => {
-                    // fulltime
-                },
-                () => {
-                    this.delete()
-                    contextMenus.close()
-                }], event, pane => {
-                    let input = document.createElement('input')
-                    input.style.cursor = 'pointer'
-                    input.value = this.fullTime
-                    input.addEventListener('blur', event => {
-                        if(Number(input.value)) {
-                            this.fullTime = Number(input.value)
-                            this.colorCells(columns.baseID, columns.endID - 1)
-                            rows.refreshCellsEmployees()
-                            save.employees()
-                        }
-                    })
-                    input.addEventListener('focus', event => input.select())
-                    pane.querySelector('.e4').appendChild(input)
-                    pane.querySelector('.e4').style.cursor = 'initial'
-                })
-        })
+        this.body.addEventListener('contextmenu', this.contextMenu.bind(this))
+        this.label.addEventListener('contextmenu', this.contextMenu.bind(this))
 
         const snapshotTotalWorkload = this.totalWorkload
         for(const key in snapshotTotalWorkload) {
@@ -86,6 +33,61 @@ const employeeProto = {
 
         this.label.textContent = this.name || 'Unnamed'
         return this.container
+    },
+    contextMenu(event) {
+        contextMenus.open(2, [
+            () => {
+                for(const key in this.cells) {
+                    if(this.cells[key] === event.target) {
+                        this.joining = key
+                        this.colorCells(columns.baseID, columns.endID - 1)
+                        rows.refreshCellsEmployees()
+                    }
+                }
+                save.employees()
+            },
+            () => {
+                for(const key in this.cells) {
+                    if(this.cells[key] === event.target) {
+                        this.leaving = key
+                        this.colorCells(columns.baseID, columns.endID - 1)
+                        rows.refreshCellsEmployees()
+                    }
+                }
+                save.employees()
+            },
+            () => {
+                this.joining = undefined
+                this.leaving = undefined
+                this.colorCells(columns.baseID, columns.endID - 1)
+                rows.refreshCellsEmployees()
+                save.employees()
+            },
+            () => {
+                this.toggleInteriors()
+            },
+            () => {
+                // fulltime
+            },
+            () => {
+                this.delete()
+                contextMenus.close()
+            }], event, pane => {
+            let input = document.createElement('input')
+            input.style.cursor = 'pointer'
+            input.value = this.fullTime
+            input.addEventListener('blur', event => {
+                if(Number(input.value)) {
+                    this.fullTime = Number(input.value)
+                    this.colorCells(columns.baseID, columns.endID - 1)
+                    rows.refreshCellsEmployees()
+                    save.employees()
+                }
+            })
+            input.addEventListener('focus', event => input.select())
+            pane.querySelector('.e4').appendChild(input)
+            pane.querySelector('.e4').style.cursor = 'initial'
+        })
     },
     notifySlots() {
         this.slots.forEach(slot => slot.refreshLabel())

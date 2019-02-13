@@ -68,8 +68,14 @@ const slotProto = {
                 this.delete()
                 contextMenus.close()
                 save.projects()
+            },
+            () => {
+                this.removeEmployee()
+                contextMenus.close()
             }
-        ], event)
+        ], event, pane => {
+            if(!this.employee) pane.querySelector('.e1').style.color = 'grey'
+        })
     },
     getCellsAsArray() {
         let arr = []
