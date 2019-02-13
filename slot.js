@@ -36,14 +36,8 @@ const slotProto = {
                 })
             }
         })
-        this.body.addEventListener('contextmenu', event => {
-            contextMenus.open(1, [
-                () => {
-                    this.delete()
-                    contextMenus.close()
-                    save.projects()
-                }], event)
-        })
+        this.body.addEventListener('contextmenu', this.contextMenu)
+        this.label.addEventListener('contextmenu', this.contextMenu)
         
         this.label.addEventListener('click', event => {
             inputifyAutocomplete(this.label, attemptedAssignment => {
@@ -67,6 +61,15 @@ const slotProto = {
             this.body.appendChild(cell)
             this.cells[key] = cell
         }
+    },
+    contextMenu(event) {
+        contextMenus.open(1, [
+            () => {
+                this.delete()
+                contextMenus.close()
+                save.projects()
+            }
+        ], event)
     },
     getCellsAsArray() {
         let arr = []
