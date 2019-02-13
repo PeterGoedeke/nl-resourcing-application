@@ -20,11 +20,11 @@ const columns = (function() {
         let element = headerCell.cloneNode()
         element.textContent = convertIDToDate(i)
         header.appendChild(element)
-        header.style.width = applicationWidth + 'px'
         let line = columnLine.cloneNode()
-        line.style.left = (i - baseID) * columnWidth + sidebarWidth + 'px'
+        line.style.left = `calc(${(i - baseID) * columnWidth}px + var(--total-sidebar-width))`
         fragment.appendChild(line)
     }
+    header.style.width = applicationWidth + 'px'
     document.body.appendChild(fragment)
 
     function convertIDToDate(id) {
@@ -91,4 +91,23 @@ const random = {
 function shadeColor(color, percent) {   
     var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
     return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
+}
+
+const html = document.getElementsByTagName('html')[0]
+
+function setSidebarWidth(leftWidth, rightWidth) {
+    leftWidth = leftWidth || parseInt(getComputedStyle(document.body).getPropertyValue('--left-sidebar-width'))
+    rightWidth = rightWidth || parseInt(getComputedStyle(document.body).getPropertyValue('--right-sidebar-width'))
+
+    html.style.setProperty("--total-sidebar-width", leftWidth + rightWidth + 'px')
+    html.style.setProperty("--left-sidebar-width", leftWidth + 'px')
+    html.style.setProperty("--right-sidebar-width", rightWidth + 'px')
+    columns.sidebarWidth = leftWidth + rightWidth
+    employees.list.forEach(employee => {
+        employee.container.style.width = columns.applicationWidth + columns.sidebarWidth + 'px'
+    })
+    projects.list.forEach(project => {
+        project.container.style.width = columns.applicationWidth + columns.sidebarWidth + 'px'
+    })
+    Array.from(document.querySelectorAll('.row')).concat(Array.from(document.querySelectorAll('.separator'))).forEach(row => row.style.width = columns.applicationWidth + columns.sidebarWidth + 'px')    
 }

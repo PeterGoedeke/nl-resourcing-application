@@ -89,16 +89,20 @@ body {
     position: sticky;
     left: 0;
     z-index: 3;
-    width: 50px;
     line-height: 10px;
     font-size: 10px;
 }
+.projectLabel {
+    width: var(--left-sidebar-width);
+}
+
 .projectLabel, .employeeLabel {
     display: flex;
     align-items: center;
 }
 .projectSlotLabelContainer {
-    left: 50px;
+    left: var(--left-sidebar-width);
+    width: var(--right-sidebar-width);
 }
 .projectCreateSlotButton {
     position: absolute;
@@ -142,7 +146,7 @@ input {
     top: 0;
     z-index: 4;
     display: flex;
-    padding-left: 100px;
+    padding-left: var(--total-sidebar-width);
 }
 .headerCell {
     width: 50px;
@@ -182,6 +186,11 @@ input {
     font-size: 10px;
     position: sticky;
     left: 18px;
+}
+.row > p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .newProject, .newEmployee, .newInteriorsProject, .newInteriorsEmployee, .sort {
     width: 15px;
@@ -276,7 +285,7 @@ input {
     align-items: stretch;
 }
 .employeeLabel {
-    width: 100px;
+    width: var(--total-sidebar-width);
     background-color: lightgrey;
     box-sizing: border-box;
     box-shadow: 0 2px 2px -2px inset;
@@ -299,7 +308,7 @@ input {
     display: flex;
 }
 .row > p {
-    flex-basis: 100px;
+    flex-basis: var(--total-sidebar-width);
     left: 0;
     box-sizing: border-box;
     padding-left: 5px;
@@ -361,4 +370,10 @@ input {
     .projectLabel, .employeeLabel {
         padding-left: 5px;
     }
+}
+
+:root {
+    --total-sidebar-width: 100px;
+    --left-sidebar-width: 50px;
+    --right-sidebar-width: 50px;
 }

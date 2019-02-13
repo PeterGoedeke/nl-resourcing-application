@@ -9,6 +9,16 @@ const projectProto = {
         this.endHandle = this.container.querySelector('.end')
         this.container.style.width = columns.applicationWidth + columns.sidebarWidth + 'px'
 
+        addResizing(this.slotLabelContainer, () => getComputedStyle(document.body).getPropertyValue('--left-sidebar-width'), width => {
+            if(width >= 10) setSidebarWidth(null, width)
+            this.slotLabelContainer.style.width = 'var(--right-sidebar-width)'
+        })
+
+        addResizing(this.label, () => 0, width => {
+            if(width >= 10) setSidebarWidth(width, null)
+            this.label.style.width = 'var(--left-sidebar-width'
+        })
+
         addDragging(this.startHandle, () => columns.getLeftFromID(this.start), id => {
             this.setSpan(id, this.end)
             this.startHandle.style.left = '-5px'

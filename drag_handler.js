@@ -20,3 +20,24 @@ function addDragging(element, getParentLeft, cb) {
         event.preventDefault()
     })
 }
+
+function addResizing(element, getDistanceToLeft, cb) {
+    element.onmousedown = event => {
+        document.body.style.cursor = 'e-resize'
+        if(event.which == 1) {
+            document.body.style.cursor = 'e-resize'
+            function move(event) {
+                document.body.style.cursor = 'e-resize'
+                element.style.width = event.pageX - parseInt(getDistanceToLeft()) + 'px'
+            }
+            function end(event) {
+                document.body.style.cursor = 'initial'
+                removeEventListener('mousemove', move)
+                removeEventListener('mouseup', end)
+                cb(event.pageX - parseInt(getDistanceToLeft()))
+            }
+            addEventListener('mousemove', move)
+            addEventListener('mouseup', end)
+        }
+    }
+}
