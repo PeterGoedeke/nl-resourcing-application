@@ -36,8 +36,8 @@ const slotProto = {
                 })
             }
         })
-        this.body.addEventListener('contextmenu', this.contextMenu)
-        this.label.addEventListener('contextmenu', this.contextMenu)
+        this.body.addEventListener('contextmenu', this.contextMenu.bind(this))
+        this.label.addEventListener('contextmenu', this.contextMenu.bind(this))
         
         this.label.addEventListener('click', event => {
             inputifyAutocomplete(this.label, attemptedAssignment => {
