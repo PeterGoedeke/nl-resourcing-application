@@ -22,19 +22,18 @@ function addDragging(element, getParentLeft, cb) {
 }
 
 function addResizing(element, getDistanceToLeft, cb) {
-    element.onmousedown = event => {
-        if(event.which == 1) {
-            function move(event) {
-                element.style.width = event.pageX - parseInt(getDistanceToLeft()) + 'px'
-            }
-            function end(event) {
-                document.body.style.cursor = 'initial'
-                removeEventListener('mousemove', move)
-                removeEventListener('mouseup', end)
-                cb(event.pageX - parseInt(getDistanceToLeft()))
-            }
-            addEventListener('mousemove', move)
-            addEventListener('mouseup', end)
+    element.ondblclick = event => {
+        console.log('eh')
+        function move(event) {
+            element.style.width = event.pageX - parseInt(getDistanceToLeft()) + 'px'
         }
+        function end(event) {
+            document.body.style.cursor = 'initial'
+            removeEventListener('mousemove', move)
+            removeEventListener('mouseup', end)
+            cb(event.pageX - parseInt(getDistanceToLeft()))
+        }
+        addEventListener('mousemove', move)
+        addEventListener('mouseup', end)
     }
 }
