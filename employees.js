@@ -6,21 +6,7 @@ const employeeProto = {
         this.body.style.width = columns.applicationWidth + 'px'
         this.container.style.width = columns.applicationWidth + columns.sidebarWidth + 'px'
 
-        this.label.addEventListener('click', event => {
-            this.label.style.height = columns.rowHeight + 'px'
-            inputify(this.label, newName => {
-                if(!employees.visibleNames.includes(newName) && newName) {
-                    this.label.innerHTML = newName
-                    this.name = newName
-                    this.notifySlots()
-                    save.employees()
-                    save.projects()
-                } else {
-                    this.label.innerHTML = this.name || 'Unnamed'
-                }
-                this.label.style.height = 'initial'
-            })
-        })
+        this.label.addEventListener('click', this.labelEdit.bind(this))
         this.body.addEventListener('contextmenu', this.contextMenu.bind(this))
         this.label.addEventListener('contextmenu', this.contextMenu.bind(this))
 
@@ -33,6 +19,21 @@ const employeeProto = {
 
         this.label.textContent = this.name || 'Unnamed'
         return this.container
+    },
+    labelEdit() {
+        this.label.style.height = columns.rowHeight + 'px'
+        inputify(this.label, newName => {
+            if(!employees.visibleNames.includes(newName) && newName) {
+                this.label.innerHTML = newName
+                this.name = newName
+                this.notifySlots()
+                save.employees()
+                save.projects()
+            } else {
+                this.label.innerHTML = this.name || 'Unnamed'
+            }
+            this.label.style.height = 'initial'
+        })
     },
     contextMenu(event) {
         contextMenus.open(2, [
@@ -235,36 +236,29 @@ function createEmployee(details) {
 
 const employeeAreaSeparator = document.querySelector('.employeeAreaSeparator')
 const newEmployeeButton = document.querySelector('.newEmployee')
-newEmployeeButton.addEventListener('click', event => {
-    if(sheets.types.length > 0) {
-        const newEmployee = createEmployee()
-        const container = newEmployee.batchLoad()
-        rows.refreshCellsEmployees()
-        insertAfter(container, employeeAreaSeparator)
-        save.employees()
-    } else {
-        newEmployeeButton.classList.add('invalid')
-        setTimeout(() => newEmployeeButton.classList.remove('invalid'), 200)
-    }
-})
+newEmployeeButton.addEventListener('click', event => addEmployee())
 
 const interiorsEmployeeAreaSeparator = document.querySelector('.interiorsEmployeeAreaSeparator')
 const newInteriorsEmployeeButton = document.querySelector('.newInteriorsEmployee')
-newInteriorsEmployeeButton.addEventListener('click', event => {
-    if(sheets.types.length > 0) {
-        const newEmployee = createEmployee()
-        const container = newEmployee.batchLoad()
-        newEmployee.interiors = true
-        rows.refreshCellsEmployees()
-        insertAfter(container, interiorsEmployeeAreaSeparator)
-        save.employees()
-    } else {
-        newInteriorsEmployeeButton.classList.add('invalid')
-        setTimeout(() => newInteriorsEmployeeButton.classList.remove('invalid'), 200)
-    }
-})
+newInteriorsEmployeeButton.addEventListener('click', event => addEmployee(true))
 
 const sortButton = document.querySelector('.sort')
 sortButton.addEventListener('click', event => {
     employees.sortByName()
 })
+
+function addEmployee(interiors = false) {
+    if(sheets.types.length > 0) {
+        const newEmployee = createEmployee()
+        const container = newEmployee.batchLoad()
+        rows.refreshCellsEmployees()
+        if(interiors) newEmployee.interiors = true
+        insertAfter(container, interiors ? interiorsEmployeeAreaSeparator : employeeAreaSeparator)
+        save.employees()
+        newEmployee.labelEdit()
+    } else {
+        const element = (interiors ? newInteriorsEmployeeButton : newInteriorsProjectButton)
+        element.classList.add('invalid')
+        setTimeout(() => element.classList.remove('invalid'), 200)
+    }
+}
