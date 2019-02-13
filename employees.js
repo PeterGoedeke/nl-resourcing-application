@@ -147,8 +147,7 @@ const employeeProto = {
     colorCell(cell, ID) {
         const color = (() => {
             let color
-            if(this.totalWorkload[ID] == 0) color = '#808080'
-            else if(this.totalWorkload[ID] > this.fullTime) color = '#ff0000'
+            if(this.totalWorkload[ID] > this.fullTime) color = '#ff0000'
             else if(this.totalWorkload[ID] < this.fullTime) color = '#ffa500'
             else color = '#008000'
             return color

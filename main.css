@@ -277,7 +277,7 @@ p {
 }
 .employeeBody {
     height: 10px;
-    background-color: grey;
+    background-color: #ffa500;
     position: relative;
     display: flex;
 }
