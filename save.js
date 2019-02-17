@@ -21,7 +21,7 @@ const save = {
 
 function makeSaveRequest(data) {
     const http = new XMLHttpRequest()
-    http.open('POST', window.location.href + directory)
+    http.open('POST', window.location.href + mainDirectory)
     http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
     http.send(data)
 }

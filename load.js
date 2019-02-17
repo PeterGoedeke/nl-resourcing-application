@@ -1,11 +1,12 @@
-let directory = '/file/main'
+let mainDirectory
 
 const projectFragment = document.createDocumentFragment()
 const interiorsProjectFragment = document.createDocumentFragment()
 const employeeFragment = document.createDocumentFragment()
 const interiorsEmployeeFragment = document.createDocumentFragment()
 
-function makeFileRequest(directory = '/file/main') {
+function makeFileRequest(directory) {
+    directory = directory || mainDirectory
     const http = new XMLHttpRequest()
     const url = window.location.href + directory
     http.open('GET', url)
@@ -68,3 +69,11 @@ async function load(directory) {
 }
 
 load()
+makeFileRequest('/filelist').then(response => {
+    const dir = JSON.parse(response.data)[0]
+    mainDirectory = '/file/' + dir
+    directorySelectButton.textContent = dir.replace(/_/g, ' ')
+    
+    load('/file/main')
+
+})
