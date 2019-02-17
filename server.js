@@ -23,7 +23,7 @@ http.createServer(function(req, res) {
     
             fileStream.pipe(res)
         }
-        else if(req.url.match(/file\/[A-Za-z]*$/)) {
+        else if(req.url.match(/file\/[A-Za-z1-9_]*$/)) {
             const directory = req.url.split('/file/')[1]
             checkFiles(directory).then(function(value) {
                 if(value.every(isTrue => isTrue)) {
@@ -52,8 +52,7 @@ http.createServer(function(req, res) {
             body += chunk
         })
         req.on('end', function() {
-            if(req.url === '/login') {
-                console.log(body)
+            if(req.url === '/main') {
                 const details = body.split('&').map(segment => segment.split('='))
 
                 if(verifyAccount(details)) {
@@ -65,8 +64,13 @@ http.createServer(function(req, res) {
                     })
                 }
             }
+            else if(req.url.endsWith('/rename')) {
+                const details = JSON.parse(body)
+                if(fs.existsSync('./data/' + details.oldName)) {
+                    fs.renameSync('./data/' + details.oldName, './data/' + details.newName)
+                }
+            }
             else if(req.url.match(/file\/[A-Za-z]*$/)) {
-                console.log('hi')
                 const directory = req.url.split('/file/')[1]
                 const data = JSON.parse(body)
                 save(data.type, data.data, directory)

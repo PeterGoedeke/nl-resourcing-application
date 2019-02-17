@@ -16,6 +16,12 @@ const save = {
     },
     sheets() {
         makeSaveRequest(JSON.stringify({data: sheets, type: 'sheets'}))
+    },
+    renameDir(oldName, newName) {
+        const http = new XMLHttpRequest()
+        http.open('POST', window.location.href + '/rename')
+        http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+        http.send(JSON.stringify({oldName, newName}))
     }
 }
 

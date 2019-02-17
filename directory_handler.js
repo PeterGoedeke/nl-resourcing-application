@@ -51,6 +51,18 @@ directorySelectButton.addEventListener('click', event => {
     
                     }
                 ], event, pane => {
+                    const e0 = pane.querySelector('.e0')
+                    e0.addEventListener('click', event => {
+                        inputify(e0, newName => {
+                            if(mainDirectory.endsWith(file)) {
+                                mainDirectory = '/file/' + newName.replace(/ /g, '_')
+                                directorySelectButton.textContent = newName
+                            }
+                            save.renameDir(file, newName.replace(/ /g, '_'))
+                            entry.textContent = newName
+                            file = newName.replace(/ /g, '_')
+                        })
+                    })
                 })
             }
         })
