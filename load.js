@@ -57,6 +57,7 @@ async function load() {
             insertAfter(interiorsProjectFragment, interiorsProjectAreaSeparator)
             insertAfter(employeeFragment, employeeAreaSeparator)
             insertAfter(interiorsEmployeeFragment, interiorsEmployeeAreaSeparator)
+            rows.refreshCellsAll()
         }
         else {
             console.log('no sheets')

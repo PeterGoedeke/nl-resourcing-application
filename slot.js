@@ -43,6 +43,7 @@ const slotProto = {
             inputifyAutocomplete(this.label, attemptedAssignment => {
                 if(attemptedAssignment && attemptedAssignment != 'Empty') {
                     this.assignEmployee(attemptedAssignment)
+                    rows.refreshCellsSlots()
                 } else {
                     this.removeEmployee()
                 }
@@ -86,7 +87,6 @@ const slotProto = {
         if(this.employee) this.employee.removeSlot(this)
         this.employee = employees.getEmployee(name, list)
         this.employee.assignSlot(this)
-        rows.refreshCellsSlots()
     },
     removeEmployee() {
         if(this.employee) this.employee.removeSlot(this)

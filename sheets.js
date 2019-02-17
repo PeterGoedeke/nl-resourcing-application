@@ -5,6 +5,7 @@ const sheetProto = {
         this.cell = typeCell.cloneNode()
         this.cell.addEventListener('click', event => {
             sheets.set(this.name)
+            rows.refreshCellsAll()
         })
 
         this.cell.addEventListener('contextmenu', event => {
@@ -50,7 +51,6 @@ const sheets = (function() {
         visible = name
         projects.showVisible()
         employees.showVisible()
-        rows.refreshCellsAll()
         types.forEach(type => {
             if(type.name == name) type.cell.classList.add('activeSheet')
             else type.cell.classList.remove('activeSheet')
