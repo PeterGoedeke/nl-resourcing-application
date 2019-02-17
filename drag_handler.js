@@ -43,19 +43,4 @@ function addResizing(element, getDistanceToLeft, cb) {
             addEventListener('mousemove', move)
         }
     })
-
-
-    // element.ondblclick = event => {
-    //     function move(event) {
-    //         element.style.width = event.pageX - parseInt(getDistanceToLeft()) + 'px'
-    //     }
-    //     function end(event) {
-    //         document.body.style.cursor = 'initial'
-    //         removeEventListener('mousemove', move)
-    //         removeEventListener('mouseup', end)
-    //         cb(event.pageX - parseInt(getDistanceToLeft()))
-    //     }
-    //     addEventListener('mousemove', move)
-    //     addEventListener('mouseup', end)
-    // }
 }

@@ -1,6 +1,7 @@
 const http = require('http')
 const fs = require('fs')
 const path = require('path')
+const accounts = require('./accounts.json')
 
 http.createServer(function(req, res) {
     if(req.method == 'GET') {
@@ -46,14 +47,27 @@ http.createServer(function(req, res) {
             body += chunk
         })
         req.on('end', function() {
-            const data = JSON.parse(body)
-            save(data.type, data.data)
+            if(req.url === '/login') {
+                console.log(body)
+                const details = body.split('&').map(segment => segment.split('='))
+
+                if(verifyAccount(details)) {
+                    fs.readFile('./index.html', 'utf-8', function(err, data) {
+                        res.writeHead(200, {'Content-Type': 'text/html'})
+                        res.write(data)
+                        res.write(`<script>const account = ${JSON.stringify(verifyAccount(details))}</script>`)
+                        res.end()
+                    })
+                }
+            }
         })
-        res.end()
     }
 }).listen(3000)
 
 function checkFiles() {
+function verifyAccount(details) {
+    return accounts.find(account => account.username === details[0][1] && account.password === details[1][1])
+}
     return Promise.all([
         new Promise(resolve => fs.exists('./data/projects.json', exists => resolve(exists))),
         new Promise(resolve => fs.exists('./data/employees.json', exists => resolve(exists))),
