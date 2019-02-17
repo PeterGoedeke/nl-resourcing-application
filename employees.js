@@ -156,7 +156,7 @@ const employeeProto = {
             return color
         })()
         if(!(this.joining && ID <= this.joining || this.leaving && ID >= this.leaving)) cell.style.background = color
-        else cell.style.background = `repeating-linear-gradient(-45deg, ${color}, ${shadeColor(color, 0.5)} 5px, ${color} 5px, ${shadeColor(color, 0.5)} 5px)`
+        else cell.style.background = `repeating-linear-gradient(-45deg, grey, lightgrey 5px, grey 5px, lightgrey 5px)`
     },
     get totalWorkload() {
         let totalWorkload = {}
