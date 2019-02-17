@@ -283,14 +283,15 @@ input {
 .employeeContainer {
     display: flex;
     align-items: stretch;
+    box-shadow: 0 2px 2px -2px inset;
+    border-bottom: solid white 1px;
 }
 .employeeLabel {
     width: var(--total-sidebar-width);
     background-color: lightgrey;
     box-sizing: border-box;
-    box-shadow: 0 2px 2px -2px inset;
 }
-.separator + .employeeContainer > div {
+.separator + .employeeContainer {
     box-shadow: none;
 }
 .employeeBody {
@@ -298,7 +299,6 @@ input {
     background-color: #ffa500;
     position: relative;
     display: flex;
-    box-shadow: 0 2px 2px -2px inset;
 }
 
 .row {
