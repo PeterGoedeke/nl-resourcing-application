@@ -1,13 +1,13 @@
-
+let directory = '/file/main'
 
 const projectFragment = document.createDocumentFragment()
 const interiorsProjectFragment = document.createDocumentFragment()
 const employeeFragment = document.createDocumentFragment()
 const interiorsEmployeeFragment = document.createDocumentFragment()
 
-function makeFileRequest() {
+function makeFileRequest(directory = '/file/main') {
     const http = new XMLHttpRequest()
-    const url = window.location.href + '/main'
+    const url = window.location.href + directory
     http.open('GET', url)
     http.send()
 
@@ -18,8 +18,8 @@ function makeFileRequest() {
     })
 }
 
-async function load() {
-    const res = await makeFileRequest()
+async function load(directory) {
+    const res = await makeFileRequest(directory)
     if(res.status == 200) {
         const data = JSON.parse(res.data)
         const sheetsData = data[0]

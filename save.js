@@ -21,7 +21,11 @@ const save = {
 
 function makeSaveRequest(data) {
     const http = new XMLHttpRequest()
-    http.open('POST', window.location.href)
+    http.open('POST', window.location.href + directory)
     http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
     http.send(data)
+}
+
+function makeRestoreRequest() {
+    
 }

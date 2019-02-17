@@ -23,19 +23,24 @@ http.createServer(function(req, res) {
     
             fileStream.pipe(res)
         }
-        else if(req.url.match(/main$/)) {
-            checkFiles().then(function(value) {
+        else if(req.url.match(/file\/[A-Za-z]*$/)) {
+            const directory = req.url.split('/file/')[1]
+            checkFiles(directory).then(function(value) {
                 if(value.every(isTrue => isTrue)) {
-                    loadFiles().then(function(value) {
+                    loadFiles(directory).then(function(value) {
                         res.writeHead(200, {'Content-Type': 'text/js'})
                         res.end(JSON.stringify(value))
                     }, function(err) { throw err })
                 }
-                else createFiles()
-            }, createFiles)
+                else createFiles(directory)
+            }, () => createFiles(directory))
+        }
+        else if(req.url.match(/filelist$/)) {
+            res.writeHead(200, {'Content-Type': 'text/js'})
+            res.end(JSON.stringify(fs.readdirSync('./data')))
         }
         else {
-            fs.readFile('./index.html', 'utf-8', function(err, data) {
+            fs.readFile('./login.html', 'utf-8', function(err, data) {
                 res.writeHead(200, {'Content-Type': 'text/html'})
                 res.end(data)
             })
@@ -60,51 +65,62 @@ http.createServer(function(req, res) {
                     })
                 }
             }
+            else if(req.url.match(/file\/[A-Za-z]*$/)) {
+                console.log('hi')
+                const directory = req.url.split('/file/')[1]
+                const data = JSON.parse(body)
+                save(data.type, data.data, directory)
+                res.end()
+            }
         })
     }
 }).listen(3000)
 
-function checkFiles() {
 function verifyAccount(details) {
     return accounts.find(account => account.username === details[0][1] && account.password === details[1][1])
 }
+
+function checkFiles(directory) {
     return Promise.all([
-        new Promise(resolve => fs.exists('./data/projects.json', exists => resolve(exists))),
-        new Promise(resolve => fs.exists('./data/employees.json', exists => resolve(exists))),
-        new Promise(resolve => fs.exists('./data/sheets.json', exists => resolve(exists))),
+        new Promise(resolve => fs.exists(`./data/${directory}/projects.json`, exists => resolve(exists))),
+        new Promise(resolve => fs.exists(`./data/${directory}/employees.json`, exists => resolve(exists))),
+        new Promise(resolve => fs.exists(`./data/${directory}/sheets.json`, exists => resolve(exists))),
     ])
 }
-function loadFiles() {
+function loadFiles(directory) {
     return Promise.all([
-        new Promise((resolve, reject) => fs.readFile('./data/sheets.json', 'utf8', (err, data) => {
+        new Promise((resolve, reject) => fs.readFile(`./data/${directory}/sheets.json`, 'utf8', (err, data) => {
             if(err) reject(err)
             resolve(data ? JSON.parse(data) : '')
         })),
-        new Promise((resolve, reject) => fs.readFile('./data/projects.json', 'utf8', (err, data) => {
+        new Promise((resolve, reject) => fs.readFile(`./data/${directory}/projects.json`, 'utf8', (err, data) => {
             if(err) reject(err)
             resolve(data ? JSON.parse(data) : '')
         })),
-        new Promise((resolve, reject) => fs.readFile('./data/employees.json', 'utf8', (err, data) => {
+        new Promise((resolve, reject) => fs.readFile(`./data/${directory}/employees.json`, 'utf8', (err, data) => {
             if(err) reject(err)
             resolve(data ? JSON.parse(data) : '')
         }))
     ])
 }
 
-function createFiles() {
-    fs.writeFile('./data/projects.json', '', 'utf8', function(err) {
+function createFiles(directory) {
+    if(!fs.existsSync(`./data/${directory}`)) {
+        fs.mkdirSync(`./data/${directory}`)
+    }
+    fs.writeFile(`./data/${directory}/projects.json`, '', 'utf8', function(err) {
         if(err) throw err
     })
-    fs.writeFile('./data/employees.json', '', 'utf8', function(err) {
+    fs.writeFile(`./data/${directory}/employees.json`, '', 'utf8', function(err) {
         if(err) throw err
     })
-    fs.writeFile('./data/sheets.json', '', 'utf8', function(err) {
+    fs.writeFile(`./data/${directory}/sheets.json`, '', 'utf8', function(err) {
         if(err) throw err
     })
 }
 
-function save(type, data) {
-    fs.writeFile(`./data/${type}.json`, JSON.stringify(data, null, 4), 'utf8', function(err) {
+function save(type, data, directory) {
+    fs.writeFile(`./data/${directory}/${type}.json`, JSON.stringify(data, null, 4), 'utf8', function(err) {
         if(err) throw err
     })
 }
