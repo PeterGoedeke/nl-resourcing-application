@@ -22,18 +22,40 @@ function addDragging(element, getParentLeft, cb) {
 }
 
 function addResizing(element, getDistanceToLeft, cb) {
-    element.ondblclick = event => {
-        console.log('eh')
+    element.addEventListener('mousemove', event => {
+        if(event.pageX > element.getBoundingClientRect().right - 10) element.style.cursor = 'e-resize'
+        else element.style.cursor = 'initial'
+    })
+    element.addEventListener('mouseout', event => {
+        element.style.cursor = 'initial'
+    })
+    element.addEventListener('mousedown', event => {
         function move(event) {
             element.style.width = event.pageX - parseInt(getDistanceToLeft()) + 'px'
-        }
+        }  
         function end(event) {
-            document.body.style.cursor = 'initial'
-            removeEventListener('mousemove', move)
-            removeEventListener('mouseup', end)
             cb(event.pageX - parseInt(getDistanceToLeft()))
+            removeEventListener('mouseup', end)
+            removeEventListener('mousemove', move)
         }
-        addEventListener('mousemove', move)
-        addEventListener('mouseup', end)
-    }
+        if(event.pageX > element.getBoundingClientRect().right - 10) {
+            addEventListener('mouseup', end)
+            addEventListener('mousemove', move)
+        }
+    })
+
+
+    // element.ondblclick = event => {
+    //     function move(event) {
+    //         element.style.width = event.pageX - parseInt(getDistanceToLeft()) + 'px'
+    //     }
+    //     function end(event) {
+    //         document.body.style.cursor = 'initial'
+    //         removeEventListener('mousemove', move)
+    //         removeEventListener('mouseup', end)
+    //         cb(event.pageX - parseInt(getDistanceToLeft()))
+    //     }
+    //     addEventListener('mousemove', move)
+    //     addEventListener('mouseup', end)
+    // }
 }
