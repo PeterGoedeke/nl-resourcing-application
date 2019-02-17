@@ -83,6 +83,10 @@ const sheets = (function() {
         set visible(value) { visible = value },
         get active() { return types.find(type => type.name == this.visible) },
         get types() { return types.map(type => type.name) },
+        unload() {
+            types.forEach(type => sheetTabsContainer.removeChild(type.cell))
+            types = []
+        },
         remove(type) {
             types.splice(types.indexOf(type), 1)
             employees.byType(type).forEach(employee => employee.delete())

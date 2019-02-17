@@ -68,7 +68,18 @@ async function load(directory) {
     }
 }
 
-load()
+function unload() {
+    projects.list.forEach(project => {
+        document.body.removeChild(project.container)
+    })
+    employees.visibleList.forEach(employee => {
+        document.body.removeChild(employee.container)
+    })
+    projects.list = []
+    employees.list = []
+    sheets.unload()
+}
+
 makeFileRequest('/filelist').then(response => {
     const dir = JSON.parse(response.data)[0]
     mainDirectory = '/file/' + dir
