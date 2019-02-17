@@ -24,7 +24,7 @@ async function load() {
         const data = JSON.parse(res.data)
         const sheetsData = data[0]
         if(sheetsData) {
-            sheetsData.forEach((type) => sheets.add(type))
+            sheetsData.forEach(sheetData => sheets.fromFile(sheetData))
             sheets.set(sheets.types[0])
         
             const employeeData = data[2]

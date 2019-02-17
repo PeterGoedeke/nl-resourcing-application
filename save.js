@@ -15,7 +15,7 @@ const save = {
         console.trace()
     },
     sheets() {
-        makeSaveRequest(JSON.stringify({data: sheets.types, type: 'sheets'}))
+        makeSaveRequest(JSON.stringify({data: sheets, type: 'sheets'}))
     }
 }
 

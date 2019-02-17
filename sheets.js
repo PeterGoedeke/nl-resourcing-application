@@ -35,7 +35,8 @@ function createSheet(details) {
         Object.assign(sheet, details)
     }
     else {
-        // default settings
+        sheet.minimum = 0.85
+        sheet.maximum = 0.95
     }
     return sheet
 }
@@ -80,6 +81,7 @@ const sheets = (function() {
         set: setVisible,
         get visible() { return visible },
         set visible(value) { visible = value },
+        get active() { return types.find(type => type.name == this.visible) },
         get types() { return types.map(type => type.name) },
         remove(type) {
             types.splice(types.indexOf(type), 1)
@@ -89,7 +91,14 @@ const sheets = (function() {
             })
             setVisible(types[0].name)
         },
-        add
+        add, fromFile(data) {
+            const newSheet = createSheet(data)
+            newSheet.init()
+            types.push(newSheet)
+        },
+        toJSON() {
+            return types
+        }
     }
 })()
 
