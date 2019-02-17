@@ -48,7 +48,7 @@ const rows = (function() {
             const employees = this.employees[0]
 
             for(const key in workload) {
-                summation[key] = (workload[key] || 0) - (employees[key] || 0)
+                summation[key] = (employees[key] || 0) - (workload[key] || 0)
             }
             return summation
         },
@@ -66,22 +66,50 @@ const rows = (function() {
         refreshCellsSlots() {
             this.refreshCells(emptyCells, this.totalWorkload(this.empty))
             this.refreshCells(workloadCells, this.totalWorkload(this.workload))
-            this.refreshCells(summationCells, this.summation)
+            // this.refreshCells(summationCells, this.summation, true)
+            this.refreshSummation()
         },
         refreshCellsEmployees() {
             this.refreshCells(employeeCells, this.totalWorkload(this.employees))
-            this.refreshCells(summationCells, this.summation)
+            // this.refreshCells(summationCells, this.summation, true)
+            this.refreshSummation()
         },
         refreshCellsAll() {
             this.refreshCells(emptyCells, this.totalWorkload(this.empty))
             this.refreshCells(workloadCells, this.totalWorkload(this.workload))
             this.refreshCells(employeeCells, this.totalWorkload(this.employees))
-            this.refreshCells(summationCells, this.summation)
+            // this.refreshCells(summationCells, this.summation, true)
+            this.refreshSummation()
         },
-        refreshCells(cells, list) {
+        refreshCells(cells, list, color = false) {
             for(const key in list) {
-                if(cells[key - columns.baseID]) cells[key - columns.baseID].textContent = sanitiseForDisplay(list[key] / 5)
+                if(cells[key - columns.baseID]) cells[key - columns.baseID].textContent = rowSanitise(list[key])
+            }
+        },
+        refreshSummation() {
+            const employees = this.totalWorkload(this.employees)
+            const workload = this.totalWorkload(this.workload)
+            const summation = this.summation
+            for(const key in summation) {
+                if(summationCells[key - columns.baseID]) {
+                    summationCells[key - columns.baseID].textContent = rowSanitise(summation[key])
+                    // const value = Math.round(workload[key] / employees[key] * 100)
+                    // summationCells[key - columns.baseID].textContent = value == Infinity ? 0 : value
+                    if(workload[key] / employees[key] < sheets.active.minimum) {
+                        summationCells[key - columns.baseID].style.backgroundColor = 'orange'
+                    } else if(workload[key] / employees[key] > sheets.active.maximum) {
+                        summationCells[key - columns.baseID].style.backgroundColor = 'red'
+                    } else {
+                        summationCells[key - columns.baseID].style.backgroundColor = 'green'
+                    }
+                }
             }
         }
     }
 })()
+
+function rowSanitise(value) {
+    return (Number(value) / 5).toFixed(1)
+}
+
+var called = 0
