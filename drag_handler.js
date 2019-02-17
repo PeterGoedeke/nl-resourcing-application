@@ -23,24 +23,26 @@ function addDragging(element, getParentLeft, cb) {
 
 function addResizing(element, getDistanceToLeft, cb) {
     element.addEventListener('mousemove', event => {
-        if(event.pageX > element.getBoundingClientRect().right - 10) element.style.cursor = 'e-resize'
+        if(event.pageX > element.getBoundingClientRect().right - 10 && event.target.classList != 'projectCreateSlotButton') element.style.cursor = 'e-resize'
         else element.style.cursor = 'initial'
     })
     element.addEventListener('mouseout', event => {
         element.style.cursor = 'initial'
     })
     element.addEventListener('mousedown', event => {
-        function move(event) {
-            element.style.width = event.pageX - parseInt(getDistanceToLeft()) + 'px'
-        }  
-        function end(event) {
-            cb(event.pageX - parseInt(getDistanceToLeft()))
-            removeEventListener('mouseup', end)
-            removeEventListener('mousemove', move)
-        }
-        if(event.pageX > element.getBoundingClientRect().right - 10) {
-            addEventListener('mouseup', end)
-            addEventListener('mousemove', move)
+        if(event.target.classList != 'projectCreateSlotButton') {
+            function move(event) {
+                element.style.width = event.pageX - parseInt(getDistanceToLeft()) + 'px'
+            }  
+            function end(event) {
+                cb(event.pageX - parseInt(getDistanceToLeft()))
+                removeEventListener('mouseup', end)
+                removeEventListener('mousemove', move)
+            }
+            if(event.pageX > element.getBoundingClientRect().right - 10) {
+                addEventListener('mouseup', end)
+                addEventListener('mousemove', move)
+            }
         }
     })
 }
