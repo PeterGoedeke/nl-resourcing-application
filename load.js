@@ -34,6 +34,10 @@ async function load() {
                     const container = newEmployee.batchLoad()
                     if(newEmployee.interiors && newEmployee.type == sheets.visible) interiorsEmployeeFragment.appendChild(container)
                     else if(newEmployee.type == sheets.visible) employeeFragment.appendChild(container)
+
+                    if(newEmployee.joining || newEmployee.leaving) {
+                        newEmployee.colorCells(columns.baseID, columns.endID - 1)
+                    }
                 })
             }
         
