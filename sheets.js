@@ -17,6 +17,25 @@ const sheetProto = {
                     }
                 }], event, pane => {
                     if(sheets.types.length <= 1) pane.querySelector('.e0').style.color = 'grey'
+
+                    for(let i = 0; i < 2; i++) {
+                        let input = document.createElement('input')
+                        input.style.cursor = 'pointer'
+                        input.value = (i == 0 ? this.minimum : this.maximum) * 100 + '%'
+                        input.addEventListener('blur', event => {
+                            const value = Number(parseInt(input.value))
+                            if(value) {
+                                if(i == 0) this.minimum = value / 100
+                                else this.maximum = value / 100
+
+                                rows.refreshSummation()
+                                save.sheets()
+                            }
+                        })
+                        input.addEventListener('focus', event => input.select())
+                        pane.querySelector((i == 0 ? '.e1' : '.e2')).appendChild(input)
+                        pane.querySelector((i == 0 ? '.e1' : '.e2')).style.cursor = 'initial'
+                    }
                 })
         })
 

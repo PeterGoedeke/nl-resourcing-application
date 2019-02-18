@@ -6,7 +6,7 @@ const contextMenus = (function() {
         createContextMenu([['./assets/lock.png', 'Toggle Security'], 'Toggle Interiors', 'Set Colour:', 'Move up', 'Move down', 'Delete']),
         createContextMenu(['Delete', 'Remove Employee']),
         createContextMenu(['Set Joining Date', 'Set Leaving Date', 'Clear Join & Leave', 'Toggle Interiors', 'Full-time:', 'Delete']),
-        createContextMenu(['Delete']),
+        createContextMenu(['Delete', 'Minimum:', 'Maximum:']),
         createContextMenu(['Rename', 'Duplicate', 'Delete'])
     ]
     let active = false
