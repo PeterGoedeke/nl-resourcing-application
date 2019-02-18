@@ -85,6 +85,5 @@ makeFileRequest('/filelist').then(response => {
     mainDirectory = '/file/' + dir
     directorySelectButton.textContent = dir.replace(/_/g, ' ')
     
-    load('/file/main')
-
+    load(mainDirectory)
 })
