@@ -29,7 +29,12 @@ directorySelectButton.addEventListener('click', event => {
     addEventListener('mousedown', closeWindow)
     document.body.appendChild(directorySelectWindow)
     makeFileRequest('/filelist').then(response => JSON.parse(response.data).forEach(file => {
-        const entry = document.createElement('div')
+        createEntry(file)
+    }))
+})
+
+function createEntry(file) {
+    const entry = document.createElement('div')
         entry.className = 'fileOption'
         entry.textContent = file.replace(/_/g, ' ')
         entry.addEventListener('click', event => {
@@ -45,7 +50,13 @@ directorySelectButton.addEventListener('click', event => {
     
                     },
                     () => {
-    
+                        contextMenus.close()
+                        save.duplicateDir(file).then(response => {
+                            makeFileRequest('/filelist').then(response => {
+                                while(entriesWrapper.firstChild) entriesWrapper.removeChild(entriesWrapper.firstChild)
+                                JSON.parse(response.data).forEach(file => createEntry(file))
+                            })
+                        })
                     },
                     () => {
     
@@ -67,5 +78,4 @@ directorySelectButton.addEventListener('click', event => {
             }
         })
         entriesWrapper.appendChild(entry)
-    }))
-})
+}

@@ -22,6 +22,18 @@ const save = {
         http.open('POST', window.location.href + '/rename')
         http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
         http.send(JSON.stringify({oldName, newName}))
+    },
+    duplicateDir(name) {
+        const http = new XMLHttpRequest()
+        http.open('POST', window.location.href + '/duplicate')
+        http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+        http.send(JSON.stringify(name))
+
+        return new Promise(function(resolve) {
+            http.onreadystatechange = function() {
+                if(this.readyState == 4) resolve(null)
+            }
+        })
     }
 }
 

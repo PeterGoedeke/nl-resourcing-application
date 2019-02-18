@@ -1,5 +1,5 @@
 const http = require('http')
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 const accounts = require('./accounts.json')
 
@@ -23,7 +23,7 @@ http.createServer(function(req, res) {
     
             fileStream.pipe(res)
         }
-        else if(req.url.match(/file\/[A-Za-z1-9_]*$/)) {
+        else if(req.url.match(/file\/.*$/)) {
             const directory = req.url.split('/file/')[1]
             checkFiles(directory).then(function(value) {
                 if(value.every(isTrue => isTrue)) {
@@ -69,6 +69,17 @@ http.createServer(function(req, res) {
                 if(fs.existsSync('./data/' + details.oldName)) {
                     fs.renameSync('./data/' + details.oldName, './data/' + details.newName)
                 }
+            }
+            else if(req.url.endsWith('/duplicate')) {
+                const details = JSON.parse(body)
+                if(fs.existsSync('./data/' + details)) {
+                    let i = 1
+                    while(fs.existsSync('./data/' + details + `_(${i})`)) {
+                        i++
+                    }
+                    fs.copySync('./data/' + details, './data/' + details + `_(${i})`)
+                }
+                res.end()
             }
             else if(req.url.match(/file\/[A-Za-z]*$/)) {
                 const directory = req.url.split('/file/')[1]
