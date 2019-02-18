@@ -81,6 +81,14 @@ http.createServer(function(req, res) {
                 }
                 res.end()
             }
+            else if(req.url.endsWith('/newDir')) {
+                let i = 1
+                while(fs.existsSync(`./data/unnamed_(${i})`)) {
+                    i++
+                }
+                createFiles(`unnamed_(${i})`)
+                res.end()
+            }
             else if(req.url.match(/file\/[A-Za-z]*$/)) {
                 const directory = req.url.split('/file/')[1]
                 const data = JSON.parse(body)

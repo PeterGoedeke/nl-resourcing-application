@@ -11,6 +11,19 @@ const directorySelectWindow = (function() {
     const entriesWrapper = document.createElement('div')
     entriesWrapper.className = 'entriesWrapper'
     window.appendChild(entriesWrapper)
+
+    const newDirButton = document.createElement('div')
+    newDirButton.className = 'newDir'
+    newDirButton.textContent = '+'
+    newDirButton.addEventListener('click', event => {
+        save.newDir().then(response => {
+            makeFileRequest('/filelist').then(response => {
+                while(entriesWrapper.firstChild) entriesWrapper.removeChild(entriesWrapper.firstChild)
+                JSON.parse(response.data).forEach(file => createEntry(file))
+            })
+        })
+    })
+    window.appendChild(newDirButton)
     return window
 })()
 const entriesWrapper = directorySelectWindow.querySelector('.entriesWrapper')

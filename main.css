@@ -382,7 +382,18 @@ input {
 .directorySelectWindow > p {
     width: 100%;
     text-align: center;
-
+}
+.newDir {
+    position: absolute;
+    bottom: 2.5%;
+    right: 2.5%;
+    width: 17px;
+    height: 17px;
+    box-shadow: 0 0 1px 0px inset;
+    background-color: white;
+    text-align: center;
+    line-height: 17px;
+    cursor: pointer;
 }
 
 * {

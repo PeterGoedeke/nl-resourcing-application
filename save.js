@@ -34,6 +34,18 @@ const save = {
                 if(this.readyState == 4) resolve(null)
             }
         })
+    },
+    newDir() {
+        const http = new XMLHttpRequest()
+        http.open('POST', window.location.href + '/newDir')
+        http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+        http.send()
+
+        return new Promise(function(resolve) {
+            http.onreadystatechange = function() {
+                if(this.readyState == 4) resolve(null)
+            }
+        })
     }
 }
 
