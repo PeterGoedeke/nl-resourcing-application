@@ -48,3 +48,18 @@ table {
 CSS starts here---------------------------------------------------------------
 ------------------------------------------------------------------------------
 */
+
+form {
+    width: 40vw;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+input {
+    text-align: center;
+}
+.password {
+    margin: 5px 0;
+}
