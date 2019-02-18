@@ -23,11 +23,11 @@ const save = {
         http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
         http.send(JSON.stringify({oldName, newName}))
     },
-    duplicateDir(name) {
+    dir(data, location) {
         const http = new XMLHttpRequest()
-        http.open('POST', window.location.href + '/duplicate')
+        http.open('POST', window.location.href + location)
         http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-        http.send(JSON.stringify(name))
+        http.send(data ? JSON.stringify(data) : '')
 
         return new Promise(function(resolve) {
             http.onreadystatechange = function() {
@@ -35,17 +35,14 @@ const save = {
             }
         })
     },
+    duplicateDir(name) {
+        return this.dir(name, '/duplicate')
+    },
     newDir() {
-        const http = new XMLHttpRequest()
-        http.open('POST', window.location.href + '/newDir')
-        http.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-        http.send()
-
-        return new Promise(function(resolve) {
-            http.onreadystatechange = function() {
-                if(this.readyState == 4) resolve(null)
-            }
-        })
+        return this.dir(null, 'newDir')
+    },
+    deleteDir(name) {
+        return this.dir(name, '/delete')
     }
 }
 

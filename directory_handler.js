@@ -41,9 +41,7 @@ directorySelectButton.addEventListener('click', event => {
     }
     addEventListener('mousedown', closeWindow)
     document.body.appendChild(directorySelectWindow)
-    makeFileRequest('/filelist').then(response => JSON.parse(response.data).forEach(file => {
-        createEntry(file)
-    }))
+    refreshEntries()
 })
 
 function createEntry(file) {
@@ -64,15 +62,23 @@ function createEntry(file) {
                     },
                     () => {
                         contextMenus.close()
-                        save.duplicateDir(file).then(response => {
-                            makeFileRequest('/filelist').then(response => {
-                                while(entriesWrapper.firstChild) entriesWrapper.removeChild(entriesWrapper.firstChild)
-                                JSON.parse(response.data).forEach(file => createEntry(file))
-                            })
-                        })
+                        save.duplicateDir(file).then(refreshEntries)
                     },
                     () => {
-    
+                        makeFileRequest('/filelist').then(response => {
+                            const list = JSON.parse(response.data)
+                            if(list.length > 1) {
+                                contextMenus.close()
+                                save.deleteDir(file).then(refreshEntries)
+                                if(mainDirectory == '/file/' + file) {
+                                    const newFile = (list[0] == file ? list[1] : list[0])
+                                    mainDirectory = '/file/' + newFile
+                                    unload()
+                                    load(mainDirectory)
+                                    directorySelectButton.textContent = newFile.replace(/_/g, ' ')
+                                }
+                            }
+                        })
                     }
                 ], event, pane => {
                     const e0 = pane.querySelector('.e0')
@@ -91,4 +97,11 @@ function createEntry(file) {
             }
         })
         entriesWrapper.appendChild(entry)
+}
+
+function refreshEntries() {
+    makeFileRequest('/filelist').then(response => {
+        while(entriesWrapper.firstChild) entriesWrapper.removeChild(entriesWrapper.firstChild)
+        JSON.parse(response.data).forEach(file => createEntry(file))
+    })
 }
