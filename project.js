@@ -99,6 +99,10 @@ const projectProto = {
         }, direction => {
             if(direction == DIRECTIONS.right) {
                 if(this.visibleSlots.length > 0) this.visibleSlots[0].inputifyLabel()
+            } else if(direction == DIRECTIONS.up) {
+                if(projects.list.indexOf(this) > 0) projects.list[projects.list.indexOf(this) - 1].inputifyLabel()
+            } else if(direction == DIRECTIONS.down) {
+                if(projects.list.indexOf(this) < projects.list.length - 1) projects.list[projects.list.indexOf(this) + 1].inputifyLabel()
             }
         })
     },
