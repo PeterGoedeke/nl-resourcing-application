@@ -20,20 +20,7 @@ const slotProto = {
 
         this.body.addEventListener('click', event => {
             if(this.getCellsAsArray().includes(event.target)) {
-                event.target.style.width = columns.columnWidth + 'px'
-                const preChange = this.collectEmployeePreChange()
-                inputify(event.target, newWorkload => {
-                    let id
-                    for(const key in this.cells) if(this.cells[key] == event.target) {
-                        id = key
-                        break
-                    }
-                    this.workload[id] = Number(newWorkload)
-                    event.target.innerHTML = sanitiseForDisplay(newWorkload)
-                    event.target.style.width = 'initial'
-                    this.notifyEmployee(preChange)
-                    save.projects()
-                })
+                this.inputifyCell(event.target)
             }
         })
         this.body.addEventListener('contextmenu', this.contextMenu.bind(this))
@@ -62,6 +49,41 @@ const slotProto = {
             this.body.appendChild(cell)
             this.cells[key] = cell
         }
+    },
+    inputifyCell(cell) {
+        cell.style.width = columns.columnWidth + 'px'
+        const preChange = this.collectEmployeePreChange()
+        inputifyNav(cell, newWorkload => {
+            let id
+            for(const key in this.cells) if(this.cells[key] == cell) {
+                id = key
+                break
+            }
+            this.workload[id] = Number(newWorkload)
+            cell.innerHTML = sanitiseForDisplay(newWorkload)
+            cell.style.width = 'initial'
+            this.notifyEmployee(preChange)
+            save.projects()
+        }, direction => {
+            const cellID = (() => {
+                for(const key in this.cells) if(this.cells[key] === cell) return key
+            })()
+
+            if(direction == DIRECTIONS.left) {
+                if(cell.previousElementSibling.className == 'slotCell' && cell.previousElementSibling && cellID > columns.baseID) this.inputifyCell(cell.previousElementSibling)
+                else {
+                    this.inputifyLabel()
+                }
+            }
+
+            if(direction == DIRECTIONS.left &&
+                cell.previousElementSibling.className == 'slotCell' &&
+                cell.previousElementSibling &&
+                cellID > columns.baseID
+            ) this.inputifyCell(cell.previousElementSibling)
+
+            else if(direction == DIRECTIONS.right && cell.nextElementSibling) this.inputifyCell(cell.nextElementSibling)
+        })
     },
     contextMenu(event) {
         contextMenus.open(1, [
