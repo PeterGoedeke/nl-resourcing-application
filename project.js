@@ -28,7 +28,7 @@ const projectProto = {
             this.endHandle.style.right = '-5px'
             this.endHandle.style.left = 'initial'
         })
-        this.label.addEventListener('click', this.labelEdit.bind(this))
+        this.label.addEventListener('click', this.inputifyLabel.bind(this))
         this.container.addEventListener('contextmenu', event => {
             contextMenus.open(0, [
                 () => {
@@ -89,14 +89,17 @@ const projectProto = {
         this.setColor(this.color)
         return this.container
     },
-    labelEdit() {
-        this.label.style.height = columns.rowHeight * this.visibleSlots.length + 'px'
-        inputify(this.label, newLabel => {
+    inputifyLabel() {
         this.label.style.height = (columns.rowHeight * this.visibleSlots.length || 10) + 'px'
+        inputifyNav(this.label, newLabel => {
             this.label.innerHTML = `<p>${newLabel || 'Unnamed'}</p>`
             this.name = newLabel
             this.label.style.height = 'initial'
             save.projects()
+        }, direction => {
+            if(direction == DIRECTIONS.right) {
+                if(this.visibleSlots.length > 0) this.visibleSlots[0].inputifyLabel()
+            }
         })
     },
     init() {
@@ -273,7 +276,7 @@ function addProject(interiors = false) {
         if(interiors) newProject.interiors = true
         insertAfter(container, interiors ? interiorsProjectAreaSeparator : projectAreaSeparator)
         save.projects()
-        newProject.labelEdit()
+        newProject.inputifyLabel()
     } else {
         const element = (interiors ? newInteriorsProjectButton : newProjectButton)
         element.classList.add('invalid')
