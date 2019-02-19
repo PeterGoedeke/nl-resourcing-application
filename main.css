@@ -127,6 +127,9 @@ body {
     font-size: 10px;
     /* text-align: center; */
 }
+.slotCell > input {
+    text-align: center;
+}
 .autocompleteInput {
     position: relative;
 }

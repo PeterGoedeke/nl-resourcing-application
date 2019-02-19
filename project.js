@@ -92,6 +92,7 @@ const projectProto = {
     labelEdit() {
         this.label.style.height = columns.rowHeight * this.visibleSlots.length + 'px'
         inputify(this.label, newLabel => {
+        this.label.style.height = (columns.rowHeight * this.visibleSlots.length || 10) + 'px'
             this.label.innerHTML = `<p>${newLabel || 'Unnamed'}</p>`
             this.name = newLabel
             this.label.style.height = 'initial'
