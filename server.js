@@ -89,7 +89,6 @@ http.createServer(function(req, res) {
                     res.end() 
                 }
                 else if(req.headers.request.match(/file\/.*$/)) {
-                    console.log('saved')
                     const directory = req.headers.request.split('file/')[1]
                     const data = JSON.parse(body)
                     save(data.type, data.data, directory)

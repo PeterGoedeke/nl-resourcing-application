@@ -32,9 +32,15 @@ const slotProto = {
         this.setWidth()
         this.cells = {}
         for(const key in this.workload) {
-            const cell = createCell(this.workload[key])
-            this.body.appendChild(cell)
-            this.cells[key] = cell
+            if(key >= columns.baseID) {
+                const cell = createCell(this.workload[key])
+                this.body.appendChild(cell)
+                this.cells[key] = cell
+            } else {
+                const cell = createFillerCell(this.workload[key])
+                this.body.appendChild(cell)
+                this.cells[key] = cell
+            }
         }
     },
     inputifyLabel() {
@@ -57,6 +63,28 @@ const slotProto = {
 
             } else if(direction == DIRECTIONS.left) {
                 this.host.inputifyLabel()
+            } else if(direction == DIRECTIONS.up) {
+                if(this.host.visibleSlots.length > 1 && this.host.visibleSlots.indexOf(this) != 0) this.host.visibleSlots[this.host.visibleSlots.indexOf(this) - 1].inputifyLabel()
+                else {
+                    let index = projects.list.indexOf(this.host) - 1
+                    if(index < 0) return
+                    while(projects.list[index].visibleSlots.length == 0) {
+                        index--
+                        if(index < 0) return
+                    }
+                    projects.list[index].visibleSlots[projects.list[index].visibleSlots.length - 1].inputifyLabel()
+                }
+            } else if(direction == DIRECTIONS.down) {
+                if(this.host.visibleSlots.length > 1 && this.host.visibleSlots.indexOf(this) != this.host.visibleSlots.length -1) this.host.visibleSlots[this.host.visibleSlots.indexOf(this) + 1].inputifyLabel()
+                else {
+                    let index = projects.list.indexOf(this.host) + 1
+                    if(index > projects.list.length - 1) return
+                    while(projects.list[index].visibleSlots.length == 0) {
+                        index++
+                        if(index > projects.list.length - 1) return
+                    }
+                    projects.list[index].visibleSlots[0].inputifyLabel()
+                }
             }
         }, employees.visibleNames)
     },
@@ -85,14 +113,56 @@ const slotProto = {
                     this.inputifyLabel()
                 }
             }
-
-            if(direction == DIRECTIONS.left &&
-                cell.previousElementSibling.className == 'slotCell' &&
-                cell.previousElementSibling &&
-                cellID > columns.baseID
-            ) this.inputifyCell(cell.previousElementSibling)
-
             else if(direction == DIRECTIONS.right && cell.nextElementSibling) this.inputifyCell(cell.nextElementSibling)
+            else if(direction == DIRECTIONS.up) {
+                
+                let targetSlot = null
+                function findVisibleSlot(slot) {
+                    console.log(slot, '0')
+                    if(slot.host.visibleSlots.indexOf(slot) > 0) {
+                        const slotToCheck = slot.host.visibleSlots[slot.host.visibleSlots.indexOf(slot) - 1]
+                        if(testVisibility(slotToCheck)) {
+                            targetSlot = slotToCheck
+                            console.log(slotToCheck.body, '1')
+                        }
+                        else findVisibleSlot(slotToCheck)
+                    }
+                    else {
+                        let index = projects.list.indexOf(slot.host) - 1
+                        if(index < 0) return
+                        while(projects.list[index].visibleSlots.length == 0) {
+                            index--
+                            if(index < 0) return
+                        }
+                        
+                        const slotToCheck = projects.list[index].visibleSlots[projects.list[index].visibleSlots.length - 1]
+                        if(testVisibility(slotToCheck)) {
+                            targetSlot = slotToCheck
+                            console.log(slotToCheck.body, '2')
+                        }
+                        else findVisibleSlot(projects.list[index].visibleSlots[projects.list[index].visibleSlots.length - 1])
+                    }
+                }
+                function testVisibility(slot) {
+                    return slot.end >= columns.baseID
+                }
+                findVisibleSlot(this)
+                
+                console.log(targetSlot.body, '3')
+
+                if(targetSlot) {
+                    const cellID = (() => {
+                        for(const key in this.cells) if(this.cells[key] === cell) return key
+                    })()
+
+                    if(targetSlot.cells[cellID]) targetSlot.inputifyCell(targetSlot.cells[cellID])
+                    else {
+                        if(Math.abs(targetSlot.start - cellID) <= Math.abs(targetSlot.end - cellID)) {
+                            targetSlot.inputifyCell(targetSlot.cells[targetSlot.start])
+                        } else targetSlot.inputifyCell(targetSlot.cells[targetSlot.end])
+                    }
+                }
+            }
         })
     },
     contextMenu(event) {
@@ -214,6 +284,11 @@ const slotProto = {
 function createCell(workload) {
     let cell = slotCell.cloneNode()
     cell.textContent = sanitiseForDisplay(workload)
+    return cell
+}
+function createFillerCell() {
+    const cell = createCell('')
+    cell.classList.add('filler')
     return cell
 }
 
