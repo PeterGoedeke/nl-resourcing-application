@@ -271,9 +271,9 @@ function addProject(interiors = false) {
         const newProject = createProject()
         const container = newProject.batchLoad()
         newProject.showVisible()
+        if(interiors) newProject.interiors = true
         newProject.init()
         rows.refreshCellsSlots()
-        if(interiors) newProject.interiors = true
         insertAfter(container, interiors ? interiorsProjectAreaSeparator : projectAreaSeparator)
         save.projects()
         newProject.inputifyLabel()
