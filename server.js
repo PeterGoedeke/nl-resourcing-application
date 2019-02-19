@@ -33,7 +33,10 @@ http.createServer(function(req, res) {
                             res.end(JSON.stringify(value))
                         }, function(err) { throw err })
                     }
-                    else createFiles(directory)
+                    else {
+                        createFiles(directory)
+                        res.end()
+                    }
                 }, () => createFiles(directory))
             }
             else if(req.headers.request.match(/filelist$/)) {
@@ -85,12 +88,13 @@ http.createServer(function(req, res) {
                     fs.removeSync('./data/' + details)
                     res.end() 
                 }
-                else if(req.headers.request.match(/file\/[A-Za-z]*$/)) {
+                else if(req.headers.request.match(/file\/.*$/)) {
+                    console.log('saved')
                     const directory = req.headers.request.split('file/')[1]
                     const data = JSON.parse(body)
                     save(data.type, data.data, directory)
                     res.end()
-                }
+                } else res.end()
             }
             else if(req.url === '/index') {
                 const details = body.split('&').map(segment => segment.split('='))
@@ -102,8 +106,8 @@ http.createServer(function(req, res) {
                         res.write(`<script>const account = ${JSON.stringify(verifyAccount(details))}</script>`)
                         res.end()
                     })
-                }
-            }
+                } else res.end()
+            } else res.end()
         })
     }
 }).listen(3000)

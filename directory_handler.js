@@ -49,7 +49,7 @@ function createEntry(file) {
         entry.className = 'fileOption'
         entry.textContent = file.replace(/_/g, ' ')
         entry.addEventListener('click', event => {
-            mainDirectory = '/file/' + file
+            mainDirectory = 'file/' + file
             unload()
             load(mainDirectory)
             directorySelectButton.textContent = file.replace(/_/g, ' ')
@@ -70,9 +70,9 @@ function createEntry(file) {
                             if(list.length > 1) {
                                 contextMenus.close()
                                 save.deleteDir(file).then(refreshEntries)
-                                if(mainDirectory == '/file/' + file) {
+                                if(mainDirectory == 'file/' + file) {
                                     const newFile = (list[0] == file ? list[1] : list[0])
-                                    mainDirectory = '/file/' + newFile
+                                    mainDirectory = 'file/' + newFile
                                     unload()
                                     load(mainDirectory)
                                     directorySelectButton.textContent = newFile.replace(/_/g, ' ')
@@ -85,7 +85,7 @@ function createEntry(file) {
                     e0.addEventListener('click', event => {
                         inputify(e0, newName => {
                             if(mainDirectory.endsWith(file)) {
-                                mainDirectory = '/file/' + newName.replace(/ /g, '_')
+                                mainDirectory = 'file/' + newName.replace(/ /g, '_')
                                 directorySelectButton.textContent = newName
                             }
                             save.renameDir(file, newName.replace(/ /g, '_'))
