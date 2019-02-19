@@ -26,20 +26,7 @@ const slotProto = {
         this.body.addEventListener('contextmenu', this.contextMenu.bind(this))
         this.label.addEventListener('contextmenu', this.contextMenu.bind(this))
         
-        this.label.addEventListener('click', event => {
-            inputifyAutocomplete(this.label, attemptedAssignment => {
-                if(attemptedAssignment && attemptedAssignment != 'Empty') {
-                    this.assignEmployee(attemptedAssignment)
-                    rows.refreshCellsSlots()
-                } else {
-                    this.removeEmployee()
-                }
-                this.label.innerHTML = attemptedAssignment || 'Empty'
-                save.projects()
-                save.employees()
-            }, employees.visibleNames)
-
-        })
+        this.label.addEventListener('click', this.inputifyLabel.bind(this))
 
         this.body.style.left = columns.getLeftFromID(this.start - (this.host.start - columns.baseID))
         this.setWidth()
@@ -49,6 +36,29 @@ const slotProto = {
             this.body.appendChild(cell)
             this.cells[key] = cell
         }
+    },
+    inputifyLabel() {
+        inputifyNav(this.label, attemptedAssignment => {
+            if(attemptedAssignment && attemptedAssignment != 'Empty') {
+                this.assignEmployee(attemptedAssignment)
+                rows.refreshCellsSlots()
+            } else {
+                this.removeEmployee()
+            }
+            this.label.innerHTML = attemptedAssignment || 'Empty'
+            save.projects()
+            save.employees()
+        }, direction => {
+            if(direction == DIRECTIONS.right) {
+                const cell = (() => {
+                    for(const key in this.cells) if(key >= columns.baseID) return this.cells[key]
+                })()
+                this.inputifyCell(cell)
+
+            } else if(direction == DIRECTIONS.left) {
+                this.host.inputifyLabel()
+            }
+        }, employees.visibleNames)
     },
     inputifyCell(cell) {
         cell.style.width = columns.columnWidth + 'px'
