@@ -8,8 +8,9 @@ const interiorsEmployeeFragment = document.createDocumentFragment()
 function makeFileRequest(directory) {
     directory = directory || mainDirectory
     const http = new XMLHttpRequest()
-    const url = window.location.href + directory
+    const url = window.location.href
     http.open('GET', url)
+    http.setRequestHeader('request', directory)
     http.send()
 
     return new Promise(function(resolve) {
@@ -80,9 +81,9 @@ function unload() {
     sheets.unload()
 }
 
-makeFileRequest('/filelist').then(response => {
+makeFileRequest('filelist').then(response => {
     const dir = JSON.parse(response.data)[0]
-    mainDirectory = '/file/' + dir
+    mainDirectory = 'file/' + dir
     directorySelectButton.textContent = dir.replace(/_/g, ' ')
     
     load(mainDirectory)
