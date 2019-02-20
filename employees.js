@@ -6,7 +6,7 @@ const employeeProto = {
         this.body.style.width = columns.applicationWidth + 'px'
         this.container.style.width = columns.applicationWidth + columns.sidebarWidth + 'px'
 
-        this.label.addEventListener('click', this.labelEdit.bind(this))
+        this.label.addEventListener('click', this.inputifyLabel.bind(this))
         this.body.addEventListener('contextmenu', this.contextMenu.bind(this))
         this.label.addEventListener('contextmenu', this.contextMenu.bind(this))
 
@@ -20,9 +20,9 @@ const employeeProto = {
         this.label.textContent = this.name || 'Unnamed'
         return this.container
     },
-    labelEdit() {
+    inputifyLabel() {
         this.label.style.height = columns.rowHeight + 'px'
-        inputify(this.label, newName => {
+        inputifyNav(this.label, newName => {
             if(!employees.visibleNames.includes(newName) && newName) {
                 this.label.innerHTML = newName
                 this.name = newName
@@ -33,6 +33,12 @@ const employeeProto = {
                 this.label.innerHTML = this.name || 'Unnamed'
             }
             this.label.style.height = 'initial'
+        }, direction => {
+            if(direction == DIRECTIONS.up) {
+                if(employees.visibleList.indexOf(this) > 0) employees.visibleList[employees.visibleList.indexOf(this) - 1].inputifyLabel()
+            } else if(direction == DIRECTIONS.down) {
+                if(employees.visibleList.indexOf(this) < employees.visibleList.length - 1) employees.visibleList[employees.visibleList.indexOf(this) + 1].inputifyLabel()
+            }
         })
     },
     contextMenu(event) {
@@ -254,11 +260,11 @@ function addEmployee(interiors = false) {
         rows.refreshCellsEmployees()
         if(interiors) newEmployee.interiors = true
         insertAfter(container, interiors ? interiorsEmployeeAreaSeparator : employeeAreaSeparator)
-        save.employees()
-        newEmployee.labelEdit()
+        newEmployee.inputifyLabel()
     } else {
         const element = (interiors ? newInteriorsEmployeeButton : newInteriorsProjectButton)
         element.classList.add('invalid')
         setTimeout(() => element.classList.remove('invalid'), 200)
     }
+    employees.sortByName()
 }
