@@ -34,6 +34,7 @@ const DIRECTIONS = Object.freeze({
 
 
 function inputifyNav(element, cb, navigate, database = undefined) {
+    if(element.querySelector('input')) return
     function testNavigation(event) {
         switch(event.which) {
             case DIRECTIONS.left:
@@ -45,14 +46,10 @@ function inputifyNav(element, cb, navigate, database = undefined) {
             navigate(event.which)
         }
     }
-    function clear() {
-        element.removeEventListener('keydown', testNavigation)
-    }
 
     if(database) inputifyAutocomplete(element, cb, database)
     else inputify(element, cb)
-    element.addEventListener('keydown', testNavigation)
-    element.querySelectorAll('input').forEach(input => input.addEventListener('blur', clear))
+    element.querySelector('input:not(:disabled)').addEventListener('keydown', testNavigation)
 }
 
 function inputifyAutocomplete(element, cb, database) {
