@@ -4,7 +4,8 @@ const path = require('path')
 const accounts = require('./accounts.json')
 
 http.createServer(function(req, res) {
-    if(req.method == 'GET') {
+    console.log(req.headers.referer)
+    if(req.method == 'GET' && req.headers.referer && req.headers.referer.endsWith('index')) {
         if(req.url.match(/.css$/)) {
             let fileStream = fs.createReadStream(path.join(__dirname, req.url), 'utf-8')
             res.writeHead(200, {'Content-Type': 'text/css'})
@@ -44,6 +45,13 @@ http.createServer(function(req, res) {
                 res.end(JSON.stringify(fs.readdirSync('./data')))
             }
         }
+    } else if(req.method == 'GET') {
+        if(req.url.match(/login.css$/)) {
+            let fileStream = fs.createReadStream(path.join(__dirname, req.url), 'utf-8')
+            res.writeHead(200, {'Content-Type': 'text/css'})
+    
+            fileStream.pipe(res)
+        }
         else {
             fs.readFile('./login.html', 'utf-8', function(err, data) {
                 res.writeHead(200, {'Content-Type': 'text/html'})
@@ -57,56 +65,56 @@ http.createServer(function(req, res) {
             body += chunk
         })
         req.on('end', function() {
-            if(req.headers.request) {
-                if(req.headers.request.endsWith('rename')) {
-                    const details = JSON.parse(body)
-                    if(fs.existsSync('./data/' + details.oldName)) {
-                        fs.renameSync('./data/' + details.oldName, './data/' + details.newName)
+            if(req.headers.referer && req.headers.referer.endsWith('index')) {
+                if(req.headers.request) {
+                    if(req.headers.request.endsWith('rename')) {
+                        const details = JSON.parse(body)
+                        if(fs.existsSync('./data/' + details.oldName)) {
+                            fs.renameSync('./data/' + details.oldName, './data/' + details.newName)
+                        }
                     }
-                }
-                else if(req.headers.request.endsWith('duplicate')) {
-                    const details = JSON.parse(body)
-                    if(fs.existsSync('./data/' + details)) {
+                    else if(req.headers.request.endsWith('duplicate')) {
+                        const details = JSON.parse(body)
+                        if(fs.existsSync('./data/' + details)) {
+                            let i = 1
+                            while(fs.existsSync('./data/' + details + `_(${i})`)) {
+                                i++
+                            }
+                            fs.copySync('./data/' + details, './data/' + details + `_(${i})`)
+                        }
+                        res.end()
+                    }
+                    else if(req.headers.request.endsWith('newDir')) {
                         let i = 1
-                        while(fs.existsSync('./data/' + details + `_(${i})`)) {
+                        while(fs.existsSync(`./data/unnamed_(${i})`)) {
                             i++
                         }
-                        fs.copySync('./data/' + details, './data/' + details + `_(${i})`)
+                        createFiles(`unnamed_(${i})`)
+                        res.end()
                     }
-                    res.end()
-                }
-                else if(req.headers.request.endsWith('newDir')) {
-                    let i = 1
-                    while(fs.existsSync(`./data/unnamed_(${i})`)) {
-                        i++
+                    else if(req.headers.request.endsWith('delete')) {
+                        const details = JSON.parse(body)
+                        fs.removeSync('./data/' + details)
+                        res.end() 
                     }
-                    createFiles(`unnamed_(${i})`)
-                    res.end()
+                    else if(req.headers.request.match(/file\/.*$/)) {
+                        const directory = req.headers.request.split('file/')[1]
+                        const data = JSON.parse(body)
+                        save(data.type, data.data, directory)
+                        res.end()
+                    } else res.end()
                 }
-                else if(req.headers.request.endsWith('delete')) {
-                    const details = JSON.parse(body)
-                    fs.removeSync('./data/' + details)
-                    res.end() 
-                }
-                else if(req.headers.request.match(/file\/.*$/)) {
-                    const directory = req.headers.request.split('file/')[1]
-                    const data = JSON.parse(body)
-                    save(data.type, data.data, directory)
-                    res.end()
-                } else res.end()
-            }
-            else if(req.url === '/index') {
+                else res.end()
+            } else if(req.url === '/index') {
                 const details = body.split('&').map(segment => segment.split('='))
-
+    
                 if(verifyAccount(details)) {
                     fs.readFile('./index.html', 'utf-8', function(err, data) {
                         res.writeHead(200, {'Content-Type': 'text/html'})
-                        res.write(data)
-                        res.write(`<script>const account = ${JSON.stringify(verifyAccount(details))}</script>`)
-                        res.end()
+                        res.end(data)
                     })
                 } else res.end()
-            } else res.end()
+            }
         })
     }
 }).listen(3000)
