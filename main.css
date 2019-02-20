@@ -289,13 +289,12 @@ input {
 .employeeContainer {
     display: flex;
     align-items: stretch;
-    box-shadow: 0 2px 2px -2px inset;
-    border-bottom: solid white 1px;
 }
 .employeeLabel {
     width: var(--total-sidebar-width);
     background-color: lightgrey;
     box-sizing: border-box;
+    border-bottom: solid white 1px;
 }
 .separator + .employeeContainer {
     box-shadow: none;
@@ -305,6 +304,7 @@ input {
     background-color: #ffa500;
     position: relative;
     display: flex;
+    border-bottom: solid white 1px;
 }
 
 .row {
