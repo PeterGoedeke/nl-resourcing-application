@@ -4,7 +4,6 @@ const path = require('path')
 const accounts = require('./accounts.json')
 
 http.createServer(function(req, res) {
-    console.log(req.headers ? req.headers.referer : 'client connected')
     if(req.method == 'GET' && req.headers.referer && req.headers.referer.endsWith('index')) {
         if(req.url.match(/.css$/)) {
             let fileStream = fs.createReadStream(path.join(__dirname, req.url), 'utf-8')
@@ -112,6 +111,7 @@ http.createServer(function(req, res) {
                     fs.readFile('./index.html', 'utf-8', function(err, data) {
                         res.writeHead(200, {'Content-Type': 'text/html'})
                         res.end(data)
+                        console.log(req.connection ? req.connection.remoteAddress : 'client connected')
                     })
                 } else res.end()
             }

@@ -81,7 +81,7 @@ function inputifyAutocomplete(element, cb, database) {
     function autoComplete() {
         for(const name of database) {
             if(input.value && name.toLowerCase().startsWith(input.value.toLowerCase())) {
-                hintInput.value = name
+                hintInput.value = input.value + name.toLowerCase().split(input.value.toLowerCase())[1]
                 return
             }
         }
