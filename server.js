@@ -4,7 +4,7 @@ const path = require('path')
 const accounts = require('./accounts.json')
 
 http.createServer(function(req, res) {
-    console.log(req.headers.referer)
+    console.log(req.headers ? req.headers.referer : 'client connected')
     if(req.method == 'GET' && req.headers.referer && req.headers.referer.endsWith('index')) {
         if(req.url.match(/.css$/)) {
             let fileStream = fs.createReadStream(path.join(__dirname, req.url), 'utf-8')
