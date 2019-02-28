@@ -87,4 +87,5 @@ makeFileRequest('filelist').then(response => {
     directorySelectButton.textContent = dir.replace(/_/g, ' ')
     
     load(mainDirectory)
+    setSidebarWidth(getCookie('leftWidth'), getCookie('rightWidth'))
 })

@@ -96,8 +96,8 @@ function shadeColor(color, percent) {
 const html = document.getElementsByTagName('html')[0]
 
 function setSidebarWidth(leftWidth, rightWidth) {
-    leftWidth = leftWidth || parseInt(getComputedStyle(document.body).getPropertyValue('--left-sidebar-width'))
-    rightWidth = rightWidth || parseInt(getComputedStyle(document.body).getPropertyValue('--right-sidebar-width'))
+    leftWidth = Number(leftWidth) || parseInt(getComputedStyle(document.body).getPropertyValue('--left-sidebar-width'))
+    rightWidth = Number(rightWidth) || parseInt(getComputedStyle(document.body).getPropertyValue('--right-sidebar-width'))
 
     html.style.setProperty("--total-sidebar-width", leftWidth + rightWidth + 'px')
     html.style.setProperty("--left-sidebar-width", leftWidth + 'px')
@@ -109,5 +109,30 @@ function setSidebarWidth(leftWidth, rightWidth) {
     projects.list.forEach(project => {
         project.container.style.width = columns.applicationWidth + columns.sidebarWidth + 'px'
     })
-    Array.from(document.querySelectorAll('.row')).concat(Array.from(document.querySelectorAll('.separator'))).forEach(row => row.style.width = columns.applicationWidth + columns.sidebarWidth + 'px')    
+    Array.from(document.querySelectorAll('.row')).concat(Array.from(document.querySelectorAll('.separator'))).forEach(row => row.style.width = columns.applicationWidth + columns.sidebarWidth + 'px')
+
+    setCookie('leftWidth', leftWidth, 365)
+    setCookie('rightWidth', rightWidth, 365)
 }
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+  function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
