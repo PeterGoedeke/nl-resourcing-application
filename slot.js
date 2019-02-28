@@ -51,7 +51,7 @@ const slotProto = {
             } else {
                 this.removeEmployee()
             }
-            this.label.innerHTML = attemptedAssignment || 'Empty'
+            this.label.innerHTML = this.employee && this.employee.name || 'Empty'
             save.projects()
             save.employees()
         }, direction => {

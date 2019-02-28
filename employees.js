@@ -23,7 +23,7 @@ const employeeProto = {
     inputifyLabel() {
         this.label.style.height = columns.rowHeight + 'px'
         inputifyNav(this.label, newName => {
-            if(!employees.visibleNames.includes(newName) && newName) {
+            if(!employees.visibleNames.map(name => name.toLowerCase()).includes(newName.toLowerCase()) && newName) {
                 this.label.innerHTML = newName
                 this.name = newName
                 this.notifySlots()
@@ -222,7 +222,7 @@ const employees = {
         return this.list.filter(employee => employee.type == type)
     },
     getEmployee(name, list = this.visibleList) {
-        return list.find(employee => employee.name == name)
+        return list.find(employee => employee.name && employee.name.toLowerCase() == name.toLowerCase())
     }
 }
 
