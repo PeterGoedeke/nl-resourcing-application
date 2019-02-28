@@ -36,6 +36,25 @@ const sheetProto = {
                         pane.querySelector((i == 0 ? '.e1' : '.e2')).appendChild(input)
                         pane.querySelector((i == 0 ? '.e1' : '.e2')).style.cursor = 'initial'
                     }
+                    let input = document.createElement('input')
+                    input.style.cursor = 'pointer'
+                    input.value = this.name
+                    input.addEventListener('blur', event => {
+                        const newValue = input.value.trim()
+                        if(newValue && !sheets.types.map(type => type.toLowerCase()).includes(newValue.toLowerCase())) {
+                            projects.list.forEach(project => {
+                                project.slotsByType(this.name).forEach(slot => slot.type = newValue)
+                            })
+                            employees.byType(this.name).forEach(employee => employee.type = newValue)
+                            this.name = newValue
+
+                            save.all()
+                            this.cell.textContent = newValue
+                        }
+                    })
+                    input.addEventListener('focus', event => input.select())
+                    pane.querySelector('.e3').appendChild(input)
+                    pane.querySelector('.e3').style.cursor = 'initial'
                 })
         })
 
@@ -78,8 +97,8 @@ const sheets = (function() {
     const addSheet = document.querySelector('.addSheet')
     addSheet.addEventListener('click', event => {
         inputify(addSheet, value => {
-            const newType = value.toLowerCase().trim()
-            if(!types.map(type => type.name).includes(newType) && newType) {
+            const newType = value.trim()
+            if(newType && !types.map(type => type.name.toLowerCase()).includes(newType.toLowerCase())) {
                 add(newType)
                 save.projects()
                 save.sheets()
