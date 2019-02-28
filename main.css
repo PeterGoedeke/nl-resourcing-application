@@ -68,6 +68,7 @@ body {
     display: flex;
     background-color: rgba(255, 255, 255, 0.4);
     border-bottom: solid darkgrey 1px;
+    box-sizing: border-box;
 }
 .slotBody:last-of-type {
     border-bottom: none;
