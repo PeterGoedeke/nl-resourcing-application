@@ -43,8 +43,8 @@ const sheetProto = {
         sheetTabsContainer.insertBefore(this.cell, sheetTabsContainer.lastChild)
     },
     delete() {
-        sheets.remove(this.name)
         sheetTabsContainer.removeChild(this.cell)
+        sheets.remove(this.name)
         save.all()
     }
 }
@@ -107,12 +107,12 @@ const sheets = (function() {
             types = []
         },
         remove(type) {
-            types.splice(types.indexOf(type), 1)
             employees.byType(type).forEach(employee => employee.delete())
             projects.list.forEach(project => {
                 project.slotsByType(type).forEach(slot => slot.delete())
             })
             setVisible(types[0].name)
+            types.splice(types.indexOf(type), 1)
         },
         add, fromFile(data) {
             const newSheet = createSheet(data)

@@ -249,8 +249,10 @@ const slotProto = {
     },
     delete() {
         this.host.slots.splice(this.host.slots.indexOf(this), 1)
-        this.host.body.removeChild(this.body)
-        this.label.parentElement.removeChild(this.label)
+        if(this.employeeType == sheets.active) {
+            this.host.body.removeChild(this.body)
+            this.label.parentElement.removeChild(this.label)
+        }
         this.decouple()
     },
     decouple() {
