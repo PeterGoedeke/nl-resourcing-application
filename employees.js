@@ -122,10 +122,11 @@ const employeeProto = {
     },
     delete() {
         employees.list.splice(employees.list.indexOf(this), 1)
-        if(this.type == sheets.active) document.body.removeChild(this.container)
+        if(this.type == sheets.active.name) document.body.removeChild(this.container)
         this.slots.forEach(slot => slot.removeEmployee())
         rows.refreshCellsEmployees()
         save.employees()
+        save.projects()
         //clash
     },
     assignSlot(slot) {
