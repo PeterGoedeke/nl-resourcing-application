@@ -249,7 +249,7 @@ const slotProto = {
     },
     delete() {
         this.host.slots.splice(this.host.slots.indexOf(this), 1)
-        if(this.employeeType == sheets.active) {
+        if(this.type == sheets.active.name) {
             this.host.body.removeChild(this.body)
             this.label.parentElement.removeChild(this.label)
         }
