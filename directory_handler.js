@@ -42,20 +42,39 @@ directorySelectButton.addEventListener('click', event => {
     addEventListener('mousedown', closeWindow)
     document.body.appendChild(directorySelectWindow)
     refreshEntries()
-})
+});
+
+let disabled = false
+const screen = (function() {
+    const block = document.createElement('div')
+    block.className = 'block'
+    function disableScreen() {
+        document.body.appendChild(block)
+        disabled = true
+    }
+    function enableScreen() {
+        document.body.removeChild(block)
+        disabled = false
+    }
+    return {enable: enableScreen, disable: disableScreen}
+})()
+
 
 function createEntry(file) {
     const entry = document.createElement('div')
         entry.className = 'fileOption'
         entry.textContent = file.replace(/_/g, ' ')
         entry.addEventListener('click', event => {
-            mainDirectory = 'file/' + file
-            unload()
-            load(mainDirectory)
-            directorySelectButton.textContent = file.replace(/_/g, ' ')
+            if(!disabled) {
+                screen.disable()
+                mainDirectory = 'file/' + file
+                unload()
+                load(mainDirectory)
+                directorySelectButton.textContent = file.replace(/_/g, ' ')
+            }
         })
         entry.addEventListener('mousedown', event => {
-            if(event.which == 3) {
+            if(event.which == 3 && !disabled) {
                 contextMenus.open(4, [
                     () => {
     
