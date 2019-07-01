@@ -1,21 +1,18 @@
-function setDefaultLocation() {
-    setCookie('openDirectory', mainDirectory.substr(5), 365)
-}
-
 const save = {
     all() {
         this.projects()
         this.employees()
         this.sheets()
-
     },
     projects() {
         makeSaveRequest(JSON.stringify({data: projects.list, type: 'projects'}))
-        setDefaultLocation()
+        // console.log('saved')
+        // console.trace()
     },
     employees() {
         makeSaveRequest(JSON.stringify({data: employees.list, type: 'employees'}))
-        setDefaultLocation()
+        // console.log('saved')
+        // console.trace()
     },
     sheets() {
         makeSaveRequest(JSON.stringify({data: sheets, type: 'sheets'}))

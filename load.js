@@ -84,8 +84,7 @@ function unload() {
 
 makeFileRequest('filelist').then(response => {
     screen.disable()
-    const dir = getCookie('openDirectory') || JSON.parse(response.data)[0]
-    console.log(getCookie('openDirectory'))
+    const dir = JSON.parse(response.data)[0]
     mainDirectory = 'file/' + dir
     directorySelectButton.textContent = dir.replace(/_/g, ' ')
     
