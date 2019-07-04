@@ -369,7 +369,7 @@ input {
     background-color: rgb(255, 158, 158);
 }
 
-.directorySelectWindow {
+.window {
     position: fixed;
     top: 0;
     left: 0;
@@ -383,6 +383,14 @@ input {
     padding-top: 5px;
     overflow: auto;
 }
+.errorWindow {
+    z-index: 7;
+}
+.textSpace {
+    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+}
 .fileOption {
     width: 95%;
     margin: 0 auto;
@@ -390,11 +398,11 @@ input {
     box-shadow: 0 0 1px 0px inset;
     font-size: 10px;
 }
-.directorySelectWindow > p {
+.window > p {
     width: 100%;
     text-align: center;
 }
-.newDir {
+.windowButton {
     position: absolute;
     bottom: 2.5%;
     right: 2.5%;
@@ -411,7 +419,7 @@ input {
     position: fixed;
     background-color: black;
     opacity: 0.5;
-    z-index: 1000;
+    z-index: 6;
     left: 0;
     top: 0;
     width: 100%;

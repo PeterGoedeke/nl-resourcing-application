@@ -2,7 +2,7 @@ const directorySelectButton = document.querySelector('.directorySelect')
 
 const directorySelectWindow = (function() {
     const window = document.createElement('div')
-    window.className = 'directorySelectWindow'
+    window.className = 'window'
 
     const windowHeader = document.createElement('p')
     windowHeader.textContent = 'Select File'
@@ -13,7 +13,7 @@ const directorySelectWindow = (function() {
     window.appendChild(entriesWrapper)
 
     const newDirButton = document.createElement('div')
-    newDirButton.className = 'newDir'
+    newDirButton.className = 'windowButton'
     newDirButton.textContent = '+'
     newDirButton.addEventListener('click', event => {
         save.newDir().then(response => {
@@ -48,7 +48,9 @@ let disabled = false
 const screen = (function() {
     const block = document.createElement('div')
     block.className = 'block'
-    function disableScreen() {
+    function disableScreen(loading = true) {
+        if(loading) block.style.cursor = 'wait'
+        else block.style.cursor = 'default'
         document.body.appendChild(block)
         disabled = true
     }
