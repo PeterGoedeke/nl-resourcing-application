@@ -158,7 +158,7 @@ const employeeProto = {
         const color = (() => {
             let color
             if(this.totalWorkload[ID] > this.fullTime) color = '#ff0000'
-            else if(this.totalWorkload[ID] < this.fullTime - 1) color = '#ffa500'
+            else if(this.totalWorkload[ID] < this.fullTime * .75) color = '#ffa500'
             else color = '#008000'
             return color
         })()
