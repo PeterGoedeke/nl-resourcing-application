@@ -60,10 +60,14 @@ async function load(directory) {
             insertAfter(employeeFragment, employeeAreaSeparator)
             insertAfter(interiorsEmployeeFragment, interiorsEmployeeAreaSeparator)
             rows.refreshCellsAll()
-            setTimeout(() => screen.enable(), 0)
+            setTimeout(() => {
+                if(!errorHandler.erroring) screen.enable()
+            }, 0)
         }
         else {
-            setTimeout(() => screen.enable(), 0)
+            setTimeout(() => {
+                if(!errorHandler.erroring) screen.enable()
+            }, 0)
         }
     } else {
         console.log('didn\'t return 200')
