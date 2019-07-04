@@ -64,64 +64,64 @@ http.createServer(function(req, res) {
             body += chunk
         })
         req.on('end', function() {
-            if(req.url === '/index') {
-                const details = body.split('&').map(segment => segment.split('='))
- 
-                if(verifyAccount(details)) {
-                    fs.readFile('./index.html', 'utf-8', function(err, data) {
-                        res.writeHead(200, {'Content-Type': 'text/html'})
-                        res.end(data)
-                        console.log(req.connection ? req.connection.remoteAddress : 'client connected')
-                    })
-                } else {
-                    fs.readFile('./login-failed.html', 'utf-8', function(err, data) {
-                        res.writeHead(200, {'Content-Type': 'text/html'})
-                        res.end(data)
-                        console.log('client rejected')
-                    })
-                }
-            }
 
-            else if(req.headers.referer && req.headers.referer.endsWith('index')) {
-                if(req.headers.request) {
-                    if(req.headers.request.endsWith('rename')) {
-                        const details = JSON.parse(body)
-                        if(fs.existsSync('./data/' + details.oldName)) {
-                            fs.renameSync('./data/' + details.oldName, './data/' + details.newName)
-                        }
+            if(req.headers.request) {
+                if(req.headers.request.endsWith('rename')) {
+                    const details = JSON.parse(body)
+                    if(fs.existsSync('./data/' + details.oldName)) {
+                        fs.renameSync('./data/' + details.oldName, './data/' + details.newName)
                     }
-                    else if(req.headers.request.endsWith('duplicate')) {
-                        const details = JSON.parse(body)
-                        if(fs.existsSync('./data/' + details)) {
-                            let i = 1
-                            while(fs.existsSync('./data/' + details + `_(${i})`)) {
-                                i++
-                            }
-                            fs.copySync('./data/' + details, './data/' + details + `_(${i})`)
-                        }
-                        res.end()
-                    }
-                    else if(req.headers.request.endsWith('newDir')) {
+                    return
+                }
+                else if(req.headers.request.endsWith('duplicate')) {
+                    const details = JSON.parse(body)
+                    if(fs.existsSync('./data/' + details)) {
                         let i = 1
-                        while(fs.existsSync(`./data/unnamed_(${i})`)) {
+                        while(fs.existsSync('./data/' + details + `_(${i})`)) {
                             i++
                         }
-                        createFiles(`unnamed_(${i})`)
-                        res.end()
+                        fs.copySync('./data/' + details, './data/' + details + `_(${i})`)
                     }
-                    else if(req.headers.request.endsWith('delete')) {
-                        const details = JSON.parse(body)
-                        fs.removeSync('./data/' + details)
-                        res.end() 
-                    }
-                    else if(req.headers.request.match(/file\/.*$/)) {
-                        const directory = req.headers.request.split('file/')[1]
-                        const data = JSON.parse(body)
-                        save(data.type, data.data, directory)
-                        res.end()
-                    } else res.end()
+                    res.end()
+                    return
                 }
-                else res.end()
+                else if(req.headers.request.endsWith('newDir')) {
+                    let i = 1
+                    while(fs.existsSync(`./data/unnamed_(${i})`)) {
+                        i++
+                    }
+                    createFiles(`unnamed_(${i})`)
+                    res.end()
+                    return
+                }
+                else if(req.headers.request.endsWith('delete')) {
+                    const details = JSON.parse(body)
+                    fs.removeSync('./data/' + details)
+                    res.end()
+                    return
+                }
+                else if(req.headers.request.match(/file\/.*$/)) {
+                    const directory = req.headers.request.split('file/')[1]
+                    const data = JSON.parse(body)
+                    save(data.type, data.data, directory)
+                    res.end()
+                    return
+                }
+            }
+            const details = body.split('&').map(segment => segment.split('='))
+
+            if(verifyAccount(details)) {
+                fs.readFile('./index.html', 'utf-8', function(err, data) {
+                    res.writeHead(200, {'Content-Type': 'text/html'})
+                    res.end(data)
+                    console.log(req.connection ? req.connection.remoteAddress : 'client connected')
+                })
+            } else {
+                fs.readFile('./login-failed.html', 'utf-8', function(err, data) {
+                    res.writeHead(200, {'Content-Type': 'text/html'})
+                    res.end(data)
+                    console.log('client rejected')
+                })
             }
         })
     }
@@ -142,15 +142,27 @@ function loadFiles(directory) {
     return Promise.all([
         new Promise((resolve, reject) => fs.readFile(`./data/${directory}/sheets.json`, 'utf8', (err, data) => {
             if(err) reject(err)
-            resolve(data ? JSON.parse(data) : '')
+            try {
+                resolve(data ? JSON.parse(data) : '')
+            } catch(err) {
+                resolve('PARSE_ISSUE')
+            }
         })),
         new Promise((resolve, reject) => fs.readFile(`./data/${directory}/projects.json`, 'utf8', (err, data) => {
             if(err) reject(err)
-            resolve(data ? JSON.parse(data) : '')
+            try {
+                resolve(data ? JSON.parse(data) : '')
+            } catch(err) {
+                resolve('PARSE_ISSUE')
+            }
         })),
         new Promise((resolve, reject) => fs.readFile(`./data/${directory}/employees.json`, 'utf8', (err, data) => {
             if(err) reject(err)
-            resolve(data ? JSON.parse(data) : '')
+            try {
+                resolve(data ? JSON.parse(data) : '')
+            } catch(err) {
+                resolve('PARSE_ISSUE')
+            }
         }))
     ])
 }

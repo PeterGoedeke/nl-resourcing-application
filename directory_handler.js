@@ -28,7 +28,9 @@ const directorySelectWindow = (function() {
 })()
 const entriesWrapper = directorySelectWindow.querySelector('.entriesWrapper')
 
-directorySelectButton.addEventListener('click', event => {
+directorySelectButton.addEventListener('click', openDirectorySelect)
+
+function openDirectorySelect() {
     function closeWindow(event) {
         if(event.target != directorySelectWindow &&
             !directorySelectWindow.contains(event.target) &&
@@ -42,7 +44,7 @@ directorySelectButton.addEventListener('click', event => {
     addEventListener('mousedown', closeWindow)
     document.body.appendChild(directorySelectWindow)
     refreshEntries()
-});
+}
 
 let disabled = false
 const screen = (function() {
@@ -69,10 +71,11 @@ function createEntry(file) {
         entry.addEventListener('click', event => {
             if(!disabled) {
                 screen.disable()
-                mainDirectory = 'file/' + file
                 unload()
-                load(mainDirectory)
-                directorySelectButton.textContent = file.replace(/_/g, ' ')
+                if(load('file/' + file) !== errors.PARSE_ISSUE) {
+                    directorySelectButton.textContent = file.replace(/_/g, ' ')
+                    mainDirectory = 'file/' + file
+                }
             }
         })
         entry.addEventListener('mousedown', event => {
