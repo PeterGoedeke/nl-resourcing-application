@@ -38,6 +38,9 @@ const errorHandler = (function() {
 
         let message = 'Unknown Error'
         if(error.type === errors.MISSINGEMPLOYEE) {
+            message = `During loading, the project '${error.details.host.name}' requested the employee '${error.details.slot.employeeName}' (${error.details.slot.type}). This employee does not exist in the application.
+            References to employee '${error.details.slot.employeeName}' will be removed from the application to fix conflicts. This can be reverted manually by re-adding the employee.
+            Press the button below to confirm.`
         }
         else {
             

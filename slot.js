@@ -338,7 +338,13 @@ function createSlot(details, host) {
     if(details) {
         Object.assign(slot, details)
         if(details.employeeName) {
-            slot.assignEmployee(details.employeeName, employees.list.filter(employee => employee.type == slot.type))
+            try {
+                slot.assignEmployee(details.employeeName, employees.list.filter(employee => employee.type == slot.type))
+            } catch(err) {
+                if(err.name === 'TypeError') {
+                    errorHandler.register({details: {slot:details, host}, type: errors.MISSINGEMPLOYEE})
+                }
+            }
         }
     }
     else {
