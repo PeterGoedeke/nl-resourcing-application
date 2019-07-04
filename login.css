@@ -63,3 +63,9 @@ input {
 .password {
     margin: 5px 0;
 }
+.failed {
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: -5px;
+    color: red;
+}

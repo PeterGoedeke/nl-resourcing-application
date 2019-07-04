@@ -64,7 +64,25 @@ http.createServer(function(req, res) {
             body += chunk
         })
         req.on('end', function() {
-            if(req.headers.referer && req.headers.referer.endsWith('index')) {
+            if(req.url === '/index') {
+                const details = body.split('&').map(segment => segment.split('='))
+ 
+                if(verifyAccount(details)) {
+                    fs.readFile('./index.html', 'utf-8', function(err, data) {
+                        res.writeHead(200, {'Content-Type': 'text/html'})
+                        res.end(data)
+                        console.log(req.connection ? req.connection.remoteAddress : 'client connected')
+                    })
+                } else {
+                    fs.readFile('./login-failed.html', 'utf-8', function(err, data) {
+                        res.writeHead(200, {'Content-Type': 'text/html'})
+                        res.end(data)
+                        console.log('client rejected')
+                    })
+                }
+            }
+
+            else if(req.headers.referer && req.headers.referer.endsWith('index')) {
                 if(req.headers.request) {
                     if(req.headers.request.endsWith('rename')) {
                         const details = JSON.parse(body)
@@ -104,16 +122,6 @@ http.createServer(function(req, res) {
                     } else res.end()
                 }
                 else res.end()
-            } else if(req.url === '/index') {
-                const details = body.split('&').map(segment => segment.split('='))
-    
-                if(verifyAccount(details)) {
-                    fs.readFile('./index.html', 'utf-8', function(err, data) {
-                        res.writeHead(200, {'Content-Type': 'text/html'})
-                        res.end(data)
-                        console.log(req.connection ? req.connection.remoteAddress : 'client connected')
-                    })
-                } else res.end()
             }
         })
     }
