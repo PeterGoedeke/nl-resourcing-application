@@ -1,5 +1,3 @@
-const test = document.querySelector('.test')
-
 function addDragging(element, getParentLeft, cb) {
     element.onmousedown = event => {
         if(event.which == 1) {
