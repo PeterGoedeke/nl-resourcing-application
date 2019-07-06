@@ -108,6 +108,7 @@ http.createServer(function(req, res) {
                     return
                 }
             }
+
             const details = body.split('&').map(segment => segment.split('='))
 
             if(verifyAccount(details)) {
@@ -171,6 +172,7 @@ function createFiles(directory) {
     if(!fs.existsSync(`./data/${directory}`)) {
         fs.mkdirSync(`./data/${directory}`)
     }
+    if(fs.lstatSync(`./data/${directory}`).isFile()) return
     fs.writeFile(`./data/${directory}/projects.json`, '', 'utf8', function(err) {
         if(err) throw err
     })
