@@ -28,20 +28,23 @@ const directorySelectWindow = (function() {
 })()
 const entriesWrapper = directorySelectWindow.querySelector('.entriesWrapper')
 
-directorySelectButton.addEventListener('click', openDirectorySelect)
+directorySelectButton.addEventListener('click', () => openDirectorySelect())
 
-function openDirectorySelect() {
-    function closeWindow(event) {
-        if(event.target != directorySelectWindow &&
-            !directorySelectWindow.contains(event.target) &&
-            !event.target != contextMenus.pane &&
-            !contextMenus.pane.contains(event.target)) {
-            document.body.removeChild(directorySelectWindow)
-            while(entriesWrapper.firstChild) entriesWrapper.removeChild(entriesWrapper.firstChild)
-            removeEventListener('mousedown', closeWindow)
-        }
+let _bold
+function closeWindow(event) {
+    if(event.target != directorySelectWindow &&
+        !directorySelectWindow.contains(event.target) &&
+        !event.target != contextMenus.pane &&
+        !contextMenus.pane.contains(event.target)) {
+        document.body.removeChild(directorySelectWindow)
+        while(entriesWrapper.firstChild) entriesWrapper.removeChild(entriesWrapper.firstChild)
+        removeEventListener('mousedown', closeWindow)
     }
-    addEventListener('mousedown', closeWindow)
+}
+function openDirectorySelect(bold = false) {
+    _bold = bold
+    if(!bold) addEventListener('mousedown', closeWindow)
+    directorySelectWindow.style.zIndex = bold ? 7 : 5
     document.body.appendChild(directorySelectWindow)
     refreshEntries()
 }
@@ -51,16 +54,18 @@ const screen = (function() {
     const block = document.createElement('div')
     block.className = 'block'
     function disableScreen(loading = true) {
-        if(loading) block.style.cursor = 'wait'
+        if(loading) {
+            block.style.cursor = 'wait'
+            disabled = true
+        }
         else block.style.cursor = 'default'
         document.body.appendChild(block)
-        disabled = true
     }
     function enableScreen() {
         document.body.removeChild(block)
         disabled = false
     }
-    return {enable: enableScreen, disable: disableScreen}
+    return { enable: enableScreen, disable: disableScreen }
 })()
 
 
@@ -69,6 +74,7 @@ function createEntry(file) {
         entry.className = 'fileOption'
         entry.textContent = file.replace(/_/g, ' ')
         entry.addEventListener('click', event => {
+            if(_bold) addEventListener('mousedown', closeWindow)
             if(!disabled) {
                 screen.disable()
                 unload()

@@ -61,9 +61,10 @@ const errorHandler = (function() {
 
         }
         else if(error.type === errors.PARSE_ISSUE) {
-            message = `During loading, a parsing issue was encountered.`
+            message = `During loading, a parsing issue was encountered. This means that there was likely an issue in the saving of the file you are attempting to open. Other files should still be accessible. Press the button below to confirm, and select another file.`
             wrapper(() => {
-                openDirectorySelect()
+                openDirectorySelect(true)
+                screen.disable(false)
             })
         }
         else if(error.type === errors.DISCONNECTED) {
