@@ -4,6 +4,7 @@ const path = require('path')
 const accounts = require('./accounts.json')
 
 function findEditDate(dir) {
+    if(fs.lstatSync(dir).isFile()) return 0
     return fs.readdirSync(dir).map(file => fs.lstatSync(`${dir}/${file}`).mtimeMs).sort((a, b) => {
         return b - a
     })[0]
