@@ -109,3 +109,7 @@ makeFileRequest('filelist').then(response => {
     load(mainDirectory)
     setSidebarWidth(getCookie('leftWidth'), getCookie('rightWidth'))
 })
+
+function getVersion() {
+    console.log('Version 1.0')
+}
