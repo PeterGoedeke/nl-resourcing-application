@@ -114,13 +114,14 @@ function createEntry(file) {
                     const e0 = pane.querySelector('.e0')
                     e0.addEventListener('click', event => {
                         inputify(e0, newName => {
+                            const sanitisedText = newName.replace(/[ :?\\/*<>"|]/g, '_')
                             if(mainDirectory.endsWith(file)) {
-                                mainDirectory = 'file/' + newName.replace(/ /g, '_')
+                                mainDirectory = 'file/' + sanitisedText
                                 directorySelectButton.textContent = newName
                             }
-                            save.renameDir(file, newName.replace(/ /g, '_'))
+                            save.renameDir(file, sanitisedText)
                             entry.textContent = newName
-                            file = newName.replace(/ /g, '_')
+                            file = sanitisedText
                         })
                     })
                 })
