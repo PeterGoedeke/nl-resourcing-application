@@ -115,13 +115,21 @@ function createEntry(file) {
                         e0.textContent = file
                         inputify(e0, newName => {
                             const sanitisedText = newName.replace(/[ :?\\/*<>"|]/g, '_')
-                            if(mainDirectory.endsWith(file)) {
-                                mainDirectory = 'file/' + sanitisedText
-                                directorySelectButton.textContent = newName
-                            }
-                            save.renameDir(file, sanitisedText)
-                            entry.textContent = newName
-                            file = sanitisedText
+                            let duplicated = false
+                            makeFileRequest('/filelist').then(response => {
+                                JSON.parse(response.data).forEach(name => {
+                                    if(name == sanitisedText) duplicated = true
+                                })
+                                if(!duplicated) {
+                                    if(mainDirectory.endsWith(file)) {
+                                        mainDirectory = 'file/' + sanitisedText
+                                        directorySelectButton.textContent = newName
+                                    }
+                                    save.renameDir(file, sanitisedText)
+                                    entry.textContent = newName
+                                    file = sanitisedText
+                                }
+                            })
                         })
                     })
 
@@ -138,12 +146,20 @@ function createEntry(file) {
                                 }
                                 inputify(e1, newName => {
                                     const sanitisedText = newName.replace(/[ :?\\/*<>"|]/g, '_')
-                                    save.renameDir(file, sanitisedText)
-                                    entry.textContent = newName
-                                    file = sanitisedText
-                                    mainDirectory = 'file/' + file
-                                    refreshEntries()
-                                    directorySelectButton.textContent = sanitisedText
+                                    let duplicated = false
+                                    makeFileRequest('/filelist').then(response => {
+                                        JSON.parse(response.data).forEach(name => {
+                                            if(name == sanitisedText) duplicated = true
+                                        })
+                                        if(!duplicated) {
+                                            save.renameDir(file, sanitisedText)
+                                            entry.textContent = newName
+                                            file = sanitisedText
+                                            mainDirectory = 'file/' + file
+                                            refreshEntries()
+                                            directorySelectButton.textContent = sanitisedText
+                                        }
+                                    })
                                 })
                             })
 
