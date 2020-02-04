@@ -10,6 +10,8 @@ function findEditDate(dir) {
     })[0]
 }
 
+let lastDuplicatedFile
+
 http.createServer(function(req, res) {
     if(req.method == 'GET' && req.headers.referer && req.headers.referer.endsWith('index')) {
         if(req.url.match(/.css$/)) {
@@ -47,14 +49,15 @@ http.createServer(function(req, res) {
                 }, () => createFiles(directory))
             }
             else if(req.headers.request.match(/filelist$/)) {
-
-                
-                
                 res.writeHead(200, {'Content-Type': 'text/js'})
                 res.end(JSON.stringify(fs.readdirSync('./data').sort((a, b) => {
                         return findEditDate(`./data/${b}`) - findEditDate(`./data/${a}`)
                 })))
                 // res.end(JSON.stringify(fs.readdirSync('./data')))
+            }
+            else if(req.headers.request.match(/duplicatedfile/)) {
+                res.writeHead(200, {'Content-Type': 'text/js'})
+                res.end(JSON.stringify(lastDuplicatedFile))
             }
         }
     } else if(req.method == 'GET') {
@@ -94,6 +97,7 @@ http.createServer(function(req, res) {
                             i++
                         }
                         fs.copySync('./data/' + details, './data/' + details + `_(${i})`)
+                        lastDuplicatedFile = details + `_(${i})`
                     }
                     res.end()
                     return

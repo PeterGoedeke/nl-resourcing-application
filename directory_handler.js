@@ -91,8 +91,7 @@ function createEntry(file) {
     
                     },
                     () => {
-                        contextMenus.close()
-                        save.duplicateDir(file).then(refreshEntries)
+
                     },
                     () => {
                         makeFileRequest('/filelist').then(response => {
@@ -113,6 +112,7 @@ function createEntry(file) {
                 ], event, pane => {
                     const e0 = pane.querySelector('.e0')
                     e0.addEventListener('click', event => {
+                        e0.textContent = file
                         inputify(e0, newName => {
                             const sanitisedText = newName.replace(/[ :?\\/*<>"|]/g, '_')
                             if(mainDirectory.endsWith(file)) {
@@ -122,6 +122,31 @@ function createEntry(file) {
                             save.renameDir(file, sanitisedText)
                             entry.textContent = newName
                             file = sanitisedText
+                        })
+                    })
+
+                    const e1 = pane.querySelector('.e1')
+                    e1.addEventListener('click', event => {
+                        save.duplicateDir(file).then(refreshEntries).then(() => {        
+                            e1.textContent = file
+                            makeFileRequest('duplicatedfile').then(response => {
+                                file = JSON.parse(response.data)
+                                unload()
+                                if(load('file/' + file) !== errors.PARSE_ISSUE) {
+                                    directorySelectButton.textContent = file.replace(/_/g, ' ')
+                                    mainDirectory = 'file/' + file
+                                }
+                                inputify(e1, newName => {
+                                    const sanitisedText = newName.replace(/[ :?\\/*<>"|]/g, '_')
+                                    save.renameDir(file, sanitisedText)
+                                    entry.textContent = newName
+                                    file = sanitisedText
+                                    mainDirectory = 'file/' + file
+                                    refreshEntries()
+                                    directorySelectButton.textContent = sanitisedText
+                                })
+                            })
+
                         })
                     })
                 })
