@@ -67,8 +67,27 @@ const rows = (function() {
                 for(let i = columns.baseID; i < columns.endID; i++) {
                     if(employee.joining && i <= employee.joining || employee.leaving && i >= employee.leaving) continue
                     employeeCapability[i] = employeeCapability[i] + Number(employee.fullTime) || Number(employee.fullTime)
+
+                    employee.slots.forEach(slot => {
+                        if(slot.host.interiors && slot.workload[i]) {
+                            employeeCapability[i] = employeeCapability[i] - Number(slot.workload[i])
+                        }
+                    })
                 }
             })
+
+            employees.visibleList.filter(employee => employee.interiors).forEach(employee => {
+                for(let i = columns.baseID; i < columns.endID; i++) {
+                    if(employee.joining && i <= employee.joining || employee.leaving && i >= employee.leaving) continue
+            
+                    employee.slots.forEach(slot => {
+                        if(!slot.host.interiors && slot.workload[i]) {
+                            employeeCapability[i] = employeeCapability[i] + Number(slot.workload[i])
+                        }
+                    })
+                }
+            })
+            // go through the other category and look for jobs of the type, and count the workload those employees are doing
             return [employeeCapability]
         },
         get employeesI() {
@@ -77,6 +96,25 @@ const rows = (function() {
                 for(let i = columns.baseID; i < columns.endID; i++) {
                     if(employee.joining && i <= employee.joining || employee.leaving && i >= employee.leaving) continue
                     employeeCapability[i] = employeeCapability[i] + Number(employee.fullTime) || Number(employee.fullTime)
+
+                    employee.slots.forEach(slot => {
+                        if(!slot.host.interiors && slot.workload[i]) {
+                            employeeCapability[i] = employeeCapability[i] - Number(slot.workload[i])
+                        }
+                    })
+                }
+            })
+
+            employees.visibleList.filter(employee => !employee.interiors).forEach(employee => {
+                for(let i = columns.baseID; i < columns.endID; i++) {
+                    if(employee.joining && i <= employee.joining || employee.leaving && i >= employee.leaving) continue
+            
+                    employee.slots.forEach(slot => {
+                        if(slot.host.interiors && slot.workload[i]) {
+                            console.log(employeeCapability[i], slot.workload[i])
+                            employeeCapability[i] = employeeCapability[i] + Number(slot.workload[i]) || Number(slot.workload[i])
+                        }
+                    })
                 }
             })
             return [employeeCapability]
